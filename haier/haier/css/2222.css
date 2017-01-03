@@ -1,0 +1,430 @@
+body{
+	font-family: "微软雅黑";
+}
+a{
+	text-decoration: none;
+}
+#nav{
+	height: 34px;
+	width: 100%;
+	min-width: 1000px;
+	background: #f2f2f2;
+}
+#nav_center{
+	height: 34px;
+	width: 1213px;
+	margin: 0 auto;
+	position: relative;
+}
+#nav_center .a{
+	float: left;
+	height: 34px;
+}
+#nav_center .a a{
+	font-size: 12px;text-decoration:none;
+	color:black;line-height: 34px;
+	margin-left: 5px;
+	display: inline-block;
+}
+#nav_center .a a div{
+	float: left;margin-top: 2px;
+	padding-left: 15px;
+}
+#nav_center .choose-city-box{
+	height: 34px;
+	float: left;
+    padding-left: 3px;
+}
+#nav_center #saoma1,#nav_center #saoma2{
+	height: 130px;
+	width: 130px;
+	position: absolute;
+	top: 30px;
+	display: none;
+}
+#nav_center #saoma1{
+	left: 240px;
+}
+#nav_center #saoma2{
+	left: 305px;
+}
+
+
+
+
+#nav_center ul{
+	float: right;
+}
+#nav_center ul li{
+	float: left;
+	margin-right: 15px;
+	font-size: 12px;
+	line-height: 34px;
+	text-align: center;
+}
+
+#search{
+	height: 83px;
+	width: 100%;
+	min-width: 1000px;
+	
+}
+#search_center{
+	width: 1213px;
+	height: 83px;
+	margin: 0 auto;
+}
+#search_center #left1{
+	display: inline-block;
+	float: left;
+	margin-right: 129px;	
+}
+#search_center ul{
+	float: right;
+	padding-top: 10px;
+}
+#search_center ul li{
+	float: left;
+	margin-right: 15px;
+	font-size: 12px;
+}
+#search_center ul li img{
+	height: 80%;
+	width: 80%;
+}
+#search_center #center1{
+	width: 490px;
+	margin: 0 auto;
+	float: left;
+}
+#search_center #center1 div input{
+	margin-top: 10px;
+	height: 30px;
+	width: 400px;
+}
+#center1 div input div{
+	float: left;
+	display:inline-block;
+}
+#lunbo-nav{
+	background: black;
+	height: 42px;
+	width: 100%;
+	min-width: 1000px;
+	
+}
+#lunbo-nav-center{
+	width: 1213px;
+	height: 42px;
+	margin: 0 auto;
+}
+#lunbo-nav-center ul li{
+	float: left;
+	color: white;
+	padding:  0 26px;
+	line-height: 42px;
+	margin-right: 15px;
+	text-align: center;
+}
+#lunbo-nav-center ul li:hover{
+	background: blue;
+}
+
+/*轮播*/
+#pic{
+			width: 100%;
+			height: 430px;
+			margin: 0 auto;
+			min-width: 1000px;
+			position: relative;
+			}
+			#imgPar{
+				height: 430px;
+				margin: 0 auto;
+				position: relative;
+			}
+			#imgPar img{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				height: 430px;
+				display: none;
+				width: 1349px;
+				margin: 0 auto;
+				
+			}
+			#imgPar .show{
+				display: block;
+			}
+			#hh a{
+				height: 20px;
+				width: 20px;
+				background: yellow;
+				/*border: 1px solid yellow;*/
+				border-radius: 50%;
+				text-align: center;
+				float: left;
+				padding: 10px;
+				/*margin: 0 auto;*/
+			}
+			#hh{
+				position: absolute;
+				top: 370px;
+				left: 523px;
+			}
+			.pointshow{
+				background: blue!important;
+			}
+			#lunbo-left{
+				height: 70px;
+				width: 30px;
+				line-height: 70px;
+				/*background: #eee;*/
+				position: absolute;
+				top: 150px;
+				right: 0px;
+				font-size: 30px;
+				text-align: center;
+			}
+			#lunbo-right{
+				height: 70px;
+				width: 30px;
+				line-height: 70px;
+				
+				/*background: #eee;*/
+				position: absolute;
+				top: 150px;
+				left: 0px;
+				font-size: 30px;
+				text-align: center;
+			}
+			#imgPar b{
+				position: absolute;
+				padding: 5px;
+				background: #fff;
+				cursor: pointer;
+			}
+
+/*zuohua */
+#zuohua{
+	width: 100%;
+	height: 175px;
+	background: #f2f2f2;
+	min-width: 1000px;
+	padding: 20px;
+}
+#zuohua-center{
+	width: 1213px;
+	height: 175px;
+	margin: 0px auto;
+	/*position: relative;*/
+	
+}
+#zuohua-center div{
+	float: left;
+	height: 174px;
+	position: relative;
+	width: 289px;
+	margin-right: 10px;
+}
+#zuohua-center div img{
+	width: 289px;
+
+	/*margin-top: 40px;*/
+	position: absolute;
+}
+
+/*精品推荐*/
+
+#jptj{
+	width: 100%;
+	height: 116px;
+	background: #f2f2f2;
+	min-width: 1000px;
+}
+#jptj-center{
+	width: 1213px;
+	margin: 0 auto;
+}
+#jptj-nav{
+	float: left;
+	
+}
+#jptj-nav1{
+	float: left;
+	width: 137px;
+	padding: 10px;
+	border: 1px solid skyblue;
+}
+.jptj-nav1-left{
+	float: left;
+}
+.jptj-nav1-right{
+	float: left;
+
+	
+}
+.jptj-nav1-right p{
+	font-size: 10px;
+	line-height: 17px;
+}
+.jptj-nav1-right p span{
+	color: #666;
+}
+
+/*show*/
+#show{
+	width: 100%;
+	min-width: 1000px;
+	background: #F2F2F2;
+}
+#show-center{
+	width: 1213px;
+	margin: 0 auto;
+}
+.show1{
+	display: inline-block;
+	margin-top: 30px;
+	margin-right: 10px;
+}
+.show1 .jieshao{
+	background: white;
+	margin-top: -3px;
+	padding: 10px;
+	
+}
+.show1 .jieshao p{
+	font-size: 12px;
+	line-height: 20px;
+}
+.show1 .jieshao #p3{
+	color: skyblue;
+}
+.show1 .jieshao #p4{
+	color: white;
+	display: inline-block;
+	padding: 3px;
+}
+.show1 .jieshao p b{
+	font-size: 14px;
+}
+.show1 .jieshao p span{
+	display: inline-block;
+	float: right;
+	font-size: 17px;
+	color: blue;
+}
+
+
+/*新品首发*/
+#xpsf{
+	width: 100%;
+	min-width: 1000px;
+	background: #f2f2f2;
+}
+#xpsf-center{
+	width: 1213px;
+	height: 348px;
+	margin: 0 auto;
+}
+#xpsf-center img{
+	display: inline-block;
+	float: left;
+	margin-right: 12px;
+	width: 230px;
+	margin-top: 10px;
+
+}
+
+
+
+/*互动社区*/
+#hdsq{
+	width: 100%;
+	height: 290px;
+	min-width: 1000px;
+	background: #f2f2f2;
+}
+#hdsq-center{
+	width: 1213px;
+	margin: 0 auto;
+}
+#hdsq-center #tu{
+	float:left;
+	height: 172px;
+	width: 379px;
+	margin-right: 10px;
+	background: lightcyan;
+}
+#hdsq-center #gg{
+	float: left;
+	margin-right: 25px;
+}
+#hdsq-center #tu ul{
+	padding: 40px;
+}
+#hdsq-center #tu ul li{
+	list-style: square;
+	line-height: 25px;
+	font-size: 15px;
+}
+
+#footer{
+	width: 100%;
+	height: 229px;
+	min-width: 1000px;
+	background: #f2f2f2;
+}
+#footer-center{
+	width: 1213px;
+	margin: 0 auto;
+	
+}
+#footer-center p,#footer-center b{
+	font-size: 14px;
+	line-height: 30px;
+}
+#jjj{
+	height: 100px;
+	padding: 20px;
+	float: left;
+	display: inline-block;
+	border-right: 1px solid #aaa;
+}
+#jjj a{
+	text-decoration: none;
+}
+
+
+#bottom{
+	width: 100%;
+	height: 100px;
+	min-width: 1000px;
+	background: #ddd;
+}
+#bottom-center{
+	width: 600px;
+	margin: 0 auto;
+	
+}
+#bottom-center p{
+	font-size: 14px;
+	margin: 0 auto;
+	text-align: center;
+	
+}
+
+
+/*回到顶部*/
+#side{
+	position:fixed;
+	bottom: 5px;
+	right: 0px;
+	width: 70px;
+}
+
+
+
+
+
+

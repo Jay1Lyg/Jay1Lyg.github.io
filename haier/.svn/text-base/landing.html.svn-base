@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<link rel="stylesheet" type="text/css" href="css/landing.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<script src="js/landing.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="nav">
+			<div id="nav_center">
+				<h1><a href="first-page.html"></a><span><img src="img-z/slogan.png"/></span></h1>
+			</div>
+		</div>
+
+		<div id="center">
+				
+<!--登录框-->
+			<div id="login_out">
+				<div id="login_in">
+					<h2>欢迎登录海尔商城</h2>
+					<a href="zhuce.html" target="_blank"><span>免费注册&gt;</span></a>
+					<hr style="margin-top: 40px;" />
+					
+				<form action="first-page.html" method="get" onsubmit="return checkForm()">
+					
+					<div class="box1">
+						<span id="user"></span>
+						<input type="text" name="username" id="username" value="" placeholder="邮箱/手机" onchange="aa()" />
+						<span id="tishi1" style="color: red;margin-left: 100px;font-size: 12px;"></span>
+					</div>
+	
+					<div class="box2">
+						<span id="pass"></span>
+						<input type="password" name="password" id="password" value="" placeholder="密码" onchange="bb()" />
+						<span id="tishi2" style="color: red;margin-left: 100px;font-size: 12px;"></span>
+					</div>
+	
+					<div id="box3">
+						<input type="checkbox" name="checkbox" id="checkbox" value="" /><span id="span1">两周内免登录</span>
+						<span id="span2"><a href="#">忘记密码？</a></span>
+					</div>
+	
+						<input type="submit" name="submit" id="gg" value="登录" />
+				</form>
+				
+				
+					<hr style="margin-top: 15px;" />
+	
+					<ul>
+						<li>其他方式登录：</li>
+						<li>
+							<a id="a1" href="#">海尔官网</a>
+						</li>
+						<li>
+							<a id="a2" href="#">新浪微博</a>
+						</li>
+						<li>
+							<a id="a3" href="#">QQ</a>
+						</li>
+						<li>
+							<a id="a4" href="#">支付宝</a>
+						</li>
+						<li>
+							<a id="a5" href="#">网易</a>
+						</li>
+					</ul>
+	
+				</div>
+			</div>
+		</div>
+
+
+<!--footer-->
+		<div id="bottom">
+			<div id="bottom-center">
+				<p>购物流程 | 配送方式 | 付款方式 | 售后服务 | 投诉建议 | 友情链接 | 加入我们 | 海尔知识堂</p>
+				<p>网站备案/许可证号：鲁ICP备09096283号</p>
+				<p>Copyright©2000-2016 海尔集团电子商务有限公司 All Rights Reserved</p>
+				<img src="img-z/xuanchuan1.png" />
+				<img src="img-z/xuanchuan2.png" />
+				<img src="img-z/xuanchuan3.png" />
+				<img src="img-z/xuanchuan4.png" />
+				<img src="img-z/xuanchuan5.jpg" />
+				<img src="img-z/xuanchuan6.png" style="height: 40px;" />
+				<img src="img-z/xuanchuan7.gif" />
+
+			</div>
+		</div>
+		<script src="js/demoxxx.js" type="text/javascript" charset="utf-8"></script>		
+
+	</body>
+
+</html>

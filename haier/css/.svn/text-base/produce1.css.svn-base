@@ -1,0 +1,151 @@
+#top{width: 100%;height: 30px;background: #ddd;min-width: 1100px;}
+#top #top1{width: 1100px;margin: 0 auto;}
+#qiehuan{background: #0059a9;color: white; border: none;border-radius: 3px;width: 50px;}
+#top #top1 ul li{float: left;margin-left: 25px;line-height: 30px;font-size: 12px;}
+#top #top1 ul li a{color: black;text-decoration: none;}
+#top #top1 ul li a:hover{color: blue;}
+#denglu1{background: #33beff;color: white;border: none;border-radius: 3px;}
+#weixin{position: absolute;z-index: 99;display: none;top: 22px;}
+#app{position: absolute;z-index: 99;display: none;top: 22px;}
+/*top完*/
+#logo{width: 100%;height: 100px;min-width: 1100px;}
+#logo #logo1{width: 1100px;margin: 0 auto;}
+#logo #logo1 ul{margin-top: 20px;}
+#logo #logo1 ul li{float: left;margin-left: 32px;}
+#logo #logo1 ul li a{text-decoration: none;color: #999999;font-size: 12px;}
+.img1{width: 150px;height: auto;margin-top: 6px;}
+.img2{margin-top: 6px;}
+#te1{width: 300px;height: 20px;margin-left: 20px;}
+#bu1{width: 50px; color: white; height: 26px;background:#005AAA;border-radius: 3px; border: none;}
+.xiao{font-size: 13px;color: #666;}
+/*logo完*/
+#daohang{width: 100%;height: 40px;background: #666;min-width: 1100px;position: relative;}
+#daohang #tiao{width: 1100px;margin: 0 auto;}
+#daohang #tiao ul li{float: left;line-height: 40px;width: 120px;text-align: center;}
+#daohang #tiao ul li a{text-decoration: none;font-size: 20px;color: white;}
+#daohang #tiao ul li:hover{background: #005AAA;}
+/*分类开始*/
+ #fenlei{width: 1100px;height: 500px; background: #DDDDDD;margin: 0 auto; clear: both; display: none;position: absolute;}
+#yi{width: 220px;height: 400px;float: left;border: 1px solid white;display: block;}
+#yi .a ul li{float: left;margin:0 20px ;}
+#yi .a p{color: blue;}
+#di{width: 1100px;height: 100px;display: block;}
+#di p{clear: both;text-align: center;font-size: 30px;line-height: 100px;}
+#di p a{text-decoration: none;color: #666666;}
+
+/*gouwuche下拉开始*/
+#gouxia{width: 200px;height: 50px; background: #DDDDDD;display: none;position: absolute;z-index: 100;}
+/*导航结束*/
+#chanpin{width: 100%;height: 700px;min-width: 1100px;clear: both;}
+#chanpin #weizhi{width: 1100px;height: 50px;margin: 0 auto;}
+#chanpin #weizhi ul li{float: left;line-height: 50px;}
+#chanpin #weizhi ul li a{color: #999;text-decoration: none;}
+#chanpin #weizhi ul li a span{color: red;}
+/*产品位置结束*/
+#chanpin #bcd{width: 1100px;height: 500px;;margin: 0 auto;}
+#chanpin #bcd #left{width: 450px;height: 500px;border: 1px solid;float: left;}
+#chanpin #bcd #left img{width: 450px;height: 500px;}
+#chanpin #bcd #right{width: 630px;height: 500px;border: 1px solid #999999;float: left;margin: 0 7px;}
+#chanpin #bcd #right .one{width: 630px;height: 80px;margin-top: 10px;}
+#chanpin #bcd #right .one p{font-size: 25px;}
+#chanpin #bcd #right .one span{color: crimson;}
+#chanpin #bcd #right .two{width: 630px;height: 40px;margin-top: 10px;border: 1px dashed #666666;}
+#chanpin #bcd #right .two p{color: #666666;font-size: 15px;}
+#chanpin #bcd #right .three{width: 630px;height: 100px;margin-top: 10px;}
+#chanpin #bcd #right .three ul li{color: #666666;}
+#chanpin #bcd #right .three ul li span{color:crimson ;}
+#chanpin #bcd #right .four{width: 630px;height: 220px;background: lavender;}
+#chanpin #bcd #right .four ul{margin: 10px 15px;}
+#chanpin #bcd #right .four ul li{margin: 20px;}
+#deng{width: 20px;text-align: center;}
+.li input{border: none; width: 150px;height: 40px;background: #DC143C;font-size: 30px;color: white;float: left;margin: 0 50px;}
+.che input{border: none; width: 150px;height: 35px;background: #20B2AA;font-size: 25px;color: white;float: left;margin-top: 3px;}
+.fapiao{margin-top: 20px;}
+.fapiao p{clear: both;color: #666666;text-align: center;font-size: 15px;}
+.fapiao p span{color: #DC143C;}
+
+#fenxiang{width: 1100px;height: 100px;min-width: 1100px;clear: both;margin: 10px auto;border: 1 solid;}
+#fenxiang #dong{width: 450px;height: 100px;float: left;}
+#fenxiang #dong ul li{float: left;}
+#fx{float: left;}
+#fx ul li{float: left;margin-left: 40px;}
+/*产品结束*/
+#qita{width: 100%;;min-width: 1100px;}
+#qita1{width: 1100px;;margin: 0 auto;}
+#qita1 .left{width: 200px;border: 1px solid #999999;float: left;}
+#qita1 .right{width: 850px;margin-left:20px;;border: 1px solid #999999;float: left;}
+.left .one {width: 200px; height: 50px;background: #999999;}
+.left .one p{color: #DDDDDD;font-size: 18px;text-align: center;line-height: 50px;}
+.left .two{width: 140px;height: 180px;border: 1px solid #999999;padding: 30px;}
+.left .two a{color: black;text-decoration: none;}
+.left .two a p span{color: red;}
+
+.right .yi{width: 850px;height:50px ;background: #999999;}
+.right .yi ul li{ border-right: 1px solid #DDDDDD; float: left;line-height: 50px;color: white;font-size: 25px;width: 211.5px;text-align: center; cursor:pointer}
+.right .er{width: 850px;height:70px ;background: #E6E6FA;}
+.right .er ul li{float: left;margin: 0 30px;line-height: 30px;}
+#dian1{background: white;color: black;}
+
+.right #san img{margin-left: 50px;}
+.right #san1{display: none;}
+.right #san1 .niu .hh{font-family: "微软雅黑";font-size: 20px;}
+.right #san1 .niu span{width: 250px;display: inline-block;margin-left: 20px;color: #888888;}
+.right #san2{display: none;}
+.right #san3{display: none;}
+.right #san3 .lu{float: left;margin-left: 150px;border-right: 1px solid #999999;}
+.right #san3 .fen{float: left;margin-left: 150px;border-right: 1px solid #999999;}
+.right #san3 .ji{float: left;margin-left: 150px;}
+.right #san3 .ji button{background: #0059A9;color: white;border: none;}
+#ping{width: 850px;height: 40px;background: #CCCCCC;clear: both;}
+#ping ul li{float: left;line-height: 40px;width: 150px;text-align: center;font-size: 25px;border-right: 1px solid;cursor: pointer;}
+#ttuu{clear: both;}
+.right #shen{width: 800px;height: 200px;border: 1px solid#999999;padding: 10px;margin-left: 10px;}
+.right .shen p{color: red;}
+/*其他完*/
+
+
+#foot{width: 100%;height: 220px;min-width: 1100px;background:#E6E6FA; clear: both;}
+#foot #qian{width: 1100px;height: 200px;margin: 0 auto;}
+#foot #qian .shang{width: 1100px;height: 100px;}
+#foot #qian .shang .le{width: 600px;height: 100px;float: left;margin: 0 10px;}
+#foot #qian .shang .zh{width: 250px;height: 100px;float: left;margin: 0 10px;}
+#foot #qian .shang .ri{width: 150px;height: 100px;float: left;margin: 0 10px;}
+#foot #qian .shang .le p{margin: 25px 10px;}
+#foot #qian .shang .le ul li{float: left;margin: 0px 10px;font-size: 12px;color: #666666;}
+#foot #qian .shang .le ul li:hover{color: lightseagreen;cursor:pointer;}
+#foot #qian .shang .zh a{display: inline-block; margin: 65px 100px;text-decoration: none;color: #666666;font-size: 12px;}
+#foot #qian .shang .ri a{display: inline-block; margin: 65px 50px;text-decoration: none;color: #666666;font-size: 12px;}
+
+#foot #qian .xia{width: 1100px;height: 100px;}
+#foot #qian .xia .first{width: 200px;height: 100px;float: left;border-right: 1px solid #666666;margin-left: 10px;}
+#foot #qian .xia .second{width: 200px;height: 100px;float: left;border-right: 1px solid #666666;margin-left: 10px;}
+#foot #qian .xia .third{width: 200px;height: 100px;float: left;border-right: 1px solid #666666;margin-left: 10px;}
+#foot #qian .xia .fouth{width: 200px;height: 100px;float: left;border-right: 1px solid #666666;margin-left: 10px;}
+#foot #qian .xia .fivth{width: 200px;height: 100px;float: left;border-right: 1px solid #666666;margin-left: 10px;}
+#foot #qian .xia p{margin-top: 5px;}
+#foot #qian .xia ul li{color: #666666;font-size: 12px;margin-top: 2px;}
+#foot #qian .xia ul li:hover{color:lightseagreen;cursor:pointer;}
+/*qian完*/
+#hou{width: 100%;height: 200px;min-width: 1100px;background:#999999; clear: both;}
+#hou #wan {width: 1100px;height: 150px;margin: 0 auto;}
+#hou #wan ul{margin-top:  30px;margin-left: 230px; display: inline-block;}
+#hou #wan ul li{float: left;font-size: 12px;color: #666666;margin-left: 20px;}
+#hou #wan ul li:hover{color:lightseagreen;cursor:pointer;}
+#hou #wan p{text-align: center;margin: 10px;font-size: 12px;color: #666666;}
+#lianjie{margin-left: -59px;}
+/*侧边栏开始*/
+#cebian{position: fixed;right: 5px;bottom: 3px; z-index: 7; width: 60px; height: 330px;}
+#cebian #yi{display: block;width: 60px;height: 140px;overflow: hidden; margin-bottom: 2px;  cursor: pointer;  no-repeat -4px 18px;}
+#cebian #tu2{position: fixed;right: 65px;bottom: 250px;display: none;}
+#cebian #tu3{display: block;width: 60px;height: 70px;overflow: hidden; margin-bottom: 2px;  cursor: pointer;  no-repeat -4px 18px;}
+#cebian #tu4{display: block;width: 60px;height: 70px;overflow: hidden; margin-bottom: 2px;  cursor: pointer;  no-repeat -4px 18px;}
+#cebian #tu5{display: block;width: 60px;height: 60px;overflow: hidden; margin-bottom: 2px;  cursor: pointer; no-repeat -4px 18px;border: none;}
+
+
+
+
+
+
+
+
+

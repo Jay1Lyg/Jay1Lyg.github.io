@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册成功</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<style type="text/css">
+			#logo{width: 100%;height: 90px;min-width: 1100px;border-bottom: 1px solid #dddddd;}
+            #logo #logo1{width: 1100px;margin: 0 auto;}
+            #logo #logo1 ul{margin-top: 20px;margin-left: 50px;}
+            #logo #logo1 ul li{float: left;margin-left: 25px;}
+            #logo #logo1 ul li a{text-decoration: none;color: #999999;font-size: 12px;}
+            .img1{width: 150px;height: auto;margin-top: 6px;}
+            .img2{margin-top: 6px;}
+            
+            
+            #cg{width: 100%;height: 400px;min-width: 1100px;clear: both;}
+            #cgx{width: 1100px;margin: 0 auto;height: 400px;}
+            #cgx p{text-align: center;margin-top: 50px;color: #666666;font-size: 40px;font-family: "微软雅黑";line-height: 80px;}
+            #cgx .kuan{text-align: center;line-height: 50px; margin: 0 auto;background: #CCCCCC;width: 400px;height: 50px;opacity: 0.8;}
+            #cgx .kuan span{color: white;}
+            #cgx .go{ margin: 0 auto;width: 400px;height: 50px;text-align: center;margin-top: 50px;}
+           #cgx .go button{border-radius: 3px; width: 150px;height: 40px;color: white;background: #005AAA;border: none; font-size: 25px;font-family: "微软雅黑";line-height: 40px;}
+           #cgx .go button:hover{background: #00008B;}
+           
+           
+           #hou{width: 100%;height: 200px;min-width: 1100px;background:#DDDDDD; clear: both;}
+           #hou #wan {width: 1100px;height: 150px;margin: 0 auto;}
+            #hou #wan ul{margin-top:  30px;margin-left: 230px; display: inline-block;}
+            #hou #wan ul li{float: left;font-size: 12px;color: #666666;margin-left: 20px;}
+            #hou #wan ul li:hover{color:lightseagreen;cursor:pointer;}
+            #hou #wan p{text-align: center;margin: 10px;font-size: 12px;color: #666666;}
+            #lianjie{margin-left: -59px;}
+		</style>
+	</head>
+	<body>
+		<div id="logo">
+			<div id="logo1">
+				<ul>
+					<li>
+						<a href="http://www.ehaier.com">
+							<img src="img/produce1/t012b1362279b81f9ed.jpg" class="img1" />
+						</a>
+					</li>
+					<li><img src="img/produce1/slogan.png" /class="img2"></li>
+				</ul>
+				
+			</div>
+		</div>
+			<div id="cg">
+				<div id="cgx">
+					<p>注册成功</p>
+					<div class="kuan">
+						<span>恭喜你，已注册成功！</span>
+					</div>
+					<div class="go">
+						<button>立即购物</button>
+					</div>
+				</div>
+			</div>
+		
+		<div id="hou">
+			<div id="wan">
+				<ul> 
+					<li>购物流程 |</li>
+					<li>配送方式 |</li>
+					<li>付款方式 |</li>
+					<li>售后服务 |</li>
+					<li>投诉建议 |</li>
+					<li>友情链接 |</li>
+					<li>加入我们 |</li>
+					<li>海尔知识堂</li>
+				</ul>
+				<p>网站备案/许可证号： 鲁ICP备09096283号</p>
+				<p>Copyright2000-2016 海尔集团电子商务有限公司 All Rights Reserved</p>
+			    <div id="lianjie">
+					<ul>
+						<li>
+							<a href="">
+								
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/50c6c153a103a74d19000040.png"/>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/50c6c153a103a74d19000041.png"/>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/50c6c153a103a74d19000042.png"/>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/50c6c153a103a74d19000044.png"/>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/50f7b61ce48435121700008e.jpg"/>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/beian.gif"/>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>

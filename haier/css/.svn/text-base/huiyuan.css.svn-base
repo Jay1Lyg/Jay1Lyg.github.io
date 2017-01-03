@@ -1,0 +1,152 @@
+#top{width: 100%;height: 30px;background: #ddd;min-width: 1100px;}
+#top #top1{width: 1100px;margin: 0 auto;}
+#qiehuan{background: #0059a9;color: white; border: none;border-radius: 3px;width: 50px;}
+#top #top1 ul li{float: left;margin-left: 25px;line-height: 30px;font-size: 12px;}
+#top #top1 ul li a{color: black;text-decoration: none;}
+#top #top1 ul li a:hover{color: blue;}
+#denglu1{background: #33beff;color: white;border: none;border-radius: 3px;}
+#weixin{position: absolute;z-index: 99;display: none;top: 22px;}
+#app{position: absolute;z-index: 99;display: none;top: 22px;}
+/*top完*/
+#daohang{width: 100%;height: 50px;min-width: 1100px;}
+#daohang #xiaodao{width: 1100px;height: 50px;margin: 0 auto;}
+#daohang #xiaodao ul li{float: left;line-height: 60px;margin: 0 20px;}
+#daohang #xiaodao ul li a{color: #666666;text-decoration: none;}
+#daohang #xiaodao ul li a:hover{color: red;}
+
+/*下拉开始*/
+#che1{position: absolute;z-index: 99;background: white;display: none;}
+#hd1{position: absolute;z-index: 99;background: white;display: none;}
+#che1 ul li:hover{color: brown;}
+#che1 ul li{cursor: pointer}
+#hd1 ul li{cursor: pointer}
+#hd1 ul li:hover{color: brown;}
+
+/*daohang完*/
+#lunbo{ width: 100%;height: 485px;min-width: 1100px;position: relative;}
+#lun{width: 1510px;height: 485px;margin: 0 auto;position: relative;}
+#title{	position: absolute;left: 700px;top: 430px;}
+#title a{width: 30px;height: 30px;border-radius: 50%;
+                color: #fff;font-size: 10px;
+				text-align: center;
+				padding: 5px;
+				text-decoration: none;
+				font-size: 60px;}
+#article img{display: none;width: 1510px;margin: 0 auto;}
+#article .show{display: block;}
+.pointShow{color: yellow!important;}
+#lun b{position: absolute;padding: 5px;background: #fff;cursor: pointer;font-size: 60px;}
+#left{top: 220px;left: 0;}
+#right{top: 220px;right: 0;}
+#bai{width: 220px;height: 450px;border: 1px solid;position: absolute;top: 34px;left: 209px;}
+#bai .shang{width: 220px;height: 350px;background: white;}
+#bai .shang ul li{color:#999999;text-align: left;margin-left: 10px;padding-top: 10px;}
+#bai .xia{ background: #666666;width: 220px;height: 100px;clear: both;}
+#bai .xia1{position: absolute;top:290px;left: 50px;}
+#bai .xia2{position: absolute;top: 410px;left: 28px;}
+#bai .xia3 input{width: 120px;height: 40px;background: blue; border: none;color: white;border-radius: 3px;font-size: 25px;}
+#bai .xia3{position: absolute;top: 360px;left: 42px;}
+
+/*lunbo结束*/
+#ban{min-width: 1100px; width: 100%;height: 2230px;background: url(../img/huiyuan/bg2.jpg) ;}
+#xiaoban{width: 1100px;height: 2500px;margin: 0 auto;}
+#xiaoban .bian{background: #0059A9;width:1100px ;height: 150px;opacity: 0.8;}
+#xiaoban .bian ul li{float: left;margin: 20px 12.5px;cursor: pointer;}
+#xiaoban .bian ul li span{display: block;color: white;text-align: center;}
+
+.hui{width: 1100px;height: 22px;background: #DDDDDD;}
+#zhuan{width: 1100px;height: 580px;background: white;}
+#zhuan h2{margin-left: 20px;line-height: 50px;color: #666666;}
+#zhuan .left{width: 545px;height: 400px;float: left;}
+#zhuan .left .gt{margin-left: 20px;margin-top: 20px;float: left;}
+#zhuan .left .gt p{font-size: 30px;color: darkslategray;}
+#zhuan .left .gt s{font-size: 25px;color: red;}
+#zhuan .left ul {float: right;margin-top: 20px;text-align: right;}
+#zhuan .left ul li span{font-size: 35px;font-family: "微软雅黑";}
+#zhuan .left ul li button{width: 100px;height: 32px;background: red;color: white;font-size: 20px;border: none;}
+
+#zhong{width: 1px;height: 150px;float: left;background: #999999;margin-left:15px ;}
+
+#zhuan .right{width: 535px;height: 400px;float: left;}
+#zhuan .right ul li span{font-size: 35px;font-family: "微软雅黑";}
+#zhuan .right ul{float: left;margin-top: 20px;}
+#zhuan .right .tv{float: right;margin-top: 20px;}
+#zhuan .right .tv p{font-size: 30px;color: darkslategray;}
+#zhuan .right .tv s{font-size: 25px;color: red;}
+#zhuan .right ul {float: left;margin-top: 20px;margin-left: 20px;}
+#zhuan .right ul li span{font-size: 35px;font-family: "微软雅黑";}
+#zhuan .right ul li button{width: 100px;height: 32px;background: red;color: white;font-size: 20px;border: none;}
+#zhuan .img{margin-left: 320px;}
+/*专享结束*/
+#qiang{width: 1100px;height: 450px;background: white;}
+#qiang h2{margin-left: 20px;line-height: 50px;color: #666666;}
+#qiang .img11{float: left;}
+#qiang ul{float: right;margin-top: 50px;margin-right: 150px;text-align: center;}
+#qiang .da{font-size: 25px;}
+#qiang ul li{margin: 10px;}
+#qiang ul li span{color: red;font-size: 35px;font-family: "微软雅黑";}
+#qiang .xiao{font-size: 10px;color: #888888;}
+#qiang ul li button{color: white;background: blue;width: 100px;height: 35px;font-size: 20px;border: none;}
+
+
+#qiang1{width: 1100px;height: 500px;background: white;}
+#qiang1 .img11{float: right;}
+#qiang1 ul{float: left;margin-top: 50px;margin-left: 150px;text-align: center;}
+#qiang1 .da{font-size: 25px;}
+#qiang1 ul li{margin: 10px;}
+#qiang1 ul li span{color: red;font-size: 35px;font-family: "微软雅黑";}
+#qiang1 .xiao{font-size: 10px;color: #888888;}
+#qiang1 ul li button{color: white;background: blue;width: 100px;height: 35px;font-size: 20px;border: none;}
+#qiang1 .img{margin-left: 320px;}
+/*qianggou结束*/
+ 
+#chao{width: 1100px;height: 270px;background: white;}
+#chao h2{margin-left: 20px;line-height: 50px;color: #666666;}
+#chao .yi{margin-left: 100px; float: left;width: 220px;}
+#chao div img{width: 200px;height: 120px;}
+#chao div button{display: block;width: 120px;height: 30px;color: white;font-size: 20px;border: none;background: blue;}
+
+#shouce{width: 1100px;height: 220px;background: white;}
+#shouce h2{margin-left: 20px;line-height: 50px;color: #666666;}
+#shouce ul li{float: left;margin-left: 85px;}
+#shouce ul li img{width: 250px;height: 135px;}
+#shouce ul li button{display: block;width: 120px;height: 30px;color: white;font-size: 20px;border: none;background: blue;}
+/*版纳图结束*/
+#foot{width: 100%;height: 220px;min-width: 1100px;background:#E6E6FA; clear: both;}
+#foot #qian{width: 1100px;height: 200px;margin: 0 auto;}
+#foot #qian .shang{width: 1100px;height: 100px;}
+#foot #qian .shang .le{width: 600px;height: 100px;float: left;margin: 0 10px;}
+#foot #qian .shang .zh{width: 250px;height: 100px;float: left;margin: 0 10px;}
+#foot #qian .shang .ri{width: 150px;height: 100px;float: left;margin: 0 10px;}
+#foot #qian .shang .le p{margin: 25px 10px;}
+#foot #qian .shang .le ul li{float: left;margin: 0px 10px;font-size: 12px;color: #666666;}
+#foot #qian .shang .le ul li:hover{color: lightseagreen;cursor:pointer;}
+#foot #qian .shang .zh a{display: inline-block; margin: 65px 100px;text-decoration: none;color: #666666;font-size: 12px;}
+#foot #qian .shang .ri a{display: inline-block; margin: 65px 50px;text-decoration: none;color: #666666;font-size: 12px;}
+
+#foot #qian .xia{width: 1100px;height: 100px;}
+#foot #qian .xia .first{width: 200px;height: 100px;float: left;border-right: 1px solid #666666;margin-left: 10px;}
+#foot #qian .xia .second{width: 200px;height: 100px;float: left;border-right: 1px solid #666666;margin-left: 10px;}
+#foot #qian .xia .third{width: 200px;height: 100px;float: left;border-right: 1px solid #666666;margin-left: 10px;}
+#foot #qian .xia .fouth{width: 200px;height: 100px;float: left;border-right: 1px solid #666666;margin-left: 10px;}
+#foot #qian .xia .fivth{width: 200px;height: 100px;float: left;border-right: 1px solid #666666;margin-left: 10px;}
+#foot #qian .xia p{margin-top: 5px;}
+#foot #qian .xia ul li{color: #666666;font-size: 12px;margin-top: 2px;}
+#foot #qian .xia ul li:hover{color:lightseagreen;cursor:pointer;}
+/*qian完*/
+#hou{width: 100%;height: 200px;min-width: 1100px;background:#999999; clear: both;}
+#hou #wan {width: 1100px;height: 150px;margin: 0 auto;}
+#hou #wan ul{margin-top:  30px;margin-left: 230px; display: inline-block;}
+#hou #wan ul li{float: left;font-size: 12px;color: #666666;margin-left: 20px;}
+#hou #wan ul li:hover{color:lightseagreen;cursor:pointer;}
+#hou #wan p{text-align: center;margin: 10px;font-size: 12px;color: #666666;}
+#lianjie{margin-left: -59px;}
+
+
+#cebian{position: fixed;right: 5px;bottom: 3px; z-index: 7; width: 60px; height: 330px;}
+#cebian #yi{display: block;width: 60px;height: 140px;overflow: hidden; margin-bottom: 2px;  cursor: pointer;  no-repeat -4px 18px;}
+#cebian #tu2{position: fixed;right: 65px;bottom: 250px;display: none;}
+#cebian #tu3{display: block;width: 60px;height: 70px;overflow: hidden; margin-bottom: 2px;  cursor: pointer;  no-repeat -4px 18px;}
+#cebian #tu4{display: block;width: 60px;height: 70px;overflow: hidden; margin-bottom: 2px;  cursor: pointer;  no-repeat -4px 18px;}
+#cebian #tu5{display: block;width: 60px;height: 60px;overflow: hidden; margin-bottom: 2px;  cursor: pointer; no-repeat -4px 18px;border: none;}
+#cebian #tu5:hover{border: 1px solid #0059A9;}

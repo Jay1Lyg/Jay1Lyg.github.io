@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>用户注册</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/zhuce.css" />
+	</head>
+
+	<body>
+		<div id="logo">
+			<div id="logo1">
+				<ul>
+					<li>
+						<a href="http://www.ehaier.com">
+							<img src="img/produce1/t012b1362279b81f9ed.jpg" class="img1" />
+						</a>
+					</li>
+					<li><img src="img/produce1/slogan.png" /class="img2"></li>
+				</ul>
+				<p>
+					<a href="landing.html"target="_blank">已有海尔商城账号登录 </a>
+				</p>
+			</div>
+		</div>
+		<!--顶部完-->
+		<div id="zhuye">
+			<div id="xiaozhu">
+				<p>欢迎注册海尔商城</p>
+				<div id="xuan">
+					<label><input type="radio" name="1" id="btu1" value="" checked="checked" />用电子邮箱注册</label>
+					<label><input type="radio" name="1" id="btu2" value="" />用手机号码注册</label>
+				</div>
+				<form action="zhucechenggong.html" method="get" onsubmit="return checkForm()">
+					<div id="ttt">
+						<div class="er">
+							<label for="uesername">邮箱:</label>
+							<div class="inp_container">
+								<input type="text" name="" id="uesername" onblur="user()" /><span class="red"></span>
+							</div>
+						</div>
+						<div class="er">
+							<label for="password">登录密码:</label>
+							<div class="inp_container">
+								<input type="password" name="" id="password" onblur="pass()" /><span class="red"></span>
+							</div>
+						</div>
+						<div class="er">
+							<label for="password">确认密码:</label>
+							<div class="inp_container">
+								<input type="password" name="" id="confirmPassword"onblur="repass()"  /><span class="red"></span>
+							</div>
+						</div>
+
+						<br>
+					</div>
+					
+					
+					<div id="t3">
+						<div class="er1">
+							<label for="uesernam">手机号码:</label>
+							<div class="container">
+								<input type="text" name="" id="uesernam" onblur="usern()" /><span class="red"></span>
+							</div>
+						</div>
+						<div class="er1">
+							<label for="passwor">登录密码:</label>
+							<div class="container">
+								<input type="password" name="" id="passwor" onblur="passw()" /><span class="red"></span>
+							</div>
+						</div>
+						<div class="er1">
+							<label for="passwor">确认密码:</label>
+							<div class="container">
+								<input type="password" name="" id="confirmPasswor"  onblur="repassw()"/><span class="red"></span>
+							</div>
+						</div>
+						<br>
+					</div>
+				<div id="check">
+					<label>
+					<input type="checkbox" name="" id=""  checked="checked"/><span class="blue"> 同步开通海尔快捷通账号</span>
+					</label>
+					<br />
+					<br />
+					<span class="zho">《海尔商城用户服务协议》</span>
+					<br />
+					<br />
+					
+					<input type="submit" name="submit" id="submit" value="同意以上协议，马上注册" /></input>
+				</div>
+				</form>
+
+			</div>
+		</div>
+		
+		
+		
+		<div id="foot">
+			<div id="qian">
+				<div class="shang">
+					<div class="le">
+	     			    <p><b>售后服务和保修政策</b></p>
+						<ul>
+							<li>冰箱冰柜</li>
+							<li>洗衣机</li>
+							<li>彩电</li>
+							<li>空调</li>
+							<li>热水器</li>
+							<li>电脑</li>
+							<li>厨房电器</li>
+							<li>生活小家电</li>
+							<li>手机数码</li>
+						</ul>
+					</div>
+					<div class="zh">
+						<a href="">微信客服</a>
+					</div>
+					<div class="ri">
+						<a href="">在线客服</a>
+					</div>
+						
+				</div>
+				<div class="xia">
+					<div class="first">
+						<p><b>购物指南</b></p>
+						<ul>
+							<li>注册登录</li>
+							<li>密码相关</li>
+							<li>购物流程</li>     
+							<li>交易条款</li>
+						</ul>
+					</div>
+					<div class="second">
+						<p><b>支付方式</b></p>
+						<ul>
+							<li>货到付款</li>
+							<li>网银支付</li>
+							<li>发票说明</li>
+							<li>电子发票</li>     
+						</ul>
+					</div>
+					<div class="third">
+						<p><b>物流配送</b></p>
+						<ul>
+							<li>日日顺配送</li>
+							<li>配送服务查询</li>
+							<li>全场免运费</li>
+							<li>送装同步</li>
+							<li>违约赔付</li>
+						</ul>
+					</div>
+					<div class="fouth">
+						<p><b>售后服务</b></p>
+						<ul>     
+							<li>售后服务政策</li>
+							<li>退换货说明</li>
+							<li>安装/维修</li>
+							<li>服务时效承诺</li>
+							<li>咨询投诉</li>
+						</ul>
+					</div>
+					<div class="fivth">
+						<p><b>特色服务</b></p>
+						<ul> 
+							<li>新品试用 </li>
+							<li>价格保护</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--qian结束-->
+		
+		<div id="hou">
+			<div id="wan">
+				<ul> 
+					<li>购物流程 |</li>
+					<li>配送方式 |</li>
+					<li>付款方式 |</li>
+					<li>售后服务 |</li>
+					<li>投诉建议 |</li>
+					<li>友情链接 |</li>
+					<li>加入我们 |</li>
+					<li>海尔知识堂</li>
+				</ul>
+				<p>网站备案/许可证号： 鲁ICP备09096283号</p>
+				<p>Copyright2000-2016 海尔集团电子商务有限公司 All Rights Reserved</p>
+			    <div id="lianjie">
+					<ul>
+						<li>
+							<a href="">
+								
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/50c6c153a103a74d19000040.png"/>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/50c6c153a103a74d19000041.png"/>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/50c6c153a103a74d19000042.png"/>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/50c6c153a103a74d19000044.png"/>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/50f7b61ce48435121700008e.jpg"/>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="img/huiyuan/beian.gif"/>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<!--侧边栏固定开始 -->
+		<div id="cebian">
+			<img id="yi1" src="img/produce1/ballon.png"/>
+			<img id="tu2" src="img/produce1/ewm0917.png"  style="width:150;height: 150px;"   alt="微信关注，乐享海尔贴心服务！">
+			<img id="tu3" src="img/produce1/32158555.png"/>
+			<img id="tu4" src="img/produce1/32158555.png"/>
+		</div>
+		
+		
+		<script src="js/zhuce.js" type="text/javascript" charset="utf-8"></script>
+		
+		
+	</body>
+
+</html>

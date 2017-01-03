@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>采购</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/enterprise-purchase.css"/>
+		<script src="js/huoqu-yuansu.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+<!--黑框导航-->	
+<div id="nav">
+	<div id="nav-center">
+		<p>欢迎来到海尔B2B智慧集成解决方案平台!</p>
+		<ul>
+			<li><a href="landing.html"target="_blank"style="color: white;text-decoration: none;">登录</a></li>
+			<li><a href="zhuce.html" target="_blank" style="color: white;text-decoration: none;">注册</a></li>
+			<li><span id="span1"></span>企业采购</li>
+			<li><span id="span2"></span>在线客服</li>
+			<li>海尔商城</li>
+			<li>海尔官网</li>
+			<li><a href="wodedingdan.html" target="_blank" style="color: white;text-decoration: none;">订单中心</a></li>
+			<li>收藏网址</li>
+		</ul>
+	</div>
+</div>
+<!--首页导航-->
+<div id="haier">
+	<div id="haier-center">
+		<img id="img1" src="img-enterprise-purchase/haier-logo.png"/>
+		<div id="sy-nav">
+			<div class="nav1">
+				<strong>首页</strong>
+				<p>Home</p>
+			</div>
+			<div class="nav1">
+				<strong>智慧解决方案</strong>
+				<p>Smart solutions</p>
+			</div><div class="nav1">
+				<strong>经典案例</strong>
+				<p>Classic Case</p>
+			</div><div class="nav1">
+				<strong>技术支持</strong>
+				<p>Technical Support</p>
+			</div><div class="nav1">
+				<strong>企业采购</strong>
+				<p>Enterprise procurement</p>
+			</div>
+			<div class="nav1">
+				<strong>互动论坛</strong>
+				<p>Interactive forum</p>
+			</div>
+		</div>
+			
+		<h4 class="search">
+			<input type="text" name="" id="" value="" placeholder="请输入搜索关键词"/>
+			<a href=""></a>
+		</h4>
+		<img id="img2" src="img-enterprise-purchase/messagebanner.jpg"/>
+		<img src="img-enterprise-purchase/lyb_tu.png"/>
+	</div>
+</div>
+<!--侧边栏-->
+<div id="ggside">
+	<a href="" id="a1"></a><span id="bbspan1">企业采购</span>
+	<a href="" id="a2"></a><span id="bbspan2">在线客服</span>
+	<a href="" id="a3"></a><span id="bbspan3">分享微博</span>
+	<a href="" id="a4"></a><span id="bbspan4">分享微信</span>
+</div>
+
+
+<!--采购产品需求-->
+<div id="caigou">
+	<div id="caigou-center">
+		<p><em style="color: red;">&nbsp;*&nbsp;</em>采购产品需求<span>（为了更快捷的为您提供服务，请您精确选择产品）</span></p>
+		<div id="caigou-box">
+			<img src="img-enterprise-purchase/a1.png"/><br />
+			<input type="checkbox" name="" id="" value="" /><span>中央空调</span><br />
+			<input type="checkbox" name="" id="" value="" /><span>家用中央空调</span>
+		</div>
+		<div id="caigou-box">
+			<img src="img-enterprise-purchase/a2.png"/><br />
+			<input type="checkbox" name="" id="" value="" /><span>电/燃气热水器</span><br />
+			<input type="checkbox" name="" id="" value="" /><span>太阳能</span>
+		</div>
+		<div id="caigou-box">
+			<img src="img-enterprise-purchase/a3.png"/><br />
+			<input type="checkbox" name="" id="" value="" /><span>中央空调</span><br />
+			<input type="checkbox" name="" id="" value="" /><span>家用中央空调</span>
+		</div>
+		<div id="caigou-box">
+			<img src="img-enterprise-purchase/a4.png"/><br />
+			<input type="checkbox" name="" id="" value="" /><span>中央空调</span><br />
+			<input type="checkbox" name="" id="" value="" /><span>家用中央空调</span>
+		</div>
+		<div id="caigou-box">
+			<img src="img-enterprise-purchase/a5.png"/><br />
+			<input type="checkbox" name="" id="" value="" /><span>中央空调</span><br />
+			<input type="checkbox" name="" id="" value="" /><span>家用中央空调</span>
+		</div>
+		
+		<div id="caigou-box">
+			<img src="img-enterprise-purchase/a6.png"/><br />
+			<input type="checkbox" name="" id="" value="" /><span>中央空调</span><br />
+			<input type="checkbox" name="" id="" value="" /><span>家用中央空调</span>
+		</div>
+		<div id="caigou-box">
+			<img src="img-enterprise-purchase/a7.png"/><br />
+			<input type="checkbox" name="" id="" value="" /><span>中央空调</span><br />
+			<input type="checkbox" name="" id="" value="" /><span>家用中央空调</span>
+		</div>
+		<div id="caigou-box">
+			<img src="img-enterprise-purchase/a8.png"/><br />
+			<input type="checkbox" name="" id="" value="" /><span>中央空调</span><br />
+			<input type="checkbox" name="" id="" value="" /><span>家用中央空调</span>
+		</div>
+		<div id="caigou-box">
+			<img src="img-enterprise-purchase/a9.png"/><br />
+			<input type="checkbox" name="" id="" value="" /><span>中央空调</span><br />
+			<input type="checkbox" name="" id="" value="" /><span>家用中央空调</span>
+		</div>
+		
+		<div id="caigou-box">
+			<img src="img-enterprise-purchase/a10.png"/><br />
+			<input type="checkbox" name="" id="" value="" /><span>中央空调</span><br />
+			<input type="checkbox" name="" id="" value="" /><span>家用中央空调</span>
+		</div>
+		<div id="caigou-box">
+			<img src="img-enterprise-purchase/a11.png"/><br />
+			<input type="checkbox" name="" id="" value="" /><span>中央空调</span><br />
+			<input type="checkbox" name="" id="" value="" /><span>家用中央空调</span>
+		</div>
+		
+	</div>
+</div>
+
+<!--留言咨询-->
+<div id="liuyan">
+	<div id="liuyan-center">
+		<div class="lyb_left">
+			<span>留言<br />咨询</span>
+		</div>
+		
+		<div class="liuyanbox1">
+			<p><span>姓名</span><input type="text" name="" id="" value="" /></p>
+			<p><span><em style="color: red;">&nbsp;*&nbsp;</em>所在省份</span><select name="" id="sheng">
+					<option value="0">--请选择省份--</option>
+					<option value="1">北京</option>
+					<option value="2">天津</option>
+					<option value="3">重庆</option>
+					<option value="4">上海</option>
+					<option value="5">山西</option>
+					<option value="6">山东</option>
+					<option value="7">云南</option>
+					<option value="8">陕西</option>
+					<option value="9">浙江</option>
+					<option value="10">四川</option>
+					<option value="11">甘肃</option>
+			
+				</select>
+			</p>
+			<p><span>采购数量</span><input type="text" name="" id="" value="" placeholder="0"/>台</p>
+		</div>
+		<div class="liuyanbox1">
+			<p><span><em style="color: red;">&nbsp;*&nbsp;</em>公司名称</span><input type="text" name="" id="" value="" /></p>
+			<p><span><em style="color: red;">&nbsp;*&nbsp;</em>所在城市</span><select name="" id="shi">
+					<option value="0">--请选择城市--</option>
+					<option value="1">北京</option>
+					<option value="2">重庆</option>
+					<option value="3">上海</option>
+					<option value="4">太原</option>
+					<option value="5">长治</option>
+					<option value="6">忻州</option>
+					<option value="7">吕梁</option>
+					<option value="8">晋中</option>
+					<option value="9">临汾</option>
+					<option value="10">运城</option>
+					<option value="11">晋城</option>
+				</select>
+			</p>
+			<p><span>采购金额</span><input type="text" name="" id="" value="" placeholder="0"/> 万</p>
+		</div>
+		<div class="liuyanbox2">
+			<p><span><em style="color: red;">&nbsp;*&nbsp;</em>联系电话</span><input type="text" name="" id="" value="" /></p>
+		</div>
+		<textarea name="" rows="4" cols="95"></textarea>
+		<div class="yanzhengma">
+			<p><span><em style="color: red;">&nbsp;*&nbsp;</em>联系电话</span><input type="text" name="" id="" value="" /></p>
+			<img id="yanzheng" src="img-enterprise-purchase/vCode.jpg"/>&nbsp;&nbsp;&nbsp;<span id="kanbuqing">看不清</span>
+			<input type="checkbox" name="" id="liji" value="" /><span >请立即联系我</span>
+			<button id="btn">提交申请</button>
+		</div>
+	</div>
+</div>
+<div id="suozaidi">
+	
+</div>
+
+<!--解决方案-->
+<div id="jiejue">
+	<div id="jiejue-center">
+		<div class="jiejuebox1">
+			<p>解决方案（行业）</p>
+			<a href="#">邮政通讯 </a>
+			<a href="">酒店</a>
+			<a href="">商超</a>
+			<a href="">地产</a>
+			<a href="">医疗卫生</a>
+			<a href="">食品饮料</a>
+			<a href="">教育</a>
+			<a href="">政府公建</a>
+			<a href="">交通运输</a>
+			<a href="">制造业</a>
+			<a href="">金融</a>
+			<a href="">广电娱乐</a>
+			<a href=""></a>
+		</div>
+		<div class="jiejuebox1">
+			<p>解决方案（行业）</p>
+			<a href="#">邮政通讯 </a>
+			<a href="">酒店</a>
+			<a href="">商超</a>
+			<a href="">地产</a>
+			<a href="">医疗卫生</a>
+			<a href="">食品饮料</a>
+			<a href="">教育</a>
+			<a href="">政府公建</a>
+			<a href="">交通运输</a>
+			<a href="">制造业</a>
+			<a href="">金融</a>
+			<a href="">广电娱乐</a>
+			<a href=""></a>
+		</div>
+		<div class="jiejuebox1">
+			<p>解决方案（行业）</p>
+			<a href="#">邮政通讯 </a>
+			<a href="">酒店</a>
+			<a href="">商超</a>
+			<a href="">地产</a>
+			<a href="">医疗卫生</a>
+			<a href="">食品饮料</a>
+			<a href="">教育</a>
+			<a href="">政府公建</a>
+			<a href="">交通运输</a>
+			<a href="">制造业</a>
+			<a href="">金融</a>
+			<a href="">广电娱乐</a>
+			<a href=""></a>
+		</div>
+		
+		<div class="hudong">
+			<p id="p1">与海尔互动</p><br />
+			<img src="img-enterprise-purchase/hudong1.png"/>
+			<img src="img-enterprise-purchase/hudong2.png"/>
+			<p id="p2">扫一扫，好礼相送！扫码下载智慧生活app</p>
+			<div class="sousuo">
+				<input type="text" name="" id="" value="" placeholder="请输入搜索关键词"/><img src="img-enterprise-purchase/footsbt.png"/>
+			</div>
+		</div>
+		
+		<div id="lianjie">
+			<p><b>友情链接：</b>海尔施特劳斯官网</p>
+			<p>海尔合规热线</p>
+			<p>海尔商城</p>
+		</div>
+		
+		<div id="lianjie">
+			<ul>
+				<li>关于海尔&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</li>
+				<li>新闻中心&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</li>
+				<li>联系我们&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</li>
+				<li>法律声明</li>
+			</ul>
+			<p id="haha">鲁ICP备09096283&nbsp;&nbsp;|&nbsp;&nbsp;Copyright ©2015 海尔集团 版权所有</p>
+		</div>
+		
+		
+	</div>
+</div>
+
+
+		
+		
+		
+	<script src="js/enterprise-purchase.js" type="text/javascript" charset="utf-8"></script>	
+	</body>
+</html>

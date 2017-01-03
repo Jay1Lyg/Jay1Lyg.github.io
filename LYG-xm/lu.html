@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>泸州老窖</title>
+		<link rel="stylesheet" type="text/css" href="css/lu.css"/>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.cycle.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".dd li").each(function(index){
+					$(this).mouseover(function(){
+					    console.log(index)
+						$(".xiala").slideDown("fast")
+						$(".xiala div:eq("+index+")").slideDown()
+					})
+					$(this).mouseout(function(){
+						$(".xiala div:eq("+index+")").slideUp()
+						$(".xiala").hide()
+					})
+				})
+			
+				$(".xiala").mouseover(function(){
+					$(this).show();
+				})
+				$(".xiala").mouseout(function(){
+					$(this).hide();
+				})
+				
+				
+				$("#lb").cycle({
+					"fx":"scrollRight",
+					"pager":"#btn"
+				})
+				
+				
+				$(".y").click(function(){
+                  		$(".r").slideDown()
+                  		$(".l").hide()
+                  	})
+				$(".yy").click(function(){
+                  		$(".l").slideDown()
+                  		$(".r").hide()
+                  	})
+				 $(window).scroll(function(){
+                    if($(window).scrollTop()>100){
+                 $("#hui").fadeIn(1500);
+           
+                      }
+                        else{
+                       $("#hui").fadeOut(1500);
+                  }
+                })
+                  $("#hui").click(function(){
+                      $('body,html').animate({scrollTop:0},1000);
+                })
+//                	
+           })
+			
+		</script>
+	</head>
+	<body>
+		<div id="top">
+			<div id="top1">
+				<div class="img1">
+					<img src="img/luzhou/logo.png"/>
+				</div>
+				
+				<div class="left1">
+					<ul>
+						<li><a href="">搜索</a></li>
+						<li><a href="">English</a></li>
+						<li><a href="">微应用</a></li>
+					</ul>
+				</div>
+				
+				<div class="right1">
+					<ul>
+						<li>关于我们</li>
+						<li>招聘信息</li>
+						<li>国窖影音</li>
+						<li>投资者关系</li>
+						<li>服务热线</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div id="dao">
+			<div id="dao1">
+				<span style="cursor: pointer; width: 30px; margin-left: 270px; font-size: 13px;color: #ccc;line-height: 28px;float: left;">
+					首页
+				</span>
+				<ul class="dd">
+					<li>品牌</li>
+					<li>服务</li>
+					<li>新闻</li>
+					<li>文化</li>
+					<li>公益</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="xiala">
+			<div>
+				<img src="img/luzhou/56a855353a189.png"/>
+				<img src="img/luzhou/tq.png"/>
+				<img src="img/luzhou/eq.png"/>
+				<img src="img/luzhou/toq.png"/>
+				<img src="img/luzhou/jlj.png"/>
+			</div>
+			<div >
+				<img style="margin: 0 auto;display: block;" src="img/luzhou/532010afd1e4a.png"/>
+			</div>
+			<div >
+				<ul>
+					<li>
+					   <img src="img/luzhou/56a087d42e68b.jpg"/>
+					   <p style="color: white;">2016国窖1573封藏大典</p>
+					</li>
+					<li>
+					   <img src="img/luzhou/56e8c6b5668cc.jpg"/>
+					   <p style="color: white;">2016中国国际酒业博览会</p>
+					</li>
+				</ul>
+			</div>
+			<div >
+				<ul>
+					<li>
+					   <img src="img/luzhou/5322b2b98ea9f.jpg"/>
+					   <p style="color: white;">文化遗产</p>
+					</li>
+					<li>
+					   <img src="img/luzhou/5322b2c78f98c.jpg"/>
+					   <p style="color: white;">文化专题</p>
+					</li>
+				</ul>
+			</div>
+			<div >
+				<ul>
+					<li>
+					   <img src="img/luzhou/53202e243241b.jpg"/>
+					   <p style="color: white;">公益活动</p>
+					</li>
+					<li>
+					   <img src="img/luzhou/53202e2e1df6b.jpg"/>
+					   <p style="color: white;">公益报告</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<!--轮播开始-->
+		<div id="lbb">
+			
+		<div id="lb">
+			<img src="img/luzhou/5680affdb5c62.jpg"/>
+			<img src="img/luzhou/57e373d0278a2.jpg"/>
+			<img src="img/luzhou/581164d3609f6.jpg"/>
+			<img src="img/luzhou/582e78b453e05.jpg"/>
+			<img src="img/luzhou/584df6f95b380.jpg"/>
+		</div>
+		<div id="btn"></div>
+		</div>
+		
+		<!--轮播结束-->
+		<div id="tou">
+			<div id="tou1">
+				<div class="left2">
+					<p style="margin: 10px 20px;font-size: 30px;">公告栏</p>
+                    <p style="margin: 10px 20px;">Bulletin Board</p>
+                    <p style="margin: 5px;">泸州老窖股份有限公司关于部分产品执行企业标准的说明</p>
+                    <button style="border: none;color: #ddd;color: black;margin: 10px;">查看详情</button>
+				</div>
+				<div class="right2">
+					
+					<div class="yi">
+						<img class="y" src="img/luzhou/news_prev.png"/>
+					</div>
+					<div class="er">
+						<p style="font-size: 30px;text-align: center;margin-top: 40px;">新闻</p>
+						<span >
+							news
+						</span>
+						<div id="p">
+						<p class="l">2015—2016学年泸州老窖奖学金颁发仪式隆重举行
+                                  12月3日，2015—2016学年泸州老窖奖学金颁
+                                                                  发仪式在西南医科大学城北校区隆重举行。泸州老窖股份有限公司党委副...
+						</p>
+						<p class="r" style="display: none;">
+                                                                           泸州老窖“久香牌曲药”通过国家质检总局生态原产地产...
+                               11月30日，受国家质检总局委托，来自中国检验认证集团、山西出入境检验检疫局、中国科学院生态环境研究中心的相...
+						</p>
+						
+						</div>
+					</div>
+					<div class="san">
+						<img class="yy" src="img/luzhou/news_next.png"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="shi">
+			<div id="shi1">
+				<div class="left3"style="float: left;margin-left: 20px;width: 650px;height: 460px;">
+					<video controls="controls" width="650px" height="460px">
+			             <source src="movie/luo.mp4" type="video/mp4"/>  <!--chorme,IE9+-->
+			             <source src="movie/luo.ogg" type="video/ogg"/>	<!--火狐-->
+			             <embed src="movie/luo.swf"/>
+		            </video>
+
+				</div>
+				<div class="right3"style="float: left;margin-left: 20px;">
+					<img src="img/luzhou/569d99ac46666.jpg" width="750px"height="485px"/>
+				</div>
+			</div>
+		</div>
+		
+		<div id="xiao">
+			<div id="xiao1">
+				
+			</div>
+		</div>
+		
+		
+		<div id="logo">
+			<div id="logo1">
+				<img src="img/luzhou/logo_b.png"/>
+				<ul>
+					<li>网上商城 <br>Mall</li>
+					<li>联系社区 <br>Mall</li>
+					<li>专卖店 <br>Mall</li>
+					<li>积分商城 <br>Mall</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="ding">
+			<img id="hui" src="img/luzhou/bottom3.png"/>
+		</div>
+		
+		<div id="foot">
+			<div id="foot1">
+				<div class="ba">
+					<ul>
+						<li>品牌</li>
+						<li>国窖1573</li>
+						<li>特曲</li>
+						<li>窖龄酒</li>
+						<li>头曲</li>
+						<li>二曲</li>
+						<li>养生酒</li>
+					</ul>
+				</div>
+				<div class="ba">
+					<ul>
+						<li>服务</li>
+						<li>官方商城</li>
+						<li>天猫旗舰店</li>
+						<li>京东旗舰店</li>
+						<li>专卖店查询</li>
+						<li>会员俱乐部</li>
+						<li>联系片区</li>
+						<li>防伪查询</li>
+					</ul>
+				</div>
+				<div class="ba">
+					<ul>
+						<li>新闻</li>
+						<li>企业新闻</li>
+						<li>媒体聚焦</li>
+						<li>新闻专题</li>
+					</ul>
+				</div>
+				<div class="ba">
+					<ul>
+						<li>文化</li>
+						<li>文化遗产双国宝</li>
+						<li>文化专题</li>
+					</ul>
+				</div>
+				<div class="ba">
+					<ul>
+						<li>公益</li>
+						<li>公益活动</li>
+						<li>公益报告</li>
+					</ul>
+				</div>
+				<div class="ba">
+					<ul>
+						<li>关于我们</li>
+						<li>企业介绍</li>
+						<li>集团高层</li>
+						<li>企业理念</li>
+						<li>企业荣誉</li>
+						<li>下属公司</li>
+					</ul>
+				</div>
+				<div class="ba">
+					<ul>
+						<li>投资者关系</li>
+						<li>董事介绍</li>
+						<li>监事介绍</li>
+						<li>高管介绍</li>
+						<li>信息披露</li>
+						<li>年报季报</li>
+					</ul>
+				</div>
+				<div class="ba">
+					<ul>
+						<li>网站应用</li>
+						<li>老窖商学院</li>
+						<li>客户平台</li>
+						<li>常见问题</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

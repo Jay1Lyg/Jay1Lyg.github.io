@@ -1,0 +1,75 @@
+#header{
+	height: 70px;
+	background: #333;
+	width: 100%;
+	min-width: 1260px;
+}
+
+#header .center{
+	width: 1260px;
+	margin: 0 auto;
+}
+
+#header .logo{
+	background: url(../images/logo2.png) no-repeat;
+	text-indent: -9999px;
+	width: 139px;
+	height: 40px;
+	margin-top: 13px;
+	float: left;
+}
+
+#header .logo:hover{
+	background: url(../images/logo.png) no-repeat;
+}
+
+#header .link a{
+	color: #eee;
+	text-decoration: none;
+	font-size: 18px;
+	text-align: center;
+	display: block;
+}
+
+#header .link ul{
+	float: right;
+}
+
+#header .link li{
+	float: left;
+	line-height: 70px;
+	width: 120px;
+}
+
+#header .link li.active{
+	background: black;
+}
+
+#header .link li:hover{
+	background: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

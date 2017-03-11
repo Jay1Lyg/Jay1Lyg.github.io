@@ -1,0 +1,1 @@
+body:before{font-family:monospace;content:'Error: Undefined variable: "$topbgcolor".\A         on line 6 of C:\Users\��\Documents\HBuilderProjects\kge\css\extend.scss\A \A 1: .fl{float: left;}\A 2: .fr{float: right;}\A 3: .clearfix:after{\A 4:     content: \'';height:0;display:block;visibility:hidden;clear:both;\A 5:}\A 6:.active{color:$topbgcolor}';white-space:pre}

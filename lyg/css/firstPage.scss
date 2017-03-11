@@ -1,0 +1,773 @@
+//newUser boder
+$borderColor: #ccc;
+$color:#777;
+$bgColor:#eee;
+$blue:#00f;
+$yellow:#ffa203;
+$bg:#fff;
+
+$w1200:1200px;
+$h435:435px;
+$w80:80px;
+$w60:60px;
+$h60:60px;
+$w70:70px;
+$h70:70px;
+$w380:380px;
+$h190:190px;
+
+$font:16px;
+$fontSize:14px;
+
+$n:none;
+$position: no-repeat center top;
+
+*{
+    font-family: "microsoft yahei";
+    box-sizing: border-box;
+}
+.fl{
+    float: left;
+}
+
+%fr{    
+    float: right;
+}
+.clearfix:after{
+    content: '';height: 0;display: block;visibility: hidden;clear: both;
+}
+
+//lunbo start
+#carousel{
+    width: 100%;
+    height: $h435;
+    margin: 0 auto;
+    #container{
+        width: 100%;
+        height: $h435;
+        margin: 0 auto;
+        border: 1px solid;
+        position: relative;
+    }
+    #title{
+        position: absolute;
+        left: 800px;
+        top: 400px;
+    }
+    #title a{
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 10px;
+        display: inline-block;
+        background: black;
+        text-align: center;
+        padding: 5px;
+        text-decoration: none;
+    }
+    #firstCarousel{
+        overflow: hidden;
+        width: 100%;
+        margin: 0 auto;
+        height: 435px;
+        background: #032c43;
+    }
+    #firstCarousel div{
+        width: 1200px;
+        height: 435px;
+        margin: 0 auto;
+        position: relative;
+        
+    }
+    .up{
+        position: absolute;
+        top: 2em;
+        width: 100%;
+        text-align: center;
+        font-size: 3em;
+        color: #48e2ff;
+        font-weight: bold;
+    }
+    .down{
+        position: absolute;
+        top: 7em;
+        width: 100%;
+        text-align: center;
+        font-size: 1.5em;
+        color: #fff;
+        font-weight: bold;
+    }
+    .down span{
+        color: #48e2ff;
+    }
+    #thirdCarousel{
+        width: 100%;
+        margin: 0 auto;
+        height: 435px;
+        background: url(../img/banner_03.png) no-repeat center top;
+        color: white;
+    }
+    #thirdCarousel div{
+        position: relative;
+        width: 1200px;
+        height: 435px;
+        margin: 0 auto;
+    }
+    .upper{
+        position: absolute;
+        top: 3em;
+        font-size: 2.5em;
+        font-weight: bold;
+    }
+    .low{
+        position: absolute;
+        top: 9.5em;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+    #thirdCarousel img{
+        width: 1500px;
+        height: 340px;
+        -webkit-animation: up 1000ms ease-in;
+        animation: up 1000ms ease-in;
+        padding-top: 5em;
+        padding-left: 2em;
+    }
+    #thirdCarousel h3{
+        position: absolute;
+        top: 16em;
+        padding: 0.5em 1em;
+        border: 1px solid #fff;
+    }
+    #firstCarousel img{
+        width: 1117px;
+        height: 434px;
+        -webkit-animation: up 1000ms ease-in;
+        animation: up 1000ms ease-in;
+        padding-left:2em ;
+    }
+    @-webkit-keyframes up{
+        from{
+            transform: translate(0,35px);
+        }
+        to{
+            transform: translate(0,0);
+        }
+    }
+    #secondCarousel{
+        width: 100%;
+        margin: 0 auto;
+        height: 435px;
+        background: url(../img/banner_02.png) no-repeat center top;
+    }
+    #secondCarousel div{
+        width: 1200px;
+        height: 435px;
+        margin: 0 auto;
+    }
+    .one{
+        padding-top: 2.5em;
+        font-size: 64px;
+    }
+    .two{
+        font-size: 40px;
+    }
+    #secondCarousel div p{
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        -webkit-animation: move 500ms ease-in;
+        animation: move 500ms ease-in;
+    }
+    @-webkit-keyframes move{
+        from{
+            opacity: 0;
+        }
+        to{
+            opacity: 1;
+        }
+    }
+    #fourthCarousel{
+        width: 100%;
+        margin: 0 auto;
+        height: 435px;
+        background: #292169;
+    }
+    #four{
+        width: 100%;
+        height: 435px;
+        margin: 0 auto;
+        background: url(../img/banner_04.png) no-repeat center top;
+        text-align: center;
+        color: white;
+        font-weight: bolder;
+    }
+    #four img{
+        -webkit-animation: move 1000ms ease-in;
+        animation: move 1000ms ease-in;
+        -webkit-animation: up 1000ms ease-in;
+        animation: up 1000ms ease-in;
+    }
+    .content{display: none;}
+    .show{display: block;}
+    .pointShow{
+        background: blue!important;
+        color: #000!important;
+    }
+    #container b{position: absolute;padding: 5px;
+        background: rgba(255,255,255,0);cursor: pointer;
+        font-size: 4em;
+        color: #ccc;opacity: 0.8;
+        z-index: 999;
+    }
+    #left{top: 170px;left: 45px;}
+    #right{top: 170px;right: 45px;}
+}
+//lunbo end
+
+//new start
+#new{
+    width: 100%;
+    height: 144px;
+    margin: 0 auto;
+    ul{
+        width: $w1200;
+        height: 104px;
+        margin: 20px auto;
+        display: flex;
+        list-style: $n;
+        li{
+            flex: 1;
+            border: 1px solid $borderColor;
+            margin-right: 1.5em;
+            padding: 1.4em 0 1.4em 1.4em;
+        }
+    }
+    .new{
+        .common{
+            @extend .fl;
+            height: $h60;
+            width: $w80;
+            display: inline-block;
+            background: url(../img/new.png) no-repeat;
+        }
+        .caption{
+            padding-top: 0.5em;
+        }
+        .newCustomer{
+            background-position: 0 -751px;
+        }
+        .virtual{
+            background-position: 0 -142px;
+        }
+        .meeting{
+            background-position: 0 -298px;
+        }
+        .online{
+            background-position: 0 -449px;
+        }
+        span{
+            font-size: $font;
+            color: #222;
+        }
+        p{
+            display: inline-block;
+            font-size: $fontSize;
+            color: $color;
+            padding-top: 1em;
+        }
+    }
+}
+//new end
+
+//leading start
+#leading{
+    width: 100%;
+    height: 544px;
+    background: $bgColor;
+    .leading{
+        margin: 0 auto;
+        width: $w1200;
+        p{
+            font-size: 1.5em;
+            padding-top: 1.5em;
+            padding-bottom: 1em;
+        }
+        div.active{
+            display: block;
+        }
+        .content>div{
+            -webkit-animation: move 300ms ease-in;
+             animation: move 300ms ease-in;
+            
+        }
+        @-webkit-keyframes move{
+            from{
+                opacity: 0;
+            }
+            to{
+                opacity: 1;
+            }
+        }
+    }
+   .sketch{
+        width: $w1200;
+        height: $h60;
+        display: flex;
+        list-style: $n;
+        border: 1px solid $borderColor;
+        background: $bg;
+        li{
+            @extend .fl;
+            text-align: center;
+            flex: 1;
+            margin: 0 1em;
+            line-height: $h60;
+            border-bottom: none;
+            color: $color;
+        }
+        li.active{
+            border-bottom: 1px solid $blue;
+            color: $blue;
+        }
+        b{
+            color: white;
+            background: red;
+            padding: 0 5px;
+            border-radius:3px;
+            font-size: $fontSize;
+        }
+    }
+    .content{
+        width: $w1200;
+        background: $bg;
+        height: 350px;
+        padding: 1.5em 0 1.5em 1.5em;
+        display: $n;
+        ul{
+             width: 100%;
+            height: 115px;
+            display: flex;
+            list-style: $n;
+        }
+        li{
+            flex: 1;
+            margin-right: 2em;
+            padding: 1.4em 0 1.4em 1.4em;
+        }
+    }
+    .large{
+        width: $w380;
+        height: $h190;
+        @extend .fl;
+        background: url(../img/leading.png) no-repeat;
+    }
+    .big{
+        background-position: 0 -615px;
+    }
+    .intelligence{
+        background-position: 0 -20px;
+    }
+    .near{
+        background-position: 0 -212px;
+    }
+    .stack{
+        background-position: 0 -410px;
+    }
+    .voice{
+        background-position: 0 -1766px;
+    }
+    .caption{
+        padding-top: 0.5em;
+        p{
+            font-size: $fontSize;
+            color: $color;
+            padding-top: 0.1em;
+            padding-bottom: 0.2em;
+            display: inline-block;
+        }
+        b{
+            padding-top: 0.8em;
+            color: $blue;
+        }
+        h3{
+            font-size: 1.5em;
+            font-weight: 400;
+            padding-bottom: 1em;
+        }
+        h4{
+            padding-top: 1em;
+            color: $blue;
+        }
+    }
+    .yunServe{
+        .same{
+            @extend .fl;
+            height: $h70;
+            width: $w70;
+            display: inline-block;
+            margin-right:1em ;
+            background: url(../img/leading.png) no-repeat;
+        }
+        .detail{
+            padding-top: 0.5em;
+        }
+        .solution{
+            background-position: -1px -797px;
+        }
+        .bigData{
+            background-position: -1px -886px;
+        }
+        .intelServe{
+            background-position: 0 -965px;
+        }
+        .data{
+            background-position: -3px -1523px;
+        }
+        .stable{
+            background-position: -2px -1603px;
+        }
+        .safe{
+            background-position: -2px -1681px;
+        }
+        .one{
+            background-position: 0 -1045px;
+        }
+        .person{
+            background-position: 0 -1122px;
+        }
+        .source{
+            background-position: -2px -1203px;
+        }
+        .connect{
+            background-position: 0 -1282px;
+        }
+        .security{
+            background-position: 0 -1362px;
+        }
+        .ecology{
+            background-position: 0 -1446px;
+        }
+        .interactive{
+            background-position: 0 -1956px;
+        }
+        .distinguish{
+            background-position: 0 -2032px;
+        }
+        .learn{
+            background-position: 0 -2103px;
+        }
+        span{
+            font-size: $font;
+            color: #222;
+        }
+        p{
+            font-size: $fontSize;
+            color: $color;
+            padding-top: 0.5em;
+        }
+        b{
+            color: $blue;
+            font-weight: 400;
+        }
+    }
+}
+//leading end
+
+//response start
+#response{
+    width: 100%;
+    height: 700px;
+    .response{
+        width: $w1200;
+        margin: 0 auto;
+    }
+    .content{
+        width: $w1200;
+        height: 457px;
+        margin: 0 auto;
+    }
+    p{
+        font-size: 1.5em;
+        padding-top: 1.5em;
+        padding-bottom: 1em;
+    }
+   ul{
+       display: flex;
+       li{
+           flex: 1;
+           margin-right: 1em;
+           border: 1px solid $borderColor;
+       }
+   }
+   .title{
+       height: 87px;
+       width: 100%;
+       text-align: center;
+       padding: 1em 0;
+       b{
+           font-size: 20px;
+           color: #222;
+           font-weight: 400;
+       }
+       p{
+           font-size: $fontSize;
+           color: $color;
+           padding-top: 0.5em; 
+       }
+   }
+   .part{
+       width: 100%;
+       border: 1px solid $borderColor;
+       padding: 1em;
+       &:hover{
+           .net{
+               -webkit-animation: change 400ms ease-in infinite;
+                animation: change 400ms ease-in infinite;
+           }
+       }
+   }
+   @keyframes change{
+        from{
+            transform: scale(1);
+        }
+        to{
+            transform: scale(1.2);
+        }
+    }
+   .computer{
+       height: 64px;
+   }
+   .net{
+        @extend .fl;
+        height: $h60;
+        width: $w60;
+        display: inline-block;
+        margin-right:1em ;
+        background: url(../img/response.png) no-repeat; 
+   }
+   .bbc{
+       background-position: 0 0;
+   }
+   .blb{
+       background-position: 0 -65px;
+   }
+   .dcc{
+       background-position: 0 -130px;
+   }
+   .bos{
+       background-position: -65px 0;
+   }
+   .cds{
+       background-position: -65px -65px;
+   }
+   .cdn{
+       background-position: -65px -130px;
+   }
+   .rds{
+       background-position: -130px 0;
+   }
+   .scs{
+       background-position: -130px -65px;
+   }
+   .sql{
+       background-position: -130px -130px;
+   }
+   .caption{
+        padding-top: 0.5em;
+         span{
+            font-size: $font;
+            color: #222;
+        }
+        p{
+            font-size: $fontSize;
+            color: $color;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+        }
+    }
+    .money{
+        height: $h60;
+        padding-top: 1em;
+    }
+    .left{
+        @extend .fl;
+        padding-right: 0.8em;
+        p{
+            font-size: $fontSize;
+            padding: 0.5em;
+        }
+        span{
+            color: $color;
+        }
+        b{
+            color: $yellow;
+            font-weight: 400;
+        }
+    }
+    .right{
+        @extend .fl;
+        p{
+            padding: 0.5em 1.5em;
+             font-size: $font;
+             border: 1px solid $blue;
+             color: $blue;
+             display: inline-block;
+        }
+    }
+}
+//response end
+
+//solve strart
+#solve{
+    width: 100%;
+    height: 600px;
+    background: $bgColor;
+    .solve{
+        margin: 0 auto;
+        width: 1200px;
+        p{
+            font-size: 1.5em;
+            padding-top: 1.5em;
+            padding-bottom: 1em;
+        }
+    }
+    .programme{
+        height: 455px;
+        background: $bg;
+        border: 1px solid $borderColor;
+        padding: 1em;
+    }
+    #item{
+        @extend .fl;
+        border-right: 1px solid $borderColor;
+        li.active{
+            color: $blue;
+        }
+    }
+    .item{
+        width: 140px;
+        height: $h70;
+        line-height: $h70;
+        margin-right: 1em;
+        border-bottom: 1px solid $borderColor;
+    }
+    .item:last-child{
+        border-bottom: none;
+    }
+    .slide{
+        @extend .fl;
+        margin-left: 3em;
+        width: 960px;
+        height: 420px;
+        p{
+            padding-top: 1em;
+        }
+        li{
+            display: none;
+        }
+        li.active{
+            display: block;
+        }
+    }
+    .caption{
+        @extend .fl;
+    }
+    .scale{
+        -webkit-animation: shrink 600ms ease-in ;
+                animation: shrink 600ms ease-in ;
+    }
+     @keyframes shrink{
+        from{
+            transform: scale(0.7);
+        }
+        to{
+            transform: scale(1);
+        }
+    }
+    h4{
+        font-size: $fontSize;
+        color: $color;
+        padding-top: 0.5em;
+        font-weight: 400;
+    }
+    h3{
+        font-size: $fontSize;
+        color: $blue;
+        padding-top: 2.5em;
+        padding-bottom: 2em;
+        font-weight: 400;
+    }
+    .h3{
+        padding-bottom: 0.5em;
+    }
+    span{
+        color: $blue;
+    }
+    .up{
+        height: 269px;
+        border-bottom: 1px solid $borderColor;
+    }
+    .deploy{
+        @extend .fl;
+        width: 379px;
+        height: 269px;
+        margin-left:3em ;
+        background: url(../img/solve.png) no-repeat;
+    }
+    .one{
+        background-position: 0 -7px;
+    }
+    .two{
+        background-position: 0 -550px;
+    }
+    .three{
+                margin-left:0 ;
+        background-position: 0 -818px;
+    }
+    .four{
+        background-position: 0 -1090px;
+    }
+    .five{
+        background-position: 0 -1367px;
+    }
+    .video{
+        @extend .fl;
+        width: 345px;
+        height: 279px;
+        margin-left:-2em ;
+        background: url(../img/solve.png) no-repeat;
+        background-position: 0 -280px;
+    }
+    .client{
+        p{
+            font-size: $font;
+            color: $color;
+            padding-top: 0.5em;
+            padding-top: 0.5em;
+            font-weight: 400;
+        }
+    }
+    .logo{
+        width: 100%;
+        height: 118px;
+        border: 1px solid $borderColor;
+        img{
+            margin: 0 1.7em;
+        }
+    }
+}
+//solve end
+//save start
+#save{
+    width: 100%;
+    height: 211px;
+    margin: 0 auto;
+    div{
+        height: 211px;
+        background: url(../img/save.jpg) $position;
+    }
+}
+//save end

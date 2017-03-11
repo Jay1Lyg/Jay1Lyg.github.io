@@ -1,0 +1,195 @@
+@charset "UTF-8";
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none; }
+
+.head {
+  width: 100%; }
+  .head div {
+    width: 1920px;
+    height: 434px;
+    margin: 0 auto; }
+    .head div img {
+      margin-left: -260px; }
+    .head div b {
+      position: absolute;
+      padding: 5px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 50px;
+      opacity: 0.5; }
+    .head div #title {
+      position: absolute;
+      left: 582px;
+      top: 478px; }
+      .head div #title a {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 10px;
+        display: inline-block;
+        background: #607d8b;
+        text-align: center;
+        padding: 5px;
+        text-decoration: none; }
+  .head #left {
+    top: 245px;
+    left: 0; }
+  .head #right {
+    top: 245px;
+    right: 0; }
+
+section {
+  width: 100%;
+  box-sizing: border-box; }
+  section div {
+    width: 1200px;
+    height: 200px;
+    margin: 0 auto;
+    padding-top: 30px; }
+    section div h2 {
+      font-weight: normal;
+      font-family: "新宋体";
+      display: inline; }
+    section div span {
+      font-size: 14px;
+      color: #666; }
+    section div ul li {
+      width: 23%;
+      padding: 30px 0 30px 10px;
+      float: left; }
+      section div ul li dl {
+        float: right;
+        margin-top: -88px;
+        margin-right: 20px; }
+        section div ul li dl dt {
+          font-size: 20px;
+          font-family: "黑体"; }
+        section div ul li dl dd {
+          line-height: 35px;
+          font-size: 13px;
+          color: #666; }
+
+.content {
+  width: 100%;
+  background: #f6f7fb; }
+  .content .content1 {
+    width: 1200px;
+    height: 465px;
+    margin: 0 auto;
+    padding-top: 30px;
+    position: relative; }
+    .content .content1 h3, .content .content1 #server .server1 span {
+      font-weight: normal;
+      font-family: "微软雅黑";
+      float: left;
+      clear: both; }
+    .content .content1 ul {
+      position: absolute;
+      right: 17px; }
+      .content .content1 ul li {
+        float: left;
+        width: 130px;
+        height: 40px;
+        background: white;
+        line-height: 40px;
+        text-align: center;
+        border: 1px solid #eee;
+        color: #666; }
+      .content .content1 ul .select:hover {
+        color: white;
+        background: deepskyblue;
+        cursor: pointer; }
+    .content .content1 #server {
+      margin-top: 50px; }
+      .content .content1 #server .server1 {
+        float: left;
+        position: relative;
+        height: 350px; }
+        .content .content1 #server .server1 h3, .content .content1 #server .server1 span {
+          color: #fff;
+          position: absolute;
+          top: 240px;
+          left: 50px; }
+        .content .content1 #server .server1 span {
+          color: #97e7ff;
+          font-size: 14px;
+          line-height: 26px;
+          top: 270px;
+          text-align: center; }
+      .content .content1 #server .server2 {
+        float: left;
+        height: 350px;
+        background: #fff;
+        width: 909px;
+        border: 2px solid #eee;
+        margin-left: 40px; }
+        .content .content1 #server .server2 ul li {
+          box-sizing: border-box;
+          width: 230px;
+          height: 350px;
+          border: none;
+          float: left;
+          padding: 30px 20px; }
+          .content .content1 #server .server2 ul li span {
+            color: #000;
+            font-size: 14px; }
+          .content .content1 #server .server2 ul li .price {
+            color: red;
+            font-family: "微软雅黑";
+            font-size: 20px; }
+          .content .content1 #server .server2 ul li button {
+            width: 120px;
+            height: 35px;
+            background: #fff;
+            border: 1px solid deepskyblue;
+            color: deepskyblue; }
+          .content .content1 #server .server2 ul li button:hover {
+            background: deepskyblue;
+            color: #fff; }
+    .content .content1 p {
+      font-size: 14px;
+      color: #666;
+      line-height: 40px; }
+
+.config {
+  width: 1200px;
+  margin: 0 auto;
+  height: 260px;
+  background: #fff; }
+  .config h3, .config .content .content1 #server .server1 span, .content .content1 #server .server1 .config span {
+    line-height: 100px;
+    font-family: "微软雅黑"; }
+  .config ul li {
+    float: left;
+    width: 20%; }
+    .config ul li img {
+      border: 1px solid #eee; }
+
+footer {
+  width: 100%;
+  background: #444855;
+  height: 200px;
+  height: 297px; }
+  footer div {
+    width: 1200px;
+    margin: 0 auto; }
+
+#sidebar {
+  position: fixed;
+  z-index: 9999;
+  right: 10px;
+  top: 450px; }
+  #sidebar li {
+    width: 50px;
+    height: 65px;
+    background: #108CEF;
+    text-align: center;
+    padding: 20px 2px 13px 2px;
+    margin: 3px; }
+    #sidebar li img {
+      width: 25px; }
+
+/*# sourceMappingURL=bdy.css.map */

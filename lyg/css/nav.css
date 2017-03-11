@@ -1,0 +1,257 @@
+@charset "UTF-8";
+.fl, header nav .nav-left, header nav .nav-left li, header nav .log-on .nav-right, header nav .log-on .nav-right li, header .p-left, header .p-right, header .p-plan .planLeft, header .p-plan .planCenter, header .p-plan .planRight, #footertop .footerone, #footertop .footertwo, #footertop .footerthree, #footertop .footerfour, #footertop .footerfive, .footercenter p, .footercenter ul li, .foot p, .foot ul li {
+  float: left; }
+
+.fr, header nav .log-on {
+  float: right; }
+
+.clearfix:after, header:after, header nav:after, header .p-acte:after, header .p-plan:after, header .fHelp:after, #footertop:after, .foot:after, .end:after {
+  content: '';
+  height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both; }
+
+.m0, header nav .nav-left, header nav .log-on, header nav .log-on .nav-right {
+  margin: 0; }
+
+* {
+  box-sizing: border-box; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+header {
+  width: 100%;
+  height: 80px;
+  background: -webkit-linear-gradient(top, #ffffff, #f9f9f9); }
+  header nav {
+    width: 1200px;
+    height: 80px;
+    margin: 0 auto; }
+    header nav .nav-left {
+      height: 40px;
+      line-height: 40px; }
+      header nav .nav-left li {
+        font-size: 17px;
+        padding: 0 0.8em;
+        list-style-type: none;
+        color: #333333;
+        font-family: 微软雅黑;
+        cursor: pointer;
+        line-height: 80px; }
+        header nav .nav-left li:hover {
+          color: #6666ff; }
+        header nav .nav-left li img {
+          margin-top: 1.5em;
+          width: 87px;
+          height: 37px; }
+    header nav .log-on {
+      height: 80px;
+      padding-right: 2em; }
+      header nav .log-on .nav-right {
+        height: 40px;
+        line-height: 40px; }
+        header nav .log-on .nav-right li {
+          font-size: 17px;
+          padding: 0 0.8em;
+          list-style-type: none;
+          color: #333333;
+          font-family: 微软雅黑;
+          line-height: 80px;
+          cursor: pointer; }
+          header nav .log-on .nav-right li:hover {
+            color: #6666ff; }
+          header nav .log-on .nav-right li.active {
+            background: rgba(255, 255, 255, 0.5); }
+          header nav .log-on .nav-right li img {
+            width: 87px;
+            height: 37px; }
+  header .p-acte {
+    width: 500px;
+    height: 350px;
+    border: 1px solid #666666;
+    display: none;
+    position: absolute;
+    z-index: 666; }
+  header .p-left {
+    background: #f0f0f0;
+    width: 164px;
+    height: 350px; }
+    header .p-left ul li {
+      list-style: none;
+      font-family: 微软雅黑;
+      color: #666666;
+      margin-top: 1.5em;
+      text-align: center;
+      cursor: pointer; }
+      header .p-left ul li:hover {
+        color: #6666ff; }
+  header .p-right {
+    background: #ffffff;
+    width: 333px;
+    height: 350px; }
+    header .p-right .active {
+      display: block; }
+    header .p-right ul {
+      display: none; }
+      header .p-right ul li {
+        list-style: none;
+        margin-top: 1.5em;
+        margin-left: 2em;
+        cursor: pointer; }
+        header .p-right ul li:hover {
+          color: #6666ff; }
+  header .p-plan {
+    width: 600px;
+    height: 350px;
+    border: 1px solid #BBBBBB;
+    display: none;
+    position: absolute;
+    background: #ffffff;
+    z-index: 3333; }
+    header .p-plan h5 {
+      font-family: 微软雅黑;
+      color: #666666;
+      margin-top: 1em;
+      border-bottom: 1px solid #f0f0f0;
+      margin-left: 2em; }
+    header .p-plan ul li {
+      list-style: none;
+      margin-top: 1em;
+      margin-left: 2em;
+      font-family: 微软雅黑;
+      cursor: pointer;
+      font-size: 13px; }
+      header .p-plan ul li:hover {
+        color: #6666ff; }
+    header .p-plan .planLeft {
+      width: 185px;
+      height: 350px;
+      margin-left: 0.2em; }
+    header .p-plan .planCenter {
+      width: 185px;
+      height: 350px;
+      margin-left: 0.5em; }
+    header .p-plan .planRight {
+      width: 185px;
+      height: 350px;
+      margin-left: 0.5em; }
+  header .fHelp {
+    width: 164px;
+    height: 350px;
+    background: #ffffff;
+    border: 1px solid #666666;
+    position: absolute;
+    display: none;
+    z-index: 6666; }
+    header .fHelp ul {
+      padding-top: 1em; }
+      header .fHelp ul li {
+        list-style: none;
+        margin-top: 1em;
+        font-family: 微软雅黑;
+        cursor: pointer;
+        font-size: 13px;
+        cursor: pointer;
+        margin-left: 2em; }
+        header .fHelp ul li:hover {
+          color: #6666ff; }
+
+footer {
+  width: 100%;
+  background: #444855;
+  height: 450px; }
+
+#footertop {
+  width: 1200px;
+  height: 280px;
+  margin: 0 auto;
+  border-bottom: 1px solid #d6d6d6; }
+  #footertop p {
+    color: #d6d6d6;
+    font-family: 微软雅黑;
+    padding-top: 1em; }
+  #footertop ul li {
+    list-style: none;
+    color: #d6d6d6;
+    font-size: 12px;
+    margin-top: 1.3em;
+    font-family: 微软雅黑;
+    cursor: pointer; }
+    #footertop ul li:hover {
+      color: #6666ff; }
+  #footertop .footerone {
+    width: 350px;
+    height: 280px;
+    margin-left: 2em;
+    border-bottom: 1px solid #d6d6d6; }
+  #footertop .footertwo {
+    width: 110px;
+    height: 280px;
+    border-bottom: 1px solid #d6d6d6; }
+  #footertop .footerthree {
+    width: 200px;
+    height: 280px;
+    border-bottom: 1px solid #d6d6d6; }
+  #footertop .footerfour {
+    width: 280px;
+    height: 280px;
+    border-bottom: 1px solid #d6d6d6; }
+  #footertop .footerfive {
+    width: 200px;
+    height: 280px;
+    border-bottom: 1px solid #d6d6d6; }
+
+.footercenter {
+  width: 1200px;
+  height: 60px;
+  margin: 0 auto;
+  border-bottom: 1px solid #d6d6d6; }
+  .footercenter p {
+    color: #ffffff;
+    margin-left: 5em;
+    margin-top: 1em;
+    font-family: 微软雅黑; }
+  .footercenter ul li {
+    list-style: none;
+    cursor: pointer;
+    color: #d6d6d6;
+    font-size: 12px;
+    font-family: 微软雅黑;
+    margin-left: 2em;
+    margin-top: 1.5em; }
+    .footercenter ul li:hover {
+      color: #6666ff; }
+
+.foot {
+  width: 1200px;
+  margin: 0 auto; }
+  .foot p {
+    color: #ffffff;
+    margin-left: 5em;
+    margin-top: 1em;
+    font-family: 微软雅黑; }
+  .foot ul li {
+    list-style: none;
+    color: #d6d6d6;
+    font-size: 12px;
+    font-family: 微软雅黑;
+    cursor: pointer;
+    margin-left: 2em;
+    margin-top: 1.5em; }
+    .foot ul li:hover {
+      color: #6666ff; }
+
+.end {
+  width: 1200px;
+  margin: 0 auto; }
+  .end p {
+    color: #d6d6d6;
+    font-size: 10px;
+    font-family: 微软雅黑;
+    text-align: center;
+    margin-top: 3em; }
+
+/*# sourceMappingURL=nav.css.map */

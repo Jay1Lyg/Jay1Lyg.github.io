@@ -1,0 +1,221 @@
+#header{
+	height: 70px;
+	background: #555;
+	min-width: 1260px;
+	
+}
+#header .center{
+	width: 1260px;
+	margin: 0 auto;
+}
+#header .logo{
+	background: url(../img/logo.png) no-repeat;
+	text-indent: -9999px;
+	width: 139px;
+	height: 40px;
+	margin-top: 13px;
+	float: left;
+}
+#header .logo:hover{
+	background: url(../img/logo2.png) no-repeat;	
+}
+#header .link a{
+	text-align: center;
+	color: white;
+	line-height: 70px;
+	text-decoration: none;
+	font-size: 18px;
+	display: block;
+}
+#header .link ul{
+	float: right;
+}
+#header .link li{
+	float: left;
+	width: 110px;
+}
+#header .active{
+	background:black ;
+	text-align: center;
+}
+#header .link li:hover{
+	background: black;
+}
+#search{
+	background: url(../img/500px.jpg);
+	height: 600px;
+	width: 100%;
+	min-width: 1260px;
+	background-position: -200px -200px;
+	position: relative;
+}
+#search .center{
+	background: black;
+	opacity: 0.6;
+	width: 600px;
+	height: 60px;
+	border-radius: 5px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -30px 0 0 -300px;
+}
+#search .search{
+	border: 0;
+	width: 450px;
+	height: 54px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -27px 0 0 -295px;
+	border-radius: 5px;
+	font-size: 25px;
+}
+#search .search1{
+	border: 0;
+	width: 135px;
+	height: 54px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -27px 0 0 161px;
+	font-size: 30px;	
+	border-radius: 5px;
+}
+#search .search1:active{
+	background: yellow;
+	color: white;
+}
+#search .search1:visited{
+	background: black;
+	color: white;
+}
+/*搜索结束*/
+#tour{
+	width: 1270px;
+	margin: 0 auto;
+	height: 1150px;
+}
+#tour .text{
+	text-align: center;
+}
+#tour .text h2{
+	font-size: 40px;
+	color: #666;
+	margin: 10px 0;
+}
+#tour .text p{
+	color: #666666;
+	margin: 10px 0;
+}
+#tour .tour{
+	width: 380px;
+	border: 2px solid #666666;
+	padding: 2px 2px;
+	border-radius: 5px;
+	float: left;
+	/*margin-left: 20px;*/
+	margin: 10px;
+	
+}
+#tour .tour img{
+	/*margin-left: 20px;*/
+}
+#tour .tour p{
+	color: #666666;
+}
+#tour .tour span{
+	color: black;
+	font-size: 15px;
+}
+#tour span b{
+	color: red;
+	font-size: 20px;
+	display: inline;
+}
+#tour .tour em{
+	color: #666666;
+	float: right;
+	line-height: 30px;
+}
+/*tour结束*/
+#infu{
+	width: 100%;
+	height: 300px;
+	background: #333333;
+	min-width: 1260px;
+}
+#infu .left{
+	width: 25%;
+	height:300px ;
+	/*background: darkblue;*/
+	float: left;
+	margin-left: 160px;
+	/*text-align: center;*/
+}
+#infu .left h3{
+	margin-top: 30px;
+	border-bottom: 2px dashed #666;
+	font-size: 30px;
+	color: white;
+	height: 60px;
+}
+#infu .left ul li{
+	color: white;
+	/*line-height: 15px;*/
+	height: 40px;
+}
+#infu .zhong{
+	width: 25%;
+	height:300px ;
+	/*background: darkblue;*/
+	float: left;
+	/*text-align: center;*/
+	margin-left:20px ;
+	
+}
+#infu .zhong h3{
+	margin-top: 30px;
+	border-bottom: 2px dashed #666;
+	font-size: 30px;
+	color: white;
+	height: 60px;
+}
+#infu .zhong ul li{
+	color: white;
+	/*line-height: 15px;*/
+	height: 40px;
+	}
+#infu .right{
+	width: 25%;
+	height:300px ;
+	/*background: darkblue;*/
+	float: left;
+	/*text-align: center;*/
+	margin-left:20px ;
+}
+#infu .right h3{
+	margin-top: 30px;
+	border-bottom: 2px dashed #666;
+	font-size: 30px;
+	color: white;
+	height: 60px;
+}
+#infu .right ul li{
+	color: white;
+	/*line-height: 15px;*/
+	height: 40px;
+}
+	/*infu结束*/
+#foot{
+	width: 100%;
+	height: 350px;
+	background: black;
+	min-width: 1260px;
+}
+#foot p{
+	color: white;
+	font-size: 13px;
+	text-align: center;
+	line-height: 80px;
+}	

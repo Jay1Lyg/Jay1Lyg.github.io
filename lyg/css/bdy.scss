@@ -1,0 +1,292 @@
+$fontSize: 13px;
+$fontSize1: 14px;
+$fontSize2: 16px;
+$fontSize3: 20px;
+$fontColor: #666;
+$navBgColor: #ffffff;
+$activeTextColor: rgba(255,255,255,.5);
+$normalTextColor: #333333;
+
+$h80:80px;
+$h40:40px;
+$s12:13px;
+$navFontSize: 17px;
+$navfontfamily:微软雅黑;
+$logowidth:87px;
+$logoheight:37px;
+$normalwidth:1200px;
+$minwidth:1000px;
+$w1000:100%;
+$blue:blue;
+$classifybgone:#f0f0f0;
+$classifybgtwo:#ffffff;
+$color666:#666666;
+$classifyFontcolor:#666666;
+$w500:500px;
+$h350:350px;
+$w150:164px;
+$w350:333px;
+$w195:185px;
+$w600:600px;
+
+
+
+
+$footerbgcolor:#444855;
+$footerfontcolor:#d6d6d6;
+$footerH:350px;
+$footH:280px;
+$w300:350px;
+$w200:200px;
+$w100:110px;
+$footerfs:12px;
+$h60:60px;
+$end:10px;
+$w310:310px;
+$big:35px;
+$c00a8ff:#00a8ff;
+$butw:90px;
+$buth:30px;
+$w640:650px;
+$w160:160px;
+$h90:90px;
+$w450:450px;
+$font20:20px;
+$black:black;
+$colorf9:#f9f9f9;
+$h700:700px;
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.head {
+    width: 100%;
+    div {
+        width: 1920px;
+        height: 434px;
+        margin: 0 auto;
+        img {
+            margin-left: -260px;
+        }
+        b {
+            position: absolute;
+            padding: 5px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 50px;
+            opacity: 0.5;
+        }
+        #title{
+        position: absolute;
+        left: 582px;
+        top: 478px;
+        a{
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 10px;
+            display: inline-block;
+            background: #607d8b;
+            text-align: center;
+            padding: 5px;
+            text-decoration: none;
+        }
+ }
+    }
+    #left {
+        top: 245px;
+        left: 0;
+    }
+    #right {
+        top: 245px;
+        right: 0;
+    }
+}
+section {
+    width: 100%;
+    box-sizing: border-box;
+    div {
+        width: 1200px;
+        height: 200px;
+        margin: 0 auto;
+        padding-top: 30px;
+        h2 {
+            font-weight: normal;
+            font-family: "新宋体";
+            display: inline;
+        }
+        span {
+            font-size: $fontSize1;
+            color: $fontColor;
+        }
+        ul li {
+            width: 23%;
+            padding: 30px 0 30px 10px;
+            float: left;
+            dl {
+                float: right;
+                margin-top: -88px;
+                margin-right: 20px;
+                dt {
+                    font-size: $fontSize3;
+                    font-family: "黑体";
+                }
+                dd {
+                    line-height: 35px;
+                    font-size: $fontSize;
+                    color: $fontColor;
+                }
+            }
+        }
+    }
+}
+.content {
+    width: 100%;
+    background: #f6f7fb;
+    .content1 {
+        width: 1200px;
+        height: 465px;
+        margin: 0 auto;
+        padding-top: 30px;
+        position: relative;
+        h3 {
+            font-weight: normal;
+            font-family: "微软雅黑";
+            float: left;
+            clear: both;
+         }
+        ul {
+            position: absolute;
+            right: 17px;
+            li {
+                float: left;
+                width: 130px;
+                height: 40px;
+                background: white;
+                line-height: 40px;
+                text-align: center;
+                border: 1px solid #eee;
+                color: $fontColor;
+            }
+            .select:hover {
+                color: white;
+                background: deepskyblue;
+                cursor: pointer;
+            }
+        }
+        #server {
+            margin-top: 50px;
+            .server1 {
+                float: left;
+                position: relative;
+                height: 350px;
+                h3 {
+                    color: #fff;
+                    position: absolute;
+                    top: 240px;
+                    left: 50px;
+                }
+                span {
+                    @extend h3;
+                    color: #97e7ff;
+                    font-size: $fontSize1;
+                    line-height: 26px;
+                    top: 270px;
+                    text-align: center;
+                }
+            }
+            .server2 {
+                float: left;
+                height: 350px;
+                background: #fff;
+                width: 909px;
+                border: 2px solid #eee;
+                margin-left: 40px;
+                ul {
+                    li {
+                        box-sizing: border-box;
+                        width: 230px;
+                        height: 350px;
+                        border: none;
+                        float: left;
+                        padding: 30px 20px;
+                        span {
+                            color: #000;
+                            font-size: $fontSize1;
+                        }
+                        .price {
+                            color: red;
+                            font-family: "微软雅黑";
+                            font-size: $fontSize3;
+                        }
+                        button {
+                            width: 120px;
+                            height: 35px;
+                            background: #fff;
+                            border: 1px solid deepskyblue;
+                            color: deepskyblue;
+                        }
+                        button:hover {
+                            background: deepskyblue;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        p {
+            font-size: $fontSize1;
+            color: $fontColor;
+            line-height: 40px;
+        }
+    }
+}
+.config{
+    width: 1200px;
+    margin: 0 auto;
+    height:260px;
+    background: #fff;
+    h3{
+        line-height: 100px;
+        font-family: "微软雅黑";
+    }
+    ul{
+        li{
+            float: left;
+            width: 20%;
+            img{
+                border: 1px solid #eee;
+            }
+        }
+    }
+}
+footer{
+    width: 100%;
+    background: #444855;
+    height: 200px;
+    height: 297px;
+    div{
+        width: 1200px;
+        margin: 0 auto;
+    }
+}
+#sidebar{
+        position: fixed;
+        z-index: 9999;
+        right: 10px;
+        top: 450px;
+        li{
+            width: 50px;
+            height: 65px;
+            background: #108CEF;
+            text-align: center;
+            padding: 20px 2px 13px 2px;
+            margin: 3px;
+            img{
+                width: 25px;
+            }
+        }
+}
+

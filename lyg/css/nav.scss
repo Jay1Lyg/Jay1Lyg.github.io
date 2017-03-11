@@ -1,0 +1,356 @@
+@import 'extend';
+@import 'var';
+//@import 'normalize';
+
+*{box-sizing: border-box;}
+*{margin: 0;padding: 0;}
+header{
+    width: $w1000;
+    height: $h80;
+    background: -webkit-linear-gradient( top,$classifybgtwo,$colorf9  );
+    @extend .clearfix;
+    nav{
+        @extend .clearfix;
+        width: $normalwidth;
+        height: $h80;
+        margin: 0 auto;
+        .nav-left{
+//          @extend .clearfix;
+            @extend .m0;    //继承
+            @extend .fl;
+            height: $h40;line-height: $h40;
+            li{
+                @extend .fl;
+                font-size: $navFontSize;padding: 0 0.8em;
+                list-style-type: none;
+                color: $normalTextColor;
+                font-family: $navfontfamily;
+                cursor: pointer;
+                line-height: $h80;
+                &:hover{
+                    color: lighten($blue,20%);  
+                }
+                img{
+                    margin-top: 1.5em;
+                    width:$logowidth;
+                    height: $logoheight;
+                }
+            }
+        }
+       .log-on{
+            @extend .m0;    //继承
+            height: $h80;
+            @extend .fr;
+            padding-right: 2em;
+            .nav-right{
+                @extend .m0;    //继承
+            @extend .fl;
+//          @extend .clearfix;
+            height: $h40;line-height: $h40;
+            li{
+                @extend .fl;
+                font-size: $navFontSize;padding: 0 0.8em;
+                list-style-type: none;
+                color: $normalTextColor;
+                font-family: $navfontfamily;
+                 line-height: $h80;
+                cursor: pointer;
+                &:hover{
+                    color: lighten($blue,20%);  
+                }
+                &.active{   
+                    background: $activeTextColor;
+                }
+                img{
+                    width:$logowidth;
+                    height: $logoheight;
+                }
+            }
+            }
+            
+        }
+        
+    }
+    .p-acte{
+        width: $w500;
+        height: $h350;
+        border: 1px solid $color666;
+        @extend .clearfix;
+        display: none;
+        position: absolute;
+        z-index: 666;
+        
+        
+    }
+    .p-left{
+        background: $classifybgone;
+        width: $w150;
+        height: $h350;
+        @extend .fl;
+        ul{
+            li{
+                list-style: none;
+                font-family: $navfontfamily;
+                color: $classifyFontcolor;
+                margin-top: 1.5em;
+                text-align: center;
+                cursor: pointer;
+                &:hover{
+                    color: lighten($blue,20%);
+                }
+                
+            }
+        }
+
+    }
+    .p-right{
+        background: $classifybgtwo;
+        @extend .fl;
+        width: $w350;
+        height: $h350;
+
+        .active{
+            display: block;
+        }
+        ul{
+        display: none;
+            
+            li{
+                list-style: none;
+                margin-top: 1.5em;
+                margin-left: 2em;
+                cursor: pointer;
+                &:hover{
+                    color: lighten($blue,20%);
+                }
+                
+            }
+        }
+    }
+    .p-plan{
+        @extend .clearfix;
+        width: $w600;
+        height: $h350;
+        border: 1px solid #BBBBBB;
+        display: none;
+        position: absolute;
+        background: $classifybgtwo;
+        z-index: 3333;
+        h5{
+                font-family: $navfontfamily;
+                color: $color666;
+                margin-top: 1em;
+                border-bottom: 1px solid $classifybgone;
+                margin-left: 2em;
+            }
+            ul{
+                li{
+                    list-style: none;
+                    margin-top: 1em;
+                    margin-left: 2em;
+                    font-family: $navfontfamily;
+                    cursor: pointer;
+                    font-size: $s12;
+                    &:hover{
+                        color: lighten($blue,20%);
+                    }
+                }
+            }
+        .planLeft{
+            width: $w195;
+            height: $h350;
+            @extend .fl;
+            margin-left: 0.2em;
+            
+           
+        }
+        .planCenter{
+            width: $w195;
+            height: $h350;
+            @extend .fl;
+            margin-left: 0.5em;
+            
+        }
+        .planRight{
+            width: $w195;
+            height: $h350;
+            @extend .fl;
+            margin-left: 0.5em;
+            
+        }
+    }
+    .fHelp{
+        width: $w150;
+        height: $h350;
+        background: $classifybgtwo;
+        border: 1px solid $color666;
+        @extend .clearfix;
+        position: absolute;
+        display: none;
+        z-index: 6666;
+        ul{
+            padding-top: 1em;
+            li{
+                list-style: none;
+                margin-top: 1em;
+                font-family: $navfontfamily;
+                cursor: pointer;
+                font-size: $s12;
+                cursor: pointer;
+                margin-left: 2em;
+                &:hover{
+                    color: lighten($blue,20%);
+                }
+            }
+            }
+        
+    }
+}
+
+
+
+
+
+
+//脚本
+footer{
+    width: $w1000;
+    background:$footerbgcolor;
+    height: $footerH;
+}
+#footertop{
+    width: $normalwidth;
+    height: $footH;
+    margin: 0 auto;
+    @extend .clearfix;
+    border-bottom: 1px solid $footerfontcolor;
+    p{
+            color: $footerfontcolor;
+//          margin-left: 2em;
+            font-family: $navfontfamily;
+            padding-top: 1em;
+        }
+    ul{
+        
+        li{
+            list-style: none;
+            color: $footerfontcolor;
+            font-size: $footerfs;
+            margin-top: 1.3em;
+            font-family: $navfontfamily;
+            cursor: pointer;
+            &:hover{
+                        color: lighten($blue,20%);
+                    }
+        }
+    }
+    
+    .footerone{
+        width: $w300;
+        height: $footH;
+        margin-left: 2em;
+        @extend .fl;
+        border-bottom: 1px solid $footerfontcolor;
+
+        
+    }
+    .footertwo{
+        width: $w100;
+        height: $footH;
+        @extend .fl;
+        border-bottom: 1px solid $footerfontcolor;
+        
+    }
+    .footerthree{
+        width: $w200;
+        height: $footH;
+        @extend .fl;
+        border-bottom: 1px solid $footerfontcolor;
+        
+    }
+    .footerfour{
+        width: $footH;
+        height: $footH;
+        @extend .fl;
+        border-bottom: 1px solid $footerfontcolor;
+        
+    }
+    .footerfive{
+        width: $w200;
+        height: $footH;
+        @extend .fl;
+        border-bottom: 1px solid $footerfontcolor;
+        
+    }
+    
+    
+}
+    .footercenter{
+        width: $normalwidth;
+        height: $h60;
+        margin: 0 auto;
+        border-bottom: 1px solid $footerfontcolor;
+        p{
+           color: $classifybgtwo;
+            margin-left: 5em;
+            margin-top: 1em;
+            font-family: $navfontfamily;
+            @extend .fl;
+        }
+        ul{
+            li{
+                @extend .fl;
+                list-style: none;
+                cursor: pointer;
+                 color: $footerfontcolor;
+                font-size: $footerfs;
+                font-family: $navfontfamily;
+                margin-left: 2em;
+                margin-top: 1.5em;
+                &:hover{
+                        color: lighten($blue,20%);
+                    }
+                
+            }
+        }
+    }
+    .foot{
+        @extend .clearfix;
+        width: $normalwidth;
+        margin: 0 auto;
+        p{
+           color: $classifybgtwo;
+            margin-left: 5em;
+            margin-top: 1em;
+            font-family: $navfontfamily;
+            @extend .fl;
+        }
+        ul{
+            li{
+                @extend .fl;
+                list-style: none;
+                 color: $footerfontcolor;
+                font-size: $footerfs;
+                font-family: $navfontfamily;
+                cursor: pointer;
+                margin-left: 2em;
+                margin-top: 1.5em;
+                &:hover{
+                        color: lighten($blue,20%);
+                    }
+                
+            }
+        }
+    }
+    .end{
+        width: $normalwidth;
+        margin: 0 auto;
+        @extend .clearfix;
+        p{
+            color: $footerfontcolor;
+            font-size: $end;
+            font-family: $navfontfamily;
+            text-align: center;
+            margin-top: 3em;
+        }
+    }

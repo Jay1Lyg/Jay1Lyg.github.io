@@ -1,0 +1,79 @@
+#contioner{
+	width: 1356px;
+	height: 5000px;
+}
+#contioner .p1{
+	height: 50px;
+	width: 50px;
+	background: crimson;
+	position: fixed;
+	top:250px;
+	left:1300px;
+}
+#contioner .p1 .pp1{
+	width: 200px;
+	height: 50px;
+	background-color: aqua;
+	position: relative;
+	top: 0px;
+	left: -100px;
+	text-align: center;
+	display: none;
+}
+#contioner .p1:hover .pp1{
+	display: block;
+}
+#contioner .p2{
+	height: 50px;
+	width: 50px;
+	background: yellow;
+	position: fixed;
+	top:310px;
+	left:1300px;
+}
+#contioner .p2 .pp2{
+	width: 200px;
+	height: 50px;
+	background-color: aqua;
+	position: relative;
+	top: 0px;
+	left: -100px;
+	text-align: center;
+	display: none;
+}
+#contioner .p3{
+	height: 50px;
+	width: 50px;
+	background: blue;
+	position: fixed;
+	top:370px;
+	left:1300px;
+}
+#contioner .p3 .pp3{
+	width: 200px;
+	height: 50px;
+	background-color: aqua;
+	position: relative;
+	top: 0px;
+	left: -100px;
+	text-align: center;
+	display: none;
+}
+#contioner .p4{
+	height: 50px;
+	width: 50px;
+	background: blueviolet;
+	position: fixed;
+	top:430px;
+	left:1300px;
+}
+#contioner .p4 .pp4{
+	width: 200px;
+	height: 50px;
+	background-color: aqua;
+	position: relative;
+	top: 0px;
+	left: -100px;
+	text-align: center;
+	display: none;
+}

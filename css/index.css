@@ -7,4 +7,10 @@ body {
   main {
     flex: 1 0 auto;
   }
-      
+  section{
+  	background: #eee;
+  	height: 100%;
+  }    
+  footer.page-footer{
+  	margin-top: 0;
+  }

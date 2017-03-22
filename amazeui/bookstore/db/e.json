@@ -1,0 +1,14 @@
+{
+	"id": "e",
+	"title": "Go",
+	"author": "Google",
+	"price": 217.89,
+	"update": "2014-01-27",
+	"status": "true",
+	"images": [
+		"u",
+		"v",
+		"w",
+		"x"
+	]
+}

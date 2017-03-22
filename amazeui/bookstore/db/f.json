@@ -1,0 +1,14 @@
+{
+	"id": "f",
+	"title": "TypeScript",
+	"author": "Microsoft",
+	"price": 198.89,
+	"update": "2013-01-27",
+	"status": "true",
+	"images": [
+		"y",
+		"z",
+		"w",
+		"x"
+	]
+}

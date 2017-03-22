@@ -1,0 +1,24 @@
+h3 small{
+	font-size: 50%;
+}
+.book-title{
+	margin-top: 0px;
+}
+.card .detail-bar{
+	padding: 16px;
+}
+.detail-bar .row{
+	margin: 6px 0 0;
+}
+.detail-bar .image-bar{
+	margin-top: 16px;
+}
+.back{
+	margin-right: 0!important;
+}
+.status-bar{
+	position: relative;
+}
+.status{
+	position: absolute;right: 38px;top: 20px;
+}

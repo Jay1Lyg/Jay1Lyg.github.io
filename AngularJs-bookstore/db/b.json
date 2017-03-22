@@ -1,0 +1,14 @@
+{
+	"id": "b",
+	"title": "React",
+	"author": "Facebook",
+	"price": 57.23,
+	"update": "2013-08-09",
+	"status": "false",
+	"images": [
+		"i",
+		"j",
+		"k",
+		"l"
+	]
+}

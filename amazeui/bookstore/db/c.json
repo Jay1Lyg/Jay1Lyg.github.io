@@ -1,0 +1,14 @@
+{
+	"id": "c",
+	"title": "Vue",
+	"author": "尤玉溪",
+	"price": 89.00,
+	"update": "2013-09-18",
+	"status": "false",
+	"imagmes": [
+		"m",
+		"n",
+		"o",
+		"p"
+	]
+}

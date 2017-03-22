@@ -1,0 +1,93 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Hello Amaze UI</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+	<div class="carousel slide" data-ride = "carousel" id="my-carous">
+	<!--三點-->
+		<ol class="carousel-indicators">
+			<li class="active"  data-target="#my-carous" data-slide-to="0"></li>
+			<li  data-target="#my-carous" data-slide-to="1"></li>
+			<li  data-target="#my-carous" data-slide-to="2"></li>
+		</ol>
+		
+		<!--圖片 文字-->
+		<div class="carousel-inner">
+			<div class="item active">
+				<img width="100%"height="400" src="img/t014912f35c18da23e7.jpg"/>
+				<div class="carousel-caption">
+        			<h3>美女</h3>
+        			<p>等咖啡離開了</p>
+      			</div>
+			</div>
+			<div class="item">
+				<img width="100%"height="400"  src="img/t01a4ca1d9245a96c8c.jpg"/>
+				<div class="carousel-caption">
+        			<h3>心雨</h3>
+        			<p>白色的竹籬笆</p>
+      			</div>
+			</div>
+			<div class="item">
+				<img width="100%"height="400" src="img/t01b4c16a03c1902909.jpg"/>
+				<div class="carousel-caption">
+        			<h3>楓葉</h3>
+        			<p>緩緩飄落</p>
+      			</div>
+			</div>
+		</div>
+		<!--左右箭頭-->
+		<a href="#my-carous" class="left carousel-control" data-slide = "prev">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+		</a>
+		<a href="#my-carous" class="right carousel-control" data-slide = "next">
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+		
+	</div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+	$('.carousel').carousel({
+ 		 interval: 2000
+	})
+</script>
+</body>
+</html>

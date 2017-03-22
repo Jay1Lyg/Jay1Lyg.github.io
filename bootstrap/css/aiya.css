@@ -1,0 +1,63 @@
+@charset "UTF-8";
+body {
+  background: #dddddd; }
+
+header {
+  width: 100%;
+  height: 160px;
+  background: url(../img/fcb3879e14429d75833a461572e64.jpg) no-repeat;
+  background-size: cover;
+  text-align: center; }
+  header img {
+    padding-top: 50px; }
+
+section {
+  width: 100%; }
+  section .widget {
+    background: #eeeeee;
+    border-radius: 5px;
+    padding: 21px 30px;
+    margin-bottom: 35px; }
+
+footer {
+  background: #202020; }
+  footer .widget {
+    padding: 21px 30px;
+    margin-bottom: 35px; }
+    footer .widget h4 {
+      color: white;
+      border-bottom: 1px solid #ddd;
+      font-family: "微软雅黑";
+      padding-bottom: 7px; }
+      footer .widget h4:after {
+        content: "";
+        width: 90px;
+        height: 1px;
+        background: #e67e22;
+        bottom: -1px; }
+    footer .widget .tui {
+      border-bottom: 1px dashed #ddd;
+      margin-bottom: 20px; }
+      footer .widget .tui .a {
+        color: white;
+        display: inline-block;
+        font-family: "微软雅黑";
+        margin: 5px; }
+      footer .widget .tui p {
+        font-family: "微软雅黑"; }
+        footer .widget .tui p .a {
+          color: white; }
+      footer .widget .tui span {
+        color: #ccc; }
+    footer .widget .content a {
+      display: inline-block;
+      border: 1px solid #ccc;
+      font-family: "微软雅黑";
+      color: #eeeeee;
+      padding: 1px;
+      margin: 5px 10px; }
+      footer .widget .content a:hover {
+        background: #e67e22;
+        color: white; }
+
+/*# sourceMappingURL=aiya.css.map */

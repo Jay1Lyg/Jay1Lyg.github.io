@@ -1,0 +1,36 @@
+<div class="col s12 m7">
+	<h2 class="header">{{book.title}}</h2>
+	<div class="card horizontal hoverable">
+		<div class="card-image"> 
+			<img ng-src="img/letters/{{imgSrc}}.jpg"> 
+		</div>
+		<div class="card-stacked">
+			<div class="card-content detail-bar">
+				<div class="row">
+					<p class="col s6 right-align">标题：</p>
+					<p class="col s6">{{book.title}}</p>
+				</div>
+				<div class="row">
+					<p class="col s6 right-align">作者：</p>
+					<p class="col s6">{{book.author}}</p>
+				</div>
+				<div class="row">
+					<p class="col s6 right-align">价格：</p>
+					<p class="col s6">{{book.price | number:2 | currency}}</p>
+				</div>
+				<div class="row">
+					<p class="col s6 right-align">发行日期：</p>
+					<p class="col s6">{{book.update}}</p>
+				</div>
+				<div class="row image-bar">
+					<div class="col s3" ng-repeat="image in book.images">
+						<img ng-click="changeSrc(image)" class="responsive-img" ng-src="img/letters/{{image}}.jpg"/>
+					</div>
+				</div>
+			</div>
+			<div class="card-action right-align">
+				<a class="back grey-text" href="javascript:history.back()"><i class="mdi-navigation-arrow-back"></i>返回上页</a>
+			</div>
+		</div>
+	</div>
+</div>

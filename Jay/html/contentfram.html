@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>dovument</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/newsList.css"/>
+	<script type="text/javascript">
+			document.querySelector('html').style.fontSize = document.documentElement.clientWidth / 12+ 'px';
+		</script>
+
+</head>
+<body>
+	
+	<script type="text/x-dot-template" id="new-tml">
+			<div class="list" >
+			<h3 >{{=it.title}}</h3>
+			<small>回复：<span>{{=it.reply_count}}</span>修改时间：<span>{{=it.edit_time}}</span>新闻来源:<span>{{=it.source}}</span></small>
+			<img src="{{=it.top_image}}"/>
+			<p class="digest ">
+				{{=it.content}}
+			</div>
+	</script>
+	<section id="news">
+		
+	</section>
+	
+	
+</body>
+   <script src="../script/api.js" ></script>
+   <script src="../script/doT.min.js" ></script>
+   <script src="../script/contentfram.js" type="text/javascript" charset="utf-8"></script>
+   
+</html>

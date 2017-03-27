@@ -1,16 +1,204 @@
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+body,ul,li,form{
+    padding: 0;
+    margin:0;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: "微软雅黑";
+}
+/*@keyframes bg {
+   0%{
+       background: url("../img/img1.jpg") no-repeat;
+   }
+    50%{
+        background: url("../img/img2.jpg") no-repeat;
+    }
+    100%{
 
-  main {
-    flex: 1 0 auto;
-  }
-  section{
-  	background: #eee;
-  	height: 100%;
-  }    
-  footer.page-footer{
-  	margin-top: 0;
-  }
+        background: url("../img/img1.jpg") no-repeat;
+    }
+}*/
+.outbox{
+    width: 100%;
+    height: 750px;
+    /*background:url("../img/img1.jpg") no-repeat;*/
+    /*animation: bg 5s linear ;*/
+    background-size:100% auto;
+    position: relative;
+}
+.innerbox{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+}
+.logo{
+    display: block;
+    font-size: 50px;
+    color: #eee;
+    position: absolute;
+    left: 30px;
+    top:30px
+}
+.nav{
+    width: 600px;
+    height: 110px;
+    background: rgba(0,0,0,0.7);
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.snav{
+    width: 33.3333%;
+    height: 100%;
+    float: left;
+    font-size: 18px;
+    color: #FFF;
+    text-align: center;
+    line-height: 110px;
+    font-weight:bold;
+    transition:all 1s ease;
+}
+.snav:hover{
+    background: rgba(255,255,255,0.8);
+    color: #000;
+}
+.content{
+    width:80%;
+    height: 500px;
+    background: rgba(0,0,0,0.7);
+    position: absolute;
+    left: 10%;
+    bottom: 50px;
+    padding: 30px;
+    /*display: none;*/
+    opacity: 0;
+    transition: all 1s ease;
+}
+.app{
+    width: 100px;
+    height: 25px;
+    border: 1px solid #fff;
+    border-radius: 30px;
+    text-align: center;
+    line-height: 25px;
+    font-size: 14px;
+    color: #fff;
+    position: absolute;
+    right: 30px;
+    top:60px
+}
+.con-top{
+    width: 100%;
+    height: 75px;
+    /*background: red;*/
+    overflow: hidden;
+}
+.about{
+    display: block;
+    font-size: 40px;
+    color: #fff;
+    margin-top: 10px;
+    float: left;
+}
+.con-top img{
+    float: right;
+}
+.con-line{
+    width: 100%;
+    height: 8px;
+    background: url("../img/line.png");
+}
+.con-con{
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+    /*background: red;*/
+}
+.con-l{
+    width: 45%;
+    height: 100%;
+    float: left;
+    /*background: blue;*/
+}
+.con-l div{
+    font-size: 18px;
+    color: #fff;
+    line-height: 40px;
+}
+.con-r{
+    width: 45%;
+    height: 100%;
+    float: right;
+    /*background: blue;*/
+}
+.con-r div{
+    font-size: 18px;
+    color: #fff;
+    line-height: 40px;
+}
+.skills{
+    width: 24%;
+    height: 48%;
+    /*background: red;*/
+    float: left;
+}
+.skills img{
+    width: 100%;
+    height: 100%;
+}
+.skills-word{
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.8);
+    overflow: hidden;
+}
+.skills-word span{
+    display: block;
+    font-size:18px;
+    color: #222;
+    margin: 40px 20px;
+}
+.imgbox{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+.work1{
+    width: 24%;
+    height: 90%;
+    background: url("../img/1.jpg");
+    background-size:100% auto;
+    float: left;
+}
+.work2{
+    width: 24%;
+    height: 90%;
+    background: url("../img/3.jpg");
+    background-size:100% auto;
+    float: left;
+    margin-left: 10px;
+}
+.work3{
+    width: 24%;
+    height: 90%;
+    background: url("../img/4.jpg");
+    background-size:100% auto;
+    float: left;
+    margin-left: 10px;
+}
+.work4{
+    width: 24%;
+    height: 90%;
+    background: url("../img/5.jpg");
+    background-size:100% auto;
+    float: left;
+    margin-left: 10px;
+}
+.workzhe{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    transition: all 2s ease;
+}
+.workzhe:hover{
+    background: rgba(0,0,0,0);
+}

@@ -1,0 +1,32 @@
+html,body{
+	height: 100%;
+}
+
+
+
+/*脚步导航栏*/
+#footer{
+	background: #eee;
+}
+
+
+#footer li{
+	height: 4em;
+	padding: 0.3em 0;
+	text-align: center;
+}
+#footer li.active,#footer li:active{
+	color: dodgerblue;
+}
+#footer li i{
+	font-size: 2em;
+}
+#footer li.active .icon-home:before,#footer li:active .icon-home:before{
+	content: "\e624";
+}
+#footer li.active .icon-guanzhu:before,#footer li:active .icon-guanzhu:before{
+	content: "\e616";
+}
+#footer li.active .icon-camera:before,#footer li:active .icon-camera:before{
+	content: "\e626";
+}

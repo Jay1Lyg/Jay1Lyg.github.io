@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>dovument</title>
+    <link rel="stylesheet" type="text/css" href="../css/loginfram.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/registerfram.css"/>
+</head>
+<body>
+	<div class="log">
+		
+		<form action="" method="post">
+			<input type="text" name="username" id="username" placeholder="用户名"/>
+			<input type="password" name="password" id="password" placeholder="请输入密码"/>
+			<input type="password" name="repassword" id="repassword" placeholder="请确认密码"/>
+			<button type="submit">注册 </button>
+		</form>
+	</div>
+	
+	
+</body>
+   <script src="../script/api.js" ></script>
+</html>

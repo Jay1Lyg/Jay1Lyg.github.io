@@ -1,0 +1,55 @@
+body{
+	padding: 1em;
+}
+.h2{
+	width: auto;
+	text-align: center;
+}
+h2{
+	
+	margin: 1em 0;
+	color: #999999;
+}
+.denglu{
+	width: auto;
+	height: 5em;
+	border-bottom: 1px solid #ddd;
+}
+.dlgroup{
+	width: 4em;
+	height: 4em;
+	background: #00bcd4;
+	color: white;
+	float: left;
+	border-radius: 50%;
+}
+.btn_dl p{
+	float: left;
+	margin-top: 1.8em;
+}
+.dlgroup:active{
+	width: 4.5em;
+	height: 4.5em;
+}
+.zc{
+	margin-top: 1em;
+	
+}
+.zhuce{
+	color: blue;
+	font-family: "微软雅黑";
+}
+.ul{
+	width: auto;
+	height: 15em;
+	padding-top: 1em;
+	
+}
+.ul ul li{
+	margin-top: 2em;
+	color: #999;
+	
+}
+.ul ul li span{
+	color: #9e9e9e;
+}

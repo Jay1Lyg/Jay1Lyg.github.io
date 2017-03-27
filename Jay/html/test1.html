@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>dovument</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+</head>
+<body>
+	
+	<script type="text/x-dot-template" id="tml">
+		{{for(var i=0 ;i<it.length;i++){}}
+			<h1>姓名是:{{=it[i].name}}</h1>
+			<p>性别是:{{=it[i].sex}}</p>
+			<p>年龄是:{{=it[i].age}}</p>
+		{{}}}
+	</script>
+	<div id="name">
+	</div>
+	
+</body>
+   <script src="../script/api.js" ></script>
+   <script src="../script/doT.min.js" ></script>
+   <script type="text/javascript">
+   	var data=[
+   	
+	   	{
+		   		"name":"jay",
+		   		"sex":"man",
+		   		"age":23
+		   	},
+		   	{
+		   		"name":"liyangg ",
+		   		"sex":"man",
+		   		"age":288
+		   	},
+		   	{
+		   		"name":"大主宰",
+		   		"sex":"女",
+		   		"age":23
+		   	}
+	   	]
+   	
+   	var tml=$api.byId("tml").text;
+   	var tmlFn=doT.template(tml);
+   	$api.html($api.byId("name"),tmlFn(data))
+   </script>
+</html>

@@ -1,0 +1,11 @@
+$(function(){
+    $(".snav").click(function(){
+        //$(".snav").each(function(i,obj){
+            $(".content").css("opacity","0")
+            $($(".content")[$(this).index(".snav")]).css("opacity","1")
+        //})
+    })
+    $(".con-top").find("img").click(function(){
+        $(".content").css("opacity","0")
+    })
+})

@@ -1,250 +1,282 @@
-
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>我的作品</title>
-		<link rel="icon" sizes="32x32" type="image/png" href="img/31.jpg">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link rel="stylesheet" href="css/materialize.css"/>
-		<link rel="stylesheet" type="text/css" href="css/index.css"/>
-		<style type="text/css">
-			.side-nav{
-				left: 0;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="navbar-fixed">
+<html lang="en">
+<head>
+    <title>particles.js example</title>
+    <script src="js/particles.min.js"></script>
+    <link rel="icon" sizes="32x32" type="image/png" href="img/31.jpg">
+    <style>
+        html,body{
+            margin:0;
+        }
+
+        canvas{
+            display:block;
+            vertical-align:bottom;
+        }
+
+        #particles-js{
+            height:100%;
+            background:#000
+        }
+    </style>
+     <link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.js"></script>
+		<script src="js/index.js"></script>
+</head>
+<body>
+<div id="particles-js" >
+	<div class="outbox" style="position: absolute;">
+			<div class="innerbox"></div>
+			<span class="logo">JAY</span>
+			<div class="nav">
+				<div class="snav">ABOUT ME</div>
+				<div class="snav">SKILL</div>
+				<div class="snav">WORK</div>
+			</div>
+			<div class="lianjie"style="position: absolute; right: 90%;top: 27%;">
+				<div class="git"style="height: 50px;">
+					<a href="https://github.com/Jay1Lyg/Jay1Lyg.github.io" target="_blank" style="color: wheat;text-decoration: none;">github</a>
+				</div>
+				<div class="weibo">
+					<a href="http://jay1lyg.coding.me/Jay1Lyg/" target="_blank" style="color: wheat;text-decoration: none;">我的博客</a>
+				</div>
+			</div>
 			
-		
-		    <nav >
-			<div class="nav-wrapper container">
-				<a href="#!" class="brand-logo">我的主页</a>
-				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-				<ul class="right hide-on-med-and-down">
-					<li>
-						<a href="https://github.com/Jay1Lyg/Jay1Lyg.github.io" target="_blank">github</a>
-					</li>
-					<li>
-						<a href="http://jay1lyg.coding.me/Jay1Lyg/" target="_blank">我的博客</a>
-					</li>
-		
-				</ul>
-				<ul class="side-nav" id="mobile-demo">
-					<li>
-						<a href="https://github.com/Jay1Lyg/Jay1Lyg.github.io">github</a>
-					</li>
-					<li>
-						<a href="http://jay1lyg.coding.me/Jay1Lyg/">我的博客</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</div>	
-		
-		<section>
-			<div class="container ">
-				<div class="row">
-			     <div class="col s12 m7">
-			     	
-			     	<div class="card">
-			         <div class="card-image">
-			           <img src="img/t01bb1cee59001caa52.jpg">
-			           <span class="card-title">小样</span>
-			         </div>
-			         <div class="card-content">
-			           <p>
-			           	开始系统学前端初期用<b>HTML CSS</b>布局的一个简单的页面。
-			           </p>
-			         </div>
-			         <div class="card-action">
-			           <a href="luyou/index.html" target="_blank">小样&gt;</a>
-			         </div>
-			       </div>
-			     	
-			       <div class="card">
-			         <div class="card-image">
-			           <img src="img/t014ee8509d34bb9410.jpg">
-			           <span class="card-title">电商</span>
-			         </div>
-			         <div class="card-content">
-			           <p>
-			           	这是我学习前端做的第一个成品网页，在和小组成员合作的情况下完成，作为检验自己 一个小阶段的成果，<i>团队协作工具用到的是 SVN</i>，
-			           	其中<b>会员页面</b>，<b>订单页面</b>，<b>线下体验页面</b>，包括<b>注册页面</b>，由我独立完成。
-			           	效果有<b>弹出框</b>，<b>下拉菜单</b>，<b>轮播图</b>，<b>滚动监听</b>等效果。
-			           	其中各种效果用到的是Js的的基础部分完成。各个页面之间链接完成。
-			           </p>
-			         </div>
-			         <div class="card-action">
-			           <a href="haier/huiyuan.html" target="_blank">电商网页入口&gt;</a>
-			         </div>
-			       </div>
-			       
-			       
-			       
-			       <div class="card">
-			         <div class="card-image">
-			           <img src="img/t0189cd87a9a7616d11.jpg">
-			           <span class="card-title">企业+fullpage</span>
-			         </div>
-			         <div class="card-content">
-			           <p>
-			           	这是我学习前端做的一个企业网页和使用<b>fullPage</b>技术做的一个页面。 两个网页由我自己独立完成，
-			           	在进一步学习<b>jquery</b>等前端技术之后，找到了一个企业网站进行布局与完成。
-			           	其中效果有<b>下拉菜单</b>，<b>轮播图</b>，<b>返回首页</b>等效果。用到jquery及其插件完成。
-			           	fullpage页面中，主要用到jquery自定义动画效果
-			           	
-			           </p>
-			         </div>
-			         <div class="card-action">
-			           <a href="LYG-xm/lu.html" target="_blank">企业网页入口&gt;</a>
-			           <a href="LYG-xm/xiaomi5.html" target="_blank">全屏滚动fullPage入口&gt;</a>
-			         </div>
-			       </div>
-			       
-			       
-			       <div class="card">
-			         <div class="card-image">
-			           <img src="img/t014ee8509d34bb9410.jpg">
-			           <span class="card-title">能力加强版</span>
-			         </div>
-			         <div class="card-content">
-			           <p>
-			           	在接触了一段时间之后，愈发觉得这份工作的有趣，在和良师益友交流中提升。开始学习使用<b>HTML5  CSS3 JS高级部分</b>进行代码编写
-			           	这是我和我的小团队合开发的一个网页，在技术上更加熟练，在代码方面，对于优化
-			           	代码有了一个更为清晰的思路。这次用到的团队开发工具是<i>git</i>，共同开发前端页面。其中，由我担任团队项目经理，完成部分包括：网页的<b>导航</b>
-			           	和<b>页脚</b>，和一个完整的<b>phoneApp页面</b>。在这次团队开发中，对合作有了更为清晰的认识，效率也大大提高，能力有了更大提升！！！
-			           </p>
-			         </div>
-			         <div class="card-action">
-			           <a href="lyg/nav.html" target="_blank">网页入口&gt;</a>
-			         </div>
-			       </div>
-			       
-			        <div class="card">
-			         <div class="card-image">
-			           <img src="img/t0142fa882c69643a7d.png">
-			           <span class="card-title">微站 </span>
-			         </div>
-			         <div class="card-content">
-			           <p>
-			              		开始接触移动端开发，首先进行的是手机端的页面布局。此项目自己独立完成。模仿最近很火的全民K歌的页面，运用<b>flex</b>布局，写出主题部分5个
-			              		页面，应用<b>iscroll.js</b>让页面更流畅。
-			              		
-			           </p>
-			         </div>
-			         <div class="card-action">
-			           <a href="Jay/index.html" target="_blank">微站入口&gt;</a>
-			         </div>
-			       </div>
-			       
-			       
-			       <div class="card">
-			         <div class="card-image">
-			           <img src="img/1-101015101005.jpg">
-			           <span class="card-title">在路上 </span>
-			         </div>
-			         <div class="card-content">
-			           <p>
-			           	下个更精彩
-			           </p>
-			         </div>
-			         <div class="card-action">
-			           <a href="#" >The End?</a>
-			         </div>
-			       </div>
-			       
-			       
-			     </div>
-			     
-			     
-			     
-			     <div class="col s12 m4 offset-m1">
-			     	<div class="card">
-						<div class="card-image waves-effect waves-light">
-							<img class="activator" src="img/W020101026571787317249.jpg" />
-							<span class="card-title">我的信息
-							</span>
+			<div class="contentbox">
+				<div class="content">
+					<div class="con-top">
+						<span class="about">ABOUT</span>
+						<img src="img1/close.png">
+					</div>
+					<div class="con-line"></div>
+					<div class="con-con">
+						<div class="con-l">
+							<div>姓名：李阳光</div>
+							<div>性别：男</div>
+							<div>年龄：24</div>
+							<div>学历：本科</div>
+							<div>专业：计算机科学与技术</div>
+							<div>电话：18334680915</div>
+							<div>邮箱：18334680915@163.com</div>
 						</div>
-						<div class="card-content">
-							<sapn class="card-title activator orange-text">
-								姓名：李阳光
-								<i class="mdi-navigation-more-vert right"></i></sapn>
-
-					            <p class="activator">
-					           	简介：<br />一个对Web前端技术有着极大热情的青年；一个技术上的小学生；
-					           	一个努力奔跑的......
-					           </p>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title orange-text">
-								<i class="mdi-navigation-close right"></i>
-								Jay Li
-							</span>
-							<p>从大二开始接触前端方面的知识，从那时候觉得这个东西很是有趣，越接触越喜欢。直到快毕业，我知道我会从事前端工程师这份工作，
-							并且在这个知识的海洋里尽情的汲取养分，做一个 努力奔跑的前端技术工作者！！！</p>
+						<div class="con-r">
+							<div>工作经验</div>
+							<div>&nbsp;&nbsp;在山西思软科技有限公司工作半年，工作期间担任前端工程师一职，参与公司项目的完成，项目中利用html，css，js实现页面的布局及动画。</div>
+							<div style="margin-top: 20px">自我评价</div>
+							<div>&nbsp;&nbsp;本人积极乐观，具有团队合作意识，责任心强，在校期间曾获得优秀社团干部的荣誉，对前端工程师具有很高的热情，工作期间更是发现了它的魅力所在。</div>
 						</div>
 					</div>
-					
-					<div class="card">
-						<div class="card-image waves-effect waves-light">
-							<img class="activator" src="img/201504131235086557.jpg" />
-							<span class="card-title" style="color: #ff9800;">
-							</span>
+				</div>
+				<div class="content">
+					<div class="con-top">
+						<span class="about">SKILL</span>
+						<img src="img/close.png">
+					</div>
+					<div class="con-line"></div>
+					<div class="con-con">
+						<div class="skills">
+							<img src="img/div.jpg">
+							<!--<div class="imgbox"></div>-->
 						</div>
-						<div class="card-content">
-							<sapn class="card-title activator orange-text">
-								请点击&gt;
-								<i class="mdi-navigation-more-vert right"></i></sapn>
-
-							 
-					            
+						<div class="skills">
+							<div class="skills-word">
+								<span>精通div+css布局，能够熟练，快速的完成页面布局，精通HTML5与CSS3。</span>
+							</div>
 						</div>
-						<div class="card-reveal">
-							<span class="card-title orange-text">
-								<i class="mdi-navigation-close right"></i>
-								学海无涯
-							</span>
-							<p><a href="http://www.liaoxuefeng.com/">廖雪峰</a></p>
-							<p><a href="http://www.ruanyifeng.com/blog/">阮一峰</a></p>
-							<p><a href="http://nodejs.cn/">NodeJs</a></p>
-							<p><a href="https://isux.tencent.com/">ISUX</a></p>
-							<p><a href="https://angularjs.org/">Angular</a></p>
+						<div class="skills" style="margin-left: 40px">
+							<img src="img/js.jpg">
+						</div>
+						<div class="skills">
+							<div class="skills-word">
+								<span>能够运用js完成页面效果，如各种电商网站的效果，加强页面的交互性，是页面更美观,熟练使用Jquery渲染页面效果。</span>
+							</div>
+						</div>
+						<div class="skills" style="margin-top: 20px">
+							<img src="img/html5.png">
+						</div>
+						<div class="skills" style="margin-top: 20px">
+							<div class="skills-word">
+								<span>精通前端框架bootstrap amazeui；<br>熟悉流行MVC框架angularJs；<br>熟悉NodeJS。</span>
+							</div>
+						</div>
+						<div class="skills" style="margin-top: 20px;margin-left: 40px">
+							<img src="img/cordova.png">
+						</div>
+						<div class="skills" style="margin-top: 20px">
+							<div class="skills-word">
+								<span>熟悉APICloud，能够完成APP的开发</span>
+							</div>
 						</div>
 					</div>
-			     	
-			     	
-			   
+				</div>
+				<div class="content">
+					<div class="con-top">
+						<span class="about">WORK</span>
+						<img src="img/close.png">
+						<a href="http://downloadpkg.apicloud.com/app/download?path=http://7ygbap.com1.z0.glb.clouddn.com/d962e29a7a35dbc37ac55c0f82155317_d"><span class="app">点击下载APP</span></a>
+					</div>
+					<div class="con-line"></div>
+					<div class="con-con">
+						<div class="work1">
+							
+							<a href="haier/first-page.html" target="_blank" style="text-decoration: none;">
+								<div class="workzhe" style="color: wheat;">电商页面</div>
+							</a>
+						</div>
+						<div class="work2">
+							<a href="lyg/phoneAPP.html" target="_blank" style="text-decoration: none;">
+								<div class="workzhe" style="color: wheat;">云页面</div>
+							</a>
+						</div>
+						<div class="work3">
+							<a href="LYG-xm/lu.html" target="_blank" style="text-decoration: none;">
+								<div class="workzhe" style="color: wheat;">企业页面 </div>
+							</a>
+						</div>
+						<div class="work4">
+							<a href="Jay/index.html"target="_blank" style="text-decoration: none;">
+								<div class="workzhe" style="color: wheat;">微站</div>
+							</a>
+						</div>
+					</div>
+				</div>
 			</div>
-		</section>
-		
-		
-		
-		
-		 <footer class="page-footer">
-			    <div class="container">
-			      <div class="row">
-			        <div class="col l6 s12">
-			          <h5 class="white-text">materials</h5>
-			          <p class="grey-text text-lighten-4">此页面用前端框架materials搭建完成</p>
-			        </div>
-			        <div class="col l4 offset-l2 s12">
-			          <h5 class="white-text">Links</h5>
-			          <ul>
-			            <li><a class="grey-text text-lighten-3" href="http://www.materialscss.com">materialscss</a></li>
-			           
-			          </ul>
-			        </div>
-			      </div>
-			    </div>
-			    
-		  </footer>
-		
-		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/materialize.min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			$(".button-collapse").sideNav();
-		</script>
-	</body>
+		</div>
+</div>
+<script>
+    /* ---- particles.js config ---- */
+
+    particlesJS("particles-js", {
+        "particles": {
+            "number": {
+                "value": 80,
+                "density": {
+                    "enable": true,
+                    "value_area": 1200
+                }
+            },
+            "color": {
+                "value": "#ffffff"
+            },
+            "shape": {
+                "type": "circle", //circle,edge,triangle(三角),polygon(多边形),star,image,[]
+                "stroke": {//边缘
+                    "width": 0,
+                    "color": "#000000"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                },
+                "image": {
+                    "src": "img/github.svg",
+                    "width": 100,
+                    "height": 100
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 10,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 4,
+                "random": true,
+                "anim": {
+                    "enable": true,
+                    "speed": 5,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 3,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": true,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": true,
+                    "mode": "grab"//grab:吸引，repulse：排斥，bubble：气泡
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 140,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 200,
+                    "size": 20,
+                    "duration": 2,//持续时间
+                    "opacity": 8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 1//增加颗粒数
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    });
+
+
+    /* ---- stats.js config ---- */
+
+//    var count_particles, stats, update;
+//    stats = new Stats;
+//    stats.setMode(0);
+//    stats.domElement.style.position = 'absolute';
+//    stats.domElement.style.left = '0px';
+//    stats.domElement.style.top = '0px';
+//    document.body.appendChild(stats.domElement);
+//    count_particles = document.querySelector('.js-count-particles');
+//    update = function() {
+//        stats.begin();
+//        stats.end();
+//        if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+//            count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+//        }
+//        requestAnimationFrame(update);
+//    };
+//    requestAnimationFrame(update);
+</script>
+</body>
 </html>

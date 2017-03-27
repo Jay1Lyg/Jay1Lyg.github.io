@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>dovument</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/courses.css"/>
+	<script type="text/javascript">
+			document.querySelector('html').style.fontSize = document.documentElement.clientWidth / 12+ 'px';
+		</script>
+
+</head>
+<body>
+	
+	<div >
+		<header class="clearfix">
+			<div class="fl hot" onclick="openNewslist(1,'头条')">
+				头条
+			</div>
+			<ul class="fl">
+				<li class="fl business"  onclick="openNewslist(5,'财经')">财经</li>
+				<li class="fl military"  onclick="openNewslist(3,'军事')">军事</li>
+				<li class="fl car"  onclick="openNewslist(4,'汽车')">汽车</li>
+				<li class="fl joke"  onclick="openNewslist(6,'笑话')">笑话</li>
+			</ul>
+		</header>
+		<footer class="clearfix">
+			<div class="fl enter"  onclick="openNewslist(2,'娱乐')">
+				娱乐
+			</div>
+			<div class="fl pe"  onclick="openNewslist(7,'体育')">
+				体育
+			</div>
+			<div class="fl te"  onclick="openNewslist(8,'科技')">
+				科技
+			</div>
+		</footer>
+	</div>
+	
+	
+</body>
+   <script src="../script/api.js" ></script>
+   <script src="../script/doT.min.js" ></script>
+   <script src="../script/course.js" type="text/javascript" charset="utf-8"></script>
+   <script type="text/javascript">
+  
+   </script>
+   
+</html>

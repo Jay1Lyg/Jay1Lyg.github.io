@@ -1,0 +1,26 @@
+
+
+header{
+	position: relative;
+	width: auto;
+	height: 3em;
+	line-height: 3em;
+	background: #00BCD4;
+	text-align: center;
+	color: #fff;
+	
+}
+header span{
+	font-size: 1.5em;
+}
+header i{
+	font-size: 1.5em !important;
+	left: 0.5em;
+	position: absolute;
+	color: #fff;
+	
+}
+
+header i:active{
+	opacity: 0.7;
+}

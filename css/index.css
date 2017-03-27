@@ -64,7 +64,7 @@ body,ul,li,form{
 .content{
     width:80%;
     height: 500px;
-    background: rgba(0,0,0,0.7);
+    background: rgba(255,255,255,0.2);
     position: absolute;
     left: 10%;
     bottom: 50px;
@@ -164,14 +164,14 @@ body,ul,li,form{
 }
 .work1{
     width: 24%;
-    height: 90%;
+    height: 99%;
     background: url("../img/1.jpg");
     background-size:100% auto;
     float: left;
 }
 .work2{
     width: 24%;
-    height: 90%;
+    height: 99%;
     background: url("../img/3.jpg");
     background-size:100% auto;
     float: left;
@@ -179,7 +179,7 @@ body,ul,li,form{
 }
 .work3{
     width: 24%;
-    height: 90%;
+    height: 99%;
     background: url("../img/4.jpg");
     background-size:100% auto;
     float: left;
@@ -187,7 +187,7 @@ body,ul,li,form{
 }
 .work4{
     width: 24%;
-    height: 90%;
+    height: 99%;
     background: url("../img/5.jpg");
     background-size:100% auto;
     float: left;

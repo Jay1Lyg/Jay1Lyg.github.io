@@ -1,0 +1,321 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 演员详情
+    // <link rel="stylesheet" href="/css/reset.css">
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/actor_edti1.css')
+    link(rel='stylesheet', href='/css/fixed.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    header
+      .newactor_banner
+        div.myImg
+
+        div
+          ul.tab
+            li.active 基本资料
+            li 参演经历
+            li 照片视频
+            li 接戏标准
+    section
+      // 基本资料
+      .information.active
+        // 资料
+        // 基本资料
+        .weui-cells.weui-cells_form.weuiOne.font-color
+      .experience
+        .display_experience
+      .photos
+
+        // 接戏标准
+      .standard
+        // 接戏标准
+        .weui-cells.weui-cells_form.weuiTwo
+    footer
+      .newactor_button.btn_standard
+        button 添加到方案
+    .overlay1
+    script.
+        
+                //基本资料
+              var btns =$(".tab li"),
+              contents =$("section>div")
+              var t = new TabView(btns,contents);
+              var userid=!{JSON.stringify(userid)};
+              var careerincrew_id=!{JSON.stringify(careerincrew_id)};
+              var programme_id=!{JSON.stringify(programme_id)};
+              var actorbudget_id=!{JSON.stringify(actorbudget_id)};
+           'use strict';
+
+          var url_url = url + '/agent/a_userprofile/' + userid + '/null';
+          $.ajax({
+              type: "GET",
+              url: url_url,
+              dataType: "jsonp",
+              success: function success(data) {
+                  console.log(data);
+                  function common(data) {
+                      if (data) {
+                          if (data.gender == "1") {
+                              data.gender = "男";
+                          } else if (data.gender == "2") {
+                              data.gender = "女";
+                          } else if (data.gender == "3") {
+                              data.gender = "不限";
+                          }
+                      }
+                  }
+                  common(data);
+
+                  /*$(".phone").click(function(e){
+                       e.preventDefault();
+                       $(".contactalert2").show();
+                        var conPhone="";
+                        conPhone+=`
+                           <p>联系人电话：${data.telephone}</p>
+                           <a class="confirm" href="tel://${data.telephone}">联系他</a>
+                           <a class="cancel">取消</a>
+                        `;
+                        $(".contactalert2").html(conPhone);
+                         console.log($(".contactalert2 .confirm").attr("href"));
+                        $(".cancel").click(function(e){
+                            e.preventDefault();
+                            $(".contactalert2").hide();
+                        });
+                    });*/
+                  var html1 = "";
+                  html1 += '\n                      <img src="' + data.iconUrl + '" alt="">\n                   ';
+                  $(".myImg").html(html1);
+                  var html = "";
+                  html += '\n                         <div class="weui-cell">\n                            <div class="weui-cell__hd"><label class="weui-label common-input"> \u827A\u540D</label></div>\n                            <div class="weui-cell__bd">\n                                <input class="weui-input font-color name" type="text"  placeholder="\u8BF7\u8F93\u5165\u827A\u540D" value="' + data.artname + '" disabled>\n                            </div>\n                         </div>\n                         <div class="weui-cell">\n                            <div class="weui-cell__hd"><label class="weui-label common-input">\u771F\u5B9E\u59D3\u540D</label></div>\n                            <div class="weui-cell__bd">\n                                <input class="weui-input font-color" type="text" placeholder="\u8BF7\u8F93\u5165\u771F\u5B9E\u59D3\u540D" value="' + data.realname + '" disabled>\n                            </div>\n                         </div>\n                         <div class="weui-cell weui-cell_select weui-cell_select-after">\n                            <div class="weui-cell__hd">\n                                <label for="" class="weui-label  common-input"> \u6027\u522B</label>\n                            </div>\n                            <div class="weui-cell__bd">\n                                <input class="weui-input font-color" type="text" placeholder="\u6027\u522B" value="' + data.gender + '" disabled>\n                            </div>\n                         </div>\n                         <div class="weui-cell">\n                            <div class="weui-cell__hd"><label for="" class="weui-label common-input"> \u51FA\u751F\u5E74\u6708</label></div>\n                            <div class="weui-cell__bd">\n                                <input class="weui-input  font "  type="date" value="' + data.birth + '" disabled>\n                            </div>\n                         </div>\n                         <div class="weui-cell">\n                            <div class="weui-cell__hd"><label for="" class="weui-label common-input"> \u4E09\u56F4</label></div>\n                            <div class=" measurements">\n                                <input class="weui-input "  type="type" value="' + data.bust + '" placeholder="bust" disabled>\n                                <input class="weui-input "  type="type" value="' + data.waist + '" placeholder="waist" disabled>\n                                <input class="weui-input "  type="type" value="' + data.hip + '" placeholder="hip" disabled>\n                            </div>\n                         </div>\n                         <div class="weui-cell">\n                            <div class="weui-cell__hd"><label class="weui-label common-input" > \u8EAB\u9AD8(cm)</label></div>\n                            <div class="weui-cell__bd">\n                                <input class="weui-input font-color" type="number" pattern="[0-9]*" placeholder="\u8BF7\u8F93\u5165\u8EAB\u9AD8" value="' + data.height + '" disabled>\n                            </div>\n                         </div>\n                         <div class="weui-cell">\n                            <div class="weui-cell__hd"><label class="weui-label common-input" >\u4F53\u91CD(kg)</label></div>\n                            <div class="weui-cell__bd">\n                                <input class="weui-input font-color" type="number"  pattern="[0-9]*" placeholder="\u8BF7\u8F93\u5165\u4F53\u91CD" value="' + data.weight + '" disabled>\n                            </div>\n                         </div>\n                         <div class="weui-cell">\n                            <div class="weui-cell__hd"><label class="weui-label common-input" >\u6BD5\u4E1A\u9662\u6821</label></div>\n                            <div class="weui-cell__bd">\n                                <input class="weui-input font-color" type="text"  placeholder="\u8BF7\u8F93\u5165\u6BD5\u4E1A\u9662\u6821" value="' + data.schoolname + '" disabled>\n                            </div>\n                         </div>\n                         <div class="weui-cell add-college" >\n                            <div class="weui-cell__hd"><label class="weui-label common-input"> \u6280\u80FD\u7279\u957F</label></div>\n                            <div class="weui-cell__bd">\n                                <span class="font-color">' + data.skill_str + '</span>\n\n                            </div>\n                         </div>\n                         <div class="weui-cell add-college myfeather" >\n                            <div class="weui-cell__hd"><label class="weui-label common-input"> \u7279\u5F81</label></div>\n                            <div class="weui-cell__bd specialty">\n                                <span class="font-color">' + data.feature_str + '</span>\n                            </div>\n                         </div>\n                    ';
+                  $(".weuiOne").html(html);
+
+                  if (data.workExpArray.length != 0) {
+                      for (var i = 0; i < data.workExpArray.length; i++) {
+                          var img = "";
+                          if (data.workExpArray[i].image_set.imagesURLArray.length == 0) {
+                              img = "";
+                          } else {
+                              img += '' + data.workExpArray[i].image_set.imagesURLArray[0].imagesURL;
+                          }
+                          var html2 = "";
+                          html2 += '\n                              <div>\n                                 <div class="photo_experience">\n                                     <img src="' + data.workExpArray[0].image_set.imagesURLArray[0].imagesURL + '" alt="">\n                                 </div>\n                                 <div class="detail_experience font-color" >\n                                    <ul class="lineHeight">\n                                        <li><span>\u5267&#x3000\u540D\uFF1A</span>\u300A' + data.workExpArray[0].detail.productionName + '\u300B</li>\n                                        <li><span>\u5267\u76EE\u7C7B\u578B\uFF1A</span>' + data.workExpArray[0].detail.productionType + '</li>\n                                        <li><span>\u9970\u6F14\u89D2\u8272\uFF1A</span>' + data.workExpArray[0].detail.role + '</li>\n                                        <li><span>\u89D2\u8272\u7C7B\u578B\uFF1A</span>' + data.workExpArray[0].detail.roleTag + '</li>\n                                    </ul>\n                                 </div>\n                              </div>\n                             ';
+                          $(".display_experience").html(html2);
+                      }
+                  } else {
+                      $(".display_experience").html("");
+                  }
+                  var html3 = "";
+                  html3 += '\n                          <div class="casting">\n                           <div>\n                            <div>\n                                <img src="' + data.CastingImageUrl.frontimagewaist + '" alt="">\n                            </div>\n                            <p>\u6B63\u9762\u5361\u80F8</p>\n                           </div>\n                           <div>\n                            <div>\n                                <img src="' + data.CastingImageUrl.leftimage45 + '" alt="">\n                            </div>\n                            <p>\u5DE6\u4FA745\u5EA6\u5361\u80F8</p>\n                           </div>\n                           <div>\n                            <div>\n                                <img src="' + data.CastingImageUrl.rightimage45 + '" alt="">\n                            </div>\n                            <p>\u53F3\u4FA745\u5EA6\u5361\u80F8</p>\n                           </div>\n                           <div>\n                            <div>\n                                <img src="' + data.CastingImageUrl.rightimage90 + '" alt="">\n                            </div>\n                            <p>\u53F3\u4FA790\u5EA6\u5361\u8170</p>\n                           </div>\n                           <div>\n                            <div>\n                                <img src="' + data.CastingImageUrl.leftimage90 + '" alt="">\n                            </div>\n                            <p>\u5DE6\u4FA790\u5EA6\u5361\u8170</p>\n                           </div>\n                           <div>\n                            <div>\n                                <img src="' + data.CastingImageUrl.frontimagewaist + '" alt="">\n                            </div>\n                            <p>\u6B63\u9762\u5361\u8170</p>\n                           </div>\n                           <div>\n                            <div>\n                                <img src="' + data.CastingImageUrl.frontimageall + '" alt="">\n                            </div>\n                            <p>\u6B63\u9762\u5168\u8EAB</p>\n                           </div>\n                           <div>\n                            <div>\n                                <img src="' + data.CastingImageUrl.frontimagehead + '" alt="">\n                            </div>\n                            <p>\u9732\u989D\u5934\u6B63\u9762\u5361\u80F8</p>\n                           </div>\n                           <div>\n                            <div>\n                                <img src="' + data.CastingImageUrl.artimage + '" alt="">\n                            </div>\n                            <p>\u827A\u672F\u7167</p>\n                           </div>\n                          </div>\n                          <div class="url">\n                              <h4 class="h4">\u89C6\u9891</h4>\n                              <div>\n                                  <p>url:<div>' + data.videoset.videos + '</div></p>\n                              </div>\n                          </div>\n                    ';
+                  $(".photos").html(html3);
+                  var html5 = "";
+                  var _iteratorNormalCompletion = true;
+                  var _didIteratorError = false;
+                  var _iteratorError = undefined;
+
+                  try {
+                      for (var _iterator = data.typename.nameSet[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                          var result = _step.value;
+
+                          var html6 = "";
+                          //如果length大于1,就添加/，并且去掉最后一个/;如果length小于1，就不添加。
+                          if (result.repertoireTypeArray.length >= 2) {
+                              var _iteratorNormalCompletion2 = true;
+                              var _didIteratorError2 = false;
+                              var _iteratorError2 = undefined;
+
+                              try {
+                                  for (var _iterator2 = result.repertoireTypeArray[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                                      var results = _step2.value;
+
+                                      html6 += results.repertoireTypeName + '/';
+                                  }
+                              } catch (err) {
+                                  _didIteratorError2 = true;
+                                  _iteratorError2 = err;
+                              } finally {
+                                  try {
+                                      if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                          _iterator2.return();
+                                      }
+                                  } finally {
+                                      if (_didIteratorError2) {
+                                          throw _iteratorError2;
+                                      }
+                                  }
+                              }
+
+                              html6 = html6.replace(/^\s+|\s+$/g, "").slice(0, -1);
+                          } else {
+                              var _iteratorNormalCompletion3 = true;
+                              var _didIteratorError3 = false;
+                              var _iteratorError3 = undefined;
+
+                              try {
+                                  for (var _iterator3 = result.repertoireTypeArray[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                                      var results = _step3.value;
+
+                                      html6 += '' + results.repertoireTypeName;
+                                  }
+                              } catch (err) {
+                                  _didIteratorError3 = true;
+                                  _iteratorError3 = err;
+                              } finally {
+                                  try {
+                                      if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                          _iterator3.return();
+                                      }
+                                  } finally {
+                                      if (_didIteratorError3) {
+                                          throw _iteratorError3;
+                                      }
+                                  }
+                              }
+                          }
+                          html5 += '\n                           ' + result.categoryName + ':' + html6 + '<br/>\n                        ';
+                      }
+                  } catch (err) {
+                      _didIteratorError = true;
+                      _iteratorError = err;
+                  } finally {
+                      try {
+                          if (!_iteratorNormalCompletion && _iterator.return) {
+                              _iterator.return();
+                          }
+                      } finally {
+                          if (_didIteratorError) {
+                              throw _iteratorError;
+                          }
+                      }
+                  }
+
+                  if (data.schedule == false) {
+                      data.schedule = "无";
+                  } else if (data.schedule == true) {
+                      data.schedule = "有";
+                  }
+
+                  var html4 = "";
+                  html4 += '\n                            <div class="weui-cell" >\n                               <div class="weui-cell__hd"><label class="weui-label common-input">\u5267\u76EE\u7C7B\u522B\u7C7B\u578B</label></div>\n                               <div class="weui-cell__bd specialty">\n                                   <span class="font-color">' + html5 + '</span>\n\n                               </div>\n                            </div>\n                            <div class="weui-cell" >\n                               <div class="weui-cell__hd"><label class="weui-label common-input">\u89D2\u8272\u7C7B\u522B</label></div>\n                               <div class="weui-cell__bd specialty">\n                                   <span class="font-color">' + data.roletag_str + '</span>\n                               </div>\n                            </div>\n                            <div class="weui-cell" >\n                               <div class="weui-cell__hd"><label class="weui-label common-input">\u6863\u671F\uFF1A</label></div>\n                               <div class="weui-cell__bd specialty">\n                                   <input class="weui-input font-color" type="text" value="' + data.schedule + '" disabled>\n                               </div>\n                            </div>\n                       ';
+                  $(".weuiTwo").html(html4);
+                  //遍历页面中所有图片。为图片1：实现图片根据实际高宽实现自适应2：为图片添加点击预览功能
+                  function thum($img) {
+                      var divWid = parseFloat($img.parent().css('width')) * 1.3;
+                      $img.parent().css('height', divWid);
+                      var width = parseFloat($img.css('width'));
+                      var height = parseFloat($img.css('height'));
+                      if (width > height) {
+                          $img.addClass('Wid');
+                      } else {
+                          $img.addClass('Hei');
+                      }
+                  }
+
+                  $(".myImg img").each(function (index, item) {
+                      thum($(item));
+                      picRreLook(".myImg img");
+                  });
+                  $(".casting img").each(function (index, item) {
+                      thum($(item));
+                      picRreLook(".casting img");
+                  });
+
+                  if ($(".photo_experience img").attr("src") != undefined) {
+                      $(".photo_experience img").each(function (index, item) {
+                          thum($(item));
+                          picRreLook(".photo_experience img");
+                      });
+                  } else {
+                      $(".photo_experience img").attr("alt", "暂无图片");
+                  }
+                  //为图片添加点击预览功能(封装)
+                  function picRreLook(img) {
+                      $(img).each(function () {
+                          if ($(this).attr("src")) {
+                              $(this).click(function () {
+                                  if ($(this).hasClass("scale")) {
+                                      $(this).removeClass("scale");
+                                      $(".overlay1").css("display", "none");
+                                      $('html,body').removeClass('ovfHiden');
+                                  } else {
+                                      $(this).addClass("scale");
+                                      $(".overlay1").css("display", "block");
+                                      $(".overlay1").css({ "width": $(document).width(), "height": $(document).height() });
+                                      $('html,body').addClass('ovfHiden');
+                                  }
+                              });
+                          } else {}
+                      });
+                  }
+              },
+              error: function error(err) {
+                  console.log(err);
+              }
+          });
+
+          $(".newactor_button button").click(function () {
+
+              var buttonurl = url + '/WX/wx_addActorToProgramme/' + userid + '/' + careerincrew_id + '/' + programme_id + '/' + actorbudget_id;
+              //console.log(buttonurl);
+              $.ajax({
+                  type: "GET",
+                  url: buttonurl,
+                  dataType: "jsonp",
+                  success: function success(data) {
+                      console.log(data);
+                      if (data.canadd == false) {
+                          alert("方案中演员最多可以添加三条哦！");
+                      } else if (data.alreadyAdd == true) {
+                          alert("已经添加，不可重复添加哦！");
+                      } else if (data.programmestate == 2) {
+                          alert("添加成功");
+                      }
+                  },
+                  error: function error(err) {
+                      console.log(err);
+                  }
+              });
+          });
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

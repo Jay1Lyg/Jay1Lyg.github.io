@@ -1,0 +1,113 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title Document
+    style.
+  body
+    a 上传封面
+    img#imgSml(src='', alt='')
+    script(src='js/jquery-2.1.0.min.js')
+    script.
+      $('a').on('click',()=>{
+      sendImg($('#imgSml'))
+      })
+      const URL="http://www.901vehicle.cn/WX/testpicture"  //URLs
+      function sendImg($img){
+      let inp = `<input id="inp" style="width:1px;height:1px;overflow:hidden;position:fixed;" type='file'>`
+      $('body').append(inp);
+      $('#inp').ready(()=>{
+      if($('#inp').attr('type')!='file'){
+      alert('没绑上')
+      }else{
+      $('#inp').change(function(){
+      console.log('触发了change事件')
+      var reader = new FileReader();
+      let pan_src;
+      let k = confirm('是否确定要上传图片')
+      if(k==true){
+      reader.onload = function(e){
+      pan_src  = e.target.result;
+      sendSm(pan_src,URL,$img);
+      $('#inp').remove();
+      }
+      reader.readAsDataURL(this.files[0]);
+      }else{
+      alert("以取消上传。")
+      $('#inp').remove();
+      }
+      })
+      }
+      $('#inp').click();
+      })
+      }
+      function sendSm(pan_src,URL,$img){
+      let canvas =  document.createElement('canvas');
+      canvas.id = "panCan";
+      let img = new Image();
+      $('body').append(
+      `<div id="pan_canvas" style="width:1px;height:1px;overflow:hidden;position:fixed;">
+      </div>`
+      );
+      let setOne = new Promise((res,rej)=>{
+      $(img).attr('id','pan_img').prop('src', pan_src);
+      res(img)
+      }).then((img)=>{
+      $('#pan_canvas').append(img).append(canvas);
+      return new Promise((res,rej)=>{
+      res()
+      })
+      }).then(()=>{
+      let dataURL;
+      $('#pan_img')[0].onload=()=>{
+      var ctx = $('#panCan')[0].getContext("2d");
+      ctx.clearRect(0, 0, 500,500);
+      let ImgHei = parseFloat($('#pan_img').css('height'));
+      let ImgWid = parseFloat($('#pan_img').css('width'));
+      let name = $('#pan_img').val();
+      let CanHei,CanWid,k=ImgHei/ImgWid;
+      let sLong = 200 ;                   //压缩后最短边长度
+      if(ImgWid>ImgHei){
+      CanHei=sLong;
+      CanWid=sLong/k;
+      }else{
+      CanWid=sLong;
+      CanHei=sLong*k;
+      }
+      $('#panCan').prop("width",CanWid).prop("height",CanHei)
+      ctx.drawImage($('#pan_img')[0],0,0,CanWid,CanHei);
+      dataURL=canvas.toDataURL("image/jpeg",0.2);  //图片格式 , 0-1 压缩比
+      $.ajax({
+      type:"POST",
+      url:URL,
+      dataType:'json',
+      data:{"imgData":dataURL},
+      success: function(data){
+      if($img){
+      $img.attr('src',data.imagesURL)
+      }
+      alert(data.imagesURL+"上传成功");
+      $('#pan_canvas').remove();
+      },
+      error:function(data){
+      alert('出错了'+data);
+      $('#pan_canvas').remove();
+      }
+      })
+      }
+      })
+      }
+      function sendBI(pan_src,URL){
+      $.ajax({
+      type:"POST",
+      url:URL,
+      dataType:'json',
+      data:{"imgData":pan_src},
+      success: function(data){
+      alert(data.imagesURL+"上传成功");
+      },
+      error:function(data){
+      alert('出错了'+data);
+      }
+      })
+      }

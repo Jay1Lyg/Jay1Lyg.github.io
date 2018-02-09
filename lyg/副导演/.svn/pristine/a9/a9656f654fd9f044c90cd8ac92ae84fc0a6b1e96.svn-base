@@ -1,0 +1,13 @@
+html{
+	font-size:62.5%; /* 10¡Â16=62.5% */
+}
+.actorName{
+	width:750px;
+	height:21px;
+	border:1px solid red;
+	background:#ffe400;
+}
+.actorName h1,
+.actorName h3{
+	text-align:center;
+}

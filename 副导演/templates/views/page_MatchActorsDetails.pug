@@ -1,0 +1,421 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 演员详情
+    // <link rel="stylesheet" href="/css/reset.css">
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/alert.css')
+    link(rel='stylesheet', href='/css/actor_edti1.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+
+      html {
+          font-size: 20px; /*20*/
+      }
+
+
+      .newactor_banner>div.fixed_tel{
+            width: 35%;
+            height: 40px;
+            /*border: 1px solid red;*/
+            position: fixed;
+            right: -7%;
+            top:12%;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.3);
+            display:none;
+
+        }
+        .newactor_banner>div.fixed_tel span{
+            color: white;
+            font-size: 14px;
+            position: fixed;
+            right: 3%;
+            line-height: 40px;
+        }
+        .newactor_banner>div.fixed_tel img{
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            right: 20%;
+            top:13.2%;
+        }
+        .button_invite{
+          position:fixed;
+          bottom:0;
+          height:60px;
+          right:0;
+          left:0;
+          text-align:center;
+          background:rgb(242,242,242);
+          z-index:201;
+
+        }
+        .button_invite button{
+
+          width:80%;
+          height:40px;
+          background:#4da2ad;
+          color:white;
+          border:none;
+
+           border-radius: 5px;
+        }
+        
+        .fade{
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.8;
+            opacity: .80;
+            filter: alpha(opacity=80);
+        }
+        .p_alert{
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1002;
+            overflow: auto;
+            background:black;
+            opacity:.88;
+        }
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    //script(type='text/javascript', src='/js/vconsole.min.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    header
+      .newactor_banner
+        img.banner_img( alt='')
+        .fixed_tel
+          img(src='/img/share.png', alt='')
+          span CASTING
+        div
+          ul.tab
+            li.active 基本资料
+            li 参演经历
+            li 照片视频
+            li 接戏标准
+    section(style='margin-bottom:80px')
+      // 基本资料
+      .information.active
+        // 资料
+        // 基本资料
+      // 参演经历
+      .experience
+        // 参演经历
+      // 照片视屏
+      .photos
+        // 照片视屏
+      // 接戏标准
+      .standard
+        // 接戏标准
+    .button_invite
+      button.button_bei 添加到备选
+    div.overlay1
+    .dialogs
+      img.quxiao(style="float:right;margin:10px;width:20px;" ,src="/img/quxiao.png")
+      div(style='width:100%;height:2px;clear:both')
+      .dalog_info
+    .p_alert
+    .fade
+    script.
+      
+      //    基本资料
+      var btns =$(".tab li"),
+      contents =$("section>div")
+      var t = new TabView(btns,contents);
+      var userid=!{JSON.stringify(userid)};
+      var careerincrew_id=!{JSON.stringify(careerincrew_id)};
+      var director_id = !{JSON.stringify(director_id)};
+      let careerincrew_ids=[careerincrew_id];
+      console.log(careerincrew_ids);
+      //var authorid=!{JSON.stringify(authorid)};
+        //WX/wx_searchAlternativeActorsdetails/:userid/:careerincrew_id;
+        function list(){
+         var url_url=url+'/WX/wx_searchAlternativeActorsdetails/'+userid+'/'+careerincrew_id;
+        console.log(url)
+      $.ajax({
+              type : "get",
+              url : url_url,
+              dataType : "jsonp",
+              success : function(data){
+                  console.log(data)
+                  //var img=$(".newactor_banner").html();
+                   //$(".banner_img").removeAttr("src");
+                    $(".banner_img").attr("src", data.iconUrl);
+
+                  $(".button_bei").attr("id",data.addstate);
+                  if(data.addstate==false){
+
+                    $(".button_bei").css("background","#ddd");
+                  }
+                  var str1=$(".information").html();
+                  if(data.gender==1){
+                   gender="男"
+                  }else if(data.gender==2){
+                    gender="女"
+                  }else{
+                   gender="不限"
+                  }
+                  str1='<div class="weui-cells weui-cells_form"><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input"> 艺名</label></div><div class="weui-cell__bd"><input disabled class="weui-input font-color name" type="text"  value="'+data.artname+'"></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input">真实姓名</label></div><div class="weui-cell__bd"><input class="weui-input font-color" type="text" disabled value="'+data.realname+'"></div></div><div class="weui-cell weui-cell_select weui-cell_select-after"><div class="weui-cell__hd"><label for="" class="weui-label  common-input"> 性别</label></div><div class="weui-cell__bd"><input disabled class="weui-input font-color" type="text" value="'+gender+'"></div></div><div class="weui-cell"><div class="weui-cell__hd"><label for="" class="weui-label common-input"> 出生年月</label></div><div class="weui-cell__bd"><input class="weui-input  font " disabled type="text" value="'+data.birth+'"></div></div><div class="weui-cell"><div class="weui-cell__hd"><label for="" class="weui-label common-input"> 三围</label></div><div class=" measurements"><input class="weui-input font-color"  type="type" value="'+data.bust+'" placeholder="bust" disabled><input disabled class="weui-input font-color"  type="type" value="'+data.waist+'" placeholder="waist"><input class="weui-input font-color" disabled type="type" value="'+data.hip+'" placeholder="hip"></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input" > 身高 cm</label></div><div class="weui-cell__bd"><input class="weui-input font-color" type="number" pattern="[0-9]*" value="'+data.height+'" disabled></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input" >体重 kg</label></div><div class="weui-cell__bd"><input class="weui-input font-color" type="number"  pattern="[0-9]*" value="'+data.weight+'" disabled></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input" >毕业院校</label></div><div class="weui-cell__bd"><input class="weui-input font-color" type="text"  pattern="[0-9]*" value="'+data.schoolname+'" disabled></div></div><div class="weui-cell add-college" ><div class="weui-cell__hd"><label class="weui-label common-input"> 技能特长</label></div><div class="weui-cell__bd"><span>'+data.skill_str+'</span></div></div><div class="weui-cell add-college" ><div class="weui-cell__hd"><label class="weui-label common-input"> 特征</label></div><div class="weui-cell__bd specialty"><span>'+data.feature_str+'</span></div></div></div>'
+                  $(".information").html(str1);
+                   //===========================演艺经历============================
+                   var array=data.workExpArray;
+                   var str2=$(".experience").html();
+                   for(var i=0;i<array.length;i++){
+                   var imagesURL;
+                   if(array[i].image_set.imagesURLArray.length==""){
+                      imagesURL=""
+                   }else{
+                    imagesURL=array[i].image_set.imagesURLArray[0].imagesURL;
+                   }
+                    str2+='<div class="display_experience"><div ><div class="photo_experience"><img src="'+imagesURL+'" alt=""></div><div class="detail_experience"><ul><li><span>剧&#x3000名：</span>'+array[i].detail.productionName+'</li><li><span>剧目类型：</span>'+array[i].detail.productionType+'</li><li><span>饰演角色：</span>'+array[i].detail.role+'</li><li><span>角色类型：</span>'+array[i].detail.roleTag+'</li></ul></div></div></div>'
+                  }
+                  $(".experience").html(str2);
+                  if(array.length==0){
+                    $(".experience").html('<p style="margin:2rem auto;text-align:center;font-size:16px">暂无演艺经历</p>');
+                  }
+
+                  //视频照片++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                  var casting=data.CastingImageUrl;
+                  var videoset=data.videoset;
+                  var str3= $(".photos").html();
+                  str3='<div class="casting"><h4 class="h4">照片</h4><div><div><img src="'+casting.frontimage+'" alt=""></div><p>正面卡胸</p></div><div><div><img src="'+casting.leftimage45+'" alt=""></div><p>左侧45度卡胸</p></div><div><div><img src="'+casting.rightimage45+'" alt=""></div><p>右侧45度卡胸</p></div><div><div><img src="'+casting.rightimage90+'" alt=""></div><p>右侧90度卡腰</p></div><div><div><img src="'+casting.leftimage90+'" alt=""></div><p>左侧90度卡腰</p></div><div><div><img src="'+casting.frontimagewaist+'" alt=""></div><p>正面卡腰</p></div><div><div><img src="'+casting.frontimageall+'" alt=""></div><p>正面全身</p></div><div><div><img src="'+casting.frontimagehead+'" alt=""></div><p>露额头正面卡胸</p></div><div><div><img src="'+casting.artimage+'" alt=""></div><p>艺术照</p></div></div><div class="url"><h4 class="h4">视频</h4><div><p>url：<a href="'+videoset.videos+'" style="color:#222" >'+videoset.videos+'</a></p></div></div>'
+                  $(".photos").html(str3);
+
+                  //-------------------------------接戏标准----------------------------------
+                  var str4= $(".standard").html();
+              
+                 if(data.schedule==false){
+                    var schedule='无档期';
+                  }else{
+                    var schedule='有档期';
+                  }
+                  var typename=data.typename.nameSet;
+                  var one1='';
+                  for(var i=0;i<typename.length;i++){
+                  var span='';
+                   for(var j=0;j<typename[i].repertoireTypeArray.length;j++){
+                    span+='<span style="margin-left:0.1rem;color:#999;font-size:0.26rem" id="'+typename[i].repertoireTypeArray[j].repertoireTypeid+'"class=" leixing1" >'+typename[i].repertoireTypeArray[j].repertoireTypeName+'<span>'
+                  }
+                   one1 += '<div ><label  class="leibie1" style="font-size:0.28rem"> '+typename[i].categoryName+':</label><div style="display:inline" class="allleixing">'+span+'</div></div>'
+                  
+                }
+                  str4='<div class="weui-cells weui-cells_form"><div class="weui-cell" ><div class="weui-cell__hd"><label class="weui-label common-input" style="width:100%">剧目类别类型：</label></div><div class="weui-cell__bd  one1">'+one1+'</div></div><div class="weui-cell" ><div class="weui-cell__hd"><label class="weui-label common-input">角色类别：</label></div><div class="weui-cell__bd specialty"><span>'+data.roletag_str+'</span></div></div><div class="weui-cell" ><div class="weui-cell__hd"><label class="weui-label common-input">档期：</label></div><div class="weui-cell__bd specialty"><span class="dangqi">'+schedule+'</span></div></div></div>'
+                  
+                  
+                  
+                  $(".standard").html(str4);
+
+                     //遍历页面中所有图片。为图片1：实现图片根据实际高宽实现自适应2：为图片添加点击预览功能
+                    function thum($img){
+                         let divWid = parseFloat($img.parent().css('width'))*1.3;
+                         $img.parent().css('height',divWid);
+                        let width = parseFloat($img.css('width'));
+                        let height = parseFloat($img.css('height'));
+                        if(width>height){
+                          $img.addClass('Wid');
+                        }else{
+                          $img.addClass('Hei');
+                        }
+                     }
+                      function picRreLook(img){
+                          $(img).each(function(){
+                            if($(this).attr("src")){
+                            $(this).click(function(){
+                            if($(this).hasClass("scale")){
+                              $(this).removeClass("scale");
+                              $(".overlay1").css("display","none");
+                              $('html,body').removeClass('ovfHiden');
+                            }else{
+                              $(this).addClass("scale");
+                              $(".overlay1").css("display","block");
+                              $(".overlay1").css({ "width": $(document).width(), "height": $(document).height() });
+                              $('html,body').addClass('ovfHiden');
+                            }
+                          });
+                            }else{}
+                          });
+                      }
+
+                         $(".newactor_banner").on("click",".banner_img",function(){
+                            console.log(11111)
+                            if($(this).hasClass("scale")){
+                              $(this).removeClass("scale");
+                              $(".overlay1").css("display","none");
+                              $('html,body').removeClass('ovfHiden');
+                            }else{
+                              $(this).addClass("scale");
+                              $(".overlay1").css("display","block");
+                              $(".overlay1").css({ "width": $(document).width(), "height": $(document).height() });
+                              $('html,body').addClass('ovfHiden');
+                            }
+                          });
+                          console.log( $(".newactor_banner>img").width());
+                          console.log( $(".newactor_banner>img").height());
+                      $(".casting img").each((index,item)=>{
+                            thum($(item));
+                            picRreLook($(item));
+                      })
+
+                     if($(".photo_experience img").attr("src")){
+
+                      $(".photo_experience img").each((index,item)=>{
+                           thum($(item));
+                           picRreLook($(item));
+
+                      });
+
+                     }else{
+                         $(".photo_experience img").attr("alt","暂无图片");
+                     }
+
+
+
+
+              },
+              error:function(){
+                  alert('fail');
+              }
+            });
+        };
+        list();  
+
+        
+      function render(){
+
+      /**
+       * 剧名点击事件
+       * **/
+      $('.p_head').on('click', function (e) {
+          let $this = $(this);
+
+          /**手风琴效果**/
+              //所有兄弟p_head 下的 p_body+dis, 并且p_head 的 open+dis close-dis
+          let p_heads=$this.siblings('.p_head');
+          p_heads.removeClass('p_head_Choice').next().addClass('dis');
+            p_heads.find('.p_tog_c').removeClass('dis');
+            p_heads.find('.p_tog_o').addClass('dis');
+
+          let $body = $this.next(), $el = $(e.target);
+
+          let close = $this.find('.p_tog_c'),
+              open = $this.find('.p_tog_o');
+
+          /*body交替显示隐藏*/
+          $body.toggleClass('dis');
+          $this.addClass('p_head_Choice');
+
+          /**/
+          $this.find('.p_tog img.dis').removeClass('dis');
+
+          if ($body.hasClass('dis')) {
+              open.addClass('dis');
+              close.removeClass('dis');
+          } else {
+              close.addClass('dis');
+              open.removeClass('dis');
+          }
+
+
+      });
+
+      /**
+       * 领衔主演点击事件
+       * **/
+      $('.p_bo_he ul li').on('click', function (e) {
+          let $this = $(this);
+          $this.addClass('p_choice').siblings().removeClass('p_choice');
+          let num = $this.attr("data-s");
+
+          $this.parent().parent().parent().children('.p_bo_bo').addClass('dis');
+          $($this.parent().parent().parent().children()[num]).removeClass('dis')
+
+      });
+
+      /**
+       * 演员的点击事件
+       * **/
+      $('.p_bo_bo span').on('click', function () {
+          if(($(this).attr('data-addstate'))==2){
+            $.alert('您以添加了演员:'+$(this).html()+', 请勿重复添加。')
+          }else{
+              $(this).toggleClass('p_choi');
+          }
+
+        });
+
+      /**
+       * 确认按钮点击事件
+       * ***/
+      $('.p_current').on('click', function () {
+         
+          });
+          $('.cancel').on('click', function () {
+              CloseDiv('.hide', '.p_alert');
+          })
+      }
+
+      //弹出隐藏层
+            function ShowDiv(show_div, bg_div) {
+                $(show_div).css('display','block');
+                $(bg_div).css('display','block') ;
+                let bgdiv = $(bg_div);
+                bgdiv.css({'width':document.body.scrollWidth,'height':$(document).height()});
+            };
+            //关闭弹出层
+             function CloseDiv(show_div, bg_div) {
+                  $(show_div).hide();
+                  $(bg_div).hide();
+              };
+
+            $('.button_bei').on('click',function(){
+
+                var $this=$(this);
+                if($this.attr('id') == 'true'){
+                  let data = {
+                      user_id: userid,
+                      careerincrew_id: careerincrew_ids
+                  }
+                  console.log(data)
+                  
+                      var url5 = url + '/WX/wx_addActorToAlternativemodel';
+                      $.ajax({
+                          type: "post",
+                          url: url5,
+                          data: data,
+                          //dataType: "jsonp",
+                          // jsonp: "jsonpCallback",
+                          success: function (data) {
+                            console.log(data);
+                              $.alert("添加成功");
+                              list(); 
+                          },
+                          error: function (err) {
+                              console.log(err)
+                          }
+                      }).fail(function (errorThrown) {
+                          console.log(errorThrown);
+                      });
+                      }else{
+                      alert("已经添加到备选")
+                      }
+                
+          
+            })
+
+

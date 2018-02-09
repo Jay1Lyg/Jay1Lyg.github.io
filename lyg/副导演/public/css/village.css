@@ -1,0 +1,159 @@
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+html{
+	font-size:62.5%;
+}
+body{
+	font-size:12px;
+	font-size:1.2rem ;
+}
+p{
+	font-size:14px;
+	font-size:1.4rem;
+}
+.feelCon{
+	width:100%;
+	background:#ffe6c8;
+}
+.huawen{
+	position:relative;
+}
+.huawen img{
+	width:100%;
+	height:15.2rem;
+}
+.juzuMesg p{
+	font-size:2.5rem;
+	color:#fff;
+	position:relative;
+	text-align:center;
+	top:-7rem;
+}
+.juzuTitle{
+	width:8rem;
+	height:3.1rem;
+	margin:-8px auto;
+	position:relative;
+}
+.juzuTitle img{
+	width:8.4rem;
+	height:2.54rem;
+}
+.juzuTitle span{
+	font-size:1.6rem;
+	color:#fff;
+	position:absolute;
+	top:0.5rem;
+	left:1.4rem;
+	font-weight:bold;
+}
+.juzuCon{
+	width:100%;
+	position:relative;
+	padding-left:2rem;
+	box-sizing:border-box;
+	line-height:22px;
+	margin-top:1rem;
+}
+.juzuCon .messLeft{
+	margin-right:1rem;
+}
+.juzuCon .messLeft,
+.juzuCon .messRight{
+	float:left;
+	min-width:48%;
+}
+.juzuCon .messLeft ul li,
+.juzuCon .messRight ul li{
+	font-size:1.4rem;
+	color:#f17a3d;
+}
+.messRight img{
+	width:2.8rem;
+	height:3.3rem;
+	position:absolute;
+	top:-2rem;
+	right:6rem;
+
+}
+.messLeft img{
+	width:2.6rem;
+	height:3rem;
+	position:absolute;
+	top:-6rem;
+	left:6rem;
+
+}
+.juzuMesg{
+	margin-top:-4rem;
+}
+.xiaozhuan{
+	width:92%;
+	min-height:3rem;
+	text-indent:2em;
+	border:1px solid #f17a3d;
+	border-radius:3px;
+	margin:1rem 0;
+}
+.roleMesg{
+	position:relative;
+	margin-top:2rem;
+}
+.roleMesg span{
+	position:absolute;
+	font-weight:bold;
+}
+.bottomBj{
+	position:relative;
+}
+.bottomBj img{
+	width:100%;
+	height:18rem;
+	position:absolute;
+}
+.erjiTitle{
+	width:29rem;
+	height:1.125rem;
+	margin:1.5rem auto;
+}
+.erjiTitle img{
+	width:29rem;
+	height:1.125rem;
+}
+.erjiTitle p{
+	font-size:1.6rem;
+	color:#f17a3d;
+	text-align:center;
+	margin-top:-1.8rem;
+}
+.bottomBj{
+	width:100%;
+	height:10.4rem;
+	position:relative;
+}
+.bottomBj img{
+	width:100%;
+	height:10.4rem;
+	position:absolute;
+}
+.peoZhuan{
+	width:100%;
+	color:#f17a3d;
+}
+.peoZhuan p{
+	text-align:left;
+	font-size:1.4rem;
+}
+.heart{
+	position:fixed;
+	z-index:100;
+	right:0;
+	top:8.5rem;
+}
+.heart img{
+	width:6.2rem;
+	height:3rem;
+}

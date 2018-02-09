@@ -1,0 +1,76 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 角色信息
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/weui2.css')
+    link(rel='stylesheet', href='/css/actor_edit_echart.css')
+    link(rel='stylesheet', href='/css/program.css')
+    style.
+      * {
+      padding: 0;
+      margin: 0;
+      list-style: none
+      }
+      body {
+      background: white
+      }
+    script(type='text/javascript').
+      // document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    script(type='text/javascript', src='/js/jquery.min.js')
+    // <script type="text/javascript" src="/js/jqWeui.js"></script>
+    script(type='text/javascript', src='/js/zepto.min.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    div
+      .weui_cell.slidelefts
+        .weui_cell_bd.weui_cell_primary
+          div
+            .recommend_edit(style='height: 132px')
+              div
+                img.chart(src='img/img1.png', alt='')
+              div
+                p(style='font-size: 14px')
+                  | 与旗下演员
+                  span 刘德华
+                  | 匹配度较高
+                #main(style='width: 100px;height:100px;float: left;')
+                ul.pipei
+                  li 基本信息：
+                  li 特征角色：
+                  li 片酬需求：
+                  li 档期匹配：
+        .slideleft
+          span.bg-green.f-white 删除
+  script.
+    var careerincrew_id=!{JSON.stringify(careerincrew_id)};
+    var actorbudget_id=!{JSON.stringify(actorbudget_id)};
+    var director_id=!{JSON.stringify(director_id)};
+    function list(){
+          var juzu_url=url+'/WX/wx_searchAlternativeActorsbySlider/'+careerincrew_id+'/'+actorbudget_id;
+          console.log(juzu_url);
+          $.ajax({
+              type : "get",
+              url : juzu_url,
+              dataType : "jsonp",
+              async:false,
+              // jsonp: "jsonpCallback",
+              success : function(data){
+                  console.log(data);
+                  var datas=data;
+                 
+                 
+              },
+              error:function(err){
+                 console.log(err)
+              }
+          });
+        };
+        list();
+   

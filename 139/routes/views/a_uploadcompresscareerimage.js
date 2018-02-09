@@ -1,0 +1,106 @@
+var keystone = require('keystone'),
+  CareerImage = keystone.list('CareerImage'),
+  CareerInResume = keystone.list('CareerInResume');
+var fs = require("fs");
+var query = require('../../query/util/savePictureToServer.js');
+var config = require('../../public/conf/common.js');
+
+exports = module.exports = function(req, res) {
+  var userid = req.body.userid;
+  var careeInResumeid = req.body.careerInResume_id;
+  var index = req.body.index;
+  var imgData = req.body.imgData;
+  var location = userid+'/'+new Date().getTime()+'.jpg';
+  var medianame = new Date().getTime()+'.jpg';
+  var path='images/compress_careerimage/';
+  var item={};
+  console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+  console.log(req.body);
+  console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+ //将图片保存到数据库
+       // if(careeInResumeid==null||careeInResumeid=='null'||careeInResumeid==''){//第一次上传
+        if(careeInResumeid==undefined||index==undefined){
+            res.status(403).send('parameter undefined');
+        }else{
+          var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
+          var dataBuffer = new Buffer(base64Data, 'base64');
+          var dataArray = [path,userid,location,dataBuffer];
+          query.savePictureToServer(dataArray,function(err){//保存图片到本地服务器
+             if(err){
+               throw new Error(err);
+             }else{
+               CareerInResume.model.findOne()
+                .where('_id',careeInResumeid)
+                .exec(function(err,ret){
+                   if(err){
+                     throw new Error(err);
+                   }else{
+                    if(index==1){//第一次上传  index=1
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       console.log(ret);
+                       ret.compress_images.push(item);           
+                       console.log(ret.compress_images);
+                       ret.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                              var data = {};
+                              var imagesURL=config.homeEntry.url+'/WX/career/compress_careerimage/'+ userid+'/'+ medianame;
+                              data.imagesURL = imagesURL; 
+                              res.send(data);
+                          }
+                       })
+                    }else{//重新上传  index=2
+                          var location1 = ret.compress_images[0];
+                          console.log(location1);
+                          if(ret.compress_images.length==0){
+                             item.filename=location;
+                             item.originalname=medianame;
+                             item.path=path;
+                             console.log(ret);
+                             ret.compress_images.push(item);           
+                             console.log(ret.compress_images);
+                             ret.save(function(err){
+                                if(err){
+                                  res.send(err);
+                                }else{
+                                  var data = {};
+                                  var imagesURL=config.homeEntry.url+'/WX/career/compress_careerimage/'+ userid+'/'+ medianame;
+                                  data.imagesURL = imagesURL; 
+                                  res.send(data);
+                                }
+                             })
+                          }else{
+                             fs.unlink(process.cwd()+'/images/compress_careerimage/'+location1.filename, function(err) {
+                                if (err) {
+                                  return console.error(err);
+                                }else{
+                                  console.log('删除成功');
+                                    ret.compress_images[0].filename=location;
+                                    ret.compress_images[0].originalname=medianame;
+                                    ret.compress_images[0].path=path;
+                                    ret.save(function(err){
+                                        var data = {};
+                                        var imagesURL=config.homeEntry.url+'/WX/career/compress_careerimage/'+ userid+'/'+ medianame;
+                                        data.imagesURL = imagesURL; 
+                                        res.send(data); 
+                                    })
+                                 
+                                }
+
+                             });
+                       }
+                    }
+                     
+                  }
+                })
+             }
+          }) 
+        }
+}
+
+
+
+  

@@ -1,0 +1,98 @@
+doctype html
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    title actor
+    link(rel='stylesheet', href='./css/weui.css')
+    link(rel='stylesheet', href='./css/actor.css')
+  body
+    // banner start
+    .actor-banner
+      ul.banner-img
+        li.img-current
+          img(src='./img/职员banner.png', alt='')
+        li
+        li
+      ul.banner-index
+        li
+        li
+        li.index-current
+    // banner end
+    // filter start
+    .weui-flex.actor-filter
+      .weui-flex__item.filter-sex
+        .placeholder
+          p#sex-val 性别
+          img(src='./img/三角black.png', alt='')
+        ul.filter-ul
+          li 不限
+          li 男
+          li 女
+      .weui-flex__item.filter-age
+        .placeholder
+          p 年龄段
+          img(src='./img/三角black.png', alt='')
+        ul.filter-ul
+          li 不限
+          li 婴幼儿
+          li 少年
+          li 青年
+          li 中年
+          li 老年
+    // filter end
+    // container start
+    .actor-container.clearfix
+      .weui-flex
+        .weui-flex__item.contain-item1
+          a(href='#')
+            img(src='./img/演员1.png', alt='')
+            .contain-cover 演员 模特
+          .item-cert
+            p.actor-name 赵雨昕
+            .contain-cert
+              img(src='./img/认证-小.png', alt='')
+              p 已认证
+        .weui-flex__item.contain-item2
+          a(href='#')
+            img(src='./img/演员3.png', alt='')
+            .contain-cover 演员 模特
+          .item-cert
+            p.actor-name 欧阳雨泽
+            .contain-cert
+              img(src='./img/认证-小.png', alt='')
+              p 已认证
+      .weui-flex
+        .weui-flex__item.contain-item1
+          a(href='#')
+            img(src='./img/演员1.png', alt='')
+            .contain-cover 演员 模特
+          .item-cert
+            p.actor-name 赵雨昕
+            .contain-cert
+              img(src='./img/认证-小.png', alt='')
+              p 已认证
+        .weui-flex__item.contain-item2
+          a(href='#')
+            img(src='./img/演员3.png', alt='')
+            .contain-cover 演员 模特
+          .item-cert
+            p.actor-name 欧阳雨泽
+            .contain-cert
+              img(src='./img/认证-小.png', alt='')
+              p 已认证
+      .weui-flex
+        .weui-flex__item.contain-item1
+          a(href='#')
+            img(src='./img/演员1.png', alt='')
+            .contain-cover 演员 模特
+          .item-cert
+            p.actor-name 赵雨昕
+            .contain-cert
+              img(src='./img/认证-小.png', alt='')
+              p 已认证
+        .weui-flex__item.contain-item2
+    // container end
+    // load start
+    .actor-load
+      | ~>_

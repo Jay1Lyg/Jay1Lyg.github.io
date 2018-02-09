@@ -1,0 +1,12 @@
+var keystone = require('keystone');
+
+
+exports = module.exports = function (req, res) {     
+	var author=req.params.authorid;
+	var crewsId=req.params.crewsId;
+	res.render('page_careerInfo',{
+      author : author,
+      crewsId : crewsId
+    });
+
+};

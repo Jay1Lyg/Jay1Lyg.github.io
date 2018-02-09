@@ -1,0 +1,258 @@
+var keystone = require('keystone'),
+	Address = keystone.list('Address'),
+	Areainfo = keystone.list('Areainfo'),
+	Category = keystone.list('Category'),
+	Production = keystone.list('Production'),
+	ProductionCrews = keystone.list('ProductionCrews'),
+	ProductionCompany = keystone.list('ProductionCompany'),
+	Issuer = keystone.list('Issuer'),
+	RoleCategory = keystone.list('RoleCategory'),
+	Role = keystone.list('Role'),
+	User = keystone.list('User'),
+	CareerInCrew = keystone.list('CareerInCrew'),
+  Category = keystone.list('Category'); 
+  Invitation = keystone.list('Invitation'); 
+  Resume = keystone.list('Resume'); 
+  SkillTag = keystone.list('SkillTag');
+  RoleTag = keystone.list('RoleTag');
+  FeatureTag = keystone.list('FeatureTag');
+  BoundProductionAndInvited = keystone.list('BoundProductionAndInvited');
+  SkillTag = keystone.list('SkillTag');
+  FeatureTag = keystone.list('FeatureTag');
+  RepertoireType = keystone.list('RepertoireType');
+  ProductionMatchActor = keystone.list('ProductionMatchActor');
+    
+var async = require('async');
+var _ = require('underscore');
+var format = require('./format.js');
+var search = require('../production/search.js');
+var config = require('../../../public/conf/common.js');
+
+
+//根据硬性条件筛选出演员
+var searchActorsAccordingToNecessaryConditions = function(careerinfo,callback){
+	var user_result = [];
+   if(careerinfo.gender==3){
+      User.model.find()
+      .exec(function(err,ret){
+        if(err){
+          throw new Error(err);
+        }else{
+          async.eachSeries(ret,function(item,next){
+             format.formatProfileBasicInfo(item,function(err,user){//查询演员信息
+                if(err){
+                   throw new Error(err);
+                }else{
+                   format.matchAccordingToNecessaryConditions(user,careerinfo,function(err,result){//按性别，年龄段，身高，体型进行匹配
+                       if(err){
+                          throw new Error(err);
+                       }else{
+                        console.log(result);
+                        if(result == false){
+                            next();
+                        }else{
+                          user_result.push(user);
+                          next();
+                        }
+                          
+                       }
+                   });
+                }
+             })
+          },function(err){
+             if(err){
+                throw new Error(err);
+             }else{
+                callback(null,user_result);
+             }
+          }); 
+
+        }
+    })
+   }else{
+      User.model.find()
+      .where('gender',careerinfo.gender)
+      .exec(function(err,ret){
+        if(err){
+          throw new Error(err);
+        }else{
+          async.eachSeries(ret,function(item,next){
+             format.formatProfileBasicInfo(item,function(err,user){//查询演员信息
+                if(err){
+                   throw new Error(err);
+                }else{
+                	 format.matchAccordingToNecessaryConditions(user,careerinfo,function(err,result){//按性别，年龄段，身高，体型进行匹配
+                       if(err){
+                          throw new Error(err);
+                       }else{
+                        console.log(result);
+                       	if(result == false){
+                            next();
+                       	}else{
+                       	  user_result.push(user);
+                          next();
+                       	}
+                          
+                       }
+                	 });
+                }
+             })
+          },function(err){
+             if(err){
+                throw new Error(err);
+             }else{
+             	  callback(null,user_result);
+             }
+          }); 
+
+        }
+      })
+  }
+}
+
+var positionMatchActor = function(careerinfo,userArray,callback){
+   //var userArray = [];
+   var result = [];
+   var basicMatchingDegree;
+   var featureMatchingDegree ;
+   var offsetMatchingDegree ;
+   var scheduleMatchingDegree ;
+   var totalMatchingDegree;
+   console.log('----------userArray-------------');
+   console.log(careerinfo);
+   console.log(userArray);
+   console.log('----------userArray-------------');
+   async.eachSeries(userArray,function(item,next){
+      var userdata = {};
+      async.waterfall([
+         function(callback){//匹配基本信息35
+           format.matchBasicInfo(careerinfo,item,function(err,basicDegree){
+              if(err){
+                 throw new Error(err);
+              }else{
+                 console.log(basicDegree);
+                 basicMatchingDegree = basicDegree*0.35;
+                 console.log('basicMatchingDegree:'+basicMatchingDegree);
+                 callback(null);
+              }
+           });   
+         },function(callback){//角色特征20
+            format.matchFeature(careerinfo,item,function(err,featureDegree){
+               if(err){
+                  throw new Error(err);
+               }else{
+               	  featureMatchingDegree = featureDegree*0.2;
+                  callback(null);
+                  console.log('featureMatchingDegree:'+featureMatchingDegree);
+               }
+            })
+         },function(callback){//片酬需求30
+         	  format.matchoffset(careerinfo,item,function(err,offsetDegree){
+               if(err){
+                  throw new Error(err);
+               }else{
+                  offsetMatchingDegree = offsetDegree*0.3;
+                  console.log('offsetMatchingDegree:'+offsetMatchingDegree);
+                  callback(null);
+               }
+            });
+
+         },function(callback){//档期匹配15
+            format.matchschedule(careerinfo,item,function(err,scheduleDegree){
+               if(err){
+                  throw new Error(err);
+               }else{
+                  scheduleMatchingDegree = scheduleDegree*0.15;
+                  console.log('scheduleMatchingDegree:'+scheduleMatchingDegree);
+                  callback(null);
+               }
+            });
+         },function(callback){//计算总匹配度
+            totalMatchingDegree = basicMatchingDegree+featureMatchingDegree+offsetMatchingDegree+scheduleMatchingDegree;
+            console.log('totalMatchingDegree:'+totalMatchingDegree);
+            callback(null);
+         },function(callback){
+            userdata.realname = item.realname;
+            userdata._id = item.id;
+            userdata.image = item.image;
+            userdata.basicMatchingDegree = basicMatchingDegree;
+            userdata.featureMatchingDegree = featureMatchingDegree;
+            userdata.offsetMatchingDegree = offsetMatchingDegree;
+            userdata.scheduleMatchingDegree = scheduleMatchingDegree;
+            userdata.totalMatchingDegree = totalMatchingDegree;
+            result.push(userdata);
+            callback(null);
+         },function(callback){//将匹配结果保存到数据库
+            ProductionMatchActor.model.findOne()
+            .where('careerincrewid',careerinfo.careerincrew_id)
+            .where('user_id',item.id)
+            .exec(function(err,ret){
+              if(err){
+                throw new Error(err);
+              }else{
+                if(ret==null){
+                   ProductionMatchActor.model.create({
+                      careerincrewid: careerinfo.careerincrew_id,
+                      user_id: item.id,
+                      realname : item.realname, 
+                      basicInfo_degree: basicMatchingDegree,
+                      feature_degree: featureMatchingDegree,
+                      paycheck_degree: offsetMatchingDegree,
+                      schedule_degree: scheduleMatchingDegree,
+                      total_degree: totalMatchingDegree,
+                   },function(err,ret1){
+                      if(err){
+                         throw new Error(err);
+                      }else{
+                         callback(null);
+                      }
+                   })
+                }else{
+                   ret.realname = item.realname;
+                   ret.basicInfo_degree = basicMatchingDegree;
+                   ret.feature_degree = featureMatchingDegree;
+                   ret.paycheck_degree = offsetMatchingDegree;
+                   ret.schedule_degree = scheduleMatchingDegree;
+                   ret.total_degree = totalMatchingDegree;
+                   ret.save(function(err){
+                      if(err){
+                         throw new Error(err);
+                      }else{
+                         callback(null);
+                      }
+                   })
+                }
+              }
+            })
+         }
+      ],function(err){
+          if(err){
+             throw new Error(err);
+          }else{
+             next();
+          }
+      })
+   },function(err){//按照匹配度高低排序
+      if(err){
+         throw new Error(err);
+      }else{
+        console.log('!!!!');
+        console.log(result);
+         format.SortbymatchinDegree(result,function(err,user_result){
+            if(err){
+              throw new Error(err);
+            }else{
+              console.log('---');
+              console.log(user_result);
+              console.log('---');
+               callback(null,user_result);
+            }
+         });
+      }
+   });
+
+}
+module.exports = {
+  searchActorsAccordingToNecessaryConditions: searchActorsAccordingToNecessaryConditions,
+  positionMatchActor : positionMatchActor
+}

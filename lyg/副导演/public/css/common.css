@@ -1,0 +1,65 @@
+#header{
+    height: 48px;
+    width: 100%;
+    background: #f7f7f7; background-color: #f7f7f7 !important;z-index: 500;
+}
+#header div{
+    position: relative;
+    background-color: #f7f7f7 !important;
+   z-index: 66;
+}
+#header div  img{
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    margin: 16px 0 0 5px;
+
+}
+#header div p{
+    color: #222222;
+    font-size: 16px;
+    font-family:微软雅黑;
+    line-height: 48px;
+    background: white;
+    text-align: center;
+}
+#header div span{
+    color: #4da2ad;
+    font-size: 15px;
+    line-height: 48px;
+    font-family:微软雅黑;
+    position: absolute;
+    right:20px;
+    top:0;
+}
+.clearfix{
+    
+    display: block;
+    clear: both;
+    height: 0;
+}
+.banner-1{
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+.banner-1>img{
+    width: 100%;
+    height: 200px;
+}
+.banner-11>img{
+    width: 100%;
+    height: 200px;
+    filter:blur(5px);
+-webkit-filter:blur(5px);
+-moz-filter:blur(5px);
+-ms-filter:blur(5px);
+-o-filter:blur(5px);
+}
+.banner-11>div>img{
+    position: absolute;
+    width: 40%;
+    top: 20px;
+    left: 30%;
+    border-radius: 50%
+}

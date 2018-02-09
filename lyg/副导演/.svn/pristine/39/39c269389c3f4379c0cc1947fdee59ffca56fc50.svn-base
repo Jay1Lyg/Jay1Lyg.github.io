@@ -1,0 +1,115 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title casting
+    link(rel='stylesheet', href='/css/ximuDetail.css')
+    script(type='text/javascript', src='/js/jquery.min.js')
+  body
+    .crewMesg
+      .headTop
+        .beibei
+          img(src='/img/21971254158583215.png', width='750', height='759', border='0', alt='')
+        .shuye
+          img(src='/img/262325834393162622.png', width='373', height='443', border='0', alt='')
+      .crewTitle
+        p
+          | /
+          span 古城
+          | /
+        .solidBorder
+          b.solidLeft
+          .juTitle 剧组信息
+          b.solidDiv
+        .message
+          .messLeft
+            ul
+              li 剧名：古城
+              li 剧目类型：科幻片
+              li 报名截止日期：2017-05-10
+              li 出品公司：紫螺科技
+          .messRight
+            ul
+              li 剧目类型：院线电影
+              li 拍摄地：北京
+              li 拍摄周期(天)：45
+              li 承制公司：紫螺科技
+        div(style='clear:both;')
+        .solidBorder
+          b.solidLeft
+          .juTitle 角色信息
+          b.solidDiv
+          div(style='clear:both;')
+        // ---------剧目类别增多，可循环下边div-------
+        .otherMesg
+          .erjiTitle
+            | 领衔主演
+          .message
+            .messLeft
+              ul
+                li 剧名：古城
+                li 剧目类型：科幻片
+                li 报名截止日期：2017-05-10
+                li 出品公司：紫螺科技
+                li 人物小传：
+            .messRight
+              ul
+                li 剧目类型：院线电影
+                li 拍摄地：北京
+                li 拍摄周期(天)：45
+                li 承制公司：紫螺科技
+            div(style='clear:both')
+            .xiaozhuan
+    .crewBottom
+      .beijing2
+        img(src='/img/291250723232712445.png', width='750', height='654', border='0', alt='')
+      .shuye2
+        img(src='/img/277298584468738840.png', width='373', height='443', border='0', alt='')
+    script.
+        //'/WX/page_YouthTemplate/:productionCrew_id/:appid',
+        (()=>{
+          var url="http://www.901vehicle.cn";
+          var productionCrew_id=!{JSON.stringify(productionCrew_id)};
+          var appid=!{JSON.stringify(appid)};
+          var userid=null;
+          var youthUrl=url+'/WX/wx_searchallpositionDetails/'+productionCrew_id+'/'+userid;
+          $.ajax({
+            type:"GET",
+            url:youthUrl,
+            dataType:"jsonp",
+            success:function(data){
+              console.log(11111111111111);
+              console.log(data);
+            },
+            error:function(err){
+              console.log(err);
+            }
+          });
+        })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

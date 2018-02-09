@@ -1,0 +1,82 @@
+notice_class{
+    margin: 0.1rem 0;
+    clear: both;
+}
+.notice_type{
+    width: 100%;
+    background: rgba(242, 242, 242, 1);
+    height: 0.9rem;
+    border-bottom: 1px solid #999999
+;
+}
+.notice_type p{
+    font-size: 0.28rem;
+    color: #222222;
+    line-height: 0.9rem;
+    margin-left: 0.76rem;
+    display: inline;
+}
+
+.jiantou{
+    float: right;
+    clear: both;
+    height: 0.9rem;
+}
+.jiantou img{
+    width: 0.5rem;
+    margin: 0.2rem 0.62rem 0.2rem 0;
+}
+.jiantou img:last-child{
+    display: none;
+}
+.detail_type{
+    display: none;
+}
+
+.tabs{
+    width: 100%;
+    background: white;
+
+}
+.tabs ul{
+    text-align: center;
+    background: white;
+    height: 40px;
+
+}
+.tabs ul li{
+    float: left;
+    width: 25%;
+    font-size: 14px;
+    background: white;
+    line-height: 40px;
+    /*border-bottom: 1px solid #666;*/
+}
+.tabs ul li.active{
+    color: #4da2ad;
+    border-bottom: 2px solid #4da2ad;
+}
+.section{
+    width: 100%;
+    clear: both;
+    text-align: center;
+}
+.section>div{
+    display: none;
+}
+.section>div.active{
+    display: block;
+}
+.section>button{
+    width: 50%;
+    background: #4da2ad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 5px 0;
+    height: 35px;
+    font-size: 14px;
+}
+.weui-cells_checkbox .weui-check:checked + .weui-icon-checked:before{
+    color:#4da2ad;
+}

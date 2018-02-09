@@ -1,0 +1,77 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 旗下艺人搜索
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/actor_manage.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    header
+      .header
+        .search
+          // 搜索内容
+          #searchBar.weui-search-bar
+            form.weui-search-bar__form
+              .weui-search-bar__box
+                input#searchInput.weui-search-bar__input(type='search', placeholder='请输入演员姓名', required='')
+                a#searchClear.weui-icon-clear(href='javascript:')
+              label#searchText.weui-search-bar__label(style='transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);')
+                i.weui-icon-search
+                span 搜索
+            a.search_actor(style='color: #4da2ad;font-size: 0.28rem;padding: 0.1rem') 搜索
+    section
+      .all_actor
+        .active
+          // 全部
+          // 参演经历
+          .display_experience.actor1
+            
+  script.
+      var appid=!{JSON.stringify(appid)};
+    $(".search_actor").click(function(){
+      var name=$("#searchInput").val();
+      var url_url=url+'/agent/a_searchCompanyActorByname/'+appid+'/'+name;
+      if(name){
+        $.ajax({
+          type : "get",
+          url : url_url,
+          dataType : "jsonp",
+          success : function(data){
+              console.log(data)
+              var array=data;
+              $('.actor1').empty()
+              var str = $('.actor1').html();           
+              for(var i=0;i<array.length;i++){
+               // var url3='http://www.901vehicle.cn/WX/page_deliveryActor/'+array[i].user_id;
+                    if(array[i].schedule==false){
+                      var schedule='无';
+                    }else{
+                      var schedule='有';
+                    }
+                     str +='<a href="'+url+'/agent/a_page_userInfo/'+array[i].userid+'/'+appid+'"><div><div class="photo_experience"><img src="'+array[i].iconUrl+'"></div><div class="detail_experience"><ul><li><span>姓名：</span>'+array[i].name+'</li><li><span>特征：</span>'+array[i].feature+'</li><li><span>档期：</span>'+schedule+'</li><li><span>角色类型：</span>领携主演</li></ul></div></div></a>'                                                                                          
+              }
+              $('.actor1').html(str); 
+              if(array.length<3){
+                  $(".weui-loadmore").css("display","none");
+                }
+
+          },
+          error:function(){
+              alert('fail');
+          }
+        });
+      }else{
+        $.alert("请输入搜索内容")
+      }
+      })
+      

@@ -1,0 +1,658 @@
+﻿doctype html
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    title 演员列表
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/myNotice.css')
+    link(rel='stylesheet', href='/css/common.css')
+    link(rel='stylesheet', href='/css/actor_list.css')
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/actor_chert.css')
+    style.
+      .swiper-container {
+            width: 100%;
+        }
+
+        .swiper-container img {
+            display: block;
+            width: 100%;
+        }
+        .swiper-pagination-bullet-active{
+            background: #4da2ad;
+        }
+    // <script src="js/zepto.min.js"></script>
+    script(src='/js/jquery.min.js')
+    script(src='/js/fixed.js')
+    script(src='/js/detail.js')
+    script(src='/js/jqWeui.js')
+    script(src='/js/swiper.js')
+    script(src='/js/tab.js')
+    //script(src='/js/vconsole.min.js')
+    script(src='/js/template-web.js')
+    script(src='/js/jquery.cookie.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(type='text/javascript', src='/js/url.js')
+    script.
+      $(function () {
+      $(".swiper-container").swiper({
+          loop: true,
+          autoplay: 3000
+        });
+      //            下拉刷新
+      $(document.body).pullToRefresh().on("pull-to-refresh", function() {
+        setTimeout(function() {
+        if($(".age_select").hasClass("activ")||$(".sex_select").hasClass("activ")){
+          xuan(age,sex)
+        }else if($(".select_info").hasClass("activ")){
+         
+        }else{
+          actor_list(1);
+        }
+         
+          j=2;
+          $(document.body).pullToRefreshDone();
+          $(document.body).infinite()
+        }, 2000);
+      });
+        
+      //            滚动加载
+       
+      
+      $(".notice-tab").on("click",function(e){
+      console.log("kk");
+      if(!$(".notice-tab").hasClass("active")) {
+      $(".notice-tab").removeClass("active");
+      $(this).addClass("active");
+      var $index = $(this).index();
+      $(".notice-tab .imgIng").eq($index).addClass("disNone");
+      $(".notice-tab .imgEd").eq($index).removeClass("disNone");
+      $(".tabDown>div").removeClass("actives");
+      $(".tabDown>div").eq($index).addClass("actives");
+      e.stopPropagation()
+      }
+      });
+      
+      $(document).click(function() {
+      if($(".notice-tab").hasClass("active")){
+      $(".imgEd").addClass("disNone");
+      $(".imgIng").removeClass("disNone");
+      $(".notice-tab").removeClass("active");
+      $(".tabDown>div").removeClass("actives")
+      }
+      });
+       $(document).scroll(function() {
+      if($(".notice-tab").hasClass("active")){
+      $(".imgEd").addClass("disNone");
+      $(".imgIng").removeClass("disNone");
+      $(".notice-tab").removeClass("active");
+      $(".tabDown>div").removeClass("actives")
+      }
+      });
+
+      });
+  body(ontouchstart='')
+    .weui-pull-to-refresh__layer
+      .weui-pull-to-refresh__arrow
+      .weui-pull-to-refresh__preloader
+      .down 下拉刷新
+      .up 释放刷新
+      .refresh 正在刷新
+    header#header
+      div
+        // <img src="img/矩形-1-拷贝.png" alt="">
+        p 演员列表
+    section
+      .swiper-container
+        .swiper-wrapper
+          // Slides
+          .swiper-slide
+            a(href='http://mp.weixin.qq.com/s/xt1vkiJsIDHSEBRlCp5dog')
+              img(src='/img/actor_wu.png')
+          .swiper-slide
+            a(href='http://mp.weixin.qq.com/s/scY3eI7QmLlwh9idSMMxgA')
+              img(src='/img/actor_hao.png')
+          .swiper-slide
+            a(href='http://mp.weixin.qq.com/s/VV8AzbqwIyGw01lsrxo6oA')
+              img(src='/img/actor_han.png')
+          .swiper-slide
+            a(href='https://mp.weixin.qq.com/s/xsAx5fQS8IZRlZcOOY1_KA')
+              img(src='/img/actor_yu.png')
+        // If we need pagination
+        .swiper-pagination
+      .weui-flex.tabUp
+        .weui-flex__item.notice-tab
+          span.sex_select 性别
+          img.imgIng(src='/img/三角black.png', alt='')
+          img.imgEd.disNone(src='/img/三角-上blue.png', alt='')
+        .weui-flex__item.notice-tab
+          span.age_select 年龄段
+          img.imgIng(src='/img/三角black.png', alt='')
+          img.imgEd.disNone(src='/img/三角-上blue.png', alt='')
+        #panel.weui-flex__item
+          span.select_info 精选
+          img.imgIng(src='/img/select.png', style='width: 15px;margin: 0;vertical-align: middle', alt='')
+      .tabDown
+        div
+          ul.btn.btnOne
+            li#1.btn 男
+            li#2.btn 女
+            li#0.btn 不限
+        div
+          ul.btn.btnTwo
+            li#1.btn 婴幼儿
+            li#2.btn 少年
+            li#3.btn 青年
+            li#4.btn 中年
+            li#5.btn 老年
+            li#0.btn 不限
+      .photo_font
+      div.div(style='margin:0 auto;text-align:center;display:none')
+        img(src='/img/kong.png',style='margin:0 auto;height:160px;width:165px')
+        p(style='color:#aeaeae;font-size:14px;') 暂无演员
+    #menu.sidebar
+      .page.panel.js_show
+        .page__bd
+          .weui-cell.weui-cell_select.weui-cell_select-after
+            .weui-cell__hd
+              label.weui-label.common-input(for='')  性别
+            .weui-cell__bd
+              select.weui-select.option.gender(name='select_sex')
+                option(value='0', style='text-align: right') 不限
+                option(value='1', style='text-align: right') 男
+                option(value='2', style='text-align: right') 女
+          .weui-cell.weui-cell_select.weui-cell_select-after
+            .weui-cell__hd
+              label.weui-label.common-input  年龄段
+            .weui-cell__bd
+              select.weui-select.option.age(name='select_age')
+                option(value='0', style='text-align: right') 不限
+                option(value='1', style='text-align: right') 婴幼儿
+                option(value='2', style='text-align: right') 少年
+                option(value='3', style='text-align: right') 青年
+                option(value='4', style='text-align: right') 中年
+                option(value='5', style='text-align: right') 老年  
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input  身高
+            .weui-cell__bd
+              input.weui-input.font-color.height.min_height(name='height', type='number', placeholder='请输入',style='float:left;width:40%')
+              span(style='float:left') -
+              input.weui-input.font-color.height.max_height(name='height', type='number', placeholder='请输入',style='float:left;width:40%')
+          .weui-cell.weui-cell_select.weui-cell_select-after
+            .weui-cell__hd
+              label.weui-label.common-input(for='')  体型
+            .weui-cell__bd
+              select.weui-select.option.shap(name='shape')
+                option(value='0', style='text-align: right') 不限
+                option(value='1', style='text-align: right') 瘦子
+                option(value='2', style='text-align: right') 偏瘦
+                option(value='3', style='text-align: right') 适中
+                option(value='4', style='text-align: right') 健硕
+                option(value='5', style='text-align: right') 胖子
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input  片酬（万元）
+            .weui-cell__bd
+              input.weui-input.font-color.rolepaycheck(name='rolepaycheck ', type='text', placeholder='请输入')
+          div(style='margin-left: 15px;border-top: 1px solid #e5e5e5;')
+            .weui-cell__hd
+              label.weui-label.common-input  技能特长
+            .specialty.specialty1
+          div(style='margin-left: 15px;border-top: 1px solid #e5e5e5;clear: both')
+            .weui-cell__hd
+              label.weui-label.common-input  特征
+            .weui-cell__bd.specialty.specialty2
+          div(style='margin-left: 15px;border-top: 1px solid #e5e5e5;clear: both')
+            .weui-cell__hd
+              label.weui-label.common-input  剧目类别
+            .weui-cell__bd.specialty.specialty3
+          div(style='margin-left: 15px;border-top: 1px solid #e5e5e5;clear: both')
+            .weui-cell__hd
+              label.weui-label.common-input  剧目类型
+            .weui-cell__bd.specialty.specialty5
+          div(style='margin-left: 15px;border-top: 1px solid #e5e5e5;clear: both')
+            .weui-cell__hd
+              label.weui-label.common-input 角色类别
+            .weui-cell__bd.specialty.specialty4
+      .filter
+        button 精选
+    .weui-loadmore(style='clear: both;display: none')
+      i.weui-loading
+      span.weui-loadmore__tips 正在加载
+    .overlay
+    script.
+      $("#panel").click(function(){
+      
+        $(".sidebar").animate({right:"0"});
+        $(".overlay").css({ "width": $(document).width(), "height": $(document).height() });
+        $(".overlay").css("display","block");
+        //$('html,body').addClass('ovfHiden');
+     
+      });
+      $(".overlay").click(function(){
+      $(".sidebar").animate({right:"-75%"});
+      $(".overlay").css("display","none");
+      $('html,body').removeClass('ovfHiden');
+      })
+      var j=2;
+        var loading = false;  //状态标记
+       
+        $(document.body).infinite(1000).on("infinite", function(e) {
+            if(loading) return;
+            loading = true;
+            var totalpages=parseInt($(".photo_font").attr("id"));
+            console.log(totalpages)
+            setTimeout(function() {
+                      console.log(j) 
+                  if(totalpages>=j){
+                 actor_list_jiazai(j)
+                }
+              
+                loading = false;
+            }, 1000);
+        });
+       var openid = !{JSON.stringify(openid)};
+      var appid = !{JSON.stringify(appid)};
+      var userid = !{JSON.stringify(userid)};
+       $.cookie('the_cookie', userid, { expires: 7, path: '/' }); 
+      var url1=url+"/agent/a_allskilltypes/1/null";
+      $.ajax({
+        type : "get",
+        url : url1,
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+        console.log(data);
+        var specialty = $(".specialty1").html();
+        var length=data.length;
+        for(var i=0;i<length;i++){
+          specialty += '<div><input  type="checkbox" name="specialty1" value="" id="'+data[i].id+'"><label for="'+data[i].id+'">'+data[i].name+'</label></div>'
+        }
+          $(".specialty1").html(specialty);
+        },
+        error:function(){
+        alert('fail');
+        }
+      });
+      //特征
+      var url2=url+"/agent/a_allfeaturetypes/1/null";
+      $.ajax({
+        type : "get",
+        url : url2,
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+         console.log(data);
+          var specialty = $(".specialty2").html();
+          var length=data.length;
+        for(var i=0;i<length;i++){
+          specialty += '<div><input  type="checkbox" name="specialty2" value="" id="'+data[i].id+'"><label for="'+data[i].id+'">'+data[i].name+'</label></div>'
+        }
+          $(".specialty2").html(specialty);
+        },
+        error:function(){
+        alert('fail');
+        }
+      });
+      //剧目类bie
+      var url3=url+"/WX/wx_allproductiontypes/1/null";
+      $.ajax({
+        type : "get",
+        url : url3,
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+          console.log(data);
+          var specialty = $(".specialty3").html();
+          var length=data.length;
+          for(var i=0;i<length;i++){
+            specialty += '<div class="leibie" ><input class="categoryid"  type="radio" name="specialty3" value="" id="'+data[i].id+'"><label for="'+data[i].id+'">'+data[i].name+'</label></div>'
+          }
+          $(".specialty3").html(specialty);
+        },
+        error:function(){
+        alert('fail');
+        }
+      });
+      //角色类型
+      var url4=url+"/agent/a_allroletypes/1/null";
+      $.ajax({
+        type : "get",
+        url : url4,
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+          console.log(data);
+          var specialty = $(".specialty4").html();
+          var length=data.length;
+          for(var i=0;i<length;i++){
+            specialty += '<div><input  type="checkbox" name="specialty4" value="" id="'+data[i].id+'"><label for="'+data[i].id+'">'+data[i].name+'</label></div>'
+
+          }
+          $(".specialty4").html(specialty);
+        },
+        error:function(){
+        alert('fail');
+        }
+      });
+      $(".specialty3").on("click",".leibie",function(){
+          console.log($(this).children("input").prop('disabled'))
+          
+
+          //$(this).children("input").attr('checked','checked')
+          //if($(this).children("input").prop('disabled')){
+            
+            var id=$(this).children("input").attr("id");
+            var wname=$(this).children("label").html();
+            console.log(wname)
+            $(".name1").html(wname);
+            $(".name1").attr("id",id);
+            
+            var url20=url+'/WX/wx_allrepertoiretype/'+id;
+             console.log(url20)
+            $.ajax({
+              type : "get",
+              url : url20,
+              dataType : "jsonp",
+              success : function(data){
+                $(".dialogs_leixing").css("display","block");
+                $(".overlay").css("display","block");
+                console.log(data);
+                $(".specialty5").empty();
+                var specialty = $(".specialty5").html();
+                var length=data.length;
+                for(var i=0;i<length;i++){
+                  specialty += '<div><input  type="checkbox" name="specialty5"  id="'+data[i].id+'"><label class="label" for="'+data[i].id+'">'+data[i].name+'</label></div>'
+                }
+                  $(".specialty5").html(specialty);
+              },
+              error:function(err){
+                console.log(err)
+              }
+            });
+          //}else{
+           // alert("警用")
+          //}
+      })
+      //-------------------演员列表-----------------------
+     var age="0";
+     var sex="0";
+      var actor_list=function(page){
+       var actor_url=url+'/WX/wx_getallActors/'+page+'/'+appid+'/'+openid;
+       console.log(actor_url)
+        $.ajax({
+          type : "get",
+          url : actor_url,
+          dataType : "jsonp",
+          // jsonp: "jsonpCallback",
+          success : function(data){
+            console.log(data);
+            console.log("lll");
+            var data_edit=data.results;
+            $(".photo_font").attr("id",data.totalPages);
+            $(".photo_font").empty();
+            if(data.length!=0){
+              var str='';
+              for(var i=0;i<data_edit.length;i++){
+              var compress_iconUrl;
+              if(data_edit[i].compress_iconUrl){
+                compress_iconUrl=data_edit[i].compress_iconUrl;
+              }else{
+                compress_iconUrl=data_edit[i].iconUrl
+              }
+
+                str+='<a href="'+url+'/WX/page_actorDetail/'+userid+'/'+data_edit[i].id+'/'+appid+'"><div><div><img class="img" src="'+compress_iconUrl+'" alt=""></div><p>'+data_edit[i].realname+'</p><b>已认证</b></div></a>'
+              }
+              $(".photo_font").html(str);
+               function thum($img){
+                var divWid1 = parseFloat($img.parent().css('width'))*1.3;
+                $img.parent().css('height',divWid1);
+              var width = parseFloat($img.css('width'));
+              var height = parseFloat($img.css('height'));
+              if(width>height){
+                $img.addClass('Wid');
+              }else{
+                $img.addClass('Hei');
+              }
+           };
+
+           $('.img').each(function(index,item){
+            thum($(item));
+           })
+            }else{
+              $(".div").css('display','block');
+            }
+
+           
+          },
+          error:function(){
+          alert('fail');
+          }
+        });
+      }
+      actor_list(1)
+     var actor_list_jiazai=function(page){
+       var actor_url=url+'/WX/wx_getallActors/'+page+'/'+appid+'/'+openid;
+       console.log(actor_url)
+        $.ajax({
+          type : "get",
+          url : actor_url,
+          dataType : "jsonp",
+          // jsonp: "jsonpCallback",
+          success : function(data){
+            console.log(data);
+            console.log("lll");
+            var data_edit=data.results;
+              var str='';
+              for(var i=0;i<data_edit.length;i++){
+               var compress_iconUrl;
+              if(data_edit[i].compress_iconUrl){
+                compress_iconUrl=data_edit[i].compress_iconUrl;
+              }else{
+                compress_iconUrl=data_edit[i].iconUrl
+              }
+
+                str+='<a href="'+url+'/WX/page_actorDetail/'+userid+'/'+data_edit[i].id+'/'+appid+'"><div><div><img class="img" src="'+compress_iconUrl+'" alt=""></div><p>'+data_edit[i].realname+'</p><b>已认证</b></div></a>'
+              }
+              $(".photo_font").append(str);
+                function thum($img){
+                var divWid1 = parseFloat($img.parent().css('width'))*1.5;
+                $img.parent().css('height',divWid1)
+              var width = parseFloat($img.css('width'));
+              var height = parseFloat($img.css('height'));
+              if(width>height){
+                $img.addClass('Wid');
+              }else{
+                $img.addClass('Hei');
+              }
+           }
+
+           $('.img').each(function(index,item){
+            thum($(item));
+           })
+            
+          },
+          error:function(){
+          alert('fail');
+          }
+        });
+        j++
+      }
+
+      //------------------------提交筛选条件----------------------------
+      $(".filter>button").click(function(){
+          var skillArray =[];
+          $('input[name="specialty1"]:checked').each(function () {
+            skillArray.push($(this).attr("id"))
+          });
+          var featureArray =[];
+          $('input[name="specialty2"]:checked').each(function () {
+            featureArray.push($(this).attr("id"))
+          });
+           var repertoireArray =[];
+          $('input[name="specialty5"]:checked').each(function () {
+             repertoireArray .push($(this).attr("id"))
+           })
+           var roletypeArray  =[];
+          $('input[name="specialty4"]:checked').each(function () {
+             roletypeArray.push($(this).attr("id"))
+           })
+           var categoryid= $('input[name="specialty3"]:checked').attr("id");
+           if(categoryid="undefined"){
+            categoryid=""
+           }
+           $(".select_info").addClass("activ");
+           $(".sex_select").removeClass("active");
+           $(".age_select").removeClass("active");
+           $(".age_select").html("年龄段");
+           $(".sex_select").html("性别");
+           age=0;
+           sex=0;
+          var gender=$(".gender").val();
+          var age=$(".age").val();
+          var shap=$(".shap").val();
+          var min_height=$(".min_height").val();
+          var max_height=$(".max_height").val();
+          
+          var rolepaycheck =$(".rolepaycheck").val();
+          
+          var data={
+              gender:gender,
+              age:age,
+              shap:shap,
+              categoryid:categoryid,
+              skillArray:skillArray,
+              min_height:min_height,
+              max_height:max_height,
+              featureArray:featureArray,
+              featureArray:featureArray,
+              roletypeArray:roletypeArray,
+              rolepaycheck:rolepaycheck,
+              repertoireArray:repertoireArray
+
+          }
+          console.log(data);
+         
+             $(".sidebar").animate({right:"-75%"});
+                $(".overlay").css("display","none");
+                $('html,body').removeClass('ovfHiden');
+              $(document.body).destroyInfinite();
+            var url20=url+'/WX/wx_getAllaccurateactor/1/'+appid+'/'+openid;
+            $.ajax({
+              type : "post",
+              url : url20,
+              contentType:'application/json;charset=utf-8',
+              dataType : "jsonp",
+              data:JSON.stringify(data),
+              // jsonp: "jsonpCallback",
+              success : function(data){
+                
+               console.log(data);
+               var data_edit=data;
+                $(".photo_font").empty();
+                
+                if(data.length!=0){
+
+                  var str='';var str1='';
+                  for(var i=0;i<data_edit.length;i++){
+                     if(data_edit[i].SalaryoffsetValue==null||data_edit[i].SalaryoffsetValue.length==0){
+                      str+='<a href="'+url+'/WX/page_actorDetail/'+userid+'/'+data_edit[i].id+'/'+appid+'"><div><img src="'+data_edit[i].iconUrl+'" alt=""><p>'+data_edit[i].realname+'</p><b>已认证</b></div></a>'
+                    }else{
+                    str+='<a hhref="'+url+'/WX/page_actorDetail/'+userid+'/'+data_edit[i].id+'/'+appid+'"><div><img src="'+data_edit[i].iconUrl+'" alt=""><p>'+data_edit[i].realname+'</p><b>已认证</b><p>片酬差指数：'+data_edit[i].SalaryoffsetValue*100+'%</p></div></a>'
+                    }
+                    
+                  }
+                  $(".photo_font").html(str);
+                 
+                }else{
+                  $(".photo_font").html('<div style="text-align:center;margin:20px 0;"><p style="color:#999;font-size:14px">暂无符合您筛选条件的演员</p></div>');
+                }
+                
+               
+              },
+              error:function(){
+              alert('fail');
+              }
+           
+         
+          });
+           
+           
+          
+        })
+        function xuan(age,sex){
+           var actor_url=url+'/WX/wx_getsearchActors/'+age+'/'+sex+'/'+appid+'/'+openid;
+         console.log(actor_url)
+          $.ajax({
+            type : "get",
+            url : actor_url,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+              console.log(data);
+              $(".photo_font").empty();
+              console.log("lll");
+              var data_edit=data;
+                var str='';
+                for(var i=0;i<data_edit.length;i++){
+                 var compress_iconUrl;
+              if(data_edit[i].compress_iconUrl){
+                compress_iconUrl=data_edit[i].compress_iconUrl;
+              }else{
+                compress_iconUrl=data_edit[i].iconUrl
+              }
+
+                  str+='<a href="'+url+'/WX/page_actorDetail/'+userid+'/'+data_edit[i].id+'/'+appid+'"><div><div><img class="img" src="'+compress_iconUrl+'" alt=""></div><p>'+data_edit[i].realname+'</p><b>已认证</b></div></a>'
+                }
+                $(".photo_font").append(str);
+                function thum($img){
+                var divWid1 = parseFloat($img.parent().css('width'))*1.5;
+                $img.parent().css('height',divWid1)
+                  var width = parseFloat($img.css('width'));
+                  var height = parseFloat($img.css('height'));
+                  if(width>height){
+                    $img.addClass('Wid');
+                  }else{
+                    $img.addClass('Hei');
+                  }
+               }
+
+               $('.img').each(function(index,item){
+                thum($(item));
+               })
+              
+            },
+            error:function(){
+            alert('fail');
+            }
+          });
+        }
+
+
+        //----------------筛选------------------------
+        $(".btnOne").on("click","li",function(){
+          console.log($(this).attr("id"));
+          sex=$(this).attr("id");
+          var sexname=$(this).html();
+          $(".sex_select").empty();
+          $(".sex_select").html(sexname);
+           $(".sex_select").addClass("activ")
+          $(".btnOne li").removeClass("bgcolor")
+          $(this).addClass("bgcolor");
+          $(document.body).destroyInfinite();
+          xuan(age,sex)
+        })
+        $(".btnTwo").on("click","li",function(){
+          console.log($(this).attr("id"));
+          var agename=$(this).html();
+          $(".age_select").empty();
+          $(".age_select").html(agename);
+           $(".age_select").addClass("activ")
+           $(".btnTwo li").removeClass("bgcolor")
+          $(this).addClass("bgcolor");
+          age=$(this).attr("id");
+          xuan(age,sex)
+          $(document.body).destroyInfinite();
+        })

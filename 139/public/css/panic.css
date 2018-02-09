@@ -1,0 +1,149 @@
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+html{
+	font-size:62.5%;
+}
+body{
+	font-size:12px;
+	font-size:1.2rem ;
+}
+p{
+	font-size:14px;
+	font-size:1.4rem;
+}
+.panic{
+	width:100%;
+	background:#494949;
+}
+.panicHead img{
+	width:100%;
+	height:24rem;
+	position:absolute;
+}
+.panicTitle{
+	width:20.5rem;
+	height:3rem;
+	line-height:3rem;
+	margin:0 auto;
+	position:relative;
+	top:4rem;
+}
+.panicTitle b{
+	display:block;
+	margin:0 auto;
+}
+.panicTitle b,p{
+	float:left;
+}
+.panicTitle b img{
+	width:4.75rem;
+	height:0.6rem;
+}
+.panicTitle p{
+	color:#758042;
+	text-align:center;
+	font-size:2.5rem;
+}
+.jzMesg .jzDetail,
+.jzMesg .jzTitle{
+	float:left;
+}
+.jzMesg .jzDetail ul li{
+	font-size:1.4rem;
+	color:#fff;
+	line-height:1.7rem;
+}
+.jzMesg{
+	position:relative;
+	top:7rem;
+}
+.jzMesg .jzDetail{
+	margin-left:3rem;
+}
+.jzTitle img{
+	height:11.1rem;
+	width:4.1rem;
+}
+.jzTitle{
+	position:absolute;
+	top:1rem;
+	right:3rem;
+}
+.jzTitle p{
+	font-size:1.6rem;
+	color:#758042;
+	position:absolute;
+	top:1rem;
+	right:1.3rem;
+}
+.roleMsge{
+	width:100%;
+	position:relative;
+	top:9rem;
+}
+.roleTitle img{
+	height:11.1rem;
+	width:4.1rem;
+}
+.roleTitle{
+	position:relative;
+}
+.roleTitle p{
+	font-size:1.6rem;
+	color:#758042;
+	position:absolute;
+	top:1rem;
+	left:1rem;
+}
+.rmLeft
+{
+	float:left;
+	margin-left:2rem;
+}
+.rmRight ul li{
+	font-size:1.4rem;
+	color:#fff;
+	line-height:1.7rem;
+}
+.rmRight{
+	float:right;
+	margin-right:9rem;
+}
+.xiaozhuan{
+	width:100%;
+	min-height:2rem;
+	border:1px solid #fff;
+	text-indent:2em;
+	border-radius:3px;
+	margin:1rem auto;
+	margin-bottom:2rem;
+}
+.bottomImg img{
+	width:100%;
+	height:14.4rem
+}
+.rolealist p{
+	font-size:1.2rem;
+	margin:-7rem 0 0 5rem;
+	color:#dbe6a6;
+}
+.rolealist p{
+	width:19px;
+}
+.rmRmesg{
+	width:100%;
+}
+.heart{
+	position:fixed;
+	z-index:100;
+	right:0;
+	top:6.5rem;
+}
+.heart img{
+	width:6.2rem;
+	height:3rem;
+}
+

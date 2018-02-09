@@ -1,0 +1,505 @@
+var keystone = require('keystone'),
+	Casting = keystone.list('Casting');
+var fs = require("fs");
+var query = require('../../query/util/downImageToNative.js');
+var config = require('../../public/conf/common.js');
+
+
+var saveImage=function(mediaId,imageLocation,userid,callback){
+  var item={};
+  Casting.model.findOne()
+        .where('user_id',userid)
+        .exec(function(err, casting) {
+            console.log('1111111111111111111111111111111111111111111111');
+            console.log(casting);
+            console.log(imageLocation);
+              if(imageLocation=='1'){
+
+                if(casting==null){
+                    var location = userid+'/'+mediaId+'.jpg';
+                    var medianame=mediaId+'.jpg';
+                    var path='images/frontimage';
+                    Casting.model.create({user_id:userid},function(err,ret){
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       ret.frontimage.push(item);
+                       ret.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                            var url=config.homeEntry.url+'/WX/casting/frontimage/'+userid+'/'+mediaId+'.jpg';
+                            callback(null,url);
+                          }
+                       })
+                    })
+                }else{
+                  var location = userid+'/'+mediaId+'.jpg';
+                  var medianame=mediaId+'.jpg';
+                  var path='images/frontimage';
+                   item.filename=location;
+                   item.originalname=medianame;
+                   item.path=path;
+                   casting.frontimage.push(item);
+                   casting.save(function(err){
+                      if(err){
+                        res.send(err);
+                      }else{
+                        var url=config.homeEntry.url+'WX/casting/frontimage/'+userid+'/'+mediaId+'.jpg';
+                        callback(null,url);
+                      }
+                   })
+                }
+                
+              }if(imageLocation=='2'){
+                  if(casting==null){
+                    var location = userid+'/'+mediaId+'.jpg';
+                    var medianame=mediaId+'.jpg';
+                    var path='images/leftimage45';
+                    Casting.model.create({user_id:userid},function(err,ret){
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       ret.leftimage45.push(item);
+                       ret.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                            var url=config.homeEntry.url+'WX/casting/leftimage45/'+userid+'/'+mediaId+'.jpg';
+                            callback(null,url);
+                          }
+                       })
+                    })
+                  }else{
+                    var location = userid+'/'+mediaId+'.jpg';
+                    var medianame=mediaId+'.jpg';
+                    var path='images/leftimage45';
+                     item.filename=location;
+                     item.originalname=medianame;
+                     item.path=path;
+                     casting.leftimage45.push(item);
+                     casting.save(function(err){
+                        if(err){
+                          res.send(err);
+                        }else{
+                         // res.send('http://kaishi.viphk.ngrok.org/WX/casting/leftimage45/'+userid+'/'+mediaId+'.jpg');
+                          var url=config.homeEntry.url+'WX/casting/leftimage45/'+userid+'/'+mediaId+'.jpg';
+                          callback(null,url);
+                        }
+                     })
+                  }
+                  
+                
+              }if(imageLocation=='3'){
+                if(casting==null){
+                    var location = userid+'/'+mediaId+'.jpg';
+                    var medianame=mediaId+'.jpg';
+                    var path='images/rightimage45';
+                    Casting.model.create({user_id:userid},function(err,ret){
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       ret.rightimage45.push(item);
+                       ret.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                            var url=config.homeEntry.url+'WX/casting/rightimage45/'+userid+'/'+mediaId+'.jpg';
+                            callback(null,url);
+                          }
+                       })
+                    })
+                  }else{
+                      var location = userid+'/'+mediaId+'.jpg';
+                      var medianame=mediaId+'.jpg';
+                      var path='images/rightimage45';
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       casting.rightimage45.push(item);
+                       casting.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                            //res.send('http://kaishi.viphk.ngrok.org/WX/casting/rightimage45/'+userid+'/'+mediaId+'.jpg');
+                            var url=config.homeEntry.url+'WX/casting/rightimage45/'+userid+'/'+mediaId+'.jpg';
+                            callback(null,url);
+                          }
+                       })
+                  }
+                 
+                
+              }if(imageLocation=='4'){
+                 
+                   if(casting==null){
+                     var location = userid+'/'+mediaId+'.jpg';
+                     var medianame=mediaId+'.jpg';
+                     var path='images/rightimage90';
+                    Casting.model.create({user_id:userid},function(err,ret){
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       ret.rightimage90.push(item);
+                       ret.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                            var url=config.homeEntry.url+'WX/casting/rightimage90/'+userid+'/'+mediaId+'.jpg';
+                            callback(null,url);
+                          }
+                       })
+                    })
+                  }else{
+                       var location = userid+'/'+mediaId+'.jpg';
+                        var medianame=mediaId+'.jpg';
+                        var path='images/rightimage90';
+                         item.filename=location;
+                         item.originalname=medianame;
+                         item.path=path;
+                         casting.rightimage90.push(item);
+                         casting.save(function(err){
+                            if(err){
+                              res.send(err);
+                            }else{
+                              //res.send('http://kaishi.viphk.ngrok.org/WX/casting/rightimage90/'+userid+'/'+mediaId+'.jpg');
+                              var url=config.homeEntry.url+'WX/casting/rightimage90/'+userid+'/'+mediaId+'.jpg';
+                              callback(null,url);
+                            }
+                         })
+                  }
+                
+              }if(imageLocation=='5'){
+                 
+                 if(casting==null){
+                    var location = userid+'/'+mediaId+'.jpg';
+                    var medianame=mediaId+'.jpg';
+                    var path='images/leftimage90';
+                    Casting.model.create({user_id:userid},function(err,ret){
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       ret.leftimage90.push(item);
+                       ret.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                            var url=config.homeEntry.url+'WX/casting/leftimage90/'+userid+'/'+mediaId+'.jpg';
+                            callback(null,url);
+                          }
+                       })
+                    })
+                  }else{
+                        var location = userid+'/'+mediaId+'.jpg';
+                        var medianame=mediaId+'.jpg';
+                        var path='images/leftimage90';
+                         item.filename=location;
+                         item.originalname=medianame;
+                         item.path=path;
+                         casting.leftimage90.push(item);
+                         casting.save(function(err){
+                            if(err){
+                              res.send(err);
+                            }else{
+                              //res.send('http://kaishi.viphk.ngrok.org/WX/casting/leftimage90/'+userid+'/'+mediaId+'.jpg');
+                              var url=config.homeEntry.url+'WX/casting/leftimage90/'+userid+'/'+mediaId+'.jpg';
+                              callback(null,url);
+                            }
+                         })
+                
+                  }
+              }if(imageLocation=='6'){
+                 
+                   if(casting==null){
+                      var location = userid+'/'+mediaId+'.jpg';
+                      var medianame=mediaId+'.jpg';
+                      var path='images/frontimagewaist';
+                    Casting.model.create({user_id:userid},function(err,ret){
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       ret.frontimagewaist.push(item);
+                       ret.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                            var url=config.homeEntry.url+'WX/casting/frontimagewaist/'+userid+'/'+mediaId+'.jpg';
+                            callback(null,url);
+                          }
+                       })
+                    })
+                  }else{
+                         var location = userid+'/'+mediaId+'.jpg';
+                          var medianame=mediaId+'.jpg';
+                          var path='images/frontimagewaist';
+                           item.filename=location;
+                           item.originalname=medianame;
+                           item.path=path;
+                           casting.frontimagewaist.push(item);
+                           casting.save(function(err){
+                              if(err){
+                                res.send(err);
+                              }else{
+                                //res.send('http://kaishi.viphk.ngrok.org/WX/casting/frontimagewaist/'+userid+'/'+mediaId+'.jpg');
+                                var url=config.homeEntry.url+'WX/casting/frontimagewaist/'+userid+'/'+mediaId+'.jpg';
+                                callback(null,url);
+                              }
+                           })
+                
+                  }
+                
+              }if(imageLocation=='7'){
+                 
+                   if(casting==null){
+                    var location = userid+'/'+mediaId+'.jpg';
+                    var medianame=mediaId+'.jpg';
+                    var path='images/frontimageall';
+                    Casting.model.create({user_id:userid},function(err,ret){
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       ret.frontimageall.push(item);
+                       ret.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                            var url=config.homeEntry.url+'WX/casting/frontimageall/'+userid+'/'+mediaId+'.jpg';
+                            callback(null,url);
+                          }
+                       })
+                    })
+                  }else{
+                         var location = userid+'/'+mediaId+'.jpg';
+                          var medianame=mediaId+'.jpg';
+                          var path='images/frontimageall';
+                           item.filename=location;
+                           item.originalname=medianame;
+                           item.path=path;
+                           casting.frontimageall.push(item);
+                           casting.save(function(err){
+                              if(err){
+                                res.send(err);
+                              }else{
+                                //res.send('http://kaishi.viphk.ngrok.org/WX/casting/frontimageall/'+userid+'/'+mediaId+'.jpg');
+                                var url=config.homeEntry.url+'WX/casting/frontimageall/'+userid+'/'+mediaId+'.jpg';
+                                callback(null,url);
+                              }
+                           })
+                  }
+                
+              }if(imageLocation=='8'){
+                  
+                  if(casting==null){
+                    var location = userid+'/'+mediaId+'.jpg';
+                    var medianame=mediaId+'.jpg';
+                    var path='images/frontimagehead';
+                    Casting.model.create({user_id:userid},function(err,ret){
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       ret.frontimagehead.push(item);
+                       ret.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                            var url=config.homeEntry.url+'WX/casting/frontimagehead/'+userid+'/'+mediaId+'.jpg';
+                            callback(null,url);
+                          }
+                       })
+                    })
+                  }else{
+                        var location = userid+'/'+mediaId+'.jpg';
+                        var medianame=mediaId+'.jpg';
+                        var path='images/frontimagehead';
+                         item.filename=location;
+                         item.originalname=medianame;
+                         item.path=path;
+                         casting.frontimagehead.push(item);
+                         casting.save(function(err){
+                            if(err){
+                              res.send(err);
+                            }else{
+                              //res.send('http://kaishi.viphk.ngrok.org/WX/casting/frontimagehead/'+userid+'/'+mediaId+'.jpg');
+                              var url=config.homeEntry.url+'WX/casting/frontimagehead/'+userid+'/'+mediaId+'.jpg';
+                              callback(null,url);
+                            }
+                         })
+                  }
+                
+              }if(imageLocation=='9'){
+                  
+                 if(casting==null){
+                    var location = userid+'/'+mediaId+'.jpg';
+                    var medianame=mediaId+'.jpg';
+                    var path='images/artimage';
+                    Casting.model.create({user_id:userid},function(err,ret){
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       ret.artimage.push(item);
+                       ret.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                            var url=config.homeEntry.url+'WX/casting/artimage/'+userid+'/'+mediaId+'.jpg';
+                            callback(null,url);
+                          }
+                       })
+                    })
+                  }else{
+                        var location = userid+'/'+mediaId+'.jpg';
+                        var medianame=mediaId+'.jpg';
+                        var path='images/artimage';
+                         item.filename=location;
+                         item.originalname=medianame;
+                         item.path=path;
+                         casting.artimage.push(item);
+                         casting.save(function(err){
+                            if(err){
+                              res.send(err);
+                            }else{
+                              //res.send('http://kaishi.viphk.ngrok.org/WX/casting/artimage/'+userid+'/'+mediaId+'.jpg');
+                               var url=config.homeEntry.url+'WX/casting/artimage/'+userid+'/'+mediaId+'.jpg';
+                              callback(null,url);
+                            }
+                         })
+                  }
+                
+              }
+          
+        });
+
+}
+
+exports = module.exports = function(req, res) {
+  var userid = req.body.userid;
+  var mediaId= req.body.media;
+  var imageLocation = req.body.imageLocation;
+  var appid = req.body.appid;
+  var location;
+  var url;
+  var item={};
+  console.log(req.body);
+       Casting.model.findOne()
+        .where('user_id',userid)
+        .exec(function(err, casting) {
+          
+            if(casting == null){
+              if(mediaId==undefined||imageLocation==undefined||userid==undefined||appid==undefined){
+                res.status(403).send('parameter undefined');
+
+              }else{
+                  saveImage(mediaId,imageLocation,userid,function(err,ret){
+                     if(err){
+                        throw new Error(err);
+                     }else{
+                       query.downlodeImage(mediaId,imageLocation,userid,appid,function(err){//从官方服务器下载图片到自己服务器
+                         if(err){
+                            res.send(err);
+                         }else{
+                           console.log(ret);
+                           res.send(ret);
+                         }
+                      });
+                     }
+                  });
+              }
+            }else{
+              if(imageLocation==undefined||userid==undefined||appid==undefined){
+                res.status(403).send('parameter undefined');
+
+              }
+              var location;
+              var url;
+              if(imageLocation == '1'){
+                location = casting.frontimage;
+                url = 'frontimage';
+                console.log('hhhhhhhhhhhhh0000000000hhhhhhhhhhhhhhhhhhh');
+                console.log(casting);
+                console.log('hhhhhhhhhhhhh000000000000hhhhhhhhhhhhhhhhhhh');
+              }else if(imageLocation == '2'){
+                location = casting.leftimage45;
+                url = 'leftimage45';
+              }else if(imageLocation == '3'){
+                location = casting.rightimage45;
+                url = 'rightimage45';
+              }else if(imageLocation == '4'){
+                location = casting.rightimage90;
+                url = 'rightimage90';
+              }else if(imageLocation == '5'){
+                location = casting.leftimage90;
+                url = 'leftimage90';
+              }else if(imageLocation == '6'){
+                location = casting.frontimagewaist;
+                url = 'frontimagewaist';
+              }else if(imageLocation == '7'){
+                location = casting.frontimageall;
+                url = 'frontimageall';
+              }else if(imageLocation == '8'){
+                location = casting.frontimagehead;
+                url = 'frontimagehead';
+              }else if(imageLocation == '9'){
+                location = casting.artimage;
+                url = 'artimage';
+              }
+              console.log(location);
+              if(location.length != 0){ 
+                fs.unlink(process.cwd()+'/images/'+url+'/'+location[0].filename, function(err) {
+                    if (err) {
+                      return console.error(err);
+                      }
+                      console.log("deleted");
+                });
+                  //delete iamge in db
+                if(imageLocation == '1'){
+                  casting.frontimage = [];        
+                }else if(imageLocation == '2'){
+                  casting.leftimage45 = [];               
+                }else if(imageLocation == '3'){
+                  casting.rightimage45 = [];                
+                }else if(imageLocation == '4'){
+                  casting.rightimage90 = [];                  
+                }else if(imageLocation == '5'){
+                  casting.leftimage90 = [];                 
+                }else if(imageLocation == '6'){
+                  casting.frontimagewaist = [];                 
+                }else if(imageLocation == '7'){
+                  casting.frontimageall = [];
+                }else if(imageLocation == '8'){
+                  casting.frontimagehead = [];              
+                }else if(imageLocation == '9'){
+                  casting.artimage = [];
+                }
+                
+                casting.save(function (err) {
+                  if (err) console.log('delete images failed');
+                  console.log('ffffffffffffffffffffffffffffffffffffs');
+                  //res.redirect('/WX/wx_userprofile/'+userid+'/'+req.body.appid);
+                  //var
+                   var str = '';
+                   res.send(str);
+                  //res.send('ok');
+                    
+                });   
+              } else{
+
+                saveImage(mediaId,imageLocation,userid,function(err,ret){
+                     if(err){
+                        throw new Error(err);
+                     }else{
+                       query.downlodeImage(mediaId,imageLocation,userid,appid,function(err){//从官方服务器下载图片到自己服务器
+                           if(err){
+                              res.send(err);
+                           }else{
+                             console.log(ret);
+                             res.send(ret);
+                           }
+                        });
+                        //res.send(ret);
+                     }
+                  });
+              }
+
+            }
+        })
+
+}

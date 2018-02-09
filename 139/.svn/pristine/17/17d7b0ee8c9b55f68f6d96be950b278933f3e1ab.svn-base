@@ -1,0 +1,282 @@
+doctype html
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    script(src='/js/zepto.min.js')
+    script(src='/js/zepto.cookie.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    title 演员
+    link(rel='stylesheet', href='/../css/weui.css')
+    link(rel='stylesheet', href='/../css/detail.css')
+
+  body
+    // title start
+    header.detail-header
+      div
+        img(src='/../img/矩形-1-拷贝.png', alt='', id='detail-back')
+        p.nameTop
+
+    // title end
+    // banner start
+    .detail-banner
+    // banner end
+    // container start
+    .detail-container(style='height:90%')
+      .weui-tab
+        .weui-navbar
+          .weui-flex__item.container-tab
+            p.tab-text.tab-active 基本资料
+          .weui-flex__item.container-tab
+            p.tab-text 演艺经历
+          .weui-flex__item.container-tab
+            p.tab-text 照片
+      .contain-page(style='margin-bottom:50px')
+    // container end
+    script(src='/../js/zepto.min.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    script(src='/../js/detail.js')
+    script(src='/../js/template-web.js')
+    script#artTemplate(type='text/html').
+      <div class="page-base page-select">
+      <div class="exp-tv">
+      <i></i>
+      <h4 class="exptv-title">基本信息</h4>
+      <img src="/../img/认证.png" alt="">
+      <p>艺名：{{ details.artname }}</p>
+      <p>真实姓名：{{ details.realname }}</p>
+      <p>生日：{{ details.birth }}</p>
+      <p>身高：{{ details.height }}</p>
+      <p>体重：{{ details.weight }}</p>
+      <p>毕业院校：{{ details.school }}</p>
+      </div>
+      <div class="exp-tv exp-skill">
+      <i></i>
+      <h4 class="exptv-title">技能特长</h4>
+      <p>{{ details.skill_name }}</p>
+      </div>
+      <div class="exp-tv exp-skill">
+      <i></i>
+      <h4 class="exptv-title">自我介绍</h4>
+      <p>{{ details.shortintroduce }}</p>
+      </div>
+      </div>
+      <div class="page-experience">
+       {{ each resum_info $value i }}
+      <div class="exp-tv">
+      <i>{{ $value.productionName }}</i>
+      <h4 class="exptv-title">{{ $value.productionName }} {{ $value.productionName }} {{ $value.productionName }}</h4>
+      <p class="exptv-name"></p>
+      </div>
+       {{/each}}
+      </div>
+      <div class="page-img">
+      <ul>
+      <li>
+      <img src="{{ details.frontimage }}" alt="">
+      <p>正面卡胸</p>
+      </li>
+      <li>
+      <img src="{{ details.leftimage45 }}" alt="">
+      <p>左侧45度卡胸</p>
+      </li>
+      <li>
+      <img src="{{ details.rightimage45 }}" alt="">
+      <p>右侧45度卡胸</p>
+      </li>
+      <li>
+      <img src="{{ details.rightimage90 }}" alt="">
+      <p>右侧90度卡胸</p>
+      </li>
+      <li>
+      <img src="{{ details.leftimage90 }}" alt="">
+      <p>左侧90度卡胸</p>
+      </li>
+      <li>
+      <img src="{{ details.frontimagewaist }}" alt="">
+      <p>正面卡腰</p>
+      </li>
+      <li>
+      <img src="{{ details.frontimageall }}" alt="">
+      <p>正面全身</p>
+      </li>
+      <li>
+      <img src="{{ details.frontimagehead }}" alt="">
+      <p>露额头正面卡胸</p>
+      </li>
+      <li>
+      <img src="{{ details.artimage }}" alt="">
+      <p>艺术照</p>
+      </li>
+      </ul>
+      </div>
+  
+    script.
+      $(function () {
+      var ajaxArr = [];
+      var user_id = !{JSON.stringify(user_id)};
+      $.ajax({
+        type: "GET",
+        url: url+"/WX/wx_getactorresums/"+user_id,
+        dataType: "jsonp",
+        success: function (data) {
+          var str=$(".nameTop").html();
+          str='<p>'+data.realname+'</p>'
+          $(".nameTop").html(str);
+          var real=$(".realname").html(str);
+          name_real='<p>您确定要邀请 <b>'+data.realname+'</b> 进组吗？</p>'
+          $(".realname").html(name_real);
+          
+          var str1=$(".detail-banner").html();
+          str1='<div onclick="previewImage1()"><img src="'+data.iconUrl+'" alt="" style="height:200px"></div>'
+          $(".detail-banner").html(str1);
+          var html = template('artTemplate', {
+            details: data
+          });
+        $('.contain-page').html(html);
+        console.log(data);
+
+         var str = $('.page-experience').html()             
+              for(var i=0;i<data.resum_info.length;i++){
+                var strr="";
+                   var imageArray=data.resum_info[i].image_set.imagesURLArray;
+                   for(var j =0 ;j<imageArray.length;j++){
+                     strr += '<div class="weui-flex__item picture" style="z-index:1" onclick="previewImage('+i+','+j+')"><img width="100%" height="100%" src="'+imageArray[j].imagesURL+'" alt=""></div>'
+                   }
+
+                str += '<h4 style="clear:both" class="exptv-title">'+data.resum_info[i].productionPublishDate+';《'+data.resum_info[i].productionName+'》;'+data.resum_info[i].role+'<span class="write" style="float: right"></span></h4>'
+                str+=strr
+              }
+                 
+                $('.page-experience').html(str)
+
+            wx.config({
+              debug: false,
+              appId: data.appId,
+              timestamp: data.timestamp,
+              nonceStr: data.nonceStr,
+              signature: data.signature,
+              jsApiList: [
+              'previewImage'
+              ]
+            });
+
+            wx.ready(function(){
+                
+
+            });
+
+             previewImage1=function (){
+               var url=[];
+               url[0]=data.iconUrl;
+               wx.previewImage({
+                current: '', // 当前显示图片的http链接
+                urls: url // 需要预览的图片http链接列表
+               });
+               
+             }
+
+            previewImage=function (a,b){
+               var imageArray=data.resum_info[a].image_set.imagesURLArray;
+               var url=[];
+               var c=imageArray[b].imagesURL;
+               url[0]=c;
+               
+              if(b==0){
+                 wx.previewImage({
+                  current: '', // 当前显示图片的http链接
+                  urls: url // 需要预览的图片http链接列表
+                 });
+              }
+               if(b==1){
+                 wx.previewImage({
+                  current: '', // 当前显示图片的http链接
+                  urls: url // 需要预览的图片http链接列表
+                 });
+              }
+               if(b==2){
+                 wx.previewImage({
+                  current: '', // 当前显示图片的http链接
+                  urls: url // 需要预览的图片http链接列表
+                 });
+               }
+              
+           }
+
+          $(".contain-page").on("click","li",function(){
+          console.log($(this).index);
+          var a=$(this).index();
+           var url=[];
+            if(a==0){
+              var c=data.frontimage;
+              url[0]=c;
+               wx.previewImage({
+                current: '', // 当前显示图片的http链接
+                urls: url // 需要预览的图片http链接列表
+               });
+            }
+            if(a==1){
+              var c=data.leftimage45;
+              url[0]=c;
+               wx.previewImage({
+                current: '', // 当前显示图片的http链接
+                urls: url // 需要预览的图片http链接列表
+               });
+            }if(a==2){
+              var c=data.rightimage45;
+              url[0]=c;
+               wx.previewImage({
+                current: '', // 当前显示图片的http链接
+                urls: url // 需要预览的图片http链接列表
+               });
+            }if(a==3){
+              var c=data.rightimage90;
+              url[0]=c;
+               wx.previewImage({
+                current: '', // 当前显示图片的http链接
+                urls: url // 需要预览的图片http链接列表
+               });
+            }if(a==4){
+              var c=data.leftimage90;
+              url[0]=c;
+               wx.previewImage({
+                current: '', // 当前显示图片的http链接
+                urls: url // 需要预览的图片http链接列表
+               });
+            }if(a==5){
+              var c=data.frontimagewaist;
+              url[0]=c;
+               wx.previewImage({
+                current: '', // 当前显示图片的http链接
+                urls: url // 需要预览的图片http链接列表
+               });
+            }if(a==6){
+              var c=data.frontimageall;
+              url[0]=c;
+               wx.previewImage({
+                current: '', // 当前显示图片的http链接
+                urls: url // 需要预览的图片http链接列表
+               });
+            }if(a==7){
+              var c=data.frontimagehead;
+              url[0]=c;
+               wx.previewImage({
+                current: '', // 当前显示图片的http链接
+                urls: url // 需要预览的图片http链接列表
+               });
+            }if(a==8){
+              var c=data.artimage;
+              url[0]=c;
+               wx.previewImage({
+                current: '', // 当前显示图片的http链接
+                urls: url // 需要预览的图片http链接列表
+               });
+            }
+          })
+       
+        
+        }
+      })
+      })

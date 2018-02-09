@@ -1,0 +1,177 @@
+header{
+    z-index: 500;
+    background-color:white;
+    
+    width: 100%;
+}
+.notice_class{
+    margin: 0.1rem 0;
+}
+.notice_type{
+    width: 100%;
+    background: rgba(242, 242, 242, 1);
+    height: 0.9rem;
+}
+.notice_type p{
+    font-size: 0.28rem;
+    color: #222222;
+    line-height: 0.9rem;
+    margin-left: 0.76rem;
+    display: inline;
+}
+
+.jiantou{
+    float: right;
+    clear: both;
+    height: 0.9rem;
+}
+.jiantou img{
+    width: 0.5rem;
+    margin: 0.2rem 0.62rem 0.2rem 0;
+}
+.jiantou img:last-child{
+   display: none;
+}
+
+/*选显卡*/
+
+
+
+/*演员样式*/
+.display_experience{
+    width: 100%;
+
+}
+.display_experience>div{
+    height: 114px;
+    padding: 0.1rem;
+    background: white;
+    margin-bottom: 10px;
+    clear: both;
+
+}
+.display_experience>div>div{
+    float: left;
+}
+.display_experience>a>div{
+    height: 114px;
+    padding: 0.1rem;
+    background: white;
+    margin-bottom: 10px;
+    clear: both;
+
+}
+.display_experience>a>div>div{
+    float: left;
+}
+.photo_experience{
+    width: 35%;
+    height: 114px;
+
+}
+.photo_experience img{
+    width: 100%;
+    height: 114px;
+    margin-top: 0.2rem;
+}
+.detail_experience{
+    width: 55%;
+    padding: 1%;
+}
+.zhixiang{
+    width: 4%;
+    height:114px;
+
+
+}
+.zhixiang>img{
+    width: 0.4rem;
+
+    display: block;
+    margin-top: 400%;
+}
+.detail_experience img{
+    float: right;
+    width: 0.4rem;
+}
+.detail_experience ul{
+    margin-top: 0.1rem;
+    clear: both;
+
+}
+.detail_experience ul li{
+    font-size: 14px;
+    margin: 0.1rem 0;
+    color: #696969;
+}
+.detail_experience ul li:first-child{
+    font-size:14px;
+    margin: 0.1rem 0;
+    color: black;
+
+}
+.detail_experience ul li:first-child span{
+    color: black;
+
+}
+.detail_experience ul li span{
+    color: #696969;
+    width: 100%;
+    font-size: 14px
+}
+
+.detail_experience ul li span.types{
+    color: #4da2ad;
+    font-size: 0.6em;
+    border: 1px solid #4da2ad;
+    padding: 0.02rem 0.1rem;
+    border-radius: 0.1rem;
+    -webkit-transform-origin-x: 0;
+    -webkit-transform: scale(0.80);
+}
+.detail_experience ul p{
+    font-size: 13px;
+    color:#999 ;
+}
+
+/*角色信息=========================*/
+.display_experience>div>div.about_me{
+    float: right;
+    margin: 5px 20px;
+
+}
+.display_experience>div>div.about_me button{
+    width: 65px;
+    height: 30px;
+    background: #4da2ad;
+    color: white;
+    border: none;
+    margin-left: 15px;
+    border-radius: 5px;
+}
+
+
+.info_detile .true1{
+    opacity: 0.2
+}
+.weui_cell .slideleft span.gua_active{
+    display: none;
+}
+
+.add-actor{
+    height: 0.7rem;
+    width: 80%;
+    background:white ;
+    font-size: 0.28rem;
+    line-height: 0.7rem;
+    border: 1px solid #f2f2f2;
+    margin-top: 20px;
+    color: black;
+}
+.wrapper01 .scroller li{
+    width:60px;
+}
+#wrapper02{
+    padding-left:11px;
+    box-sizing:border-box;
+}

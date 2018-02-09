@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html  lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>上传素材</title>
+</head>
+<body>
+  <form action="http://kaishi.viphk.ngrok.org/WX/wx_upload" method="post" enctype= "multipart/form-data" >
+  	<label for="resource">素材名称</label>
+  	<input type="text" name="name" id="name">
+  	<label for="resource">作者</label>
+  	<input type="text" name="author" id="author">
+    <label for="resource">上传图片素材</label>
+    <input type="file" id="resource" name="images_upload">
+    <button type="submit">点击上传</button>
+  </form>
+
+</body>
+</html>

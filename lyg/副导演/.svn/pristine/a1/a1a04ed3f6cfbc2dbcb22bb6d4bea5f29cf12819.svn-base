@@ -1,0 +1,230 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title.titles
+    link(rel='stylesheet', href='/css/ximuDetail.css')
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    .crewMesg
+      .headTop
+        .beibei
+          img(src='/img/21971254158583215.png', width='750', height='759', border='0', alt='')
+        .shuye
+          img(src='/img/262325834393162622.png', width='373', height='443', border='0', alt='')
+      .heart
+          img(src='/img/gu3.png', width='148', height='72', border='0', alt='')
+      .crewTitle
+        .qingRender
+        div(style='clear:both;')
+        .solidBorder
+          b.solidLeft
+          .juTitle 角色信息
+          b.solidDiv
+          div(style='clear:both;')
+        .otherMesg
+    .crewBottom
+      .beijing2
+        img(src='/img/291250723232712445.png', width='750', height='654', border='0', alt='')
+      .shuye2
+        img(src='/img/277298584468738840.png', width='373', height='443', border='0', alt='')
+    script.
+        //'/WX/page_YouthTemplate/:productionCrew_id/:appid',
+        (()=>{
+          var productionCrew_id=!{JSON.stringify(productionCrew_id)};
+          var appid=!{JSON.stringify(appid)};
+          var userid=null;
+          var youthUrl=url+'/WX/wx_searchallpositionDetails/'+productionCrew_id+'/'+userid;
+          $.ajax({
+            type:"GET",
+            url:youthUrl,
+            dataType:"jsonp",
+            success:function(data){
+            var titleCon="";
+            titleCon+=`
+               ${data.production.categorytag.categoryName}&nbsp;|&nbsp;《${data.production.production_name}》&nbsp;|&nbsp;演员招募
+            `;
+               $(".titles").html(titleCon);
+                var html="";
+                var html2="";
+                for(var playTypes of data.production.categorytag.repertoireTpyeArray){
+                   html2+=`
+                       ${playTypes.repertoireTpyeName}
+                   `;
+                }
+                html+=`
+                    <p>/<span>${data.production.production_name}</span>/</p>
+                    <div class="solidBorder">
+                        <b class="solidLeft"></b>
+                        <div class="juTitle">剧组信息</div>
+                        <b class="solidDiv"></b>
+                    </div>
+                    <div class="message">
+                        <div class="messLeft">
+                          <ul>
+                            <li>剧名：${data.production.production_name}</li>
+                            <li>剧目类别：${data.production.categorytag.categoryName}</li>
+                            <li>剧目类型：${html2}</li>
+                            <li>拍摄地：${data.production.location[0].fullname}</li>
+                          </ul>
+                        </div>
+                       <div class="messRight">
+                          <ul>
+                              <li>拍摄周期(天)：${data.production.duration}</li>
+                              <li>出品公司：${data.production.production_companys_name}</li>
+                              <li>承制公司：${data.production.issuer_companies_name}</li>
+                              <li>报名截止日期：${data.production.expired_date}</li>
+                          </ul>
+                       </div>
+                    </div>
+                `;
+              $(".qingRender").html(html);
+              var obj2=data.obj2;//领衔主演
+              var obj3=data.obj3;//主演
+              var obj4=data.obj4;//客串演员
+              var obj5=data.obj5;//其他演员
+              var str2="";
+              var str3="";
+              var str4="";
+              var str5="";
+              var str_all2="";
+              var str_all3="";
+              var str_all4="";
+              var str_all5="";
+              //公共部分封装进函数中 需要知道obj,没数据时的容器,以及拼接的字符串
+              function common(obj,string,str_all){
+                   if(obj!=undefined){
+                      for(var i=0;i<obj.length;i++){
+
+                          if(obj[i].gender==1){
+                              obj[i].gender="男";
+                          }else if(obj[i].gender==2){
+                              obj[i].gender="女";
+                          }else if(obj[i].gender==3){
+                              obj[i].gender="不限";
+                          }
+                          //obj[i].genger=obj[i].genger=="1"?"男":obj[i].genger=="2"?"女":obj[i].genger=="3"?"不限";
+
+                          if(obj[i].age=="1"){
+                             obj[i].age="婴幼儿";
+                          }else if(obj[i].age=="2"){
+                             obj[i].age="少年";
+                          }else if(obj[i].age=="3"){
+                              obj[i].age="青年";
+                          }else if(obj[i].age=="4"){
+                              obj[i].age="中年";
+                          }else if(obj[i].age=="5"){
+                              obj[i].age="老年";
+                          }else if(obj[i].age=="6"){
+                              obj[i].age="不限";
+                          }
+
+                          if(obj[i].shape=="1"){
+                              obj[i].shape="极瘦";
+                          }else if(obj[i].shape=="2"){
+                              obj[i].shape = "偏瘦";
+                          }else if(obj[i].shape=="3"){
+                              obj[i].shape = "适中";
+                          }else if(obj[i].shape=="4"){
+                              obj[i].shape = "健壮";
+                          }else if(obj[i].shape=="5"){
+                              obj[i].shape = "偏胖";
+                          }else if(obj[i].shape=="0"){
+                              obj[i].shape = "不限";
+                          }
+
+                          var height;
+                          obj[i].height=height;
+                          if(obj[i].min_height=="" && obj[i].max_height==""){
+                             obj[i].height= "不限";
+
+                          }else if(obj[i].min_height=="" && obj[i].max_height!=""){
+                              obj[i].height= "<="+obj[i].max_height;
+
+                          }else if(obj[i].min_height!="" && obj[i].max_height==""){
+                              obj[i].height= ">="+obj[i].min_height;
+
+                          }else if(obj[i].min_height!="" && obj[i].max_height!=""){
+                              obj[i].height= obj[i].min_height+'-' +obj[i].max_height;
+                          }
+
+                         string+=`
+
+                                 <div class="messLeft">
+                                     <ul>
+                                         <li>职位名称：${obj[i].role}</li>
+                                         <li>年龄段：${obj[i].age}</li>
+                                         <li>体型：${obj[i].shape}</li>
+                                         <li>技能特长：${obj[i].skillTag}</li>
+                                         <li>拍摄周期(天)：${obj[i].workingdays}</li>
+                                     </ul>
+                                 </div>
+                                 <div class="messRight">
+                                     <ul>
+                                       <li>性别：${obj[i].shape}</li>
+                                       <li>身高：${obj[i].height}</li>
+                                       <li>招募数量：${obj[i].men_count}</li>
+                                       <li>特征：${obj[i].featureTag}</li>
+                                     </ul>
+                                 </div>
+                                 <div style="clear:both"></div>
+                                 <div class="peoZhuan">
+                                    <p>人物小传：</p>
+                                    <div class="xiaozhuan">${obj[i].description}</div>
+                                 </div>
+
+                        `;
+                      }
+                      str_all=`<div class="erjiTitle">
+                                    ${obj[0].roleTag}
+                                </div>
+                            <div class="message">
+                            ${string}
+                            </div>`
+
+                       $(".otherMesg").append(str_all);
+                  }
+               }
+               common(obj2,str2,str_all2);
+               common(obj3,str3,str_all3);
+               common(obj4,str4,str_all4);
+               common(obj5,str5,str_all5);
+
+            },
+            error:function(err){
+              console.log(err);
+            }
+          });
+            $(".heart").click(function(){
+                var youthUrl=url+'/resume/page_leadUserBackToPlatform/'+appid;
+                location.href=youthUrl;
+            });
+        })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+  body
+    form(action='/WX/wx_savemyintroduce', method='post')
+      center
+        input(type='hidden' ,name='userid' ,value=userid)
+        br
+        input(type='text' ,name='shortintroduce' ,value=shortintroduce)
+        br
+        a(href='http://www.901vehicle.cn/WX/wx_userprofile/'+userid) 返回
+        input(type='submit',value='保存')

@@ -1,0 +1,507 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 演员详情
+    // <link rel="stylesheet" href="/css/reset.css">
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/alert.css')
+    link(rel='stylesheet', href='/css/swiper.min.css') 
+    link(rel='stylesheet', href='/css/actor_edti1.css')
+    link(rel='stylesheet', href='/css/selfswiper.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+         html, body {
+            position:relative;
+            height: 100%;
+          }
+        
+        .photo_experience{display:block;height:115px}
+        .photo_experience img{width:100%;height:100%}
+        .newactor_banner div{height:40px;line-height:40px}
+        #videoUl p>a{width:100%}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/swiper.min.js')
+    script(type='text/javascript', src='/js/url.js')
+    script(type='text/javascript', src='/js/fangda.js')
+  body
+    header
+      .newactor_banner
+        img.banner_img( alt='')
+        .fixed_tel
+          img(src='/img/share.png', alt='')
+          span CASTING
+        div.swiper-pagination
+          ul.tab
+            li.active.hello  基本资料
+            li.hello  参演经历
+            li.hello  照片视频
+            li.hello  接戏标准
+    .swiper-container
+      div.swiper-wrapper
+        // 基本资料
+        .swiper-slide
+          .information.active
+            // 资料
+            // 基本资料
+          // 参演经历
+        .swiper-slide
+          .experience
+            // 参演经历
+          // 照片视屏
+        .swiper-slide
+          .photos
+            // 照片视屏
+          // 接戏标准
+        .swiper-slide
+          .standard
+            // 接戏标准
+    .button_invite
+      button.button_bei 添加到备选
+      button.button_yao 邀请进组
+    div.overlay1
+    .overlay2
+    .dialogs
+      img.quxiao(style="float:right;margin:10px;width:20px;" ,src="/img/quxiao.png")
+      div(style='width:100%;height:2px;clear:both')
+      .dalog_info
+    script.
+      //    基本资料
+      var btns =$(".tab li"),
+      contents =$("section>div")
+      var t = new TabView(btns,contents);
+      //邀请人id
+      var userid=!{JSON.stringify(user_id)};
+      var appid=!{JSON.stringify(appid)};
+      //被邀请人id
+      var authorid=!{JSON.stringify(authorid)};
+         var url_url=url+'/agent/a_userprofile/'+authorid+'/null';
+        console.log(url)
+      $.ajax({
+              type : "get",
+              url : url_url,
+              dataType : "jsonp",
+              success : function(data){
+                  console.log(data)
+                  var img=$(".newactor_banner").html();
+                   $(".banner_img").removeAttr("src");
+                    $(".banner_img").attr("src", data.iconUrl);
+                    $(".banner_img").attr("alt", data.iconUrl);
+                           var swiper = new Swiper('.swiper-container', {
+                        pagination: {
+                          el: '.swiper-pagination',
+                          clickable: true,
+                          renderBullet: function (index, className) {
+                          var hello=document.querySelectorAll(".hello");
+                           return '<span class="' + className + '">' +hello[index].innerHTML+ '</span>';
+                          },
+                        },
+                      });
+                  
+                  var str1=$(".information").html();
+                  if(data.gender==1){
+                   gender="男"
+                  }else if(data.gender==2){
+                    gender="女"
+                  }else{
+                   gender="不限"
+                  }
+                  str1='<div class="weui-cells weui-cells_form"><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input"> 艺名</label></div><div class="weui-cell__bd"><input disabled class="weui-input font-color name" type="text"  value="'+data.artname+'"></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input">真实姓名</label></div><div class="weui-cell__bd"><input class="weui-input font-color" type="text" disabled value="'+data.realname+'"></div></div><div class="weui-cell weui-cell_select weui-cell_select-after"><div class="weui-cell__hd"><label for="" class="weui-label  common-input"> 性别</label></div><div class="weui-cell__bd"><input disabled class="weui-input font-color" type="text" value="'+gender+'"></div></div><div class="weui-cell"><div class="weui-cell__hd"><label for="" class="weui-label common-input"> 出生年月</label></div><div class="weui-cell__bd"><input class="weui-input  font " disabled type="text" value="'+data.birth+'"></div></div><div class="weui-cell"><div class="weui-cell__hd"><label for="" class="weui-label common-input"> 三围</label></div><div class=" measurements"><input class="weui-input font-color"  type="type" value="'+data.bust+'" placeholder="bust" disabled><input disabled class="weui-input font-color"  type="type" value="'+data.waist+'" placeholder="waist"><input class="weui-input font-color" disabled type="type" value="'+data.hip+'" placeholder="hip"></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input" > 身高 cm</label></div><div class="weui-cell__bd"><input class="weui-input font-color" type="number" pattern="[0-9]*" value="'+data.height+'" disabled></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input" >体重 kg</label></div><div class="weui-cell__bd"><input class="weui-input font-color" type="number"  pattern="[0-9]*" value="'+data.weight+'" disabled></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input" >毕业院校</label></div><div class="weui-cell__bd"><input class="weui-input font-color" type="text"  pattern="[0-9]*" value="'+data.schoolname+'" disabled></div></div><div class="weui-cell add-college" ><div class="weui-cell__hd"><label class="weui-label common-input"> 技能特长</label></div><div class="weui-cell__bd"><span>'+data.skill_str+'</span></div></div><div class="weui-cell add-college" ><div class="weui-cell__hd"><label class="weui-label common-input"> 特征</label></div><div class="weui-cell__bd specialty"><span>'+data.feature_str+'</span></div></div></div>'
+                  $(".information").html(str1);
+                   //===========================演艺经历============================
+                   var array=data.workExpArray;
+                   var str2=$(".experience").html();
+                   for(var i=0;i<array.length;i++){
+                   var imagesURL;
+                   var compressImagesURLArray;
+                   if(!array[i].image_set.imagesURLArray.length){
+                      imagesURL=""
+                    
+                   }else{
+                    imagesURL=array[i].image_set.imagesURLArray[0].imagesURL;
+                    
+                   };
+                    if(!array[i].image_set.compressImagesURLArray.length){
+                   
+                      compressImagesURLArray="";
+                   }else{
+                    
+                    compressImagesURLArray=array[i].image_set.compressImagesURLArray[0].compress_imagesURL;
+                   };
+                   if(array[i].image_set.imagesURLArray.length&&!array[i].image_set.compressImagesURLArray.length){
+                    compressImagesURLArray=imagesURL;
+                   };
+                    str2+='<div class="display_experience"><div ><div class="photo_experience"><img class="img_ex"  src="'+compressImagesURLArray+'" alt="'+imagesURL+'"></div><div class="detail_experience"><ul><li><span>剧&#x3000名：</span>'+array[i].detail.productionName+'</li><li><span>剧目类型：</span>'+array[i].detail.productionType+'</li><li><span>饰演角色：</span>'+array[i].detail.role+'</li><li><span>角色类型：</span>'+array[i].detail.roleTag+'</li></ul></div></div></div>'
+                  }
+                  $(".experience").html(str2);
+                  if(array.length==0){
+                    $(".experience").html('<p style="margin:2rem auto;text-align:center;font-size:16px">暂无演艺经历</p>');
+                  }
+
+                  //视频照片++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                  var casting=data.CastingImageUrl;
+                  var compresscasting=data.CompressCastingImageUrl;
+                 var videoset=data.videoset.videos;
+                  if(!videoset){
+                    console.log("ll");
+                    video_url=''
+                  }else{
+                    video_url= videoset
+                    console.log("jjjj")
+                  }
+                  var str3= $(".photos").html();
+                  str3='<div class="casting"><h4 class="h4">照片</h4><div class="picDiv"><div><img src="'+casting.frontimage+'" alt="'+casting.frontimage+'"></div><p>正面卡胸</p></div><div  class="picDiv"><div><img src="'+casting.leftimage45+'" alt="'+casting.leftimage45+'"></div><p>左侧45度卡胸</p></div><div  class="picDiv"><div><img src="'+casting.rightimage45+'" alt="'+casting.rightimage45+'"></div><p>右侧45度卡胸</p></div><div  class="picDiv"><div><img src="'+casting.rightimage90+'" alt="'+casting.rightimage90+'"></div><p>右侧90度卡腰</p></div><div  class="picDiv"><div><img src="'+casting.leftimage90+'" alt="'+casting.leftimage90+'"></div><p>左侧90度卡腰</p></div><div  class="picDiv"><div><img src="'+casting.frontimagewaist+'" alt="'+casting.frontimagewaist+'"></div><p>正面卡腰</p></div><div  class="picDiv"><div><img src="'+casting.frontimageall+'" alt="'+casting.frontimageall+'"></div><p>正面全身</p></div><div class="picDiv"><div><img src="'+casting.frontimagehead+'" alt="'+casting.frontimagehead+'"></div><p>露额头正面卡胸</p></div><div  class="picDiv"><div><img src="'+casting.artimage+'" alt="'+casting.artimage+'"></div><p>艺术照</p></div><div class="url"><h4 class="h4">视频</h4><div id="videoUl"><p><a href="'+video_url+'" style="color:#222" >'+video_url+'</a></p></div></div></div>'
+                  $(".photos").html(str3);
+     
+
+                  //-------------------------------接戏标准----------------------------------
+                  var str4= $(".standard").html();
+              
+                 if(data.schedule==false){
+                    var schedule='无档期';
+                  }else{
+                    var schedule='有档期';
+                  }
+                  var typename=data.typename.nameSet;
+                  var one1='';
+                  for(var i=0;i<typename.length;i++){
+                  var span='';
+                   for(var j=0;j<typename[i].repertoireTypeArray.length;j++){
+                    span+='<span style="margin-left:0.1rem;color:#999;font-size:0.26rem" id="'+typename[i].repertoireTypeArray[j].repertoireTypeid+'"class=" leixing1" >'+typename[i].repertoireTypeArray[j].repertoireTypeName+'<span>'
+                  }
+                   one1 += '<div ><label  class="leibie1" style="font-size:0.28rem"> '+typename[i].categoryName+':</label><div style="display:inline" class="allleixing">'+span+'</div></div>'
+                  
+                }
+                  str4='<div class="weui-cells weui-cells_form"><div class="weui-cell" ><div class="weui-cell__hd"><label class="weui-label common-input" style="width:100%">剧目类别类型：</label></div><div class="weui-cell__bd  one1">'+one1+'</div></div><div class="weui-cell" ><div class="weui-cell__hd"><label class="weui-label common-input">角色类别：</label></div><div class="weui-cell__bd specialty"><span>'+data.roletag_str+'</span></div></div><div class="weui-cell" ><div class="weui-cell__hd"><label class="weui-label common-input">档期：</label></div><div class="weui-cell__bd specialty"><span class="dangqi">'+schedule+'</span></div></div></div>'
+                  
+                  
+                  
+                  $(".standard").html(str4);
+
+                   function thum($img){
+                    let divWid = parseFloat($img.parent().css('width'))*1.5;
+                    $img.parent().css('height',divWid)
+                  let width = parseFloat($img.css('width'));
+                  let height = parseFloat($img.css('height'));
+                  if(width>height){
+                    $img.addClass('Wid');
+                      }else{
+                        $img.addClass('Hei');
+                      }
+                   }
+
+                   $('.casting img').each((index,item)=>{
+                    thum($(item));
+                   });
+                  
+                   $('.casting img').addClass("myImg");
+                   $('.img_ex').addClass("myImg");
+                   $(".newactor_banner>img").addClass("myImg");
+
+                 preLook(".myImg");                        
+
+              },
+              error:function(){
+                  alert('fail');
+              }
+            });
+            $(".button_invite").on("click",".button_yao",function(){
+                if(authorid==userid){
+                  alert('副导演不能邀请自己哟')
+                }else{
+
+                  yaoqing()
+                }
+                
+            });
+            var url2=url+'/WX/wx_searchusercareerincrewsgroupbycrew/'+userid+'/'+authorid+'/1';
+                 function yaoqing(){
+                 $.ajax({
+                  type : "get",
+                  url : url2,
+                  dataType : "jsonp",
+                  // jsonp: "jsonpCallback",
+                  success : function(data){
+                   console.log(data);
+                   var datas=data;
+                   console.log(datas);
+                     $(".dalog_info").empty();
+                      $(".dialogs").css("display","block");
+                    $(".overlay1").css("display","block");
+                    $('html,body').addClass('ovfHiden');
+                    $(".dalog_info").empty();
+                    $(".overlay1").css({ "width": $(document).width(), "height": $(document).height() });
+                     var str='';
+                     for(var i=0;i<datas.length;i++){
+                     var str2='';
+                     var str3='';
+                     var str4='';
+                     var str5='';
+                        if(datas[i].rolearray.obj2==undefined){
+                          str2="";
+                        }else{
+                          for(var j=0;j<datas[i].rolearray.obj2.length;j++){
+                            str2+='<label id="'+datas[i].rolearray.obj2[j].invitestate+'" class="weui-cell weui-check__label" for="2'+[i]+[j]+'"><div class="weui-cell__hd"><input value="'+datas[i].rolearray.obj2[j].careerincrew_id+'" type="checkbox" class="weui-check" name="'+[i]+'" id="2'+[i]+[j]+'"/><i class="weui-icon-checked"></i></div><div class="weui-cell__bd"><p>'+datas[i].rolearray.obj2[j].role+'</p></div></label>'
+                          }
+                        }
+                        if(datas[i].rolearray.obj3==undefined){
+                          str3="";
+
+                        }else{
+                          for(var a=0;a<datas[i].rolearray.obj3.length;a++){
+                            str3+='<label id="'+datas[i].rolearray.obj3[a].invitestate+'" class="weui-cell weui-check__label" for="3'+[i]+[a]+'"><div class="weui-cell__hd"><input value="'+datas[i].rolearray.obj3[a].careerincrew_id+'" type="checkbox" class="weui-check" name="'+[i]+'" id="3'+[i]+[a]+'" /><i class="weui-icon-checked"></i></div><div class="weui-cell__bd"><p>'+datas[i].rolearray.obj3[a].role+'</p></div></label>'
+                          }
+                        }
+                        if(datas[i].rolearray.obj4==undefined){
+                          str4="";
+
+                        }else{
+                          for(var b=0;b<datas[i].rolearray.obj4.length;b++){
+                            str4+='<label id="'+datas[i].rolearray.obj4[b].invitestate+'" class="weui-cell weui-check__label" for="4'+[i]+[b]+'"><div class="weui-cell__hd"><input value="'+datas[i].rolearray.obj4[b].careerincrew_id+'" type="checkbox" class="weui-check" name="'+[i]+'" id="4'+[i]+[b]+'" /><i class="weui-icon-checked"></i></div><div class="weui-cell__bd"><p>'+datas[i].rolearray.obj4[b].role+'</p></div></label>'
+                          }
+                        }
+                        if(datas[i].rolearray.obj5==undefined){
+                          str5="";
+
+                        }else{
+                          for(var c=0;c<datas[i].rolearray.obj5.length;c++){
+                            str5+='<label id="'+datas[i].rolearray.obj5[c].invitestate+'" class="weui-cell weui-check__label" for="5'+[i]+[c]+'"><div class="weui-cell__hd"><input value="'+datas[i].rolearray.obj5[c].careerincrew_id+'" type="checkbox" class="weui-check" name="'+[i]+'" id="5'+[i]+[c]+'" /><i class="weui-icon-checked"></i></div><div class="weui-cell__bd"><p>'+datas[i].rolearray.obj5[c].role+'</p></div></label>'
+                          }
+                        }
+                        
+                      str+='<div class="notice_class"><div class="notice_type" ><p>《'+datas[i].productionName+'》剧组</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type "><div class="tabs"><ul class="tab"><li class="active">领衔主演</li><li>主要演员</li><li>客串演员</li><li>其他演员</li></ul></div><div class="section"><div class="active"><div class="weui-cells weui-cells_checkbox">'+str2+'</div></div><div><div class="weui-cells weui-cells_checkbox">'+str3+'</div></div><div><div class="weui-cells weui-cells_checkbox">'+str4+'</div></div><div><div class="weui-cells weui-cells_checkbox">'+str5+'</div></div><button value="'+datas[i].productionid+'" id="sure_invite" class="'+i+'">确定邀请</button></div></div></div>'
+                     }
+                    $(".dalog_info").html(str);
+                  },
+                  error:function(){
+                  alert('fail');
+                  }
+                });
+                 }
+
+            $(".dialogs").on("click",".quxiao",function(){
+              $(".dialogs").css("display","none");
+                $(".overlay1").css("display","none");
+                $('html,body').removeClass('ovfHiden');
+                
+            });
+            $(".dalog_info").on("click",".notice_type",function () {
+                $(this).next().toggle();
+                console.log($(this).children("p:last-child").children("img:first-child").is(":hidden"));
+                var dis=$(this).children("p:last-child").children("img:first-child").is(":hidden");
+                if(dis==false){
+                    $(this).children("p:last-child").children("img:last-child").css("display","block");
+                    $(this).children("p:last-child").children("img:first-child").css("display","none");
+                }else if(dis==true){
+                    $(this).children("p:last-child").children("img:last-child").css("display","none");
+                    $(this).children("p:last-child").children("img:first-child").css("display","block");
+                }
+
+              })
+        
+
+           
+            $(".dalog_info").on("click","li",function(){
+              console.log($(this).index())
+              var $index=$(this).index();
+              $(".tab li").removeClass("active");
+              $(this).addClass("active");
+             var section=$(this).parents().parents().next(".section").children("div")
+              //console.log($(this).parents().parents().next(".section").children("div"))
+             section.removeClass("active");
+              section.eq($index).addClass("active");
+             
+             
+            })
+            //确定邀请
+            
+             
+            $(".dalog_info").on("click","#sure_invite",function(){
+              var careerincrew_id=[];
+              var $this=$(this);
+              console.log($(this).attr("class"));
+              var production_id=$(this).attr("value");
+               var names=$(this).attr("class");
+               $('input[name="'+names+'"]:checked').each(function () {
+                careerincrew_id.push($(this).attr("value"))
+                console.log(careerincrew_id)
+              });
+              console.log($('input[name=names]:checked'))
+              var data={
+                inviter_id:userid,
+                invited_id:authorid,
+                production_id:production_id,
+                careerincrew_id:careerincrew_id
+              }
+              console.log(data);
+               yaoqing();
+              if(careerincrew_id.length==0){
+                $.alert("您没有邀请任何人")
+              }else{
+                var url5=url+'/WX/wx_sendinvitation';
+                 $.ajax({
+                    type : "post",
+                    url : url5,
+                    data:data,
+                    dataType : "jsonp",
+                    // jsonp: "jsonpCallback",
+                    success : function(data){
+                     console.log(data);
+                     $.alert("邀请成功");
+                     $this.parents().parents(".detail_type").css("display","none");
+                      $this.parents().parents(".detail_type").prev(".notice_type").children(".jiantou").children("img:last-child").css("display","none");
+                      $this.parents().parents(".detail_type").prev(".notice_type").children(".jiantou").children("img:first-child").css("display","block");
+
+                    
+                    },
+                    error:function(err){
+                      console.log(err)
+                    }
+                  }).fail(function(errorThrown) {
+                      console.log(errorThrown);
+                  });
+              }
+              
+             
+            });
+            $(".dalog_info").on("click","#false",function(){
+             $.alert("您已经邀请过ta了");
+             $(this).children(".weui-cell__hd").children("input").attr("disabled","disabled");
+            });
+    script.
+      $(".fixed_tel").click(function(){
+        var resume_url=url+'/resume/page_defaultTemplate/'+appid+'/'+authorid;
+        window.location.href=resume_url;
+      })
+      //添加备选------------------------------------
+      $(".button_invite").on("click",".button_bei",function(){
+                if(authorid==userid){
+                  alert('副导演不能添加自己哟')
+                }else{
+                   $(".dialogs").css("display","block");
+                    $(".overlay1").css("display","block");
+                    $('html,body').addClass('ovfHiden');
+                    $(".dalog_info").empty();
+                    $(".overlay1").css({ "width": $(document).width(), "height": $(document).height() });
+                  beixuan()
+                }
+                
+            });
+           
+            var url_beixuan=url+'/WX/wx_searchproductiondetailaboutprogramme/'+authorid+'/'+userid;
+                 function beixuan(){
+                 $.ajax({
+                  type : "get",
+                  url : url_beixuan,
+                  dataType : "jsonp",
+                  // jsonp: "jsonpCallback",
+                  success : function(data){
+                   console.log(data);
+                   var datas=data;
+                   console.log(datas);
+                     $(".dalog_info").empty()
+                     var str='';
+                     for(var i=0;i<datas.length;i++){
+                     var str2='';
+                     var str3='';
+                     var str4='';
+                     var str5='';
+                        if(datas[i].roleArray.obj2==undefined){
+                          str2="";
+                        }else{
+                          for(var j=0;j<datas[i].roleArray.obj2.length;j++){
+                            str2+='<label id="'+datas[i].roleArray.obj2[j].addstate+'" class="weui-cell weui-check__label" for="2'+[i]+[j]+'"><div class="weui-cell__hd"><input value="'+datas[i].roleArray.obj2[j].careerincrew_id+'" type="checkbox" class="weui-check" name="'+[i]+'" id="2'+[i]+[j]+'"/><i class="weui-icon-checked"></i></div><div class="weui-cell__bd"><p>'+datas[i].roleArray.obj2[j].role+'</p></div></label>'
+                          }
+                        }
+                        if(datas[i].roleArray.obj3==undefined){
+                          str3="";
+
+                        }else{
+                          for(var a=0;a<datas[i].roleArray.obj3.length;a++){
+                            str3+='<label id="'+datas[i].roleArray.obj3[a].addstate+'" class="weui-cell weui-check__label" for="3'+[i]+[a]+'"><div class="weui-cell__hd"><input value="'+datas[i].roleArray.obj3[a].careerincrew_id+'" type="checkbox" class="weui-check" name="'+[i]+'" id="3'+[i]+[a]+'" /><i class="weui-icon-checked"></i></div><div class="weui-cell__bd"><p>'+datas[i].roleArray.obj3[a].role+'</p></div></label>'
+                          }
+                        }
+                        if(datas[i].roleArray.obj4==undefined){
+                          str4="";
+
+                        }else{
+                          for(var b=0;b<datas[i].roleArray.obj4.length;b++){
+                            str4+='<label id="'+datas[i].roleArray.obj4[b].addstate+'" class="weui-cell weui-check__label" for="4'+[i]+[b]+'"><div class="weui-cell__hd"><input value="'+datas[i].roleArray.obj4[b].careerincrew_id+'" type="checkbox" class="weui-check" name="'+[i]+'" id="4'+[i]+[b]+'" /><i class="weui-icon-checked"></i></div><div class="weui-cell__bd"><p>'+datas[i].roleArray.obj4[b].role+'</p></div></label>'
+                          }
+                        }
+                        if(datas[i].roleArray.obj5==undefined){
+                          str5="";
+
+                        }else{
+                          for(var c=0;c<datas[i].roleArray.obj5.length;c++){
+                            str5+='<label id="'+datas[i].roleArray.obj5[c].addstate+'" class="weui-cell weui-check__label" for="5'+[i]+[c]+'"><div class="weui-cell__hd"><input value="'+datas[i].roleArray.obj5[c].careerincrew_id+'" type="checkbox" class="weui-check" name="'+[i]+'" id="5'+[i]+[c]+'" /><i class="weui-icon-checked"></i></div><div class="weui-cell__bd"><p>'+datas[i].roleArray.obj5[c].role+'</p></div></label>'
+                          }
+                        }
+                        
+                      str+='<div class="notice_class"><div class="notice_type" ><p>《'+datas[i].name+'》剧组</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type "><div class="tabs"><ul class="tab"><li class="active">领衔主演</li><li>主要演员</li><li>客串演员</li><li>其他演员</li></ul></div><div class="section"><div class="active"><div class="weui-cells weui-cells_checkbox">'+str2+'</div></div><div><div class="weui-cells weui-cells_checkbox">'+str3+'</div></div><div><div class="weui-cells weui-cells_checkbox">'+str4+'</div></div><div><div class="weui-cells weui-cells_checkbox">'+str5+'</div></div><button value="'+datas[i].productionid+'" id="sure_add" class="'+i+'">确定添加到备选</button></div></div></div>'
+                     }
+                    $(".dalog_info").html(str);
+                  },
+                  error:function(){
+                  alert('fail');
+                  }
+                });
+                 }
+
+              //确定添加---------------------------
+               $(".dalog_info").on("click","#sure_add",function(){
+                var careerincrew_id=[];
+                var $this=$(this);
+                console.log($(this).attr("class"));
+                var production_id=$(this).attr("value");
+                 var names=$(this).attr("class");
+                 $('input[name="'+names+'"]:checked').each(function () {
+                  careerincrew_id.push($(this).attr("value"))
+                  console.log(careerincrew_id)
+                });
+                console.log($('input[name=names]:checked'))
+                var data={
+                  user_id:authorid,
+                  careerincrew_id:careerincrew_id
+                }
+                console.log(data);
+                 //yaoqing();
+                if(careerincrew_id.length==0){
+                  $.alert("您没有添加任何人")
+                }else{
+                  var url5=url+'/WX/wx_addActorToAlternativemodel';
+                   $.ajax({
+                      type : "post",
+                      url : url5,
+                      data:data,
+                      dataType : "jsonp",
+                      // jsonp: "jsonpCallback",
+                      success : function(data){
+                       console.log(data);
+                       $.alert("添加成功");
+                       $this.parents().parents(".detail_type").css("display","none");
+                        $this.parents().parents(".detail_type").prev(".notice_type").children(".jiantou").children("img:last-child").css("display","none");
+                        $this.parents().parents(".detail_type").prev(".notice_type").children(".jiantou").children("img:first-child").css("display","block");
+
+                      
+                      },
+                      error:function(err){
+                        console.log(err)
+                      }
+                    }).fail(function(errorThrown) {
+                        console.log(errorThrown);
+                    });
+                }
+              
+             
+            });
+            $(".dalog_info").on("click","#2",function(){
+             $.alert("您已经添加过ta了");
+             $(this).children(".weui-cell__hd").children("input").attr("disabled","disabled");
+            });

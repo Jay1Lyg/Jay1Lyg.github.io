@@ -1,0 +1,194 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 演员详情
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/actor_edit_echart.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript').
+      // document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/jqWeui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/echarts.min.js')
+  body
+    .newactor_banner
+      div
+        ul.tab
+          li.active 全部申请
+          li 已通过
+          li 未通过
+    section
+      .active
+        .recommend_edit(style='height: 132px')
+          div
+            img.chart(src='img/img1.png', alt='')
+          div
+            p
+              | 与旗下演员
+              span 刘德华
+              | 匹配度较高
+            #main(style='width: 100px;height:100px;float: left;')
+            ul.pipei
+              li 基本信息：
+              li 特征角色：
+              li 片酬需求：
+              li 档期匹配：
+        div(style='background: #f2f2f2;height: 3px;clear: both')
+      // ========================已通过====================
+      div
+      // ++++++++++++++++++++++未通过--------------------
+      div
+        | 文件还来不及
+  script.
+    var btns =$(".tab li"),
+    contents =$("section>div")
+    var t = new TabView(btns,contents);
+    var myChart = echarts.init(document.getElementById('main'));
+    //app.title = '极坐标系下的堆叠柱状图';
+    var dataStyle = {
+    normal: {
+    label: {show:false},
+    labelLine: {show:false}
+    }
+    };
+    var placeHolderStyle = {
+    normal : {
+    color: 'rgba(0,0,0,0)',
+    label: {show:false},
+    labelLine: {show:false}
+    },
+    emphasis : {
+    color: 'rgba(0,0,0,0)'
+    }
+    };
+    var x=99;
+    var y=69;
+    var z=23;
+    option = {
+    title: {
+    text: x+'%',
+    //subtext: '来自紫螺科技数据',
+    //sublink: 'https://www.baidu.com',
+    x: 'center',
+    y: 'center',
+    itemGap: 10,
+    textStyle : {
+    color : 'rgba(30,144,255,0.8)',
+    fontFamily : '微软雅黑',
+    fontSize : 10,
+    fontWeight : 'bolder',
+    }
+    },
+    grid:{
+    x:0,
+    y:5,
+    x2:50,
+    y2:0,
+    borderWidth:1
+    },
+    //        tooltip : {
+    //            show: true,
+    //            formatter: "{a} <br/>{b}"
+    //        },
+    color:[
+    '#4da2ad','#adebf3','#cee7ea','#222222'
+    ],
+    //        legend: {
+    //            orient : 'vertical',
+    //            x : document.getElementById('main').offsetWidth/1.7,
+    //            y : 0,
+    //            itemGap:12,
+    //            data:['基本信息匹配度'+x+'%','29%的人表示生活压力很大','3%的人表示“我姓曾”']
+    //        },
+    toolbox: {
+    show : false,
+    feature : {
+    mark : {show: true},
+    dataView : {show: true, readOnly: false},
+    restore : {show: true},
+    saveAsImage : {show: true}
+    }
+    },
+    series : [
+    {
+    name:'基本信息',
+    type:'pie',
+    clockWise:false,
+    radius : [35, 40],
+    itemStyle : dataStyle,
+    data:[
+    {
+    value:x,
+    name:'基本信息匹配度'+x+'%',
+    },
+    {
+    value:100-x,
+    name:'invisible',
+    itemStyle : placeHolderStyle
+    }
+    ]
+    },
+    {
+    name:'特征角色',
+    type:'pie',
+    clockWise:false,
+    radius : [30, 35],
+    itemStyle : dataStyle,
+    data:[
+    {
+    value:y,
+    name:'特征角色匹配度'+x+'%',
+    },
+    {
+    value:100-y,
+    name:'invisible',
+    itemStyle : placeHolderStyle
+    }
+    ]
+    },
+    {
+    name:'片酬需求',
+    type:'pie',
+    clockWise:false,
+    radius : [25, 30],
+    itemStyle : dataStyle,
+    data:[
+    {
+    value:z,
+    name:'片酬需求匹配度'
+    },
+    {
+    value:100-z,
+    name:'invisible',
+    itemStyle : placeHolderStyle
+    }
+    ]
+    },
+    //            {
+    //                name:'档期匹配',
+    //                type:'pie',
+    //                clockWise:false,
+    //                radius : [20, 25],
+    //                itemStyle : dataStyle,
+    //                data:[
+    //                    {
+    //                        value:3,
+    //                        name:'档期匹配度'
+    //                    },
+    //                    {
+    //                        value:97,
+    //                        name:'invisible',
+    //                        itemStyle : placeHolderStyle
+    //                    }
+    //                ]
+    //            }
+    ]
+    };
+    myChart.setOption(option);

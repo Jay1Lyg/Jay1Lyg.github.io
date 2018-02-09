@@ -1,0 +1,99 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    title 方案管理
+    link(rel='stylesheet', href='/css/left.css')
+    <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="/js/jquery-weui.js"></script>
+    <script type="text/javascript" src="/js/left.js"></script>
+  body
+    section
+      .list
+        ul
+          li.jiji
+            | 剧名：三生三世
+            b
+              img.img(src='imags/jian2.png', width='12', height='18', border='0', alt='')
+            .erjilist
+              ul
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮1
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮2
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮3
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+          li.jiji
+            | 剧名：三生三世
+            b
+              img.img(src='imags/jian2.png', width='12', height='18', border='0', alt='')
+            .erjilist
+              ul
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮1
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮2
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮3
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+          li.jiji
+            | 剧名：三生三世
+            b
+              img.img(src='imags/jian2.png', width='12', height='18', border='0', alt='')
+            .erjilist
+              ul
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮1
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮2
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮3
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+          li.jiji
+            | 剧名：三生三世
+            b
+              img.img(src='imags/jian2.png', width='12', height='18', border='0', alt='')
+            .erjilist
+              ul
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮1
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮2
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮3
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+      script.

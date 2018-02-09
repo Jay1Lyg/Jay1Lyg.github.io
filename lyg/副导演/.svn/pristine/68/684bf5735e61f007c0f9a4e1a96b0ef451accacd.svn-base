@@ -1,0 +1,145 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告详情
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/actor_chert.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(src='/js/echarts.min.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    section
+      .number_div(style='display: block')
+        // <div style="background: #f2f2f2;height: 3px;clear: both"></div>
+        // <div id="0.9" class="recommend_edit" style="height: 132px">
+        // <div>
+        // <img src="image/img1.png" alt="" class="chart">
+        // </div>
+        // <div>
+        // <p>与旗下演员<span>刘德华</span>匹配度59%</p>
+        // <div id="main" style="width: 100px;height:100px;float: left;"></div>
+        // <ul class="pipei">
+        // <li><span class="one"></span>基本信息：</li>
+        // <li><span class="two"></span>特征角色：</li>
+        // <li><span class="three"></span>片酬需求：</li>
+        // <li><span class="four"></span>档期匹配：</li>
+        // </ul>
+        // </div>
+        // </div>
+        div(style='background: #f2f2f2;height: 3px;clear: both')
+      #200.number_div(style='display: block')
+    .fixed
+      ul
+    .range
+  script.
+      //  伪造数据
+      var careerincrew_id = !{JSON.stringify(careerincrew_id)};
+      var attribute = !{JSON.stringify(attribute)};
+      let pan_url=url+'/WX/wx_searchMoreMatchingActors/'+careerincrew_id+'/'+attribute+'/'+1;
+      console.log(pan_url);
+
+      $.ajax({
+        url:pan_url,
+        type:'get',
+        dataType:'jsonp',
+        success:function(data){
+            console.log(data);
+            console.log(1);
+        },
+        error:function(){
+            console.log('出错啦');
+        }
+      });
+
+      function funcNum(){
+          let data = [];
+          let num;
+          for(let i = 0 ; i<100;i++){
+              num = parseInt(Math.random()*230-30)
+              data.push(num);
+          }
+          return  data;
+      }
+      let atr = [];
+      let arr=[];
+      //  渲染页面左右 两侧
+      function render(){
+          let data = funcNum().sort(function(a,b){return b-a}),str='';
+          for(let k = 0,m=210 ; k<=23 ; k++){
+              m-=10;
+              atr.push(m);
+          }
+          //循环数组 制造二维数组
+          atr.forEach(function(item){
+              arr[item]=[];
+              data.forEach(function(ite){
+                  if(item>=ite&&ite>=item-10){
+                      arr[item].push(ite)
+                  }
+              })
+          });
+          let k = -1;
+          //循环二维数组 渲染页面
+          for(let i = 0 ; i<atr.length;i++){
+              str+=`<div id="${atr[i]}">`
+              arr[atr[i]].forEach(function(item){
+                  str+=` <div data-num="${item}" class="recommend_edit" style="height: 132px">
+    <div>
+    <img src="" alt="" class="chart">
+    </div>
+    <div>
+    <p>与旗下演员<span>刘德华</span>匹配度59%</p>
+    <div id="main" style="width: 100px;height:100px;float: left;"></div>
+    <ul class="pipei">
+    <li><span class="one"></span>基本信息：</li>
+    <li><span class="two"></span>特征角色：</li>
+    <li><span class="three"></span>片酬需求：</li>
+    <li><span class="four"></span>档期匹配：</li>
+    </ul>
+    </div>
+    </div>`;
+              });
+              str+=`</div>`
+          }
+          $('.number_div').html(str);
+          let html='';
+          for(let j = 0 ; j < atr.length ; j ++) {
+              html+=`<li><a data-id="${j}" href="#${atr[j]}">${atr[j]}</a></li>`
+          }
+          $('.fixed ul').html(html);
+          $('.fixed ul li a').on('click',function(e){
+              $('.fixed>ul>li>a ').removeClass('active');
+              $(e.target).addClass('active');
+          });
+      }
+      render();
+      //    移动 右边跟着动的逻辑
+      let scorls=[];
+      //获取所有左侧元素#100 之类的 的高度
+      $('.number_div>div').each(function(i,e){
+          scorls.push($(e).offset().top);
+      });
+      //   页面滚动时 改变active;
+      (function(){
+          $(window).scroll(function(event){
+              let winHeight = $(window).scrollTop();
+              let ind;
+              for(let i = 0 ; i < scorls.length ; i++){
+                  if(scorls[i]>=winHeight){
+                      ind=i;
+                      $('.fixed>ul>li>a').removeClass('active');
+                      $('.fixed>ul>li:eq('+ind+') a').addClass('active');
+                      return ;
+                  }
+              }
+          });
+      })()

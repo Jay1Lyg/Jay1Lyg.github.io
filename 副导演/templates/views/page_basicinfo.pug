@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+  style.
+    .one{ font-size:36px}
+  body
+    .one
+      center
+        form(action='/WX/wx_resumeBasicInfoSave', method='post')
+          | 艺 名: 
+          input(type='text', name='artname')
+          br
+          |       真实姓名: 
+          input(type='text', name='realname')
+          br
+          |       性 别：
+          select(name='cars')
+            option(value='1') 男
+            option(value='2') 女
+            option(value='3', selected='')
+          br
+          |       身 高：
+          input(type='text', name='height')
+          | cm
+          br
+          |       体 重：
+          input(type='text', name='weight')
+          | kg
+          br
+          center
+            input(type='submit', value='保存')
+          |       教育背景：
+          a(href='http://www.901vehicle.cn/page_edu')
+            input(type='text', name='edu_background')
+          br

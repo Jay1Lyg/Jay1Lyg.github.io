@@ -1,0 +1,25 @@
+var keystone = require('keystone'),
+	CareerInCrew = keystone.list('CareerInCrew');
+var async = require('async');
+exports = module.exports = function(req, res){
+	var s=[];
+   CareerInCrew.model.find()
+    .exec(function(err,ret){
+       if(err){
+          throw new Error(err);
+       }else{
+       	 async.each(ret,function(item,next){
+       	 	console.log(item);
+            var data = {};
+            data.isDelete  = item.isDelete;
+             s.push(data);
+            next();
+       	 },function(err){
+           
+            console.log(s);
+            res.send(s);
+       	 });
+       	
+       }
+    })
+}

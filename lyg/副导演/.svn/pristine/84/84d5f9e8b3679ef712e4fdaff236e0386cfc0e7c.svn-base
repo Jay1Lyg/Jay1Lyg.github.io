@@ -1,0 +1,83 @@
+/*swiper样式*/
+
+ .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      font-size: 18px;
+      background: #fff;
+      width:100%;
+      overflow:auto;
+      overflow-y:auto;
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      
+    }
+    .swiper-pagination-bullet {
+      width: 77px;
+      height: 27px;
+      color:#fff;
+      text-align: center;
+      line-height: 27px;
+      font-size: 14px;
+      opacity: 1; 
+      background:none;
+    }
+    .swiper-slide-active{
+        overflow: auto !important;
+    }
+    .swiper-pagination-bullet-active {
+      color:#fff;
+      background: none;
+    }
+    .swiper-pagination{  
+        height:32px;
+       }
+    .casting{
+       width:100%;
+      height:auto;
+    }
+    .weui-cells_form{
+       width:100%;
+       height:auto;  
+    }
+    .display_experience{
+        width:100%;
+        height:auto;
+    }
+
+    .weui-cells{
+        width:100%;
+    }
+    #videoUl{
+        width:100%;
+        min-height:50px;
+    }
+  body .swiper-wrapper{
+    width:100%;
+    height:auto;
+   }
+   .newactor_banner div{
+    top:170px;
+   }
+   .url .h4{
+    margin-left:-2.8rem;
+   }
+   .url>div p{
+    margin-left:-38%;
+   }
+  .swiper-pagination-bullet-active{
+    border-bottom:2px solid #4da2ad;
+  }

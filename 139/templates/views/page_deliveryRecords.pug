@@ -1,0 +1,301 @@
+//
+   Created by Admin on 2017/7/31.
+
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(http-equiv='X-UA-Compatible', content='ie=edge')
+        link(rel='stylesheet', href='/css/jqueryWeui.css')
+        link(rel='stylesheet', href='/css/weui.css')
+        link(rel='stylesheet', href='/css/my_Delivery.css')
+        style.
+            div.All.true{
+            opacity:0.3;
+            }
+            .mask{
+                position: relative;
+            }
+            .mask>div>img.true{
+                position: absolute;
+                right: 5%;
+                top: 15%;
+                z-index: 100;
+                display: block;
+                transform:rotate(45deg);
+                -ms-transform:rotate(45deg);     
+                -moz-transform:rotate(45deg);    
+                -webkit-transform:rotate(45deg); 
+                -o-transform:rotate(45deg);
+                width:80px;
+            }
+            .mask>div>img.false{
+                position: absolute;
+                right: 5%;
+                top: 5%;
+                z-index: 100;
+                display: none;
+                width:80px;
+            }
+        script(type='text/javascript', src='/js/jquery-2.1.4.js')
+        script(type='text/javascript', src='/js/jquery-weui.js')
+        script(type='text/javascript', src='/js/url.js')
+        //script(src='/js/zepto.min.js')
+        title 我申请的
+    body
+        .weui-pull-to-refresh__layer
+            .weui-pull-to-refresh__arrow
+            .weui-pull-to-refresh__preloader
+            .down 下拉刷新
+            .up 释放刷新
+            .refresh 正在刷新
+        .weui-tab.manage-nav
+            .weui-flex
+                .weui-flex__item.nav-tab.tab-active.tab1
+                    p.tab-text 未处理
+                .weui-flex__item.nav-tab.tab2
+                    p.tab-text 面试
+                .weui-flex__item.nav-tab.tab3
+                    p.tab-text 不合适
+        // top nav end
+        // main start
+        .manage-main
+            .main-contain.main-select
+            .main-interview
+            .main-pase
+        .none_div(style='display: none')
+            p 暂无记录
+            img.none(src='/img/暂无记录.png', alt='')
+        .weui-loadmore(style='clear: both')
+          i.weui-loading
+          span.weui-loadmore__tips 正在加载
+        script.
+            $('.nav-tab').on('click', function () {
+                $(this)
+                    .addClass('tab-active')
+                    .siblings('div')
+                    .removeClass('tab-active');
+                var $index = $(this).index();
+                console.log($index)
+                $(".manage-main>div")
+                    .eq($index)
+                    .addClass("main-select")
+                    .siblings('.main-select')
+                    .removeClass("main-select");
+            });
+
+
+                var user_id= !{JSON.stringify(userid)};
+                var appid= !{JSON.stringify(appid)};
+                var url_url =url+"/WX/wx_searchapplyposition/";
+                var first=0;
+                //var currentPage=1;
+                var time=new Date();
+                $('.nav-tab').on('click', function () {
+                    $(this)
+                        .addClass('tab-active')
+                        .siblings('div')
+                        .removeClass('tab-active');
+                    var $index = $(this).index();
+                    var index = $(this).index();
+                    $(".manage-main>div")
+                        .eq($index)
+                        .addClass("main-select")
+                        .siblings('.main-select')
+                        .removeClass("main-select");
+                        delive(1,index)
+                    
+                });
+                delive(1,0)
+                //点击跳转到通告详情----------------------
+                $(".manage-main").on("click",".All",function(){
+                    var productionCrew_id=$(this).attr("id");
+                    var careerincrewid=$(this).children(".all_delivery").attr("id");
+                    window.location.href=url+'/WX/page_searchpositionsDetails/'+productionCrew_id+'/'+careerincrewid+'/'+user_id;
+
+                });
+                function delive(currentPage,index){
+                    $.ajax({
+                        type : "get",
+                        url : url_url+user_id+"/"+currentPage+"/"+index+"/"+time+"/"+appid,
+                        dataType : "jsonp",
+                        // jsonp: "jsonpCallback",
+                        success : function(data){
+                            var All=data;
+                            $(".none_div").css("display","none")
+                            if(All.length==""){
+                                $(".none_div").css("display","block")
+                            }else{
+                                if(index==0){
+                                    $('.main-contain').empty();
+                                    var str = $('.main-contain').html();
+                                    for(var i=0;i<All.length;i++){
+                                        var span='';
+                                        for(var j=0;j<All[i].repertoireTpyeArray.length;j++){
+                                            span+=All[i].repertoireTpyeArray[j].repertoireTpyeName
+                                        }
+
+                                        str+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div id="'+All[i].crews_id+'" class="All '+All[i].isDelete+'"><div id="'+All[i].career_in_crews_id+'" class="all_delivery"> <p>《'+All[i].crews_name+'》 <span class="border_delivery">'+All[i].category+'</span><span class="time_delivery">'+All[i].registration_date+'</span></p> </div> <div class="fen_delivery"> <p>角色/职位： <span>'+All[i].role_name+'</span></p> <p>剧目类型: <span>'+span+'</span></p><p>见组地址： <span>'+All[i].location+'</span></p> </div> <div class="delivery_ed"> <p class="is_receive'+All[i].is_receive+'"></p> </div> <div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div></div>'
+                                    }
+                                    $('.main-contain').html(str);
+                                    $(".is_receive1").html("【面试邀约】");
+                                    $(".is_receive0").html("【投递成功】");
+                                    $(".is_receive2").html("【不合适】");
+                                }else if(index==1){
+                                    $('.main-interview').empty();
+                                    var str1 = $('.main-interview').html();
+                                    for(var i=0;i<All.length;i++){
+                                        
+                                        var span='';
+                                        for(var j=0;j<All[i].repertoireTpyeArray.length;j++){
+                                            span+=All[i].repertoireTpyeArray[j].repertoireTpyeName
+                                        }
+                                        str1+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div id="'+All[i].crews_id+'" class="All '+All[i].isDelete+'"><div id="'+All[i].career_in_crews_id+'" class="all_delivery"> <p>《'+All[i].crews_name+'》 <span class="border_delivery">'+All[i].category+'</span><span class="time_delivery">'+All[i].registration_date+'</span></p> </div> <div class="fen_delivery"> <p>角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p> <p>见组地址： <span>'+All[i].location+'</span></p> </div> <div class="delivery_ed"> <p class="is_receive">【面试邀约】</p> </div> <div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div></div>'
+                                    }
+                                    $('.main-interview').html(str1);
+                                }else if(index==2){
+                                    $('.main-pase').empty();
+                                    var str2 = $('.main-pase').html();
+                                    for(var i=0;i<All.length;i++){
+                                       
+                                        var span='';
+                                        for(var j=0;j<All[i].repertoireTpyeArray.length;j++){
+                                            span+=All[i].repertoireTpyeArray[j].repertoireTpyeName
+                                        }
+                                        str2+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div id="'+All[i].crews_id+'" class="All '+All[i].isDelete+'"><div id="'+All[i].career_in_crews_id+'" class="all_delivery"> <p>《'+All[i].crews_name+'》 <span class="border_delivery">'+All[i].category+'</span><span class="time_delivery">'+All[i].registration_date+'</span></p> </div> <div class="fen_delivery"> <p>角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p> <p>见组地址： <span>'+All[i].location+'</span></p> </div> <div class="delivery_ed"> <p class="is_receive">【不合适 】</p> </div> <div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div></div>'
+                                    }
+                                    $('.main-pase').html(str2);
+                                }
+                            };
+                             if (data.length <=5) {
+                                $(".weui-loadmore").css("display", "none")
+                            } 
+                            console.log(All);
+                        },
+                        error:function(){
+                            alert('fail');
+                        }
+                    });
+                   
+                };
+                    function delive_jiazai(currentPage,index){
+                    $.ajax({
+                        type : "get",
+                        url : url+user_id+"/"+currentPage+"/"+index+"/"+time+"/"+appid,
+                        dataType : "jsonp",
+                        // jsonp: "jsonpCallback",
+                        success : function(data){
+                            var All=data;
+                            $(".none_div").css("display","none")
+                            if(All.length==""){
+                                //$(".none_div").css("display","block")
+                            }else{
+                                if(index==0){
+                                   
+                                    var str = $('.main-contain').html();
+                                    for(var i=0;i<All.length;i++){
+                                        var span='';
+                                        for(var j=0;j<All[i].repertoireTpyeArray.length;j++){
+                                            span+=All[i].repertoireTpyeArray[j].repertoireTpyeName
+                                        }
+
+                                        str+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div id="'+All[i].crews_id+'" class="All '+All[i].isDelete+'"><div id="'+All[i].career_in_crews_id+'" class="all_delivery"> <p>《'+All[i].crews_name+'》 <span class="border_delivery">'+All[i].category+'</span><span class="time_delivery">'+All[i].registration_date+'</span></p> </div> <div class="fen_delivery"> <p>角色/职位： <span>'+All[i].role_name+'</span></p> <p>剧目类型: <span>'+span+'</span></p><p>见组地址： <span>'+All[i].location+'</span></p> </div> <div class="delivery_ed"> <p class="is_receive'+All[i].is_receive+'"></p> </div> <div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div></div>'
+                                    }
+                                    $('.main-contain').append(str);
+                                    $(".is_receive1").html("【面试邀约】");
+                                    $(".is_receive0").html("【投递成功】");
+                                    $(".is_receive2").html("【不合适】");
+                                }else if(index==1){
+                                    
+                                    var str1 = $('.main-interview').html();
+                                    for(var i=0;i<All.length;i++){
+                                        
+                                        var span='';
+                                        for(var j=0;j<All[i].repertoireTpyeArray.length;j++){
+                                            span+=All[i].repertoireTpyeArray[j].repertoireTpyeName
+                                        }
+                                        str1+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div id="'+All[i].crews_id+'" class="All '+All[i].isDelete+'"><div id="'+All[i].career_in_crews_id+'" class="all_delivery"> <p>《'+All[i].crews_name+'》 <span class="border_delivery">'+All[i].category+'</span><span class="time_delivery">'+All[i].registration_date+'</span></p> </div> <div class="fen_delivery"> <p>角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p> <p>见组地址： <span>'+All[i].location+'</span></p> </div> <div class="delivery_ed"> <p class="is_receive">【面试邀约】</p> </div> <div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div></div>'
+                                    }
+                                    $('.main-interview').append(str1);
+                                }else if(index==2){
+                                   
+                                    var str2 = $('.main-pase').html();
+                                    for(var i=0;i<All.length;i++){
+                                       
+                                        var span='';
+                                        for(var j=0;j<All[i].repertoireTpyeArray.length;j++){
+                                            span+=All[i].repertoireTpyeArray[j].repertoireTpyeName
+                                        }
+                                        str2+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div id="'+All[i].crews_id+'" class="All '+All[i].isDelete+'"><div id="'+All[i].career_in_crews_id+'" class="all_delivery"> <p>《'+All[i].crews_name+'》 <span class="border_delivery">'+All[i].category+'</span><span class="time_delivery">'+All[i].registration_date+'</span></p> </div> <div class="fen_delivery"> <p>角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p> <p>见组地址： <span>'+All[i].location+'</span></p> </div> <div class="delivery_ed"> <p class="is_receive">【不合适 】</p> </div> <div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div></div>'
+                                    }
+                                    $('.main-pase').append(str2);
+                                }
+                            }
+                            console.log(All);
+                            if (data.length <=5) {
+                                    $(".weui-loadmore").css("display", "none")
+                                } 
+                        },
+                        error:function(){
+                            alert('fail');
+                        }
+                    });
+                    a++
+                   
+                }
+                  //刷新--------------------------
+                  $(document.body).pullToRefresh().on("pull-to-refresh",function () {
+                          setTimeout(function () {
+                              $(document.body).pullToRefreshDone();
+                              if($(".tab1").hasClass('tab-active')){
+                                delive(1,0)
+                                
+                              };
+
+
+                              if($(".tab2").hasClass('tab-active')){
+                                
+                                delive(1,1)
+                              };
+                              if($(".tab3").hasClass('tab-active')){
+                                
+                                delive(1,2)
+                              };
+                              a=2;
+                              
+
+                          },2000)
+                      });
+
+                      //------------------------------加载---------------------------------
+                      
+                   var a=2;
+                    var loading = false;  //状态标记
+                   
+                    $(document.body).infinite(1000).on("infinite", function(e) {
+
+                        if(loading) return;
+                        loading = true;
+                        //var totalpages=parseInt($(".display_experience").attr("id"));
+                        //console.log(totalpages)
+                        setTimeout(function() {
+                             if($(".tab1").hasClass('tab-active')){
+                                delive(a,0)
+                                
+                              };
+
+
+                              if($(".tab2").hasClass('tab-active')){
+                                
+                                delive(a,1)
+                              };
+                              if($(".tab3").hasClass('tab-active')){
+                                
+                                delive(a,2)
+                              };
+                              a=2;
+                          
+                            loading = false;
+                        }, 1000);
+                    });

@@ -1,0 +1,81 @@
+var keystone = require('keystone'),
+  User = keystone.list('User');
+
+var fs = require("fs");
+var query = require('../../query/util/downImageToNative.js');
+var config = require('../../public/conf/common.js');
+
+exports = module.exports = function(req, res) {
+  var userid = req.body.userid;
+  var mediaId = req.body.media;
+  var appid = req.body.appid;
+  console.log(req.body);
+  var location = userid+'/'+mediaId+'.jpg';
+  var medianame=mediaId+'.jpg';
+  var path='images/users/';
+  var item={};
+  if(userid==undefined||mediaId==undefined||appid==undefined){
+      res.status(403).send('parameter undefined');
+  }else{
+
+      query.downlodeUserImage(mediaId,userid,appid,function(err){//从官方服务器下载图片到自己服务器
+         if(err){
+            res.send(err);
+         }else{//将图片保存到数据库
+           User.model.findOne()
+            .where('_id',userid)
+            .exec(function(err,ret){
+               if(err){
+                  throw new Error(err);
+               }else{
+                console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+                console.log(ret);
+                console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+                  if(ret.images.length==0){
+
+                       item.filename=location;
+                       item.originalname=medianame;
+                       item.path=path;
+                       ret.images.push(item);
+                       console.log(ret);
+                       ret.save(function(err){
+                          if(err){
+                            res.send(err);
+                          }else{
+                            res.send(config.homeEntry.url+'WX/users/'+userid+'/'+mediaId+'.jpg');
+                          }
+                       })
+                  }else{
+                     var location1 = ret.images;
+                     console.log(process.cwd()+'/images/users/'+location1[0].filename);
+                       fs.unlink(process.cwd()+'/images/users/'+location1[0].filename, function(err) {
+                           if (err) {
+                             return console.error(err);
+                             }
+                              console.log("deleted");
+                             
+                              item.filename=location;
+                              item.originalname=medianame;
+                              item.path=path;
+                              var ss=ret.images.shift();
+                              ret.images.push(item);
+                                  console.log(ret.images);
+                              ret.save(function(err){
+                                if(err){
+                                  res.send(err);
+                                }else{
+                                  var  imagesURL = config.homeEntry.url+'WX/users/'+ userid+'/'+ mediaId+'.jpg';
+                                  res.send(imagesURL);
+                                }
+                             })
+                        });
+
+                  }
+               }
+            })
+         }
+      });
+  }
+
+}
+

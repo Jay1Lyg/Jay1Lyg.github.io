@@ -1,0 +1,262 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 演员列表
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/actor_edit_echart.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript').
+      // document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/jqWeui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    //script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/echarts.min.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    //.weui-pull-to-refresh__layer
+        //.weui-pull-to-refresh__arrow
+        //.weui-pull-to-refresh__preloader
+        //.down 下拉刷新
+       // .up 释放刷新
+       // .refresh 正在刷新
+    section
+      .active.info1.info_clear
+    //.weui-loadmore(style='clear: both')
+      //i.weui-loading
+     // span.weui-loadmore__tips 正在加载
+  script.
+    var careerincrewsid = !{JSON.stringify(careerincrewsid)};
+    var userid = !{JSON.stringify(userid)};
+    function searchcandidatesinfo(page){
+      var url4=url+'/WX/wx_searchmatchpositioninfo/'+careerincrewsid+'/'+page;
+      ///WX/wx_searchmatchpositioninfo/:careerincrewid/:page
+     console.log(url4)
+      $.ajax({
+        type : "get",
+        url : url4,
+         async: false, 
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+          console.log(data);
+          var data=data;
+          $('.weui-loadmore').attr("id",data.totalPages)
+          var results=data.results;
+          if(!data.results.length){
+          alert("暂无推荐演员");
+          }
+          var length=results.length;
+          var str='';
+          var main="main";
+           //$(info).empty();
+           //$(".info_clear").empty;
+          for(var i=0;i<length;i++){
+            
+             str+='<div id="'+results[i]._id+'" class="recommend_edit"><div><img src="'+results[i].image+'" alt="" class="chart"></div><div><p style="font-size:14px;">与演员<span style="color:#4da2ad">'+results[i].realname+'</span>的匹配度<span style="color:#4da2ad">'+results[i].totalMatchingDegree*1000/10+'%</span></p><div id="'+main+i+'" style="width: 100px;height:112px;float: left;margin-top: 0.1rem"></div><ul class="pipei"><li><span class="one"></span>基本信息：'+results[i].basicMatchingDegree*1000/10+'%</li><li><span class="two"></span>特征角色：'+results[i].featureMatchingDegree*1000/10+'%</li><li><span class="three"></span>片酬需求：'+results[i].offsetMatchingDegree*1000/10+'%</li><li><span class="four"></span>档期匹配：'+results[i].scheduleMatchingDegree*1000/10+'%</li></ul></div></div><div style="background: #f2f2f2;height: 0.1rem;clear: both"></div>'
+             //var myChart='myChart'+i;
+              
+          };
+          
+          $(".info1").html(str);
+          for(var j=0;j<length;j++){
+          
+             chart('myChart'+j,'main'+j,results[j].totalMatchingDegree,results[j].basicMatchingDegree,results[j].featureMatchingDegree,results[j].offsetMatchingDegree,results[j].scheduleMatchingDegree)
+          };
+          if(results.length<5){
+            $(".weui-loadmore").css("display","none")
+          }
+          
+        },
+        error:function(){
+        alert('fail');
+        }
+      });
+        
+            
+    }
+
+    //加载-------------------------------------
+    
+    searchcandidatesinfo(1);
+      function chart(myChart,main,totalMatchingDegree,basicMatchingDegree,featureMatchingDegree,offsetMatchingDegree,scheduleMatchingDegree){
+       var myChart = echarts.init(document.getElementById(main));
+
+            var dataStyle = {
+                normal: {
+                    label: {show:false},
+                    labelLine: {show:false}
+                }
+            };
+            var placeHolderStyle = {
+                normal : {
+                    color: 'rgba(89,155,163,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle1 = {
+                normal : {
+                    color: 'rgba(125,196,205,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle2 = {
+                normal : {
+                    color: 'rgba(177,217,222,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle3 = {
+                normal : {
+                    color: 'rgba(223,241,243,0)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            
+             var option=option;
+             console.log(option)
+             option = {
+                title: {
+                    text: totalMatchingDegree*1000/10+'%',
+                    //subtext: '来自紫螺科技数据',
+                    //sublink: 'https://www.baidu.com',
+                    x: 'center',
+                    y: 'center',
+                    itemGap: 10,
+                    textStyle : {
+                        color : 'rgba(30,144,255,0.8)',
+                        fontFamily : '微软雅黑',
+                        fontSize : 6,
+                        fontWeight : 'bolder',
+                    }
+                },
+                grid:{
+                    x:0,
+                    y:5,
+                    x2:50,
+                    y2:0,
+                    borderWidth:1
+                },
+                tooltip : {
+                    show: true,
+                    formatter: "{a} <br/>{b}"
+                },
+                color:[
+                     '#4da2ad','#7dc4cd','#8bd3dc','#a9dce3'
+                ],
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                series : [
+                    {
+                        name:'基本信息',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [36, 45],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:basicMatchingDegree*1000/10,
+                                name:'基本信息匹配度'+basicMatchingDegree*1000/10+'%',
+                            },
+                            {
+                                value:100-basicMatchingDegree*1000/10,
+                                name:'基本信息匹配度'+basicMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle
+                            }
+                        ]
+                    },
+                    {
+                        name:'特征角色',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [26, 35],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:featureMatchingDegree*1000/10,
+                                name:'特征角色匹配度'+featureMatchingDegree*1000/10+'%',
+                            },
+                            {
+                                value:100-featureMatchingDegree*1000/10,
+                                name:'特征角色匹配度'+featureMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle1
+                            }
+                        ]
+                    },
+                    {
+                        name:'片酬需求',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [16, 25],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:offsetMatchingDegree*1000/10,
+                                name:'片酬需求匹配度'+offsetMatchingDegree*1000/10+'%'
+                            },
+                            {
+                                value:100-offsetMatchingDegree*1000/10,
+                                name:'片酬需求匹配度'+offsetMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle2
+                            }
+                        ]
+                    },
+                     {
+                        name:'档期匹配',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [6, 15],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:scheduleMatchingDegree*1000/10,
+                                name:'档期匹配度'+scheduleMatchingDegree*1000/10+'%'
+                            },
+                            {
+                                value:100-scheduleMatchingDegree*1000/10,
+                                name:'档期匹配度'+scheduleMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle3
+                            }
+                        ]
+                    },
+                    
+                ]
+            };
+
+            myChart.setOption(option);
+      };
+      $("section").on("click",".recommend_edit",function(){
+        var authorid=$(this).attr("id");
+        console.log(url+'WX/page_actorDetail/'+userid+'/'+authorid)
+        window.location.href=url+'/WX/page_actorDetail/'+userid+'/'+authorid;
+
+      })
+     

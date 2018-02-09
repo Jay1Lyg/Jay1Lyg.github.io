@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>actor</title>
+    <link rel="stylesheet" href="./css/weui.css" />
+    <link rel="stylesheet" href="./css/actor.css">
+
+</head>
+
+<body>
+
+    <!--banner start-->
+    <div class="actor-banner">
+        <ul class="banner-img">
+            <li class="img-current"><img src="./img/职员banner.png" alt=""></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul class="banner-index">
+            <li></li>
+            <li></li>
+            <li class="index-current"></li>
+        </ul>
+
+    </div>
+    <!--banner end-->
+
+    <!--filter start-->
+    <div class="weui-flex actor-filter">
+        <div class="weui-flex__item filter-sex">
+            <div class="placeholder">
+                <p id="sex-val">性别</p>
+                <img src="./img/三角black.png" alt="">
+            </div>
+            <ul class="filter-ul fsex-ul">
+                <li>男</li>
+                <li>女</li>
+                <li class="filter-hover">不限</li>
+            </ul>
+        </div>
+        <div class="weui-flex__item filter-age">
+            <div class="placeholder">
+                <p>年龄段</p>
+                <img src="./img/三角black.png" alt="">
+            </div>
+            <ul class="filter-ul fage-ul">
+                <li>婴幼儿</li>
+                <li>少年</li>
+                <li>青年</li>
+                <li>中年</li>
+                <li>老年</li>
+                <li class="filter-hover">不限</li>
+            </ul>
+        </div>
+    </div>
+    <!--filter end-->
+    <!--container start-->
+    <div class="actor-container clearfix">
+        <ul class="contain-ul">
+        </ul>
+    </div>
+
+    <!--container end-->
+    <!--load start-->
+    <div class="actor-load">
+        ~&gt;_&lt;~ 没有更多了哦
+    </div>
+    <!--load end-->
+
+
+    <script src="./js/zepto.min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+    <script src="./node_modules/art-template/lib/template-web.js"></script>
+    <script src="./js/actor.js"></script>
+    <!--<script src="./js/jquery.js"></script>-->
+    <!--<script src="./js/jquery.jsonp.js"></script>-->
+    <script src="./js/jquery-2.2.4.js"></script>
+    <script type="text/html" id="artTemplate">
+        {{ each actors $value i }}
+        <li>
+            <a href="http://www.kaishiapp.com/WX/wx_getactorresums/{{ $value.id }}">
+                        <img src="{{ $value.img_url }}" alt="">
+                        <div class="contain-cover">{{ $value.realname }}</div>
+                    </a>
+            <div class="item-cert">
+                <p class="actor-name">{{ $value.artname }}</p>
+                <div class="contain-cert">
+                    <img src="./img/认证-小.png" alt="">
+                    <p>已认证</p>
+                </div>
+            </div>
+        </li>
+        {{/each}}
+
+    </script>
+    <script>
+        $(function () {
+            // $.ajax({
+            //     type: "GET",
+            //     url: "./json/actor.json",
+            //     dataType: "json",
+            //     success: function (data) {
+            //         var html = template('artTemplate', {
+            //             actors: data.actor
+            //         });
+            //         $('.contain-ul').html(html);
+            //         // console.log(data);
+            //         // console.log(data)
+
+            //     }
+            // });
+            // var dataCallback = function () {
+
+            // }
+            // dataCallback = func([{
+            //     "name": "赵予熙",
+            //     "position": "演员 模特",
+            //     "img_url": "./img/演员1.png"
+            // }])
+            // console.log(jsonpCallback);
+            $.ajax({
+                type: "GET",
+                url: "http://www.kaishiapp.com/WX/wx_getalluserresums/3/0/0",
+                dataType: "jsonp",
+                success: function (data) {
+                    var jsonResult = data;
+                    var html = template('artTemplate', {
+                        actors: jsonResult
+                    });
+                    $('.contain-ul').html(html);
+                    console.log(data);
+
+
+
+                }
+            });
+
+
+
+        })
+    </script>
+</body>
+
+</html>

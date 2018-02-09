@@ -1,0 +1,115 @@
+.header{
+    width: 100%;
+
+}
+.header ul{
+    width: 100%;
+    height: 0.82rem;
+    background:rgba(242, 242, 242, 1);
+    display: flex;
+    text-align: center;
+}
+.header ul li{
+    flex: 1;
+    line-height: 0.82rem;
+    font-size: 0.3rem;
+}
+.header ul li.active{
+    color: #4da2ad;
+    border-bottom: 2px solid #4da2ad;
+}
+.all_actor{
+    width: 100%;
+}
+.all_actor>div{
+    display: none;
+}
+.all_actor>div.active{
+    display: block;
+}
+
+/*演员样式*/
+.display_experience{
+    width: 100%;
+
+
+}
+.position{
+    padding: 0 0.1rem;
+    background: white;
+    position: relative;
+}
+.position>div{
+    height: 2.68rem;
+    background: white;
+}
+.position>div.edit_delete{
+    width: 100%;
+    position: absolute;
+    bottom:0.2rem;
+    height: 0.6rem;
+    background: rgba(102, 102, 102, 0.6);
+    display: none;
+}
+.position>div>div{
+    float: left;
+}
+.photo_experience{
+    width: 35%;
+
+}
+.photo_experience img{
+    width: 2.3rem;
+    height: 1.9rem;
+    margin-top: 0.2rem;
+}
+.detail_experience{
+    width: 50%;
+    padding: 1%;
+}
+.detail_experience img{
+    float: right;
+    width: 0.4rem;
+}
+.detail_experience ul{
+    margin-top: 0.2rem;
+    clear: both;
+}
+.detail_experience ul li{
+    font-size: 0.28rem;
+    color: #696969;
+}
+.detail_experience ul li span{
+    color: #222222;
+}
+.detail_experience ul li span.li11{
+    color: #696969;
+}
+.detail_experience ul li span.li22{
+    color: #696969;
+}
+.edit_delete{
+    width: 100%;
+    position: absolute;
+    bottom:20px;
+    height: 0.6rem;
+
+
+}
+.edit_delete ul{
+    width: 100%;
+    height: 0.6rem;
+
+}
+.edit_delete ul li{
+    float: left;
+    width: 50%;
+    font-size: 0.28rem;
+    text-align: center;
+    color: white;
+    line-height: 0.6rem;
+
+}
+#searchInput{
+    text-align: center;
+}

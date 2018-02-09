@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+  style.
+    .one{ font-size:36px}
+  body
+    .one
+      center
+        form(action='/msavesingleeduexp', method='post')
+          |  
+          input(type='hidden',value=production_id,name='production_id')
+          br
+          |  
+          input(type='hidden',value=workexp_roleId,name='workexp_roleId')
+          br
+          |  
+          input(type='hidden',value=careerInResume_id,name='careerInResume_id')
+          br
+          
+          | 项目名称: 
+          input.weui-input(type='text',value=production_name,name='production_name')
+          br
+          | 			职位类型: 
+          input.weui-input(type='text', value=workexp_roleCategoryName,name='workexp_roleCategoryName')
+          br
+          | 		职位名称：
+          input.weui-input(type='text', value=workexp_roleName,name='workexp_roleName')
+          br
+          | 		学 历：
+          input.weui-input(type='text', value=workexp_productionType,name='workexp_productionType')
+          br
+          center
+          |
+          a(href='http://www.kaishiapp.com/muserprofile/'+userid) 
+            font(size='10px') 返回
+          input(type='submit', value='保存')

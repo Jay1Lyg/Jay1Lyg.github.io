@@ -1,0 +1,537 @@
+/*公共部分人*/
+body{
+background: rgba(242, 242, 242, 1)
+}
+
+/*添加新演员*/
+.newactor_banner{
+    width: 100%;
+    position: relative;
+    height: 4rem;
+}
+.newactor_banner img{
+    width: 100%;
+    height: 100%;
+    
+}
+.newactor_banner div{
+    width: 100%;
+    position: absolute;
+    background: rgba(0, 0, 0,0.7);
+    bottom: 0%;
+
+}
+.newactor_banner div ul{
+   width: 100%;
+  
+    
+}
+.newactor_banner div ul li{
+
+    font-size: 0.30rem;
+    text-align: center;
+    float: left;
+    width: 25%;
+    color: white
+
+}
+.newactor_banner div ul li.active{
+    display: block;
+    color: #4da2ad;
+    border-bottom: 2px solid #4da2ad;
+}
+
+section{
+width: 100%;
+    /*padding-bottom:1rem ;*/
+}
+section>div{
+    display: none;
+}
+section>div.active{
+    display: block;
+ }
+/*基本资料*/
+.common-input{
+    font-size: 0.30rem;
+}
+.font-color{
+    font-size: 0.28rem;
+}
+/*三围*/
+.measurements input{
+    float: left;width: 30%;
+}
+/*出生年月*/
+.font{
+    color: #666;
+    font-size: 0.28rem;
+}
+/*下拉*/
+.weui-select{
+    font-size: 0.28rem;
+}
+.weui-cell_select .weui-cell__bd:after{
+    border-style: none;
+}
+/*特长*/
+.specialty>div{
+    float: left;
+    width: 25%;
+    margin: 0.15rem 0;
+}
+
+/*复选框样式*/
+.specialty>div input{
+    background: white;
+}
+.specialty>div label{
+    font-size: 0.27rem;
+}
+.specialty2>div label{
+    font-size: 0.26rem;
+}
+.specialty3>div label{
+    font-size: 0.26rem;
+}
+.specialty4>div label{
+    font-size: 0.26rem;
+}
+.specialty>div{
+    float: left;
+    width: 25%;
+    margin: 0.15rem 0;
+}
+.specialty2>div{
+    float: left;
+    width: 33.3%;
+    margin: 0.15rem 0;
+    text-overflow: hidden;
+}
+.specialty3>div{
+    float: left;
+    width: 33.3%;
+    margin: 0.15rem 0;
+    text-overflow: hidden;
+}
+.specialty4>div{
+    float: left;
+    width: 33.3%;
+    margin: 0.15rem 0;
+    text-overflow: hidden;
+}
+.newactor_button button{
+    width:100% ;
+    border-style: none;
+    background: #4da2ad;
+    color: white;
+    height: 0.9rem;
+    border-radius: 0.05rem;
+    font-size: 0.28rem;
+    position: fixed;
+    bottom: 0;
+    z-index: 99
+}
+.add_experience{
+    text-align: center;
+}
+.add_experience button{
+    width:100% ;
+    border-style: none;
+    background: #4da2ad;
+    color: white;
+    height: 0.5rem;
+    border-radius: 0.05rem;
+    font-size: 0.28rem;
+    width: 80%;
+
+}
+.weui-label{
+    width:80px;
+}
+#delete_experience{
+    width: 13%;
+    height: 2.28rem;
+    background: #4da2ad;
+    text-align: center;
+}
+#delete_experience p{
+    color: white;
+    line-height: 2.28rem;
+}
+
+/*弹出框*/
+.weui-skin_android .weui-dialog__hd{
+    text-align: center;
+}
+.weui-dialog__hd{
+    padding: 0.1rem 1.6rem;
+    text-align: center;
+
+}
+.weui-skin_android .weui-dialog__ft{
+    text-align: center;
+}
+.weui-skin_android .weui-dialog__btn{
+    display: inline;
+}
+/*弹出层*/
+.dialogs{
+    display: none;
+    width: 80%;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -120%);
+    z-index: 101;
+    animation:myfirst 1s;
+    -webkit-animation:myfirst 1s;
+
+
+}
+
+@keyframes myfirst
+{
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+/*选择框样式*/
+.toolbar .title{
+    font-size: 0.28rem;
+    line-height: 1rem;
+}
+.toolbar .toolbar-inner{
+    height: 1rem;
+}
+.toolbar .picker-button{
+    font-size: 0.38rem;
+    line-height: 1rem;
+    height: 1rem;
+}
+.weui-picker-modal .picker-items-col.picker-items-col-center{
+    margin-top: 0px;
+}
+.weui-picker-modal .picker-items-col-wrapper{
+    margin-top: 0px;
+}
+
+.weui-picker-modal .picker-item{
+    font-size: 0.30rem;
+}
+.weui-picker-overlay, .weui-picker-container{
+    bottom: -3rem;
+}
+
+
+/*第二步参演经历*/
+.display_experience{
+    width: 100%;
+
+}
+.display_experience>div{
+    height: 2.28rem;
+    padding: 0.1rem;
+    background: white;
+    margin-bottom: 0.2rem;
+}
+.display_experience>div>div{
+    float: left;
+}
+.photo_experience{
+    width: 35%;
+
+}
+.photo_experience img{
+    width: 2.3rem;
+    height: 1.9rem;
+    margin-top: 0.2rem;
+}
+.detail_experience{
+    width: 50%;
+    padding: 1%;
+}
+.detail_experience img{
+    float: right;
+    width: 0.4rem;
+}
+.detail_experience ul{
+    clear: both;
+}
+.detail_experience ul li{
+    font-size: 0.28rem;
+    color: #696969;
+}
+.detail_experience ul li span{
+    color: #222222;
+}
+.delete_experience{
+    width: 13%;
+    height: 2.28rem;
+    background: #4da2ad;
+    text-align: center;
+}
+.delete_experience p{
+    color: white;
+    line-height: 2.28rem;
+}
+
+/*弹出层*/
+.dialogs_save{
+    display: none;
+    width: 80%;
+    position: fixed;
+    left: 10%;
+     bottom:20%;
+    z-index: 101;
+  
+
+
+}
+.dialogs_delete{
+    display: none;
+    width: 80%;
+    position: fixed;
+    left: 10%;
+    bottom:20%;
+    z-index: 101;
+}
+.dialogs_leixing{
+    display: none;
+    width: 80%;
+    position: fixed;
+    left: 10%;
+    top:5%;
+    z-index: 100;
+    /*border: 1px solid black;*/
+    background:white;
+}
+.dialogs_leixing1{
+    display: none;
+    width: 80%;
+    position: fixed;
+    left: 10%;
+    top:5%;
+    z-index: 100;
+    /*border: 1px solid black;*/
+    background:white;
+}
+.overlay {
+    background: #000;
+    filter: alpha(opacity=50); /* IE的透明度 */
+    opacity: 0.5;  /* 透明度 */
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 100; /* 此处的图层要大于页面 */
+    display:none;
+
+}
+
+
+.newactor_buttonsave{
+    width:100%;
+    text-align: center;
+}
+.newactor_buttonsave button{
+    width:50% ;
+    margin: 0 auto;
+    border-style: none;
+    background: #4da2ad;
+    color: white;
+    height: 0.8rem;
+    border-radius: 0.05rem;
+    font-size: 0.28rem;
+    z-index: 100
+}
+.add_experience{
+    text-align: center;
+}
+.add_experience button{
+    width:100% ;
+    border-style: none;
+    background: #4da2ad;
+    color: white;
+    height: 0.5rem;
+    border-radius: 0.05rem;
+    font-size: 0.28rem;
+    width: 80%;
+
+}
+
+/*照片视频*/
+.h4{
+    font-size: 0.28rem;
+    color: #222;
+    margin-left: 0.2rem;
+}
+.casting{
+    width: 100%;
+    margin-top: .2rem;
+}
+.casting>div{
+    float: left;width: 50%;
+    text-align: center;
+}
+.casting>div>div{
+    width: 3.3rem;
+    height: 5rem;
+    text-align: center;
+    margin: 0 auto;
+}
+.casting>div>div img{
+    width: 3.3rem;
+    height: 5rem;
+    display: block;
+    text-align: center;
+}
+.casting>div>p{
+    font-size: 0.28rem;
+    color: #696969;
+}
+/*视屏
+*/
+.url{
+    width: 100%;clear: both;
+}
+.url>div{
+    background: white;
+    height: 0.78rem;
+}
+.url>div p input{
+    border: none;
+    height: 0.78rem;
+    border-radius: 0.1rem;
+}
+.url>div p{
+   font-size: 0.26rem;
+    line-height: 0.78rem;
+    margin-left: 20%;
+}
+/*解析标准*/
+.no{
+    font-size: 0.20rem;
+    color: #696969;
+}
+.wan{
+    font-size: 0.28rem;
+    color: #696969;
+}
+/*参演经历照片*/
+.picture{
+    width:100%;
+    height: 1.9rem;
+    margin-bottom: 1rem;
+    text-align: center;
+
+}
+.picture>div{
+    width: 2.3rem;
+    height: 1.9rem;
+    margin: 0 auto;
+    border: 1px solid #696969;
+    background: url("../image/jia.png") no-repeat top 0.5rem left 0.7rem;
+}
+
+
+.weui-switch, .weui-switch-cp__box{
+    height: 28px;
+
+}
+.weui-switch:after, .weui-switch-cp__box:after{
+    height:27px
+}
+.weui-switch:checked, .weui-switch-cp__input:checked ~ .weui-switch-cp__box{
+    background: #4da2ad;
+    border-color: #4da2ad;
+}
+
+
+
+.specialty5{
+
+   /*margin:0 auto;*/
+}
+.specialty5>div{
+    float: left;
+    width: 33%;
+    margin: 0.15rem 0;
+    /*text-align: center;*/
+
+}
+.specialty5>div label{
+    font-size: 0.26rem;
+}
+
+.button_sure{
+    clear: both;
+    text-align: center;
+}
+.button_sure button{
+    list-style: none;
+    border-style: none;
+    background: #4da2ad;
+    min-width: 60%;
+    height:0.6rem;
+    color:white;
+    margin-bottom: 0.5rem
+}
+
+
+.specialty6{
+
+   /*margin:0 auto;*/
+}
+.specialty8>div{
+    float: left;
+    width: 33%;
+    margin: 0.15rem 0;
+
+    /*text-align: center;*/
+
+}
+.specialty8>div label{
+    font-size: 0.26rem;
+}
+
+.button_sure1{
+    clear: both;
+    text-align: center;
+}
+.button_sure1 button{
+    list-style: none;
+    border-style: none;
+    background: #4da2ad;
+    min-width: 60%;
+    height:0.6rem;
+    color:white;
+    margin-bottom: 0.5rem
+}
+/*.dialogs_leixing{
+    width:90%;
+    padding: 0.2rem;
+}*/
+.leibie1{
+    font-size: 0.26rem;
+    margin-right: 0.1rem;
+
+}
+.leixing1{
+    font-size: 0.24rem;
+    color: #999;
+    border:none;
+    background: white;
+    width:50%;
+}
+
+.displayNone{
+    display: none;
+}

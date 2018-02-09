@@ -1,0 +1,36 @@
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+html{
+	font-size:62.5%;
+}
+body{
+	font-size:12px;
+	font-size:1.2rem ;
+}
+p{
+	font-size:14px;
+	font-size:1.4rem;
+}
+.modelCon{
+	width:100%;
+	display:flex;
+	justify-content:space-between;
+	flex-wrap:wrap;
+}
+.photo{
+	width:45%;
+	height:20rem;
+	float:left;
+	margin:5px 5px 0px 10px;
+}
+.photo img{
+	width:100%;
+	height:18rem;
+}
+.photo  p{
+	text-align:center;
+}
+

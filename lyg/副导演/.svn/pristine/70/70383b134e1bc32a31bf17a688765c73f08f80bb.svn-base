@@ -1,0 +1,113 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    script(src='/js/zepto.min.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    script(src='/js/manage.js')
+    <script src="/js/person.js"></script>
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/manage.css')
+    link(rel='stylesheet', href='/css/person.css')
+    title 人员管理
+    script.
+      window.onload=function(){
+       var careerincrew_id=!{JSON.stringify(careerincrew_id)};
+         //动态显示参演经历
+        $.ajax({
+          type : "get",
+          url : 'http://www.kaishiapp.com/WX/wx_searchcandidatesinfo/'+careerincrew_id+'/1/1',
+          dataType : "jsonp",
+          success : function(data){
+              console.log(data)
+              var array=data;
+              var str = $('.one').html();           
+              for(var i=0;i<array.length;i++){
+                var url3='http://www.kaishiapp.com/WX/page_deliveryActor/'+array[i].user_id;
+                   if(array[i].is_receive==0){//表示未表态
+                     var url1='http://www.kaishiapp.com/WX/wx_receivecandidates/'+array[i].user_id+'/'+careerincrew_id+'/1';
+                     var url2='http://www.kaishiapp.com/WX/wx_receivecandidates/'+array[i].user_id+'/'+careerincrew_id+'/2';
+
+                     str += '<li class="mflex-item contain-item1"><a href="'+url3+'"><img style="height:240px" src="'+array[i].iconUrl+'" alt=""></a><div class="item-cert"><p class="actor-name">'+array[i].realname+'</p><div class="contain-cert"><img src="/img/认证-小.png" alt=""><p>已认证</p></div><div class="weui-flex"><div class="weui-flex__item contain-result-blue"><a style="color:#666666" href="'+url2+'">不合适</a></div><div class="weui-flex__item contain-result-blue"><a style="color:#666666" href="'+url1+'">面试<a></div></div></li>'
+                                                                                                                  
+                  }
+                  if(array[i].is_receive==1){//表示已约面试
+                     str += '<li class="mflex-item contain-item1"><a href="'+url3+'"><img style="height:240px" src="'+array[i].iconUrl+'" alt=""></a><div class="item-cert"><p class="actor-name">'+array[i].realname+'</p><div class="contain-cert"><img src="/img/认证-小.png" alt=""><p>已认证</p></div><div class="weui-flex"><div class="weui-flex__item contain-result-grey">已邀面试</div></div></div></li>'
+                  }
+                  if(array[i].is_receive==2){//表示暂时不合适
+                    str += '<li class="mflex-item contain-item1"><a href="'+url3+'"><img style="height:240px" src="'+array[i].iconUrl+'" alt=""></a><div class="item-cert"><p class="actor-name">'+array[i].realname+'</p><div class="contain-cert"><img src="/img/认证-小.png" alt=""><p>已认证</p></div><div class="weui-flex"><div class="weui-flex__item contain-result-grey">不合适</div></div></div></li>'
+                                                  
+                  }
+                                                                                                
+                };
+              $('.one').html(str)
+          },
+          error:function(){
+              alert('fail');
+          }
+        });
+         $.ajax({
+          type : "get",
+          url : 'http://www.kaishiapp.com/WX/wx_searchcandidatesinfo/'+careerincrew_id+'/1/2',
+          dataType : "jsonp",
+          success : function(data){
+              console.log(data)
+              var array=data;
+              var str = $('.two').html();           
+              for(var i=0;i<array.length;i++){
+                    str +='<li class="mflex-item contain-item1"><a href="http://www.kaishiapp.com/WX/page_deliveryActor/'+array[i].user_id+'"><img style="height:240px" src="'+array[i].iconUrl+'" alt=""></a><div class="item-cert"><p class="actor-name">'+array[i].realname+'</p><div class="contain-cert"><img src="/img/认证-小.png" alt=""><p>已认证</p></div><div class="weui-flex"><div class="weui-flex__item contain-result-grey">已邀面试</div></div></div></li>'
+                };
+              $('.two').html(str)
+          },
+          error:function(){
+              alert('fail');
+          }
+        });
+         $.ajax({
+          type : "get",
+          url : 'http://www.kaishiapp.com/WX/wx_searchcandidatesinfo/'+careerincrew_id+'/1/3',
+          dataType : "jsonp",
+          success : function(data){
+              console.log(data)
+              var array=data;
+              var str = $('.three').html();           
+              for(var i=0;i<array.length;i++){   
+                    str += '<li class="mflex-item contain-item1"><a href="http://www.kaishiapp.com/WX/page_deliveryActor/'+array[i].user_id+'"><img style="height:240px" src="'+array[i].iconUrl+'" alt=""></a><div class="item-cert"><p class="actor-name">'+array[i].realname+'</p><div class="contain-cert"><img src="/img/认证-小.png" alt=""><p>已认证</p></div><div class="weui-flex"><div class="weui-flex__item contain-result-grey">不合适</div></div></div></li>'
+                };
+              $('.three').html(str)
+          },
+          error:function(){
+              alert('fail');
+          }
+        });
+
+
+             
+
+      }
+         
+  body
+    header.manage-header
+      div
+        a(href='javascript:history.go(-1)')
+          img(src='/img/矩形-1-拷贝.png', alt='')
+        p 人员管理
+    .weui-tab.manage-nav
+      .weui-flex
+        .weui-flex__item.nav-tab.tab-active
+          p.tab-text 全部
+        .weui-flex__item.nav-tab
+          p.tab-text 面试
+        .weui-flex__item.nav-tab
+          p.tab-text 不合适
+    .manage-main
+      .main-contain.main-select
+        ul.main-ul.one
+      .main-interview
+        ul.main-ul.two
+      .main-pase
+        ul.main-ul.three
+  

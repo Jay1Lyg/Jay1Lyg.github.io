@@ -1,0 +1,464 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告详情
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/notice_edit.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    //script(src='js/echarts.min.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    header
+      .newactor_banner
+        img.banner_img(src='', alt='')
+        div
+          ul.tab
+            li.active 剧组信息
+            li 角色信息
+    section
+      .active.crew_info
+        div.crew_info1
+      div
+        .notice_class.leader
+          .notice_type
+            p 领携主演
+            p.jiantou
+              img(src='/img/sanyou.png', alt='')
+              img(src='/img/sanxia.png', alt='')
+          .detail_type.leader_actor
+            .leader_suitability.ling
+              .information_actor
+                ul
+                  li 职位名称：男一号
+                  li 性别：男
+                  li 年龄段：青年
+                  li 身高(cm)：1
+                p.all_info 查看全部信息
+                .information_actornone
+                  ul
+                    li 体型：偏廋
+                    li 招募数量：1
+                    li 技能特长：1
+                    li 特征：1
+                  div
+                    p(style='font-size: 14px') 人物小传
+                    textarea.weui-textarea(rows='3', style='font-size: 12px', disabled='') 你就是交换空间
+                  p.put_away 收起
+        .notice_class.starring
+          .notice_type
+            p 主要演员
+            p.jiantou
+              img(src='/img/sanyou.png', alt='')
+              img(src='/img/sanxia.png', alt='')
+          .detail_type.starring_actor
+            div.zhu
+        .notice_class.guest
+          .notice_type
+            p 客串演员
+            p.jiantou
+              img(src='/img/sanyou.png', alt='')
+              img(src='/img/sanxia.png', alt='')
+          .detail_type.guest_actor
+            div.ke
+        .notice_class.other
+          .notice_type
+            p 其他演员
+            p.jiantou
+              img(src='/img/sanyou.png', alt='')
+              img(src='/img/sanxia.png', alt='')
+          .detail_type.other_actor
+            div.qi        
+  script.
+    toggle($(".notice_type"));
+    $(".detail_type").on("click",".all_info",function () {
+    $(this).hide();
+    $(this).next(".information_actornone").show()
+    });
+    $(".detail_type").on("click",".put_away",function () {
+    $(this).parent(".information_actornone").prev(".all_info").show();
+    $(this).parent(".information_actornone").hide();
+    })
+    var btns =$(".tab li"),
+    contents =$("section>div")
+    var t = new TabView(btns,contents);
+    var productionCrew_id = !{JSON.stringify(productionCrew_id)};
+     var userid = !{JSON.stringify(userid)};
+      var juzu_url=url+'/WX/wx_searchallpositionDetails/'+productionCrew_id+'/'+userid;
+      console.log(juzu_url);
+      $.ajax({
+          type : "get",
+          url : juzu_url,
+          dataType : "jsonp",
+          async:false,
+          // jsonp: "jsonpCallback",
+          success : function(data){
+              console.log(data);
+              var crew_info=data.production;
+              console.log(crew_info);
+              $(".banner_img").attr("src",crew_info.production_image);
+              var crew_str='';
+              $(".crew_info1").empty();
+              if(crew_info.production_companys_name==''){
+                crew_info.production_companys_name="无"
+              };
+               if(crew_info.issuer_companies_name==''){
+                crew_info.issuer_companies_name="无"
+              }
+              crew_str='<p><span>剧名：</span>'+crew_info.production_name+'</p><p><span>通告类别：</span>'+crew_info.categorytag.categoryName+'</p><p><span>剧目类型：</span>'+crew_info.categorytag.repertoireTpyeArray[0].repertoireTpyeName+'</p><p><span>拍摄地：</span>'+crew_info.location[0].fullname+'</p><p><span>拍摄周期（天）:</span>'+crew_info.duration+'</p><p><span>出品公司：</span>'+crew_info.production_companys_name+'</p><p><span>承制公司：</span>'+crew_info.issuer_companies_name+'</p>'
+              $(".crew_info1").html(crew_str)
+             //var str= $(".display_experience").html();
+              for(var i=0;i<data.length;i++){
+                  str+=''
+              }
+              //$(".display_experience").html(str);
+              var obj2=data.obj2;//领携
+             var obj3=data.obj3;//跟组主要
+             var obj4=data.obj4;//主要
+             var obj5=data.obj5;// 其他
+             console.log(obj5);
+             console.log(obj2);
+             console.log(obj3);
+             console.log(obj4);
+             var ling=$('.ling');
+             var zhu=$('.zhu');
+             var ke=$('.ke');
+             var qi=$('.qi');
+             ling.empty();
+             zhu.empty();
+             ke.empty();
+             qi.empty();
+             var str1='';
+             var str2='';
+             var str3='';
+             var str4='';
+             if(obj2==undefined){
+              $(".ling").html();
+             }else{
+              for(var i=0;i<obj2.length;i++){
+                if(obj2[i].gender==1){
+                 var gender="男"
+                };
+                if(obj2[i].gender==2){
+                 var gender="女"
+                };
+                if(obj2[i].gender==3){
+                 var gender="不限"
+                };
+                if(obj2[i].age==1){
+                 var age="婴幼儿"
+                };
+                if(obj2[i].age==2){
+                 var age="少年"
+                };
+                if(obj2[i].age==3){
+                 var age="青年"
+                };
+                if(obj2[i].age==4){
+                 var age="中年"
+                };
+                if(obj2[i].age==5){
+                 var age="老年"
+                };
+                if(obj2[i].age==6){
+                 var age="不限"
+                };
+                if(obj2[i].shape==1){
+                 var shape="瘦子"
+                };
+                if(obj2[i].shape==2){
+                 var shape="偏瘦"
+                };
+                if(obj2[i].shape==3){
+                 var shape="适中"
+                };
+                if(obj2[i].shape==4){
+                 var shape="健硕"
+                };
+                if(obj2[i].shape==5){
+                 var shape="胖子"
+                };
+                if(obj2[i].shape==0){
+                 var shape="不限"
+                };
+                if(obj2[i].min_height==''&&obj2[i].max_height==''){
+                  height2="不限"
+                }
+                if(obj2[i].min_height==''&&obj2[i].max_height!=""){
+                    height2='<='+obj2[i].max_height
+                }
+                if(obj2[i].min_height!=''&&obj2[i].max_height==''){
+                    height2='>='+obj2[i].min_height
+                }
+                if(obj2[i].min_height!=''&&obj2[i].max_height!=''){
+                    height2=obj2[i].min_height+'-'+obj2[i].max_height
+                }
+                str1+='<div class="information_actor"><ul><li>职位名称：'+obj2[i].role+'</li><li>性别：'+gender+'</li><li>年龄段：'+age+'</li><li>身高(cm)：'+height2+'</li></ul><p class="all_info">查看全部信息</p><div class="information_actornone" ><ul><li>体型：'+shape+'</li><li>招募数量：'+obj2[i].men_count+'</li><li>技能特长：'+obj2[i].skillTag+'</li><li>特征：'+obj2[i].featureTag+'</li><li>拍摄周期(天)：'+obj2[i].workingdays+'</li></ul><div><p style="font-size:0.28rem;clear:both">人物小传</p><textarea style="font-size:0.28rem" class="weui-textarea" disabled placeholder="请输入文本" rows="3">'+obj2[i].description+'</textarea></div><p class="put_away">收起</p></div></div><div id="'+obj2[i].author._id+'" class="button_zu"><button class="'+obj2[i].Status+'" id="'+obj2[i].careerincrew_id+'">我要进组</button></div><p style="width: 100%;height: 0.2rem;background:#f2f2f2"></p>'
+               }
+               $(".ling").html(str1);
+               $(".ling").parent(".detail_type").show();
+                 $(".ling").parent(".detail_type").prev(".notice_type").children(".jiantou").children("img:last-child").css("display","block");
+                 $(".ling").parent(".detail_type").prev(".notice_type").children(".jiantou").children("img:first-child").css("display","none");
+             }
+             if(obj3==undefined){
+              $(".zhu").html();
+              
+             }else{
+               for(var i=0;i<obj3.length;i++){
+               if(obj3[i].gender==1){
+                 var gender="男"
+                };
+                if(obj3[i].gender==2){
+                 var gender="女"
+                };
+                if(obj3[i].gender==3){
+                 var gender="不限"
+                };
+                if(obj3[i].age==1){
+                 var age="婴幼儿"
+                };
+                if(obj3[i].age==2){
+                 var age="少年"
+                };
+                if(obj3[i].age==3){
+                 var age="青年"
+                };
+                if(obj3[i].age==4){
+                 var age="中年"
+                };
+                if(obj3[i].age==5){
+                 var age="老年"
+                };
+                if(obj3[i].age==6){
+                 var age="不限"
+                };
+                if(obj3[i].shape==1){
+                 var shape="瘦子"
+                };
+                if(obj3[i].shape==2){
+                 var shape="偏瘦"
+                };
+                if(obj3[i].shape==3){
+                 var shape="适中"
+                };
+                if(obj3[i].shape==4){
+                 var shape="健硕"
+                };
+                if(obj3[i].shape==5){
+                 var shape="胖子"
+                };
+                if(obj3[i].shape==0){
+                 var shape="不限"
+                };
+                if(obj3[i].min_height==''&&obj3[i].max_height==''){
+                  height3="不限"
+                }
+                if(obj3[i].min_height==''&&obj3[i].max_height!=""){
+                    height3='<='+obj3[i].max_height
+                }
+                if(obj3[i].min_height!=''&&obj3[i].max_height==''){
+                    height3='>='+obj3[i].min_height
+                }
+                if(obj3[i].min_height!=''&&obj3[i].max_height!=''){
+                    height3=obj3[i].min_height+'-'+obj3[i].max_height
+                }
+                str2+='<div class="information_actor"><ul><li>职位名称：'+obj3[i].role+'</li><li>性别：'+gender+'</li><li>年龄段：'+age+'</li><li>身高(cm)：'+height3+'</li></ul><p class="all_info">查看全部信息</p><div class="information_actornone" ><ul><li>体型：'+shape+'</li><li>招募数量：'+obj3[i].men_count+'</li><li>技能特长：'+obj3[i].skillTag+'</li><li>特征：'+obj3[i].featureTag+'</li><li>拍摄周期(天)：'+obj3[i].workingdays+'</li></ul><div><p style="font-size:0.28rem;clear:both">人物小传</p><textarea style="font-size:0.28rem" class="weui-textarea" disabled placeholder="请输入文本" rows="3">'+obj3[i].description+'</textarea></div><p class="put_away">收起</p></div></div><div id="'+obj3[i].author._id+'" class="button_zu"><button class="'+obj3[i].Status+'" id="'+obj3[i].careerincrew_id+'">我要进组</button></div><p style="width: 100%;height: 0.2rem;background:#f2f2f2"></p>'
+               }
+               $(".zhu").html(str2);
+               $(".zhu").parent(".detail_type").show();
+                 $(".zhu").parent(".detail_type").prev(".notice_type").children(".jiantou").children("img:last-child").css("display","block");
+                 $(".zhu").parent(".detail_type").prev(".notice_type").children(".jiantou").children("img:first-child").css("display","none");
+             }
+             if(obj4==undefined){
+              $(".ke").html();
+             }else{
+              for(var i=0;i<obj4.length;i++){
+                if(obj4[i].gender==1){
+                 var gender="男"
+                };
+                if(obj4[i].gender==2){
+                 var gender="女"
+                };
+                if(obj4[i].gender==3){
+                 var gender="不限"
+                };
+                if(obj4[i].age==1){
+                 var age="婴幼儿"
+                };
+                if(obj4[i].age==2){
+                 var age="少年"
+                };
+                if(obj4[i].age==3){
+                 var age="青年"
+                };
+                if(obj4[i].age==4){
+                 var age="中年"
+                };
+                if(obj4[i].age==5){
+                 var age="老年"
+                };
+                if(obj4[i].age==6){
+                 var age="不限"
+                };
+                if(obj4[i].shape==1){
+                 var shape="瘦子"
+                };
+                if(obj4[i].shape==2){
+                 var shape="偏瘦"
+                };
+                if(obj4[i].shape==3){
+                 var shape="适中"
+                };
+                if(obj4[i].shape==4){
+                 var shape="健硕"
+                };
+                if(obj4[i].shape==5){
+                 var shape="胖子"
+                };
+                if(obj4[i].shape==0){
+                 var shape="不限"
+                };
+                if(obj4[i].min_height==''&&obj4[i].max_height==''){
+                  height4="不限"
+                }
+                if(obj4[i].min_height==''&&obj4[i].max_height!=""){
+                    height4='<='+obj4[i].max_height
+                }
+                if(obj4[i].min_height!=''&&obj4[i].max_height==''){
+                    height4='>='+obj4[i].min_height
+                }
+                if(obj4[i].min_height!=''&&obj4[i].max_height!=''){
+                    height4=obj4[i].min_height+'-'+obj4[i].max_height
+                }
+                str3+='<div class="information_actor"><ul><li>职位名称：'+obj4[i].role+'</li><li>性别：'+gender+'</li><li>年龄段：'+age+'</li><li>身高(cm)：'+height4+'</li></ul><p class="all_info">查看全部信息</p><div class="information_actornone" ><ul><li>体型：'+shape+'</li><li>招募数量：'+obj4[i].men_count+'</li><li>技能特长：'+obj4[i].skillTag+'</li><li>特征：'+obj4[i].featureTag+'</li><li>拍摄周期(天)：'+obj4[i].workingdays+'</li></ul><div><p style="font-size:0.28rem;clear:both">人物小传</p><textarea style="font-size:0.28rem" class="weui-textarea" disabled rows="3">'+obj4[i].description+'</textarea></div><p class="put_away">收起</p></div></div><div id="'+obj4[i].author._id+'" class="button_zu"><button class="'+obj4[i].Status+'" id="'+obj4[i].careerincrew_id+'">我要进组</button></div><p style="width: 100%;height: 0.2rem;background:#f2f2f2"></p>'
+               }
+               $(".ke").html(str3);
+               $(".ke").parent(".detail_type").show();
+                 $(".ke").parent(".detail_type").prev(".notice_type").children(".jiantou").children("img:last-child").css("display","block");
+                 $(".ke").parent(".detail_type").prev(".notice_type").children(".jiantou").children("img:first-child").css("display","none");
+             }
+             if(obj5==undefined){
+               $(".qi").html()
+             }else{
+               for(var i=0;i<obj5.length;i++){
+                if(obj5[i].gender==1){
+                 var gender="男"
+                };
+                if(obj5[i].gender==2){
+                 var gender="女"
+                };
+                if(obj5[i].gender==3){
+                 var gender="不限"
+                };
+                if(obj5[i].age==1){
+                 var age="婴幼儿"
+                };
+                if(obj5[i].age==2){
+                 var age="少年"
+                };
+                if(obj5[i].age==3){
+                 var age="青年"
+                };
+                if(obj5[i].age==4){
+                 var age="中年"
+                };
+                if(obj5[i].age==5){
+                 var age="老年"
+                };
+                if(obj5[i].age==6){
+                 var age="不限"
+                };
+                if(obj5[i].shape==1){
+                 var shape="瘦子"
+                };
+                if(obj5[i].shape==2){
+                 var shape="偏瘦"
+                };
+                if(obj5[i].shape==3){
+                 var shape="适中"
+                };
+                if(obj5[i].shape==4){
+                 var shape="健硕"
+                };
+                if(obj5[i].shape==5){
+                 var shape="胖子"
+                };
+                if(obj5[i].shape==0){
+                 var shape="不限"
+                };
+                if(obj5[i].min_height==''&&obj5[i].max_height==''){
+                  height5="不限"
+                }
+                if(obj5[i].min_height==''&&obj5[i].max_height!=""){
+                    height5='<='+obj5[i].max_height
+                }
+                if(obj5[i].min_height!=''&&obj5[i].max_height==''){
+                    height5='>='+obj5[i].min_height
+                }
+                if(obj5[i].min_height!=''&&obj5[i].max_height!=''){
+                    height5=obj5[i].min_height+'-'+obj5[i].max_height
+                }
+                  str4+='<div class="information_actor"><ul><li>职位名称：'+obj5[i].role+'</li><li>性别：'+gender+'</li><li>年龄段：'+age+'</li><li>身高(cm)：'+height5+'</li></ul><p class="all_info">查看全部信息</p><div class="information_actornone" ><ul><li>体型：'+shape+'</li><li>招募数量：'+obj5[i].men_count+'</li><li>技能特长：'+obj5[i].skillTag+'</li><li>特征：'+obj5[i].featureTag+'</li><li>拍摄周期(天)：'+obj5[i].workingdays+'</li></ul><div><p style="font-size:0.28rem;clear:both">人物小传</p><textarea style="font-size:0.28rem" class="weui-textarea" disabled placeholder="请输入文本" rows="3">'+obj5[i].description+'</textarea></div><p class="put_away">收起</p></div></div><div id="'+obj5[i].author._id+'" class="button_zu"><button class="'+obj5[i].Status+'" id="'+obj5[i].careerincrew_id+'">我要进组</button></div><p style="width: 100%;height: 0.2rem;background:#f2f2f2"></p>'
+                 }
+                 $(".qi").html(str4);
+                 $(".qi").parent(".detail_type").show();
+                 $(".qi").parent(".detail_type").prev(".notice_type").children(".jiantou").children("img:last-child").css("display","block");
+                 $(".qi").parent(".detail_type").prev(".notice_type").children(".jiantou").children("img:first-child").css("display","none");
+             }
+              
+          },
+          error:function(err){
+             console.log(err)
+          }
+      });
+      var user_id = !{JSON.stringify(userid)};
+     
+      $(".notice_class").on("click",".button_zu",function () {
+        var authorid=$(this).attr("id");
+        var $this=$(this);
+        var careerincrew_id=$(this).children("button").attr("id");
+        var url_bao=url+'/WX/wx_applyforposition/'+user_id+'/'+authorid+'/'+careerincrew_id;
+        console.log(authorid);
+        console.log(careerincrew_id);
+          if(user_id == authorid){
+              alert("当前用户不能报自己发布的职位！")
+          }else{
+              $.ajax({
+                  type: "get",
+                  url: url_bao,
+                  dataType: "jsonp",
+                  // jsonp: "jsonpCallback",
+                  success: function (data) {
+                  console.log(data);
+                      if (user_id == data.subscribers) {
+                          alert("当前用户不能报自己发布的职位！")
+                      } else {
+                          if (data.sign_up) {
+                          console.log('1');
+                              alert("不能重复报名！")
+                          } if(data.sign_up==false) {
+                          console.log('2');
+                              alert("投递成功！")
+                              $this.children("button").css("background","#999");
+                          }if(data.status==false){
+                          console.log('3');
+                              alert("请完善简历！")
+                          }
+                      }
+
+                  },
+                  error: function () {
+                      alert('投递失败！');
+                  }
+              });
+          }
+
+      });   

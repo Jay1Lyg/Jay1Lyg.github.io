@@ -1,0 +1,40 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 了解更多
+    style.
+      * {
+      padding: 0;
+      margin: 0;
+      list-style: none
+      }
+      html {
+      font-size: 62.5%; /* 10��16=62.5% */
+      }
+      .font{
+      width: 100%;
+      text-align: center;
+      margin-top: 5rem;
+      }
+      .font>p{
+      color: #4da2ad;
+      font-size: 2.5rem;
+      }
+      .image{
+      width: 100%;
+      text-align: center;
+      margin-top: 2rem;
+      }
+      .image>img{
+      width: 11.6rem;
+      }
+  body
+    .font
+      p 扫码关注
+      p 了解更多详情呦！
+    .image
+      img(src='image/img1.png', alt='')
+  script.

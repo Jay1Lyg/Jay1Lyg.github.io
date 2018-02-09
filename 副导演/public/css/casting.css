@@ -1,0 +1,199 @@
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+html{
+	font-size:62.5%; 
+}
+body{
+	font-size:12px;
+	font-size:1.2rem;
+}
+p{
+	font-size:14px;
+	font-size:1.4rem;
+}
+.actorName{
+	width:100%;
+	height:8.75rem;
+	background:#ffe400;
+	border:1px solid transparent;
+}
+.actorName p{
+	text-align:center;
+}
+.actorName .chinaName{
+	font-size:3rem;
+	margin-top:1.5rem;
+}
+.actorName .engName{
+	font-size:1.5rem;
+	margin-top:0.8rem;
+}
+.actorPic{
+	width:100%;
+	background:#000;
+	position:relative;
+	border:1px solid transparent;
+}
+.xiaosanjiao{
+	margin-top:-3px;
+	text-align:center;
+}
+.photo_dotted{
+	width:18.75rem;
+	height:18.75rem;
+	border:2px dashed #fff;
+	border-radius:50%;
+	margin:2rem auto;
+}
+.actorPhoto{
+	width:15.75rem;
+	height:15.75rem;
+	border-radius:50%;
+	margin:1.5rem auto;
+	overflow:hidden;
+}
+.actorPic .banyuan{
+	position:absolute;
+	top:4rem;
+}
+.line{
+	width:100%;
+	height:1px;
+	background:#ffe400;
+	margin-top:5rem;
+}
+.line .basicMessage{
+	width:9.5rem;
+	height:4rem;
+	border-radius:174px;
+	border:1px solid #ffe400;
+	font-size:2rem;
+	background:#000;
+	text-align:center;
+	line-height:4rem;
+	color:#fff;
+	margin:0 auto;
+	position:relative;
+	top:-2rem; 
+}
+.actorMessage ul{
+	margin-left:1.2rem;
+	margin-top:4rem;
+}
+ .actorMessage ul li{
+	color:#fff;
+	font-size:1.6rem;
+	line-height:2rem;
+} 
+.banyuan2{
+	position:absolute;
+	top:31rem;
+	right:0;
+}
+
+.actorExperience{
+	width:100%;
+	height:22rem;
+	margin-top:4rem;
+	overflow:hidden;
+}
+.actorExperience img{
+	width:100%;
+}
+.program{
+	text-align:center;
+	color:#fff;
+	line-height:3rem;
+	margin-top:2rem;
+	position:relative;
+}
+.program p{
+	font-size:1.6rem;
+}
+.program .mytitle{
+	color:#ffe400;
+}
+
+.banyuan3{
+	position:absolute;
+	top:2rem;
+}
+.flexBox{
+	display:flex;
+	justify-content:space-between;
+	flex-wrap:wrap;
+	margin-top:4rem;
+	color:#fff;
+	line-height:2rem;
+	text-align:center;
+}
+.flexBox p{
+	font-size:1.6rem;
+}
+.flexBox img{
+	width:100%;
+}
+.imgHeight{
+	width:100%;
+	height:15.3rem;
+	overflow:hidden;
+}
+.photoLeft,.photoRight{
+	margin-top:6px;
+	width:49%;
+	overflow: hidden;
+	/*height:18.2rem;*/
+}
+
+#marginTop{
+	margin-top:5rem;
+}
+.startContent {
+position:relative;
+padding-bottom:5rem;
+}
+.startContent .textLeft{
+	color:#fff;
+	width:40%;
+	line-height:3rem;
+}
+.textLeft{
+	margin:4rem 0 0 2rem;
+}
+.textLeft p{
+	font-size:1.6rem;
+}
+.banyuan4{
+	position:absolute;
+	top:2rem;
+	right:0;
+}
+.bottom{
+	width:100%;
+	height:5rem;
+	background:#ffe400;
+	color:#fff;
+	margin:0 auto;
+	line-height:3rem;
+	text-align:center;
+}
+.bottom span{
+	font-size:3rem;	
+}
+.sanjiao{
+	width:35px;
+	height:12px;
+	margin:0 auto;
+	margin-top:-2px;
+	position:relative;
+	top:-9px;
+	background:url(../imags/dao.png) no-repeat 0px 0px;
+}
+
+
+
+
+

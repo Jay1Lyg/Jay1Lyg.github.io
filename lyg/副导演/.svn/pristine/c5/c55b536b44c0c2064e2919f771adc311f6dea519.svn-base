@@ -1,0 +1,10 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title Title
+  body
+    form(action='http://kaishi.viphk.ngrok.org/agent/a', method='post')
+      input(name='name', type='text')
+      input(name='id', type='text')
+      input(type='submit')

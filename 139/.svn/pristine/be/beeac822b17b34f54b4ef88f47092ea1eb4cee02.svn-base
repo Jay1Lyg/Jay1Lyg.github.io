@@ -1,0 +1,372 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告列表
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    //link(rel='stylesheet', href='/css/comFize.css')
+    style.
+      html{font-size:20px;}
+    link(rel='stylesheet', href='/css/notice_list.css') 
+    script(type='text/javascript', src='/js/url.js')
+    script(src="/js/jquery-2.1.4.js") 
+    script(src="/js/gotop.js") 
+    script(src="/js/jquery-weui.js")
+    script(src='/js/jqWeui.js')
+       
+    
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      body{
+      background: white;
+      }
+      .htit{line-height:1rem;padding:0 .3rem;color:#ff8e2e;font-size: .4rem;margin:1rem 0 .4rem 0}
+        .wrapper01 {position:relative;height: 50px;width: 100%;overflow: hidden;margin:0 auto;border-bottom:1px solid #ccc;z-index:500;background: white;}
+        /*.wrapper01 .scroller {position:absolute}*/
+        .wrapper01 .scroller li {height: 1rem;color:#333;float: left;line-height: 50px;font-size: .4rem;text-align: center;}
+        .wrapper01 .scroller li a{color:#333;display:block;margin:0 .3rem}
+        .wrapper .scroller li.cur a{color:#4da2ad;}
+        .wrapper01 .scroller li.cur a.active{color:#4da2ad !important;}
+       
+  body
+    .weui-pull-to-refresh__layer
+      .weui-pull-to-refresh__arrow
+      .weui-pull-to-refresh__preloader
+      .down 下拉刷新
+      .up 释放刷新
+      .refresh 正在刷新
+    header.clearfix(style='margin-top:10px')
+      #retr.wrapper.wrapper01
+        .scroller
+          ul.clearfix.clearfix1
+      #wrapper02.marginleft.wrapper01(style='display:none')
+        .scroller.cc
+          ul.clearfix.clearfix2
+      #wrapper03.wrapper.wrapper01
+        .scroller
+          ul.clearfix
+            li#null
+              a 全部
+            li#true
+              a 已认证
+            li#false
+              a 未认证
+    section(style='clear:both',ontouchstart='')
+      div(style='width: 100%;height: 3px;background: #eee;margin: 0;padding: 0')
+      .display_experience
+      div.div(style='margin:0 auto;text-align:center;display:none;')
+        img(src='/img/kong.png',style='margin:0 auto;height:160px;width:165px')
+        p(style='color:#aeaeae;font-size:14px;') 暂无通告
+    .weui-loadmore(style='clear: both')
+      i.weui-loading
+      span.weui-loadmore__tips 正在加载
+  //script(type='text/javascript', src='/js/flexible.js')
+  script(type='text/javascript', src='/js/iscroll.js')
+  script(type='text/javascript', src='/js/navbarscroll.js')
+  //script(type='text/javascript', src='/js/vconsole.min.js')
+  <script src="js/notice_nav.js"></script>
+  script.
+     
+         var appid = !{JSON.stringify(appid)};
+         var openid = !{JSON.stringify(openid)};
+         var userid = !{JSON.stringify(userid)};
+        
+         var url3=url+"/WX/wx_allproductiontypes/1/null";
+         var time=$.now();
+
+            //------------------------------刷新--------------------------
+
+          $(document.body).pullToRefresh().on("pull-to-refresh",function () {
+              setTimeout(function () {
+                  $(document.body).pullToRefreshDone();
+                  console.log($(".clearfix2").length);
+                  $(".weui-loadmore").css("display", "block")
+                  var  clearfix2=$(".clearfix2").html();
+                  if(clearfix2.length==0||clearfix2==null){
+                    if(isregistered=="null"){
+                    all_notice(1)
+                     j=2;
+                    }else{
+                      leibie_url(1,categoryid,repertoiretypeid,isregistered);
+                    }
+                   
+                  
+                  }else{
+                  leibie_url(1,categoryid,repertoiretypeid,isregistered);
+                  //$(document.body).destroyInfinite()
+                  }
+              },2000)
+          });
+        
+          
+           //------------------------------加载---------------------------------
+          
+       var j=2;
+       var a=2;
+        var loading = false;  //状态标记
+       
+        $(document.body).infinite(1000).on("infinite", function(e) {
+
+            if(loading) return;
+            loading = true;
+            var totalpages=parseInt($(".display_experience").attr("id"));
+            console.log(totalpages)
+            setTimeout(function() {
+                      console.log(j) 
+
+              var  clearfix2=$(".clearfix2").html();
+              if(clearfix2.length==0||clearfix2==null){
+                if(isregistered=="null"){
+                  if(totalpages>=j){
+                   all_notice_jiazai(j)
+                  }else{
+                    $(".weui-loadmore").css("display", "none")
+                  }
+                }
+                
+               
+              }
+                loading = false;
+            }, 1000);
+        });
+
+        console.log(time);
+        function all_notice(page){
+            var all_url=url+'/WX/wx_allcrewlist/'+page+'/'+appid+'/'+openid+'/'+time;
+            console.log(all_url);
+            $.ajax({
+                type : "get",
+                url : all_url,
+                dataType : "jsonp",
+                async:false,
+                // jsonp: "jsonpCallback",
+                success : function(data){
+                    console.log(data);
+                    var results=data.results;
+                    $(".display_experience").attr("id",data.totalPages);
+                    $(".display_experience").empty();
+                    if(results.length!=0){
+                      var str= $(".display_experience").html();
+                      for(var i=0;i<results.length;i++){
+                      var type=''
+                       for(var j=0;j<results[i].categorytag.repertoireTpyeArray.length;j++){
+                          type+='<span style="margin-right:5px;">'+results[i].categorytag.repertoireTpyeArray[j].repertoireTpyeName+'</span>';
+                          console.log(type)
+                          }
+                          str+='<a href="'+url+'/WX/page_positionsDetails/'+userid+'/'+results[i].productioncrews_id[0]._id+'/'+appid+'/'+openid+'"><div><div class="photo_experience"><img src="'+results[i].compress_production_image+'" alt=""></div><div class="detail_experience"><ul><li><span>剧名：</span>《'+results[i].name+'》<span class="types">'+results[i].categorytag.categoryName+'</span></li><li><span>剧目类型：</span>'+type+'</li><li><span>拍摄周期（天）：</span>'+results[i].duration+'</li><li><span>拍摄地：</span>'+results[i].location[0].fullname+'</li></ul></div><div class="zhixiang"><img src="/img/jiantou.png" alt=""></div></div></a><div style="width: 100%;height: 3px;background: #eee;margin: 0;padding: 0"></div>'
+                      }
+                      $(".display_experience").html(str);
+                      if (results.length <5) {
+                          $(".weui-loadmore").css("display", "none")
+                      } 
+                      }else{
+                        $(".div").css('display','block')
+                      }
+                   
+                    
+                },
+                error:function(err){
+                   console.log(err)
+                }
+            });
+            
+        }
+         all_notice(1);
+
+
+         function all_notice_jiazai(page){
+            var all_url=url+'/WX/wx_allcrewlist/'+page+'/'+appid+'/'+openid+'/'+time;
+            console.log(all_url);
+            $.ajax({
+                type : "get",
+                url : all_url,
+                dataType : "jsonp",
+                async:false,
+                // jsonp: "jsonpCallback",
+                success : function(data){
+                    console.log(data);
+                    //$(".display_experience").empty();
+                   var results=data.results;
+                    //$(".display_experience").empty();
+                   var str= $(".display_experience").html();
+                    for(var i=0;i<results.length;i++){
+                    var type=''
+                     for(var j=0;j<results[i].categorytag.repertoireTpyeArray.length;j++){
+                        type+='<span style="margin-right:5px;">'+results[i].categorytag.repertoireTpyeArray[j].repertoireTpyeName+'</span>';
+                        console.log(type)
+                        }
+                        str+='<a href="'+url+'/WX/page_positionsDetails/'+userid+'/'+results[i].productioncrews_id[0]._id+'/'+appid+'/'+openid+'"><div><div class="photo_experience"><img src="'+results[i].compress_production_image+'" alt=""></div><div class="detail_experience"><ul><li><span>剧名：</span>《'+results[i].name+'》<span class="types">'+results[i].categorytag.categoryName+'</span></li><li><span>剧目类型：</span>'+type+'</li><li><span>拍摄周期（天）：</span>'+results[i].duration+'</li><li><span>拍摄地：</span>'+results[i].location[0].fullname+'</li></ul></div><div class="zhixiang"><img src="/img/jiantou.png" alt=""></div></div></a><div style="width: 100%;height: 3px;background: #eee;margin: 0;padding: 0"></div>'
+                    }
+                    $(".display_experience").html(str);
+                    if (results.length <5) {
+                        $(".weui-loadmore").css("display", "none")
+                    } 
+                    
+                },
+                error:function(err){
+                   console.log(err)
+                }
+            });
+            j++
+        }
+        
+        console.log(url3);
+        $.ajax({
+            type : "get",
+            url : url3,
+            dataType : "jsonp",
+            async:false,
+            // jsonp: "jsonpCallback",
+            success : function(data){
+                console.log(data);
+                $(".clearfix1").empty();
+                var str=$(".clearfix1").html();
+                for(var i=0;i<data.length;i++){
+                str+='<li id="'+data[i].id+'"><a >'+data[i].name+'</a></li>'
+                }
+
+                $(".clearfix1").html(str);
+                $('#retr').navbarscroll();
+            },
+            error:function(){
+            alert('fail');
+        }
+        });
+        //---------------------------栏目类别-------------------------------------
+        var categoryid="null";
+        var repertoiretypeid="null";
+        var isregistered="null";
+        $('#retr').on("click","li",function(e){
+             var target=$(e.target); 
+            categoryid=$(this).attr("id");
+            repertoiretypeid="null"
+            var url4=url+'/WX/wx_allrepertoiretype/'+categoryid;
+            j=1;
+            console.log(url4);
+            console.log(categoryid);
+            $.ajax({
+            type : "get",
+            url : url4,
+            dataType : "jsonp",
+            success : function(data){
+              if(target.html()=="不限"){
+                $("#wrapper02").css("display","none");
+              }else{
+                 $("#wrapper02").css("display","block");
+              }
+              //console.log(data);
+                $(".clearfix2").empty();
+                var str=$(".clearfix2").html();
+                for(var i=0;i<data.length;i++){
+                str+='<li id="'+data[i].id+'" ><a  href="javascript:void(0)">'+data[i].name+'</a></li>'
+                }
+                $(".clearfix2").html(str);
+                $(".wrapper02 .scroller li.cur a").css("color","#333");
+                $('#wrapper02').navbarscroll();
+                leibie_url(1,categoryid,repertoiretypeid,isregistered)
+            },
+            error:function(){
+            alert('fail');
+            }
+            });
+        });
+        console.log(categoryid);
+        $('#wrapper03').navbarscroll();
+        $('#wrapper02').on("click","li",function(){
+          repertoiretypeid=$(this).attr("id");
+          var a=$(this).children();
+         
+            var clearfix2=$(".clearfix2 a");
+            console.log(clearfix2.length);
+            for(var i=0;i<clearfix2.length;i++){
+              clearfix2[i].classList.remove('active');
+              //console.log($(this))
+            }
+          $(this).children().addClass('active');
+            console.log(repertoiretypeid);
+            j=1;
+            leibie_url(1,categoryid,repertoiretypeid,isregistered)
+        });
+         $('#wrapper03').on("click","li",function(){
+          isregistered=$(this).attr("id");
+            console.log(isregistered);
+            j=1;
+            leibie_url(1,categoryid,repertoiretypeid,isregistered)
+        });
+        function leibie_url(page,categoryid,repertoiretypeid,isregistered){
+          var leibie_url=url+'/WX/wx_matchproduction/'+page+'/'+appid+'/'+openid+'/'+time+'/'+categoryid+'/'+repertoiretypeid+'/'+isregistered;
+          console.log(leibie_url);
+           $.ajax({
+            type : "get",
+            url : leibie_url,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+                console.log(data);
+
+                $(".display_experience").empty();
+                if(data.length!=0){
+                var str= $(".display_experience").html();
+                    for(var i=0;i<data.length;i++){
+                    var type='';
+                      for(var j=0;j<data[i].repertoireTpyeArray.length;j++){
+                         type+='<span style="margin-right:5px;">'+data[i].repertoireTpyeArray[j].repertoireTpyeName+'</span>';
+                        }
+                        str+='<a href="'+url+'/WX/page_positionsDetails/'+userid+'/'+data[i].production_crews[0]._id+'/'+appid+'/'+openid+'"><div><div class="photo_experience"><img src="'+data[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span>剧名：</span>《'+data[i].name+'》<span class="types">'+data[i].categoryName+'</span></li><li><span>剧目类型：</span>'+type+'</li><li><span>拍摄周期（天）：</span>'+data[i].duration+'</li><li><span>拍摄地：</span>'+data[i].location[0].fullname+'</li></ul></div><div class="zhixiang"><img src="/img/jiantou.png" alt=""></div></div></a><div style="width: 100%;height: 3px;background: #eee;margin: 0;padding: 0"></div>'
+                    }
+                    $(".display_experience").html(str);
+                    if (data.length <5) {
+                        $(".weui-loadmore").css("display", "none")
+                    } 
+                    }else{
+                    $.alert("无符合要求的选项")
+                    $(".weui-loadmore").css("display", "none")
+                    }
+                
+
+                
+            },
+            error:function(){
+              alert('fail');
+            }
+            });
+            
+
+        };
+
+
+        function leibie_url_jiazai(page,categoryid,repertoiretypeid,isregistered){
+          var leibie_url=url+'/WX/wx_matchproduction/'+page+'/'+appid+'/'+openid+'/'+time+'/'+categoryid+'/'+repertoiretypeid+'/'+isregistered;
+          console.log(leibie_url);
+           $.ajax({
+            type : "get",
+            url : leibie_url,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+                console.log(data);
+
+                //$(".display_experience").empty();
+                var str= $(".display_experience").html();
+                    for(var i=0;i<data.length;i++){
+                    var type='';
+                      for(var j=0;j<data[i].repertoireTpyeArray.length;j++){
+                         type+='<span style="margin-right:5px;">'+data[i].repertoireTpyeArray[j].repertoireTpyeName+'</span>';
+                        }
+                        str+='<a href="'+url+'/WX/page_positionsDetails/'+userid+'/'+data[i].production_crews[0]._id+'/'+appid+'/'+openid+'"><div><div class="photo_experience"><img src="'+data[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span>剧名：</span>《'+data[i].name+'》<span class="types">'+data[i].categoryName+'</span></li><li><span>剧目类型：</span>'+type+'</li><li><span>拍摄周期（天）：</span>'+data[i].duration+'</li><li><span>拍摄地：</span>'+data[i].location[0].fullname+'</li></ul></div><div class="zhixiang"><img src="/img/jiantou.png" alt=""></div></div></a><div style="width: 100%;height: 3px;background: #eee;margin: 0;padding: 0"></div>'
+                    }
+                    $(".display_experience").html(str);
+                    if (data.length <=3) {
+                        $(".weui-loadmore").css("display", "none")
+                    }
+            },
+            error:function(){
+              alert('fail');
+            }
+            });
+            a++;
+        }
+     

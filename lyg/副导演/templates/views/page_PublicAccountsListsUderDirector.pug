@@ -1,0 +1,200 @@
+doctype html
+html(lang='zh-CN')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+        title 经纪人广场
+        link(rel='stylesheet', href='/css/jqueryWeui.css')
+        link(rel='stylesheet', href='/css/weui.css')
+        style.
+            * {
+                padding: 0;
+                margin: 0;
+                list-style: none
+            }
+
+            .list {
+                height: 90px;
+                width: 100%;
+                background: #f2f2f2;
+                padding: 15px;
+                box-sizing: border-box;
+                margin:2px;
+            }
+
+            .list > img {
+                width: 60px;
+                border-radius: 50%;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 15px;
+               
+            }
+
+            .list > span {
+                font-size: 18px;
+                line-height:60px;
+            }
+        script(type='text/javascript', src='/js/jquery-2.1.4.js')
+        script(type='text/javascript', src='/js/jquery-weui.js')
+        script(type='text/javascript', src='/js/rootfont.js')
+        script(type='text/javascript', src='/js/vconsole.min.js')
+        script(type='text/javascript', src='/js/tab.js')
+        script(type='text/javascript', src='/js/url.js')
+    body
+        .weui-pull-to-refresh__layer
+            .weui-pull-to-refresh__arrow
+            .weui-pull-to-refresh__preloader
+            .down 下拉刷新
+            .up 释放刷新
+            .refresh 正在刷新
+        header
+            .header
+                .search
+                    // 搜索内容
+                    #searchBar.weui-search-bar
+                        form.weui-search-bar__form
+                            .weui-search-bar__box
+                                input#searchInput.weui-search-bar__input(type='search', placeholder='搜索', required='')
+                                a#searchClear.weui-icon-clear(href='javascript:')
+                            label#searchText.weui-search-bar__label(style='transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);')
+                                i.weui-icon-search
+                                span 搜索
+                        a.lookfor(style='color: #4da2ad;font-size: 0.28rem;padding: 0.1rem') 搜索
+        section
+    script.
+        var myappid = !{JSON.stringify(myappid)};
+        var user_id = !{JSON.stringify(user_id)};
+        "use strict";
+
+                //刷新
+                $(document.body).pullToRefresh().on("pull-to-refresh", function () {
+                    setTimeout(function () {
+                        $(document.body).pullToRefreshDone();
+
+                        Director_list(1);
+                        j = 2;
+                    }, 2000);
+                });
+
+                //加载
+                var j = 2;
+
+                //循环列表
+                function Director_list(page) {
+                    var url_1 = url + '/WX/wx_searchallagentpublicaccounts/' + page;
+                    console.log(url_1);
+                    //var appid1;
+                    $.ajax({
+                        type: "get",
+                        url: url_1,
+                        dataType: "jsonp",
+                        success: function success(data) {
+                            console.log(data);
+                            var html = "";
+                            //appid1=data.results[0].appid;
+                            var _iteratorNormalCompletion = true;
+                            var _didIteratorError = false;
+                            var _iteratorError = undefined;
+
+                            try {
+                                for (var _iterator = data.results[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                                    var results = _step.value;
+
+                                    html += "\n                                <div id=\"" + results.appid + "\" class= \"list\" >\n                                    <img src = \"" + results.head_img + "\">\n                                    <span> " + results.nick_name + " </span >\n                                </div >\n                            ";
+                                    $("section").html(html);
+                                }
+                            } catch (err) {
+                                _didIteratorError = true;
+                                _iteratorError = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion && _iterator.return) {
+                                        _iterator.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError) {
+                                        throw _iteratorError;
+                                    }
+                                }
+                            }
+                        },
+                        error: function error(err) {
+                            console.log(err);
+                        }
+                    });
+                };
+                Director_list(1);
+
+                //console.log(appid1);
+                $(".lookfor").click(function () {
+                    var name = $("#searchInput").val();
+                    if (name == "") {
+                        alert("请输入关键词！");
+                    } else {
+                        var nameUrl = url + '/WX/wx_searchpublicaccountsByName/' + name + '/2';
+                        $.ajax({
+                            type: "POST",
+                            url: nameUrl,
+                            dataType: "jsonp",
+                            success: function success(data) {
+                                console.log(data);
+                                var data = data;
+                                if (data.length) {
+
+                                    $("section").html("");
+                                    var html = "";
+                                    var _iteratorNormalCompletion2 = true;
+                                    var _didIteratorError2 = false;
+                                    var _iteratorError2 = undefined;
+
+                                    try {
+                                        for (var _iterator2 = data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                                            var result = _step2.value;
+
+                                            html += "\n                                   <div id=\"" + result.appid + "\" class= \"list list1\" >\n                                    <img src = \"" + result.head_img + "\">\n                                    <span> " + result.nick_name + " </span >\n                                   </div >\n                                ";
+                                            $("section").html(html);
+                                        }
+                                    } catch (err) {
+                                        _didIteratorError2 = true;
+                                        _iteratorError2 = err;
+                                    } finally {
+                                        try {
+                                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                                _iterator2.return();
+                                            }
+                                        } finally {
+                                            if (_didIteratorError2) {
+                                                throw _iteratorError2;
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    $("section").html('<div style="text-align:center" ><p style="font-size:16px">没有符合您要求的选项</p></div>');
+                                }
+                            },
+                            error: function (_error) {
+                                function error() {
+                                    return _error.apply(this, arguments);
+                                }
+
+                                error.toString = function () {
+                                    return _error.toString();
+                                };
+
+                                return error;
+                            }(function () {
+                                console.log(error);
+                            })
+                        });
+                    }
+                });
+
+                $("section").on("click", ".list", function () {
+                    var agent_appid = $(this).attr("id");
+                    var jumpUrl = url + '/WX/page_ActorListsUderAgent/' + agent_appid + '/' + user_id;
+                    location.href = jumpUrl;
+                });
+
+

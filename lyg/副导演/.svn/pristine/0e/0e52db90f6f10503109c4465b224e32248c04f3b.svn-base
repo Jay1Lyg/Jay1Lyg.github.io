@@ -1,0 +1,57 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    title 方案管理
+    link(rel='stylesheet', href='/css/left.css')
+    <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="/js/jquery-weui.js"></script>
+    <script type="text/javascript" src="/js/url.js"></script>
+  body
+    section
+      .list
+        ul.list_ul
+      script(src='/js/left.js')
+      script.
+        var director_id=!{JSON.stringify(director_id)};
+        var appid=!{JSON.stringify(appid)};
+        function list(){
+          var juzu_url=url+'/WX/wx_searchProgrammeList/'+director_id;
+          console.log(juzu_url);
+          $.ajax({
+              type : "get",
+              url : juzu_url,
+              dataType : "jsonp",
+              async:false,
+              // jsonp: "jsonpCallback",
+              success : function(data){
+                  console.log(data);
+                  var datas=data;
+                  var str='';
+                  for(data of datas){
+                    var programmeArrays=data.programmeArray;
+                    var strArr="";
+                    str+=`<li class="jiji">
+                          剧名：${data.production_name}
+                            <b>
+                              <img src="/img/jian2.png" width="12" height="18" border="0" alt="" class="img">
+                             </b> 
+                          <div class="erjilist">
+                            <ul>
+                            //for(programmeArray of programmeArrays){
+                             strArr+= `<li><a>${programmeArray.programme_name}<i><img src="/img/delete2.png" width="40" height="40" border="0" alt=""> </i></a></li>`
+                            //}
+                            </ul>
+                          </div>
+                        </li>`
+                  }
+                $(".list_ul").html(str)
+                 
+              },
+              error:function(err){
+                 console.log(err)
+              }
+          });
+        };
+        list();

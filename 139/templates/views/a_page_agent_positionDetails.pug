@@ -1,0 +1,214 @@
+doctype html
+html(lang='zh-CN')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+        title 通告详情
+        link(rel='stylesheet', href='/css/jqueryWeui.css')
+        link(rel='stylesheet', href='/css/weui.css')
+        link(rel='stylesheet', href='/css/comFize.css')
+        link(rel='stylesheet', href='/css/notice_edit.css')
+        style.
+            * {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+        script(type='text/javascript', src='/js/jquery-2.1.4.js')
+        //script(src='/js/echarts.min.js')
+        script(type='text/javascript', src='/js/jquery-weui.js')
+        script(type='text/javascript', src='/js/rootfont.js')
+        script(type='text/javascript', src='/js/tab.js')
+        script(type='text/javascript', src='/js/url.js')
+
+    body
+        header
+            .newactor_banner
+                img(src='/img/img1.png', alt='')
+                div
+                    ul.tab
+                        li.active 剧组信息
+                        li 角色信息
+        section
+            .active.crew_info
+            div
+                .notice_class.leader
+                    .notice_type
+                        p.theLead 领携主演
+                        p.jiantou
+                            img(src='/img/sanyou.png', alt='')
+                            img(src='/img/sanxia.png', alt='')
+                    .detail_type.leader_actor
+                        .information_actor
+                        .button_zu
+                            button 我要进组
+                .notice_class.starring
+                    .notice_type
+                        p.star 主要演员
+                        p.jiantou
+                            img(src='/img/sanyou.png', alt='')
+                            img(src='/img/sanxia.png', alt='')
+                    .detail_type.starring_actor
+                        .information_actor
+                        .button_zu
+                             button 我要进组
+                .notice_class.guest
+                    .notice_type
+                        p.guest 客串演员
+                        p.jiantou
+                            img(src='/img/sanyou.png', alt='')
+                            img(src='/img/sanxia.png', alt='')
+                    .detail_type.guest_actor
+                        .information_actor
+                        .button_zu
+                             button 我要进组
+
+                .notice_class.other
+                    .notice_type
+                        p.otherActor 其他演员
+                        p.jiantou
+                            img(src='/img/sanyou.png', alt='')
+                            img(src='/img/sanxia.png', alt='')
+                    .detail_type.other_actor
+                        .information_actor
+                        .button_zu
+                            button 我要进组
+    script.
+        toggle($(".notice_type"));
+        $(".detail_type").on("click", ".all_info", function () {
+            $(this).hide();
+            $(this).next(".information_actornone").show()
+        });
+        $(".detail_type").on("click", ".put_away", function () {
+            $(this).parent(".information_actornone").prev(".all_info").show();
+            $(this).parent(".information_actornone").hide();
+        })
+        var btns = $(".tab li"),
+                contents = $("section>div");
+        var t = new TabView(btns, contents);
+        //---------------------------剧组信息---------------------------------------
+        ///WX/wx_searchallpositionDetails/'+productionCrew_id+'/'+userid;
+        //var url = "http://www.901vehicle.cn";
+        var user_id = "null";
+        var productionCrew_id = !{JSON.stringify(productionCrew_id)};
+                    var detailUrl = url + '/WX/wx_searchallpositionDetails/' + productionCrew_id + '/' + user_id;
+            ///WX/wx_searchallpositionDetails/'+productionCrew_id+'/'+userid;
+            console.log(detailUrl);
+            $.ajax({
+                type: "GET",
+                url: detailUrl,
+                dataType: "jsonp",
+                success: function success(data) {
+                    console.log(data);
+                    //-----------------------------------剧组信息----------------------------------------
+                    var html = "";
+                    var html2 = "";
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
+
+                    try {
+                        for (var _iterator = data.production.categorytag.repertoireTpyeArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                            var playTypes = _step.value;
+
+                            html2 += '\n'+ playTypes.repertoireTpyeName + '\n                        ';
+                        }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+                        } finally {
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
+                        }
+                    }
+
+                    html += '\n                        <div class="active crew_info">\n                            <div>\n                            <p><span>\u5267\u540D\uFF1A</span>' + data.production.production_name + '</p>\n                            <p><span>\u901A\u544A\u7C7B\u522B\uFF1A</span>' + data.production.categorytag.categoryName + '</p>\n                            <p><span>\u5267\u76EE\u7C7B\u578B\uFF1A</span>' + html2 + '</p>\n                            <p><span>\u62CD\u6444\u5730\uFF1A</span>' + data.production.location[0].fullname + '</p>\n                            <p><span>\u62CD\u6444\u5468\u671F\uFF08\u5929\uFF09:</span>' + data.production.duration + '</p>\n                            <p><span>\u51FA\u54C1\u516C\u53F8\uFF1A</span>' + data.production.issuer_companies_name + '</p>\n                            <p><span>\u627F\u5236\u516C\u53F8\uFF1A</span>' + data.production.production_companys_name + '</p>\n                            </div>\n                        </div>\n                    ';
+                    $(".crew_info").html(html);
+                    //-----------------------------------角色信息----------------------------------------
+                    var obj2 = data.obj2; //领衔主演
+                    var obj3 = data.obj3; //主演
+                    var obj4 = data.obj4; //客串演员
+                    var obj5 = data.obj5; //其他演员
+                    var str2 = "";
+                    var str3 = "";
+                    var str4 = "";
+                    var str5 = "";
+                    //公共部分封装进函数中 需要知道obj,没数据时的容器,以及拼接的字符串
+                    function common(obj, emptyHtml, string) {
+                        if (obj == undefined) {
+                            $(emptyHtml).html("");
+                        } else {
+                            for (var i = 0; i < obj.length; i++) {
+                                //-------------性别------------
+                                if (obj[i].gender == 1) {
+                                    obj[i].gender = "男";
+                                } else if (obj[i].gender == 2) {
+                                    obj[i].gender = "女";
+                                } else if (obj[i].gender == 3) {
+                                    obj[i].gender = "不限";
+                                }
+                                //obj[i].genger=obj[i].genger=="1"?"男":obj[i].genger=="2"?"女":obj[i].genger=="3"?"不限";
+                                //-------------年龄------------
+                                if (obj[i].age == "1") {
+                                    obj[i].age = "婴幼儿";
+                                } else if (obj[i].age == "2") {
+                                    obj[i].age = "少年";
+                                } else if (obj[i].age == "3") {
+                                    obj[i].age = "青年";
+                                } else if (obj[i].age == "4") {
+                                    obj[i].age = "中年";
+                                } else if (obj[i].age == "5") {
+                                    obj[i].age = "老年";
+                                } else if (obj[i].age == "6") {
+                                    obj[i].age = "不限";
+                                }
+                                //-------------体质------------
+                                if (obj[i].shape == "1") {
+                                    obj[i].shape = "极瘦";
+                                } else if (obj[i].shape == "2") {
+                                    obj[i].shape = "偏瘦";
+                                } else if (obj[i].shape == "3") {
+                                    obj[i].shape = "适中";
+                                } else if (obj[i].shape == "4") {
+                                    obj[i].shape = "健壮";
+                                } else if (obj[i].shape == "5") {
+                                    obj[i].shape = "偏胖";
+                                } else if (obj[i].shape == "0") {
+                                    obj[i].shape = "不限";
+                                }
+                                //-------------身高------------
+                                var height;
+                                obj[i].height = height;
+                                if (obj[i].min_height == "" && obj[i].max_height == "") {
+                                    obj[i].height = "不限";
+                                } else if (obj[i].min_height == "" && obj[i].max_height != "") {
+                                    obj[i].height = "<=" + obj[i].max_height;
+                                } else if (obj[i].min_height != "" && obj[i].max_height == "") {
+                                    obj[i].height = ">=" + obj[i].min_height;
+                                } else if (obj[i].min_height != "" && obj[i].max_height != "") {
+                                    obj[i].height = obj[i].min_height + '-' + obj[i].max_height;
+                                }
+                                //-------------渲染数据------------
+                                string += '\n                                <div class="information_actor">\n                                   <ul>\n                                    <li>\u804C\u4F4D\u540D\u79F0\uFF1A' + obj[i].roleTag + '</li>\n                                    <li>\u6027\u522B\uFF1A' + obj[i].gender + '</li>\n                                    <li>\u5E74\u9F84\u6BB5\uFF1A' + obj[i].age + '</li>\n                                    <li>\u8EAB\u9AD8(cm)\uFF1A' + obj[i].height + '</li>\n                                </ul>\n                                   <p class="all_info">\u67E5\u770B\u5168\u90E8\u4FE1\u606F</p>\n                                   <div class="information_actornone" >\n                                      <ul>\n                                        <li>\u4F53\u578B\uFF1A' + obj[i].shape + '</li>\n                                        <li>\u62DB\u52DF\u6570\u91CF\uFF1A' + obj[i].men_count + '</li>\n                                        <li>\u6280\u80FD\u7279\u957F\uFF1A' + obj[i].skillTag + '</li>\n                                        <li>\u7279\u5F81\uFF1A' + obj[i].featureTag + '</li>\n                                      </ul>\n                                       <div>\n                                           <p style="font-size: 14px">\u4EBA\u7269\u5C0F\u4F20</p>\n                                           <textarea class="weui-textarea"  rows="3" style="font-size: 12px" disabled>' + obj[i].description + '</textarea>\n                                       </div>\n                                       <p class="put_away">\u6536\u8D77</p>\n                                   </div>\n                                </div>\n                               <div class="button_zu">\n                                   <button>\u6211\u8981\u8FDB\u7EC4</button>\n                               </div>\n                            ';
+                            }
+                            $(emptyHtml).html(string);
+                        }
+                    }
+                    common(obj2, ".leader_actor", str2);
+                    common(obj3, ".starring_actor", str3);
+                    common(obj4, ".guest_actor", str4);
+                    common(obj5, ".other_actor", str5);
+                },
+                error: function error(err) {
+                    console.log(err);
+                }
+            });
+
+

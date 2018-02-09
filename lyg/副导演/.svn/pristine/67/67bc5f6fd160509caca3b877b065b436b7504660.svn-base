@@ -1,0 +1,37 @@
+#header{
+    height: 48px;
+    width: 100%;
+    background: #f7f7f7f;
+}
+#header div{
+    position: relative;
+}
+#header div  img{
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    margin: 16px 0 0 5px;
+
+}
+#header div p{
+    color: #222222;
+    font-size: 16px;
+    font-family:微软雅黑;
+    line-height: 48px;
+    text-align: center;
+}
+#header div span{
+    color: #4da2ad;
+    font-size: 15px;
+    line-height: 48px;
+    font-family:微软雅黑;
+    position: absolute;
+    right:20px;
+    top:0;
+}
+.clearfix{
+    content: " ";
+    display: block;
+    clear: both;
+    height: 0;
+}

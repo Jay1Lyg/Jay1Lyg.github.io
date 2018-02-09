@@ -1,0 +1,366 @@
+var format=require('../position_match/format.js');
+//查询各角色类型下角色的个数，以及每个角色的片酬
+var searchActorNumberUderRoletype = function(careerinfo,callback){
+  var result={};
+  var obj1=[];
+  var obj2=[];
+  var obj3=[];
+  var obj4=[];
+  var obj5=[];
+   async.eachSeries(careerinfo,function(item,next){
+       var data = {};
+       if(item.role.roleTag == '59acc5e625d3453c2a50bbfa'){//领衔
+           data.roleTag = item.role.roleTag;
+           data.role_paycheck = item.role_paycheck;
+           data.workingdays = item.workingdays;
+           data.careerincrew_id = item._id
+           obj1.push(data);
+           result.obj1=obj1;
+           next();
+       }if(item.role.roleTag == '59acc5f825d3453c2a50bbfb'){//主要演员
+           data.roleTag = item.role.roleTag;
+           data.role_paycheck = item.role_paycheck;
+           data.workingdays = item.workingdays;
+           data.careerincrew_id = item._id
+           obj2.push(data);
+           result.obj2=obj2;
+           next();
+
+       }if(item.role.roleTag == '59acc60e25d3453c2a50bbfc'){//客串演员
+           data.roleTag = item.role.roleTag;
+           data.role_paycheck = item.role_paycheck;
+           data.workingdays = item.workingdays;
+           data.careerincrew_id = item._id
+           obj3.push(data);
+           result.obj3=obj3;
+           next();
+
+       }if(item.role.roleTag == '59acc62225d3453c2a50bbfd'){//其他演员
+           data.roleTag = item.role.roleTag;
+           data.role_paycheck = item.role_paycheck;
+           data.workingdays = item.workingdays;
+           data.careerincrew_id = item._id
+           obj4.push(data);
+           result.obj4=obj4;
+           next();
+       }
+   },function(err){
+       if(err){
+           throw new Error(err);
+       }else{
+           callback(null,result);
+       }
+   });
+}
+//根据滑块算出每个角色的预算/日
+var getDayPaycheck=function(obj,role_budget,paycheck_totalratio,callback){
+    pay_results = [];
+    async.eachSeries(obj,function(item,next){
+       var data = {};
+       var day_pacheck = role_budget/paycheck_totalratio*item.role_paycheck/item.workingdays;
+       data.careerincrew_id = obj.careerincrew_id;
+       data.day_pacheck = day_pacheck;
+       pay_results.push(data);
+       next();
+    },function(err){
+       if(err){
+          throw new Error(err);
+       }else{
+          callback(null,pay_results);
+       }
+    });
+}
+//根据滑块计算每种角色下每个角色的预算/日
+var getActorPaycheckByactorBudgetRetio = function(totalActorBudget,careerinfo,budgetRatioinfo,actornum,callback){
+    var results = [];
+    async.waterfall([
+      function(callback){
+         if(actornum.obj1!=undefined){
+             var leadingactor_budget = totalActorBudget*budgetRatioinfo.leadingactor_budget_ratio;//领衔主演总预算
+             var paycheck_ratio;
+             async.eachSeries(actornum.obj1,function(item,next){
+                 paycheck_totalratio = paycheck_ratio+item.role_paycheck;//领衔演员薪水总份数
+                 next();
+             },function(err){
+                 if(err){
+                    throw new Error(err);
+                 }else{
+                    getDayPaycheck(actornum.obj1,leadingactor_budget,paycheck_totalratio,function(err,pay_results){
+                        if(err){
+                            throw new Error(err);
+                        }else{
+                            async.eachSeries(pay_results,function(item1,next){
+                               results.push(item1);
+                               next();
+                            },function(err){
+                               callback(null);
+                            })  
+                        }
+                    });
+                    
+                 }
+             }) 
+          }else{
+              callback(null);
+          }
+      },function(callback){
+         if(actornum.obj2!=undefined){
+             var starringingroup_budget_ratio = totalActorBudget*budgetRatioinfo.starringingroup_budget_ratio;//跟组主演总预算
+             var paycheck_ratio;
+             async.eachSeries(actornum.obj2,function(item,next){
+                 paycheck_totalratio = paycheck_ratio+item.role_paycheck;//主要演员薪水总份数
+                 next();
+             },function(err){
+                 if(err){
+                    throw new Error(err);
+                 }else{
+                    getDayPaycheck(actornum.obj2,starringingroup_budget_ratio,paycheck_totalratio,function(err,pay_results){
+                        if(err){
+                            throw new Error(err);
+                        }else{
+                            async.eachSeries(pay_results,function(item1,next){
+                               results.push(item1);
+                               next();
+                            },function(err){
+                               callback(null);
+                            })  
+                        }
+                    });
+                    
+                 }
+             }) 
+          }else{
+              callback(null);
+          }
+      },function(callback){
+         if(actornum.obj3!=undefined){
+             var guestactor_budget_ratio = totalActorBudget*budgetRatioinfo.guestactor_budget_ratio;//客串主演总预算
+             var paycheck_ratio;
+             async.eachSeries(actornum.obj3,function(item,next){
+                 paycheck_totalratio = paycheck_ratio+item.role_paycheck;//客串演员薪水总份数
+                 next();
+             },function(err){
+                 if(err){
+                    throw new Error(err);
+                 }else{
+                    getDayPaycheck(actornum.obj3,guestactor_budget_ratio,paycheck_totalratio,function(err,pay_results){
+                        if(err){
+                            throw new Error(err);
+                        }else{
+                            async.eachSeries(pay_results,function(item1,next){
+                               results.push(item1);
+                               next();
+                            },function(err){
+                               callback(null);
+                            })  
+                        }
+                    });
+                    
+                 }
+             }) 
+          }else{
+              callback(null);
+          }
+      },function(callback){
+         if(actornum.obj4!=undefined){
+             var other_budget_ratio = totalActorBudget*budgetRatioinfo.other_budget_ratio;//客串主演总预算
+             var paycheck_ratio;
+             async.eachSeries(actornum.obj4,function(item,next){
+                 paycheck_totalratio = paycheck_ratio+item.role_paycheck;//客串演员薪水总份数
+                 next();
+             },function(err){
+                 if(err){
+                    throw new Error(err);
+                 }else{
+                    getDayPaycheck(actornum.obj4,other_budget_ratio,paycheck_totalratio,function(err,pay_results){
+                        if(err){
+                            throw new Error(err);
+                        }else{
+                            async.eachSeries(pay_results,function(item1,next){
+                               results.push(item1);
+                               next();
+                            },function(err){
+                               callback(null);
+                            })  
+                        }
+                    });
+                    
+                 }
+             }) 
+          }else{
+              callback(null);
+          }
+      }
+    ],function(err){
+        if(err){
+           throw new Error(err);
+        }else{
+           callback(null,results);
+        }
+    })
+
+}
+//根据方案匹配演员------将所有演员的信息保存到数据库
+var positionMatchActorForProgramme = function(careerinfo,userArray,callback){
+   //var userArray = [];
+   var result = [];
+   var basicMatchingDegree;
+   var featureMatchingDegree ;
+   var offsetMatchingDegree ;
+   var scheduleMatchingDegree ;
+   var totalMatchingDegree;
+   var SalaryoffsetValue;//偏移值
+   console.log('----------userArray-------------');
+   console.log(careerinfo);
+   console.log(userArray);
+   console.log('----------userArray-------------');
+   async.eachSeries(userArray,function(item,next){
+      var userdata = {};
+      async.waterfall([
+         function(callback){//匹配基本信息35
+           format.matchBasicInfo(careerinfo,item,function(err,basicDegree){
+              if(err){
+                 throw new Error(err);
+              }else{
+                 console.log(basicDegree);
+                 basicMatchingDegree = Math.round((basicDegree*100))/100;
+                 console.log('basicMatchingDegree:'+basicMatchingDegree);
+                 callback(null);
+              }
+           });   
+         },function(callback){//角色特征20
+            format.matchFeature(careerinfo,item,function(err,featureDegree){
+               if(err){
+                  throw new Error(err);
+               }else{
+                  featureMatchingDegree = Math.round((featureDegree*100))/100;
+                  callback(null);
+                  console.log('featureMatchingDegree:'+featureMatchingDegree);
+               }
+            })
+         },function(callback){//片酬需求30------
+              SalaryoffsetValue = (userinfo.paycheck - careerinfo.role_paycheck)/careerinfo.role_paycheck;//片酬偏移值
+              if(SalaryoffsetValue>-0.3 && SalaryoffsetValue<0.5){//偏移值在-30%——50%之间
+                 offsetDegree = 1-100/80*(Math.abs(SalaryoffsetValue-0.5));
+                 offsetMatchingDegree = Math.round((offsetDegree*100))/100;//片酬匹配度
+                 callback(null,offsetMatchingDegree);
+              }else if(SalaryoffsetValue>0.5 && SalaryoffsetValue<2){
+                 offsetDegree = 1-100/150*(Math.abs(SalaryoffsetValue-0.5));
+                 offsetMatchingDegree = Math.round((offsetDegree*100))/100;//片酬匹配度
+                 callback(null,offsetMatchingDegree);
+              }else{//偏移值不在-100%——200%之间，片酬匹配度为0
+                 offsetDegree = 0;
+                 offsetMatchingDegree = Math.round((offsetDegree*100))/100;//片酬匹配度
+                 callback(null,offsetMatchingDegree);
+              }
+              
+         },function(callback){//档期匹配15
+            format.matchschedule(careerinfo,item,function(err,scheduleDegree){
+               if(err){
+                  throw new Error(err);
+               }else{
+                  scheduleMatchingDegree = Math.round((scheduleDegree*100))/100;
+                  console.log('scheduleMatchingDegree:'+scheduleMatchingDegree);
+                  callback(null);
+               }
+            });
+         },function(callback){//计算总匹配度
+            totalMatchingDegree = basicMatchingDegree*0.35+featureMatchingDegree*0.2+offsetMatchingDegree*0.3+scheduleMatchingDegree*0.15;
+            console.log('totalMatchingDegree:'+totalMatchingDegree);
+            callback(null);
+         },function(callback){
+            userdata.realname = item.realname;
+            userdata._id = item.id;
+            userdata.image = item.image;
+            userdata.basicMatchingDegree = basicMatchingDegree;
+            userdata.featureMatchingDegree = featureMatchingDegree;
+            userdata.offsetMatchingDegree = offsetMatchingDegree;
+            userdata.scheduleMatchingDegree = scheduleMatchingDegree;
+            userdata.totalMatchingDegree = totalMatchingDegree;
+            result.push(userdata);
+            callback(null);
+         },function(callback){//将匹配结果保存到数据库
+            ProgrammeMatchActor.model.findOne()
+            .where('careerincrew_id',careerinfo.careerincrew_id)
+            .where('user_id',item.id)
+            .exec(function(err,ret){
+              if(err){
+                throw new Error(err);
+              }else{
+                if(ret==null){
+                   ProgrammeMatchActor.model.create({
+                      careerincrew_id: careerinfo.careerincrew_id,
+                      user_id: item.id,
+                      realname : item.realname, 
+                      gender : item.gender,
+                      SalaryoffsetValue : SalaryoffsetValue,
+                      basicInfo_degree: basicMatchingDegree,
+                      feature_degree: featureMatchingDegree,
+                      paycheck_degree: offsetMatchingDegree,
+                      schedule_degree: scheduleMatchingDegree,
+                      total_degree: totalMatchingDegree,
+                   },function(err,ret1){
+                      if(err){
+                         throw new Error(err);
+                      }else{
+                         callback(null);
+                      }
+                   })
+                }else{
+                   ret.realname = item.realname;
+                   ret.basicInfo_degree = basicMatchingDegree;
+                   ret.feature_degree = featureMatchingDegree;
+                   ret.paycheck_degree = offsetMatchingDegree;
+                   ret.schedule_degree = scheduleMatchingDegree;
+                   ret.total_degree = totalMatchingDegree;
+                   ret.gender = item.gender;
+                   ret.SalaryoffsetValue = SalaryoffsetValue;
+                   ret.save(function(err){
+                      if(err){
+                         throw new Error(err);
+                      }else{
+                         callback(null);
+                      }
+                   })
+                }
+              }
+            })
+         }
+      ],function(err){
+          if(err){
+             throw new Error(err);
+          }else{
+             next();
+          }
+      })
+   },function(err){
+      if(err){
+         throw new Error(err);
+      }else{
+         callback(null);
+      //   console.log('!!!!');
+      //   console.log(result);
+      //    format.SortbymatchinDegree(result,function(err,user_result){
+      //       if(err){
+      //         throw new Error(err);
+      //       }else{
+      //         console.log('---');
+      //         console.log(user_result);
+      //         console.log('---');
+      //         callback(null,user_result);
+      //       }
+      //    });
+       }
+   });
+
+}
+
+module.exports = {
+  searchActorNumberUderRoletype: searchActorNumberUderRoletype,
+  getActorPaycheckByactorBudgetRetio: getActorPaycheckByactorBudgetRetio,
+  getDayPaycheck: getDayPaycheck,
+  positionMatchActorForProgramme : positionMatchActorForProgramme
+}
+
+
+

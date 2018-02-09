@@ -1,0 +1,462 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 角色信息
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/weui2.css')
+    link(rel='stylesheet', href='/css/actor_edit_echart.css')
+    link(rel='stylesheet', href='/css/noticeJob.css')
+    link(rel='stylesheet', href='/css/program.css')
+    style.
+      * {
+      padding: 0;
+      margin: 0;
+      list-style: none
+      }
+      body {
+      background: white
+      }
+    script(type='text/javascript').
+      // document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    script(type='text/javascript', src='/js/jquery.min.js')
+    // <script type="text/javascript" src="js/jqWeui.js"></script>
+    script(type='text/javascript', src='/js/zepto.min.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/echarts.min.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    header#header
+      div(style='text-align: center')
+        p 
+          span.span_title
+    div(style='clear: both')
+    .notice_class.ling
+    .notice_class.zhu
+    .notice_class.ke
+    .notice_class.qi
+  script.
+   
+   ///WX/wx_searchProgrammeDetails/:production_id/:actorbudget_id/:programme_id/:attribute;
+   var production_id=!{JSON.stringify(production_id)};
+   var actorbudget_id="null";
+   var programme_id=!{JSON.stringify(programme_id)};
+   var attribute=!{JSON.stringify(attribute)};
+   var director_id=!{JSON.stringify(director_id)};
+    function list(){
+          var juzu_url=url+'/WX/wx_searchProgrammeDetails/'+production_id+'/'+actorbudget_id+'/'+programme_id+'/'+attribute;
+          console.log(juzu_url);
+          $.ajax({
+              type : "get",
+              url : juzu_url,
+              dataType : "jsonp",
+              async:false,
+              // jsonp: "jsonpCallback",
+              success : function(data){
+                  console.log(data);
+                  var datas=data,roleInfo=data.roleInfo;
+                  var str_ratio="";
+                  
+                  var obj2=roleInfo.obj2,
+                     obj3=roleInfo.obj3,
+                     obj4=roleInfo.obj4,
+                     obj5=roleInfo.obj5,
+                     str2="",
+                     str3="",
+                     str4="",
+                     str5="",
+                     str_all2="",
+                     str_all3="",
+                     str_all4="",
+                     str_all5="",
+                     str_beixuan_all2="",
+                     str_beixuan_all3="",
+                     str_beixuan_all4="",
+                     str_beixuan_all5="",
+                     str_beixuan2="",
+                     str_beixuan3="",
+                     str_beixuan4="",
+                     str_beixuan5="";
+                     var str_ling=["领衔主演","主要演员","客串演员","其他演员"]
+                   function actorInfo(obj,html,str,str_all,str_beixuan_all,str_beixuan,str_ling){
+                    if(obj==undefined){
+                      $(html).html();
+                    }else{
+                      
+                      for(var i=0;i<obj.length;i++){
+                        if(obj[i].gender==1){
+                                  obj[i].gender="男";
+                              }else if(obj[i].gender==2){
+                                  obj[i].gender="女";
+                              }else if(obj[i].gender==3){
+                                  obj[i].gender="不限";
+                              }
+                              //obj[i].genger=obj[i].genger=="1"?"男":obj[i].genger=="2"?"女":obj[i].genger=="3"?"不限";
+                              //-------------年龄------------
+                              if(obj[i].age=="1"){
+                                 obj[i].age="婴幼儿";
+                              }else if(obj[i].age=="2"){
+                                 obj[i].age="少年";
+                              }else if(obj[i].age=="3"){
+                                  obj[i].age="青年";
+                              }else if(obj[i].age=="4"){
+                                  obj[i].age="中年";
+                              }else if(obj[i].age=="5"){
+                                  obj[i].age="老年";
+                              }else if(obj[i].age=="6"){
+                                  obj[i].age="不限";
+                              }
+                              //-------------体质------------
+                              if(obj[i].shape=="1"){
+                                  obj[i].shape="极瘦";
+                              }else if(obj[i].shape=="2"){
+                                  obj[i].shape = "偏瘦";
+                              }else if(obj[i].shape=="3"){
+                                  obj[i].shape = "适中";
+                              }else if(obj[i].shape=="4"){
+                                  obj[i].shape = "健壮";
+                              }else if(obj[i].shape=="5"){
+                                  obj[i].shape = "偏胖";
+                              }else if(obj[i].shape=="0"){
+                                  obj[i].shape = "不限";
+                              }
+                              //-------------身高------------
+                              var height;
+                              obj[i].height=height;
+                              if(obj[i].min_height=="" && obj[i].max_height==""){
+                                 obj[i].height= "不限";
+
+                              }else if(obj[i].min_height=="" && obj[i].max_height!=""){
+                                  obj[i].height= "<="+obj[i].max_height;
+
+                              }else if(obj[i].min_height!="" && obj[i].max_height==""){
+                                  obj[i].height= ">="+obj[i].min_height;
+
+                              }else if(obj[i].min_height!="" && obj[i].max_height!=""){
+                                  obj[i].height= obj[i].min_height+'-' +obj[i].max_height;
+                              }
+                              //判断角色是否有匹配的演员
+                              
+                                var str_beixuan="";
+                                for(var j=0;j<obj[i].userArray.length;j++){
+                                  
+                                  str_beixuan+=`<div class="weui_cell slidelefts ">
+                                                    <div class="weui_cell_bd weui_cell_primary actor_info" id="${obj[i].userArray[j].user_id}">
+                                                        <div>
+                                                            <div class="recommend_edit" style="height: 132px">
+                                                                <div>
+                                                                    <img src="${obj[i].userArray[j].artimage}" alt="" class="chart">
+                                                                </div>
+                                                                <div>
+                                                                    <p style="font-size: 14px">与旗下演员<span style="color:#4da2ad">${obj[i].userArray[j].realname}</span>匹配度较高</p>
+                                                                    <div id="main${obj[i].userArray[j].user_id}" style="width: 100px;height:100px;float: left;"></div>
+                                                                    <ul class="pipei">
+                                                                        <li>基本信息：${obj[i].userArray[j].basicInfo_degree*1000/10}%</li>
+                                                                        <li>特征角色：${obj[i].userArray[j].feature_degree*1000/10}%</li>
+                                                                        <li>片酬需求：${obj[i].userArray[j].paycheck_degree*1000/10}%</li>
+                                                                        <li>档期匹配：${obj[i].userArray[j].schedule_degree*1000/10}%</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="slideleft">
+                                                        <span class="bg-green f-white delete_actor" id="${obj[i].userArray[j].user_id}">删除</span>
+                                                    </div>
+                                                </div>`
+                                };
+                               
+                                str_beixuan_all=`<div class="beixuan">
+                                                    <div>
+                                                       ${str_beixuan}
+
+                                                        <div class="more_actor">
+                                                            <p class="button1"><span class="weui-badge" style="margin-left: 5px;background: #4da2ad">${obj[i].alternativeActor_num}</span>备选演员
+                                                            </p>
+                                                            <p class="button2" id="${obj[i].careerincrew_id}">更多推荐<span class="weui-badge" style="margin-left: 5px;background: white;color: #4da2ad">${obj[i].programmematchactor_num}</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>`
+                                
+                             
+                              //console.log(str_beixuan);
+                          str_all+=`<div class="information_actor">
+                                    <ul>
+                                        <li>职位名称：${obj[i].role}</li>
+                                        <li>性别：${obj[i].gender}</li>
+                                        <li>年龄段：${obj[i].age}</li>
+                                        <li>身高(cm)：${obj[i].height}</li>
+
+                                    </ul>
+                                    <p class="all_info">查看全部信息</p>
+                                    <div class="information_actornone">
+                                        <ul>
+                                            <li>体型：${obj[i].shape}</li>
+                                            <li>招募数量：${obj[i].men_count}</li>
+                                            <li>技能特长：${obj[i].skillTag}</li>
+                                            <li>特征：${obj[i].featureTag}</li>
+                                        </ul>
+                                        <div>
+                                            <p style="font-size:14px">人物小传</p>
+                                            <textarea style="font-size:12px" class="weui-textarea" placeholder="请输入文本" rows="3">${obj[i].description}</textarea>
+                                        </div>
+                                        <p class="put_away">收起</p>
+                                    </div>
+                                      
+                                </div>
+                                <p style="width: 100%;height: 0.1rem;background:#f2f2f2;clear: both;"></p>
+                                <div>
+                                  ${str_beixuan_all}
+                                </div>`
+                        }
+                      str=`<div class="notice_type">
+                                <p>${str_ling}</p>
+                                <p class="jiantou"><img src="/img/sanxia.png" alt=""><img src="/img/sanyou.png" alt=""></p>
+
+                            </div>
+                            <div class="oop">
+                               ${str_all}
+                                   
+                                    
+                                    <p style="width: 100%;height: 0.2rem;background:#f2f2f2;clear: both;"></p>
+                                </div>
+                            </div>`
+                            $(html).html(str);
+                            //百度图表-----------------
+                            for(var c=0;c<obj.length;c++){
+                              for(var a=0;a<obj[c].userArray.length;a++){
+                                //var total_degree=obj[c].userArray[a].total_degree
+                                  chart('myChart'+a,'main'+obj[c].userArray[a].user_id,parseInt(obj[c].userArray[a].total_degree*100),obj[c].userArray[a].basicInfo_degree,obj[c].userArray[a].feature_degree,obj[c].userArray[a].paycheck_degree,obj[c].userArray[a].schedule_degree)
+                                };
+                            }
+                                
+
+                    };
+                  };
+                  actorInfo(obj2,".ling",str2,str_all2,str_beixuan_all2,str_beixuan2,str_ling[0]);
+                  actorInfo(obj3,".zhu",str3,str_all3,str_beixuan_all3,str_beixuan3,str_ling[1]);
+                  actorInfo(obj4,".ke",str4,str_all4,str_beixuan_all4,str_beixuan4,str_ling[2]);
+                  actorInfo(obj5,".qi",str5,str_all5,str_beixuan_all5,str_beixuan4,str_ling[3]);
+                  
+                   $("title").html("方案|" +data.programme_name);
+                    $(".span_title").html(data.programme_name);
+                   toggle($(".notice_type"));
+                  $(".oop").on("click", ".all_info", function () {
+                  $(this).hide();
+                  $(this).next(".information_actornone").show()
+                  });
+                  $(".oop").on("click", ".put_away", function () {
+                  $(this).parent(".information_actornone").prev(".all_info").show();
+                  $(this).parent(".information_actornone").hide();
+                  });
+
+
+                  ///滑动
+                   window.slideleft=(function($){var listItem=$(".weui_cell_bd"),listOpts=$(".slideleft");var onthel=false,isScroll=false,initX=0,initY=0,endX=0,endY=0,moveX=0,expandLi=null;var slideMaxWid=listOpts.width();var handleSlide=(function(){listItem.on("touchstart",function(e){if(expandLi){if(expandLi.parent().index()!==$(this).parent().index()){if(Math.abs(endY-initY)<Math.abs(endX-initX)){e.preventDefault()}expandLi.css("-webkit-transform","translateX("+0+"px)")}}initX=e.targetTouches[0].pageX;initY=e.targetTouches[0].pageY;moveX=$(this).offset().left;$(this).on("touchmove",function(e){var curY=e.targetTouches[0].pageY;var curX=e.targetTouches[0].pageX;var X=curX-initX;$(this).removeClass("animated");if(Math.abs(endY-initY)<Math.abs(endX-initX)){e.preventDefault();if(moveX==0){if(X>0){$(this).css("-webkit-transform","translateX("+0+"px)")}else{if(X<0){if(X<-slideMaxWid){X=-slideMaxWid}$(this).css("-webkit-transform","translateX("+X+"px)")}}}else{if(moveX<0){onthel=true;if(X>0){if(X-slideMaxWid>0){$(this).css("-webkit-transform","translateX("+0+"px)")}else{$(this).css("-webkit-transform","translateX("+(X-slideMaxWid)+"px)")}}else{$(this).addClass("animated");$(this).css("-webkit-transform","translateX("+0+"px)")}}}}else{isScroll=true}})});listItem.on("touchend",function(e){endX=e.changedTouches[0].pageX;endY=e.changedTouches[0].pageY;var X=endX-initX;$(this).addClass("animated");if(X>-20||onthel||isScroll){$(this).css("-webkit-transform","translateX("+0+"px)");onthel=false;isScroll=false}else{$(this).css("-webkit-transform","translateX("+(-slideMaxWid)+"px)");expandLi=$(this)}})})()})(Zepto);function echo(stringA,stringB){var hello="你好";alert("hello world")};
+                 
+                 
+              },
+              error:function(err){
+                 console.log(err)
+              }
+          });
+        };
+        list();
+        function chart(myChart,main,totalMatchingDegree,basicMatchingDegree,featureMatchingDegree,offsetMatchingDegree,scheduleMatchingDegree){
+          var myChart = echarts.init(document.getElementById(main));
+
+            var dataStyle = {
+                normal: {
+                    label: {show:false},
+                    labelLine: {show:false}
+                }
+            };
+            var placeHolderStyle = {
+                normal : {
+                    color: 'rgba(89,155,163,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle1 = {
+                normal : {
+                    color: 'rgba(125,196,205,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle2 = {
+                normal : {
+                    color: 'rgba(177,217,222,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle3 = {
+                normal : {
+                    color: 'rgba(223,241,243,0)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            
+             var option=option;
+             console.log(option)
+             option = {
+                title: {
+                    text: totalMatchingDegree+'%',
+                    //subtext: '来自紫螺科技数据',
+                    //sublink: 'https://www.baidu.com',
+                    x: 'center',
+                    y: 'center',
+                    itemGap: 10,
+                    textStyle : {
+                        color : 'rgba(30,144,255,0.8)',
+                        fontFamily : '微软雅黑',
+                        fontSize : 6,
+                        fontWeight : 'bolder',
+                    }
+                },
+                grid:{
+                    x:0,
+                    y:5,
+                    x2:50,
+                    y2:0,
+                    borderWidth:1
+                },
+                tooltip : {
+                    show: true,
+                    formatter: "{a} <br/>{b}"
+                },
+                color:[
+                     '#4da2ad','#7dc4cd','#8bd3dc','#a9dce3'
+                ],
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                series : [
+                    {
+                        name:'基本信息',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [36, 45],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:basicMatchingDegree*1000/10,
+                                name:'基本信息匹配度'+basicMatchingDegree*1000/10+'%',
+                            },
+                            {
+                                value:100-basicMatchingDegree*1000/10,
+                                name:'基本信息匹配度'+basicMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle
+                            }
+                        ]
+                    },
+                    {
+                        name:'特征角色',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [26, 35],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:featureMatchingDegree*1000/10,
+                                name:'特征角色匹配度'+featureMatchingDegree*1000/10+'%',
+                            },
+                            {
+                                value:100-featureMatchingDegree*1000/10,
+                                name:'特征角色匹配度'+featureMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle1
+                            }
+                        ]
+                    },
+                    {
+                        name:'片酬需求',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [16, 25],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:offsetMatchingDegree*1000/10,
+                                name:'片酬需求匹配度'+offsetMatchingDegree*1000/10+'%'
+                            },
+                            {
+                                value:100-offsetMatchingDegree*1000/10,
+                                name:'片酬需求匹配度'+offsetMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle2
+                            }
+                        ]
+                    },
+                     {
+                        name:'档期匹配',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [6, 15],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:scheduleMatchingDegree*1000/10,
+                                name:'档期匹配度'+scheduleMatchingDegree*1000/10+'%'
+                            },
+                            {
+                                value:100-scheduleMatchingDegree*1000/10,
+                                name:'档期匹配度'+scheduleMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle3
+                            }
+                        ]
+                    },
+                    
+                ]
+            };
+
+            myChart.setOption(option);
+      };
+      //点击查看更多
+      $(".notice_class").on("click",".button2",function(){
+        var careerincrew_id=$(this).attr("id");
+        location.href=url+'/WX/page_searchMoreMatchingActorsAboutSlider/'+careerincrew_id+'/'+attribute+'/'+actorbudget_id+'/'+director_id;
+      });
+      //点击备选演员
+      $(".notice_class").on("click",".button1",function(){
+        var careerincrew_id=$(this).next().attr("id");
+        location.href=url+'/WX/page_searchAlternativeActorsbyHand/'+careerincrew_id+'/'+programme_id;
+      });
+      //查看演员详情
+      $(".notice_class").on("click", ".actor_info", function () {
+            var userid = $(this).attr("id");
+            var careerincrew_id = $(this).next().attr("id");
+            var productionid = $(this).parent().attr("id");
+            console.log(careerincrew_id + productionid);
+            location.href = url + '/WX/page_programmeActorsDetails/' + userid + '/' + director_id + '/' + careerincrew_id + '/' + productionid;
+        });
+      //左滑删除====================
+      $(".notice_class").on("click",".delete_actor",function(){
+        var userid=$(this).attr("id");
+      })
+

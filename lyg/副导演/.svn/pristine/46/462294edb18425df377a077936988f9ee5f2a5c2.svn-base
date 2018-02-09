@@ -1,0 +1,304 @@
+doctype html
+html(lang='zh-cmn-Hans')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+        title 通告
+        link(rel='stylesheet', href='/css/weui.css')
+        link(rel='stylesheet', href='/css/myNotice.css')
+        link(rel='stylesheet', href='/css/common.css')
+        link(rel='stylesheet', href='/css/jqueryWeui.css')
+        // <script src="/js/zepto.min.js"></script>
+        script(src='/js/jquery.min.js')
+        script(src='/js/jquery.cookie.js')
+        script(src='/js/detail.js')
+        script(src='/js/jqWeui.js')
+        script(src='/js/template-web.js')
+        script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+        script.
+            $(function () {
+                var appid = !{JSON.stringify(appid)};
+                var userid = !{JSON.stringify(userid)};
+                var openid = !{JSON.stringify(openid)};
+                //            下拉刷新
+                $(document.body).pullToRefresh().on("pull-to-refresh",function () {
+                    setTimeout(function () {
+                        $(document.body).pullToRefreshDone();
+                        ajaxEs (1);
+                    },2000)
+                });
+                //            滚动加载
+                var j=1;
+                var loading = false;  //状态标记
+               
+                $(document.body).infinite(1000).on("infinite", function(e) {
+                    var cookies= $.cookie("totalPages");
+                    console.log(cookies)
+                    if(loading) return;
+                    loading = true;
+                    setTimeout(function() {
+                        console.log("ll是"+$(".notice-small").length);
+                              console.log(j) 
+                            ajaxAdd (j);
+                        
+                        loading = false;
+                    }, 1000);
+                });
+                $(".notice-tab").on("click",function(e){
+                    console.log("kk");
+                    if(!$(".notice-tab").hasClass("active")) {
+                        $(".notice-tab").removeClass("active");
+                        $(this).addClass("active");
+                        var $index = $(this).index();
+                        $(".notice-tab .imgIng").eq($index).addClass("disNone");
+                        $(".notice-tab .imgEd").eq($index).removeClass("disNone");
+                        $(".tabDown>div").removeClass("actives");
+                        $(".tabDown>div").eq($index).addClass("actives");
+                        e.stopPropagation()
+                    }
+                });
+                $.ajax({
+                    type : "get",
+                    url : "http://www.kaishiapp.com/WX/wx_allproductiontypes/1/null",
+                    dataType : "jsonp",
+                    // jsonp: "jsonpCallback",
+                    success : function(data){
+                        var dataOne=data;
+                        console.log(data);
+                        var str = $('.btnOne').html()
+                        for(var i=0;i<dataOne.length;i++){
+                            str += '<li class="btn" id="'+data[i].id+'">'+data[i].name+'</li>'
+                        }
+                        $('.btnOne').html(str)
+                    },
+                    error:function(){
+                        alert('fail');
+                    }
+                });
+                $.ajax({
+                    type : "get",
+                    url : "http://www.kaishiapp.com/WX/wx_allrolecategories/1/null",
+                    dataType : "jsonp",
+                    // jsonp: "jsonpCallback",
+                    success : function(data){
+                        var dataTwo=data;
+                        console.log(data);
+                        var str = $('.btnTwo').html();
+                        for(var i=0;i<dataTwo.length;i++){
+                            str += '<li class="btn" id="'+data[i].id+'">'+data[i].name+'</li>'
+                        }
+                        $('.btnTwo').html(str)
+                    },
+                    error:function(){
+                        alert('fail');
+                    }
+                });
+                // 全部
+                var productiontype_id="null",
+                    rolecategory_id="null",
+                    area_id="null",
+                    isregistered="null",
+                    name="null",
+                    time=new Date();
+                var url="http://www.kaishiapp.com/WX/wx_allpositions/";
+                function ajaxEs (page) {
+                    $.ajax({
+                        type : "get",
+                        url : url+ productiontype_id +"/"+rolecategory_id+"/"+area_id+"/"+isregistered+"/"+page+"/"+name+"/"+appid+"/"+openid+"/"+time,
+                        dataType : "jsonp",
+                        // jsonp: "jsonpCallback",
+                        async:false,
+                        success : function(data){
+                             var str1=$('.totalPages').html()
+                            str1 ='<p id="p" class="'+data.totalPages+'">'+data.totalPages+'</p>'
+                            $('.totalPages').html(str1)
+                            console.log(data)
+                            var totalPages=data.totalPages;
+                            console.log(totalPages)
+                            $.cookie("totalPages","totalPages")
+                            var All = [];
+                            for(var i in data.results){
+                                var All_info = {};
+                                All_info.category = data.results[i].category;
+                                All_info.category_id = data.results[i].category_id;
+                                All_info.duration = data.results[i].duration;
+                                All_info.investmentAmount = data.results[i].investmentAmount;
+                                All_info.isCreated = data.results[i].isCreated;
+                                All_info.isOfficial = data.results[i].isOfficial;
+                                All_info.issuer_companies = data.results[i].issuer_companies;
+                                All_info.location = data.results[i].location;
+                                All_info.name = data.results[i].name;
+                                All_info.production_companys = data.results[i].production_companys;
+                                All_info.production_crewId = data.results[i].production_crewId;
+                                All_info.production_image = data.results[i].production_image;
+                                All_info.userid = userid;
+                                All_info.appid = appid;
+                                All.push(All_info);
+                             }
+                            console.log(All)
+                                var html = template('artTemplate', {
+                                    notices: All
+                                });
+                            $('.notice-more').html(html);
+                            console.log(All.length)
+                            if (All.length <=3) {
+                                $(".weui-loadmore").css("display", "none")
+                            } else {
+                            }
+                            j=2;
+                        },
+                        error:function(){
+                            alert('fail');
+                        }
+                    });
+                }
+                ajaxEs (1);
+                //            滚动刷新
+                var result;
+                function ajaxAdd (page) {
+                    var userid=!{JSON.stringify(userid)};
+                    
+                    $.ajax({
+                        type : "get",
+                        url : url+ productiontype_id +"/"+rolecategory_id+"/"+area_id+"/"+isregistered+"/"+page+"/"+name+"/"+appid+"/"+openid+"/"+time,
+                        dataType : "jsonp",
+                        async:false,
+                        // jsonp: "jsonpCallback",
+                        success : function(data){
+                            //                        console.log(data.length);
+                            All=data.results;
+
+                            var str1=$('.totalPages').html()
+                            str1 ='<p id="p" class="'+data.totalPages+'">1</p>'
+                            $('.totalPages').html(str1)
+                            var str = $('.notice-more').html();
+                            for(var i=0;i<All.length;i++){
+                                str += '<div class="notice-small"><a href="http://www.kaishiapp.com/WX/page_positionList/'+All[i].production_crewId+'/'+userid+'"><div class="notice-left"><img src="'+All[i].production_image+'" alt=""></div><div class="notice-right"><p><span>'+All[i].category+'</span>'+All[i].name+'</p><div><span class="spanMa">拍摄地点： '+All[i].location+'</span><br><span>投资规模(万元)：'+All[i].investmentAmount+'</span> </div><div><span>拍摄周期(天)：'+All[i].duration+'</span></div><div class="notice-crew"><span>《'+All[i].name+'》</span>剧组</div></div><div class="nullWhite"></div></a></div>'
+                            }
+                            if(All.length!=0){
+                                $('.notice-more').html(str);
+                            }else {
+                                //                            alert("数据加载完了");
+                                $(".weui-loadmore").css("display","none")
+                                return false
+                            }
+                            result=data.totalPages
+                            console.log(result)
+                        },
+                        error:function(){
+                            alert('fail');
+                        }
+                    });
+                        j++;
+                    
+                    
+                }
+                //ajaxAdd (1)
+
+                //项目类别
+                $(".btnOne").on("click","li",function () {
+                    productiontype_id=$(this).attr("id");
+                    $(".None1").addClass("disNone")
+                    $(".appear1").html($(this).html())
+                    console.log(productiontype_id);
+                    ajaxEs (1)
+                });
+                //人员需求
+                $(".btnTwo").on("click","li",function () {
+                    rolecategory_id=$(this).attr("id");
+                    console.log(rolecategory_id);
+                    $(".None2").addClass("disNone")
+                    $(".appear2").html($(this).html())
+                    ajaxEs (1)
+                });
+                // 认证
+                $(".btnThree").on("click","li",function () {
+                    isregistered=$(this).attr("id");
+                    console.log(isregistered);
+                    $(".None3").addClass("disNone")
+                    $(".appear3").html($(this).html())
+                    ajaxEs (1)
+                });
+                $(document).click(function() {
+                    if($(".notice-tab").hasClass("active")){
+                        $(".imgEd").addClass("disNone");
+                        $(".imgIng").removeClass("disNone");
+                        $(".notice-tab").removeClass("active");
+                        $(".tabDown>div").removeClass("actives")
+                    }
+                });
+            });
+    body.weui-pull-to-refresh(ontouchstart='')
+        .weui-pull-to-refresh__layer
+            .weui-pull-to-refresh__arrow
+            .weui-pull-to-refresh__preloader
+            .down 下拉刷新
+            .up 释放刷新
+            .refresh 正在刷新
+        header#header
+            div
+                //a(href='http://www.kaishiapp.com/WX/page_searchPositions/'+openid+'/'+appid+'/'+userid)
+                   // img(style='margin-left: 10px;', src='/img/搜索黑xhdpi.png', alt='')
+                p 通告
+        section
+            .banner-1
+                img(src='/img/1.jpg', alt='')
+            .weui-flex.tabUp
+                .weui-flex__item.notice-tab
+                    span.None1 项目类别
+                    span.appear1
+                    img.imgIng(src='/img/三角black.png', alt='')
+                    img.imgEd.disNone(src='/img/三角-上blue.png', alt='')
+                .weui-flex__item.notice-tab
+                    span.None2 人员需求
+                    span.appear2
+                    img.imgIng(src='/img/三角black.png', alt='')
+                    img.imgEd.disNone(src='/img/三角-上blue.png', alt='')
+                .weui-flex__item.notice-tab
+                    span.None3 官方认证
+                    span.appear3
+                    img.imgIng(src='/img/三角black.png', alt='')
+                    img.imgEd.disNone(src='/img/三角-上blue.png', alt='')
+            .tabDown
+                div
+                    ul.btn.btnOne
+                div
+                    ul.btn.btnTwo
+                div
+                    ul.btn.btnThree
+                        li#null 全部
+                        li#true 已认证
+                        li#false 未认证
+            .notice-more
+            .totalPages(style='display:none')
+        script#artTemplate(type='text/html').
+            {{ each notices $value i }}
+            <div class="notice-small">
+            <a href="http://www.kaishiapp.com/WX/page_positionList/{{$value.production_crewId}}/{{$value.userid}}/{{$value.appid}}" id="btnOne">
+            <div class="notice-left">
+            <img src="{{ $value.production_image }}" alt="">
+            </div>
+            <div class="notice-right">
+            <p>
+            <span>{{ $value.category }}</span>
+            {{ $value.name }}
+            </p>
+            <div>
+            
+            <span class="spanMa">拍摄地点：{{ $value.location }}</span>
+            </div>
+            <div>
+            <span>投资规模(万元)：{{ $value.investmentAmount }}</span><br>
+            <span>拍摄周期(天)：{{ $value.duration }}</span>
+            </div>
+            <div class="notice-crew">
+            <span>《{{ $value.name }}》</span>剧组
+            </div>
+            </div>
+            <div class="nullWhite" style="margin-bottom:10px;clear:both"></div>
+            </a>
+            </div>
+            {{/each}}
+        .weui-loadmore(style='clear: both')
+            i.weui-loading
+            span.weui-loadmore__tips 正在加载

@@ -1,0 +1,137 @@
+doctype html
+html(lang='zh-cmn-Hans')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+        title 搜索
+        link(rel='stylesheet', href='/css/weui.css')
+        link(rel='stylesheet', href='/css/myNotice.css')
+        link(rel='stylesheet', href='/css/common.css')
+        link(rel='stylesheet', href='/css/jqueryWeui.css')
+        // <script src="js/zepto.min.js"></script>
+        script(src='/js/jquery.min.js')
+        script(src='/js/detail.js')
+        script(src='/js/jqWeui.js')
+        script(src='/js/template-web.js')
+        script(type='text/javascript', src='/js/url.js')
+        script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    body.weui-pull-to-refresh(ontouchstart='')
+        .weui-pull-to-refresh__layer
+            .weui-pull-to-refresh__arrow
+            .weui-pull-to-refresh__preloader
+            .down 下拉刷新
+            .up 释放刷新
+            .refresh 正在刷新
+        div
+        #searchBar.weui-search-bar
+            .weui-cell.weui-cell_select.weui-cell_select-after(style='height: 30px')
+                .weui-cell__bd(style='height: 30px')
+                    select.weui-select.option(name='select2', style='margin-top: -8px;color: #a0a0a0')
+                        option(style='color: #a0a0a0', value='2') 职位
+                        option(style='color: #a0a0a0', value='1') 项目
+            input#searchInput(type='text', style='width: 59%;border: 1px solid #a0a0a0;border-radius: 5px')
+            span(style='color: #4da2ad;margin-left: 3%', onclick='a()')
+                | 搜索
+        .notice-more
+        .weui-loadmore(style='clear: both;display: none')
+            i.weui-loading
+            span.weui-loadmore__tips 正在加载
+        script.
+            var appid = !{JSON.stringify(appid)};
+            var openid = !{JSON.stringify(openid)};
+            var userid = !{JSON.stringify(userid)};
+            $(document.body).pullToRefresh().on("pull-to-refresh",function () {
+                setTimeout(function () {
+                    $(document.body).pullToRefreshDone();
+                },2000)
+            });
+
+            function a() {
+                //$(".weui-loadmore").css("display","block")
+                $("#searchInput").val($("#searchInput").val());
+                var name = $("#searchInput").val();
+                var index = $(".option").val();
+                var page = 1;
+                var url_url = url+"/WX/wx_allfuzzyquerry/";
+                if(name){
+                    $.ajax({
+                        type : "get",
+                        url : url_url+index+"/"+name+"/"+page+"/"+openid+"/"+appid,
+                        dataType : "jsonp",
+                        // jsonp: "jsonpCallback",
+                        success : function(data){
+                            var All=data;
+                            $('.notice-more').empty();
+                            console.log(All);
+                            var str = $('.notice-more').html();
+                            for(var i=0;i<All.length;i++){
+                               console.log(All[i].crews_id);
+                                str += '<div class="notice-small"><a href="'+url+'/WX/page_positionList/'+All[i].crews_id+'/'+userid+'"><div class="notice-left"><img src="'+All[i].production_imagesURL+'" alt=""></div><div class="notice-right"><p><span>'+All[i].category+'</span>'+All[i].projectname+'</p><div><span class="spanMa">拍摄地点： '+All[i].location+'</span><br><span>投资规模(万元)：'+All[i].investmentAmount+'</span> </div><div><span>拍摄周期(天)：'+All[i].duration+'</span></div><div class="notice-crew"><span>《'+All[i].projectname+'》</span>剧组</div></div><div class="nullWhite"></div></a></div>'
+                            }
+                            if(All.length!=0){
+                                $('.notice-more').html(str);
+                            }if(All.length == 0){
+                                alert('没有该数据');
+                            }else {
+                                $(".weui-loadmore").css("display","none");
+                                return false
+                            }
+                        },
+                        error:function(){
+                            alert('fail');
+                        }
+                    });
+                }else{
+                    $.toast("请输入搜索内容","text");
+                    $(".weui-loadmore").css("display","none")
+                }
+            };
+            function b() {
+                 var name = $("#searchInput").val();
+                var index = $(".option").val();
+                var page = 1;
+                var url_2 = url+"/WX/wx_allfuzzyquerry/";
+                console.log(index);
+                console.log(name);
+                if(!name){
+
+                }else{
+                    $.ajax({
+                        type: "get",
+                        url: url_2+index+"/"+name+"/"+page+"/"+openid+"/"+appid,
+                        dataType: "jsonp",
+                        // jsonp: "jsonpCallback",
+                        success: function (data) {
+                            var All = data;
+                            $('.notice-small').empty();
+                            console.log(All);
+                            var str = $('.notice-more').html();
+                           for(var i=0;i<All.length;i++){
+                                str += '<div class="notice-small"><a href="'+url+'/WX/page_positionList/'+All[i].crews_id+'/'+userid+'"><div class="notice-left"><img src="'+All[i].production_imagesURL+'" alt=""></div><div class="notice-right"><p><span>'+All[i].category+'</span>'+All[i].projectname+'</p><div><span class="spanMa">拍摄地点： '+All[i].location+'</span><br><span>投资规模：'+All[i].investmentAmount+'</span> </div><div><span>拍摄周期：'+All[i].duration+'</span></div><div class="notice-crew"><span>《'+All[i].projectname+'》</span>剧组</div></div><div class="nullWhite"></div></a></div>'
+                            }
+                            if (All.length <= 4) {
+                                $(".weui-loadmore").css("display", "none");
+                            }
+                            if (All.length != 0) {
+                                $('.notice-more').html(str);
+                            } if(All.length == 0){
+                               alert('没有该数据');
+                            }if(All==null){
+                                alert('没有该数据');
+                            }else {
+                                //alert("数据加载完了");
+                                $(".weui-loadmore").css("display", "none");
+                                return false
+                            }
+                        },
+                        error: function () {
+                            alert('fail');
+                        }
+                    });
+                }
+
+
+            };
+            b()
+
+

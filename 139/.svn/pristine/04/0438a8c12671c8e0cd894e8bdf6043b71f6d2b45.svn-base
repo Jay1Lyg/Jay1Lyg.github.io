@@ -1,0 +1,77 @@
+.pic{
+    height: 40px;
+}
+.pic img{
+ width: 15px;
+    margin-left: 20px;
+}
+.pic input{
+    width: 70%;
+    /*border: 1px solid black;*/
+}
+.pic input::placeholder{
+    font-size: 14px;
+}
+.getcode span{
+    color:#666666;
+    font-size: 10px;
+    border: 1px solid #666666;
+    padding:5px  10px;
+    border-radius: 15px;
+}
+
+
+/*注册按钮
+*/
+.add-btn{
+    width: 100%;
+    text-align: center;
+    clear: both;
+}
+.add-btn button{
+    border-radius: 20px;
+    font-size: 16px;
+    background: white;
+    height: 44px;
+    width: 80%;
+    border: 2px solid #4da2ad;
+    margin-top: 40px;
+    color: #4da2ad;
+}
+
+
+.add-btn p {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #666666;
+}
+.add-btn p span{
+    color: #4da2ad;
+}
+/*.forgetPassword p{*/
+    /*font-size: 14px;*/
+    /*color: #666666;*/
+    /*float: right;*/
+    /*margin-top: 10px;*/
+    /*margin-right: 10%;*/
+/*}*/
+/*.forgetPassword p span{*/
+    /*border: 2px solid #4da2ad;*/
+    /*padding:5px 2px;*/
+    /*border-radius: 50px;*/
+    /*color: #4da2ad;*/
+/*}*/
+/*登录login*/
+.loginImg{
+    margin-top: 40px;
+    width: 100%;
+}
+.loginImg img{
+    margin: 0 auto;
+    display: table-cell;
+    vertical-align:middle;
+    text-align: center;
+    height: 50px;
+    border-radius: 50%;
+
+}

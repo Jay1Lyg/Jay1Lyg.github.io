@@ -1,0 +1,256 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 角色信息
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/weui2.css')
+    link(rel='stylesheet', href='/css/actor_edit_echart.css')
+    link(rel='stylesheet', href='/css/noticeJob.css')
+    link(rel='stylesheet', href='/css/program.css')
+    style.
+      * {
+      padding: 0;
+      margin: 0;
+      list-style: none
+      }
+      body {
+      background: white
+      }
+    script(type='text/javascript').
+      // document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    script(type='text/javascript', src='/js/jquery.min.js')
+    // <script type="text/javascript" src="js/jqWeui.js"></script>
+    script(type='text/javascript', src='/js/zepto.min.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    header#header
+      div(style='text-align: center')
+        p 方案
+    .program
+      .slider
+      .bai
+        ul
+          li 0%
+          li 10%
+          li 20%
+          li 30%
+          li 40%
+          li 50%
+          li 60%
+          li 70%
+          li 80%
+          li 90%
+          li 100%
+      div(style='clear: both')
+      .slide_info
+        ul
+          li
+            span.one_kuai
+            | 领衔主演
+          li
+            span.two_kuai
+            | 主要演员
+          li
+            span.three_kuai
+            | 客串演员
+          li
+            span.four_kuai
+            | 其他演员
+    div(style='clear: both')
+    .notice_class
+      .notice_type
+        p 主要演员
+        p.jiantou
+          img(src='img/sanyou.png', alt='')
+          img(src='img/sanxia.png', alt='')
+      div
+        div
+          .information_actor
+            ul
+              li 职位名称：男一号
+              li 性别：男
+              li 年龄段：青年
+              li 身高(cm)：1
+            p.all_info 查看全部信息
+            .information_actornone
+              ul
+                li 体型：偏廋
+                li 招募数量：1
+                li 技能特长：1
+                li 特征：1
+              div
+                p 人物小传
+                textarea.weui-textarea(placeholder='请输入文本', rows='3')
+              p.put_away 收起
+          .beixuan
+            .weui_cell.slidelefts
+              .weui_cell_bd.weui_cell_primary
+                div
+                  .recommend_edit(style='height: 132px')
+                    div
+                      img.chart(src='img/img1.png', alt='')
+                    div
+                      p(style='font-size: 14px')
+                        | 与旗下演员
+                        span 刘德华
+                        | 匹配度较高
+                      // <div id="main" style="width: 100px;height:100px;float: left;"></div>
+                      ul.pipei
+                        li 基本信息：
+                        li 特征角色：
+                        li 片酬需求：
+                        li 档期匹配：
+              .slideleft
+                span.bg-green.f-white 删除
+            .weui_cell.slidelefts
+              .weui_cell_bd.weui_cell_primary
+                div
+                  .recommend_edit(style='height: 132px')
+                    div
+                      img.chart(src='img/img1.png', alt='')
+                    div
+                      p(style='font-size: 14px')
+                        | 与旗下演员
+                        span 刘德华
+                        | 匹配度较高
+                      // <div id="main" style="width: 100px;height:100px;float: left;"></div>
+                      ul.pipei
+                        li 基本信息：
+                        li 特征角色：
+                        li 片酬需求：
+                        li 档期匹配：
+              .slideleft
+                span.bg-green.f-white 删除
+            .more_actor
+              p.button1
+                span.weui-badge(style='margin-left: 5px;background: #4da2ad') 8
+                | 备选演员
+              p.button2
+                | 更多推荐
+                span.weui-badge(style='margin-left: 5px;background: white;color: #4da2ad') 8
+          p(style='width: 100%;height: 0.2rem;background:#f2f2f2;clear: both;')
+      .notice_type
+        p 主要演员
+        p.jiantou
+          img(src='img/sanyou.png', alt='')
+          img(src='img/sanxia.png', alt='')
+      div
+        div
+          .information_actor
+            ul
+              li 职位名称：男一号
+              li 性别：男
+              li 年龄段：青年
+              li 身高(cm)：1
+            p.all_info 查看全部信息
+            .information_actornone
+              ul
+                li 体型：偏廋
+                li 招募数量：1
+                li 技能特长：1
+                li 特征：1
+              div
+                p 人物小传
+                textarea.weui-textarea(placeholder='请输入文本', rows='3')
+              p.put_away 收起
+          .beixuan
+            .weui_cell.slidelefts
+              .weui_cell_bd.weui_cell_primary
+                div
+                  .recommend_edit(style='height: 132px')
+                    div
+                      img.chart(src='img/img1.png', alt='')
+                    div
+                      p(style='font-size: 14px')
+                        | 与旗下演员
+                        span 刘德华
+                        | 匹配度较高
+                      // <div id="main" style="width: 100px;height:100px;float: left;"></div>
+                      ul.pipei
+                        li 基本信息：
+                        li 特征角色：
+                        li 片酬需求：
+                        li 档期匹配：
+              .slideleft
+                span.bg-green.f-white 删除
+            .weui_cell.slidelefts
+              .weui_cell_bd.weui_cell_primary
+                div
+                  .recommend_edit(style='height: 132px')
+                    div
+                      img.chart(src='img/img1.png', alt='')
+                    div
+                      p(style='font-size: 14px')
+                        | 与旗下演员
+                        span 刘德华
+                        | 匹配度较高
+                      // <div id="main" style="width: 100px;height:100px;float: left;"></div>
+                      ul.pipei
+                        li 基本信息：
+                        li 特征角色：
+                        li 片酬需求：
+                        li 档期匹配：
+              .slideleft
+                span.bg-green.f-white 删除
+            .more_actor
+              p.button1
+                span.weui-badge(style='margin-left: 5px;background: #4da2ad') 8
+                | 备选演员
+              p.button2
+                | 更多推荐
+                span.weui-badge(style='margin-left: 5px;background: white;color: #4da2ad') 8
+          p(style='width: 100%;height: 0.2rem;background:#f2f2f2;clear: both;')
+  script.
+    toggle($(".notice_type"));
+    $(".detail_type").on("click", ".all_info", function () {
+    $(this).hide();
+    $(this).next(".information_actornone").show()
+    });
+    $(".detail_type").on("click", ".put_away", function () {
+    $(this).parent(".information_actornone").prev(".all_info").show();
+    $(this).parent(".information_actornone").hide();
+    });
+   ///WX/wx_searchProgrammeDetails/:production_id/:actorbudget_id/:programme_id/:attribute;
+   var production_id=!{JSON.stringify(production_id)};
+   var actorbudget_id=!{JSON.stringify(actorbudget_id)};
+   var programme_id=!{JSON.stringify(programme_id)};
+   var attribute=!{JSON.stringify(attribute)};
+   function list(){
+          var juzu_url=url+'/WX/wx_searchProgrammeDetails/'+production_id+'/'+actorbudget_id+'/'+programme_id+'/'+attribute;
+          console.log(juzu_url);
+          $.ajax({
+              type : "get",
+              url : juzu_url,
+              dataType : "jsonp",
+              async:false,
+              // jsonp: "jsonpCallback",
+              success : function(data){
+                  console.log(data);
+                  var datas=data;
+                  var str_ratio="";
+                   str_ratio=`<div class="one_slider">${datas.leadingactor_budget_ratio*100}%</div>
+                              <div class="two_slider">${datas.starringingroup_budget_ratio*100}%</div>
+                              <div class="three_slider">${datas.guestactor_budget_ratio*100}%</div>
+                              <div class="four_slider">${datas.other_budget_ratio*100}%</div>`;
+                  $(".slider").html(str_ratio);
+                  //画出比例图
+                  $(".one_slider").css("width",${datas.leadingactor_budget_ratio*100}%)
+                  $(".two_slider").css("width",${datas.starringingroup_budget_ratio*100}%)
+                  $(".three_slider").css("width",${datas.guestactor_budget_ratio*100}%)
+                  $(".four_slider").css("width",${datas.other_budget_ratio*100}%)
+                 
+                 
+              },
+              error:function(err){
+                 console.log(err)
+              }
+          });
+        };
+        list();
+   

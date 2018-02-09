@@ -1,0 +1,158 @@
+//
+   Created by Admin on 2017/8/11.
+
+doctype html
+html(lang='zh-cmn-Hans')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+        title 通告详情
+        link(rel='stylesheet', href='/css/weui.css')
+        link(rel='stylesheet', href='/css/notice.css')
+    body
+        // banner start
+        .notice-banner
+           //img.banner-img(src='img/banner.png', alt='')
+        // banner end
+        // container start
+        .notice-container
+            .weui-tab
+                .weui-navbar
+                    .weui-flex__item.container-tab
+                        p.tab-text.tab-active 剧组信息
+                    .weui-flex__item.container-tab
+                        p.tab-text 职位列表
+            .contain-page
+                .page-base.page-select
+                    .exp-tv
+                        i
+                        .title_h4
+                        .expty_juzu
+                .page-role
+                    .exp-tv
+                        i
+                        .title_h4
+                        .exptv-position
+            // container end
+            // footer start
+            // footer end
+            script(src='/js/zepto.min.js')
+            script(src='/js/jquery.min.js')
+            script(src='/js/jqWeui.js')
+            script(src="/js/notice.js")
+            script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+            script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+            script(type='text/javascript', src='/js/url.js')
+            script.
+                var productionCrew_id = !{JSON.stringify(productionCrew_id)};
+                var user_id = !{JSON.stringify(user_id)};
+                var appid = !{JSON.stringify(appid)};
+                var url_url=url+"/WX/wx_positionList/";
+                $.ajax({
+                    type : "get",
+                    url : url_url+productionCrew_id+"/"+user_id,
+                    dataType : "jsonp",
+                    async:false,
+                    success : function(data){
+                        console.log(data)
+                        var data=data;
+                        var str=$(".exptv-position").html();
+                        var str1=$(".title_h4").html();
+                        var str0=$(".notice-banner").html();
+                        var str2=$(".exptv_juzu").html();
+                        str1='<h4 class="exptv-title">'+data[0].production_name+'</h4>';
+                        str0='<img class="banner-img" src="'+data[0].production_image+'">';
+                        $(".notice-banner").html(str0);
+                        $(".title_h4").html(str1);
+                        for(var i=0;i<data.length;i++){
+                            if(data[i].Status==true){
+                                str+='<div class="exptv-info"> <div class="info-name"> <p>职位名称</p> <p>部门</p> <p>年龄段</p> <p>性别</p> <p>招募数量</p> <p>见组地址</p> </div> <div class="info-content"><a id="register'+data[i].registration_status+'" class="'+url+'/WX/wx_applyforposition/'+user_id+'/'+data[i].author._id+'/'+data[i].careerincrew_id+'"><span id="'+data[i].author._id+'" class="shen" style="position: absolute;right: 10%;color:#4da2ad;border: 1px solid #4da2ad;padding: 1px 3px;font-size: 14px">申请</span></a><span style="position: absolute;right: 10%;color:#ccc;border: 1px solid #ccc;padding: 1px 3px;font-size: 14px;display: none" class="alshen">已申请</span> <p>'+data[i].role_name+'</p> <p>'+data[i].roleCategory+'</p> <p class="age'+data[i].age+'"></p> <p class="gender'+data[i].gender+'"></p> <p>'+data[i].men_count+'</p> <p>'+data[i].address_name+'</p> </div> </div> <div class="exptv-detail"> <p>职位描述</p> <p>'+data[i].description+'</p> </div><div style="height:5px;background:#eeeeee;width:100%;margin:5px 0"></div>'
+                            }else{
+                                str+='<div class="exptv-info"> <div class="info-name"> <p>职位名称</p> <p>部门</p> <p>年龄段</p> <p>性别</p> <p>招募数量</p> <p>见组地址</p> </div> <div class="info-content"><span style="position: absolute;right: 10%;color:#ccc;border: 1px solid #ccc;padding: 1px 3px;font-size: 14px;" class="alshen">已申请</span> <p>'+data[i].role_name+'</p> <p>'+data[i].roleCategory+'</p> <p class="age'+data[i].age+'"></p> <p class="gender'+data[i].gender+'"></p> <p>'+data[i].men_count+'</p> <p>'+data[i].address_name+'</p> </div> </div> <div class="exptv-detail"> <p>职位描述</p> <p>'+data[i].description+'</p> </div><div style="height:5px;background:#eeeeee;width:100%;margin:5px 0"></div>'
+                            }
+                            
+                        }
+
+                        str2='<div class="exptv-info"> <div class="info-name"> <p>剧名 </p> <p>通告类型</p><p>拍摄地</p><p>出品公司 </p> <p> 承制公司 </p> <p> 投资规模（万元）</p> <p>拍摄周期（天）</p> </div> <div class="info-content"> <p>'+data[0].crews_name+'</p> <p>'+data[0].production_category_name+'</p> <p>'+data[0].address_name+'</p> <p>'+data[0].production_companys_name+'</p> <p>'+data[0].issuer_companies_name+'</p> <p>'+data[0].investmentAmount+'</p> <p>'+data[0].duration+'</p> </div></div>'
+                        //console.log(str2)
+                        $(".expty_juzu").html(str2);
+                        $(".exptv-position").html(str)
+                        $(".gender1").html("男");
+                        $(".gender2").html("女");
+                        $(".gender3").html("不限");
+                        $(".age1").html("婴幼儿");
+                        $(".age2").html("少年");
+                        $(".age3").html("青年");
+                        $(".age4").html("中年");
+                        $(".age5").html("老年");
+                        $(".age6").html("不限");
+                        function status(){
+                            if($(".exptv-position a").attr("register0")){
+
+                            }else{
+
+                            }
+                        }
+
+                        var shen=$(".shen");
+
+                        $(".exptv-position").on("click",".shen",function () {
+
+                            var $this=$(this);
+                             var href=$this.parent().attr("class")
+                             console.log(href)
+
+                            if(user_id == $this.attr("id")){
+                                alert("当前用户不能报自己发布的职位！")
+
+                            }else{
+                                $.ajax({
+                                    type: "get",
+                                    url: href,
+                                    dataType: "jsonp",
+                                    // jsonp: "jsonpCallback",
+                                    success: function (data) {
+                                    console.log(data);
+                                        if (user_id == data.subscribers) {
+                                            alert("当前用户不能报自己发布的职位！")
+                                        } else {
+                                            if (data.sign_up) {
+                                            console.log('1');
+                                                alert("不能重复报名！")
+                                            } if(data.sign_up==false) {
+                                            console.log('2');
+                                                alert("投递成功！")
+                                                $this.parent().next().css("display","block");
+                                                $this.css("display","none")
+                                            }if(data.status==false){
+                                            console.log('3');
+                                                $.modal({
+                                                  title:"简历不完善",
+                                                  text:"去完善简历吧！",
+                                                  buttons:[{
+                                                      text: "确定", onClick: function () {
+                                                          console.log("确定")
+                                                          var _url=url'/WX/wx_userprofile/'+user_id+'/'+appid;
+                                                          $(window).attr('location', _url);
+                                                      },
+                                                  }]
+                                              });
+                                            }
+                                        }
+
+                                    },
+                                    error: function () {
+                                        alert('投递失败！');
+                                    }
+                                });
+                            }
+                        })
+                    },
+                    error:function(){
+                        alert('fail');
+                    }
+                });
+
+                $(".exptv-position").on("click",".alshen",function () {
+                    alert("不能重复报名")
+                })

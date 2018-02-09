@@ -1,0 +1,77 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='author', content='rainna')
+    meta(name='keywords', content="rainna's js lib")
+    meta(name='description', content='移动端触摸滑动')
+    meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;', name='viewport')
+    title Document
+    style.
+      .outImgCover{
+      width:100%;
+      height:700px;
+      background:black;
+      position: fixed;
+      top:0;left: 0;
+      z-index: 5;
+      }
+      .outImgCover>div .cover{
+      margin:auto;
+      position: absolute;
+      left:0;top:0;right:0;bottom: 0;
+      border:2px solid #fff;
+      background: #000;
+      opacity: 1;
+      z-index: 6;
+      }
+      .outImgCover img{
+      width:500px;
+      position: relative;
+      bottom:0;right:0;
+      }
+      .opt{
+      background: #000;
+      opacity: .6;
+      z-index: 7;
+      position:absolute;
+      }
+      .op1{
+      top:0;left:0;
+      }
+      .op2{
+      /* height:246.4px; */
+      top:0; right:0;
+      }
+      .op3{
+      bottom:0;   right:0;
+      }
+      .op4{
+      bottom:0;  left:0;
+      }
+      #cutImg{
+      position: absolute;
+      left:0;
+      top:0;
+      z-index: 100;
+      }
+  body
+    .outImgCover
+      .opt.op1
+      .opt.op2
+      .opt.op3
+      .opt.op4
+      div
+        .cover
+          img(data-img='cut', src='http://www.901vehicle.cn/WX/poster/compress_production/5a58548d6acb1b385288643b/1515738266126.jpg', alt='')
+      button#cutImg 剪裁
+    script(src='/js/jquery-2.1.0.min.js')
+    script(src='/js/SM.js')
+    script(src='/js/mycut.js')
+    script(src='/js/vconsole.min.js')
+    script.
+      $('#cutImg').on('touchstart',function(){
+      cutImg().then(function(data){
+      console.log(data);
+      })
+      })

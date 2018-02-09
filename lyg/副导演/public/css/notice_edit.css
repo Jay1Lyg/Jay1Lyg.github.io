@@ -1,0 +1,562 @@
+.newactor_banner{
+    width: 100%;
+    position: relative;
+    height: 4rem;
+}
+.newactor_banner img{
+    width: 100%;
+    height: 4rem;
+}
+.newactor_banner div{
+    width: 100%;
+    position: absolute;
+    bottom: 0%;
+    background: rgba(0, 0, 0,0.7);
+
+}
+.newactor_banner div ul{
+    width: 100%;
+
+}
+.newactor_banner div ul li{
+
+    font-size: 0.30rem;
+    text-align: center;
+    float: left;
+    width: 50%;
+    color: white;
+
+}
+.newactor_banner div ul li.active{
+    display: block;
+    color: #4da2ad;
+    border-bottom: 2px solid #4da2ad;
+}
+
+.notice_class{
+    margin: 0.1rem 0;
+}
+.notice_type{
+    width: 100%;
+    background: rgba(242, 242, 242, 1);
+    height: 0.9rem;
+}
+.notice_type p{
+    font-size: 0.28rem;
+    color: #222222;
+    line-height: 0.9rem;
+    margin-left: 0.76rem;
+    display: inline;
+}
+
+.jiantou{
+    float: right;
+    clear: both;
+    height: 0.9rem;
+}
+.jiantou img{
+    width: 0.5rem;
+    margin: 0.2rem 0.62rem 0.2rem 0;
+}
+.jiantou img:last-child{
+   display: none;
+}
+.detail_type{
+    display: none;
+}
+/*选显卡*/
+
+
+
+/*演员样式*/
+.display_experience{
+    width: 100%;
+
+}
+.display_experience>div{
+    height: 2.28rem;
+    padding:0 0.1rem;
+    background: white;
+}
+.display_experience>div>div{
+    float: left;
+}
+.photo_experience{
+    width: 35%;
+
+}
+.photo_experience img{
+    width: 2.3rem;
+    height: 1.9rem;
+    margin-top: 0.2rem;
+}
+.detail_experience{
+    width: 50%;
+    padding: 1%;
+}
+.detail_experience img{
+    float: right;
+    width: 0.4rem;
+}
+.detail_experience ul{
+    margin-top: 0.2rem;
+    clear: both;
+}
+.detail_experience ul li{
+    font-size: 0.28rem;
+    color: #696969;
+}
+.detail_experience ul li span{
+    color: #222222;
+}
+
+section>div{
+    display: none;
+}
+section>div.active{
+    display: block;
+}
+.crew_info{
+    width: 100%;
+
+}
+.crew_info>p{
+    color: #222222;
+    font-size: 0.28rem;
+    border-left: 3px solid #222;
+    height: 0.35rem;
+    padding: 0 0.2rem;
+    margin-bottom: 0.3rem;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+}
+.crew_info>div{
+    width: 100%;
+}
+.crew_info>div>p{
+    color: #222222;
+
+    font-size: 0.28rem;
+    line-height: 0.7rem;
+    height: 0.7rem;
+    padding: 0.1rem 0;
+    border-bottom: 1px solid #d7d7d7;
+    margin-left: 0.5rem;
+
+}
+/*.crew_info>div>p>span{*/
+    /*display: inline-block;*/
+    /*width: 33%;*/
+/*}*/
+
+
+/*招募演员详情*/
+.information_actor{
+
+    padding: 0.1rem 0.5rem;
+
+}
+.information_actor>ul{
+    width: 100%;
+
+
+}
+.information_actor>ul li{
+    float: left;
+    width: 50%;
+    font-size: 0.28rem;
+    color: #222;
+    margin: 0.1rem 0;
+}
+.information_actor{
+
+    padding: 0.1rem 0.5rem;
+    position: relative;
+
+}
+.information_actor>ul{
+    width: 100%;
+}
+.information_actor>ul li{
+    float: left;
+    width: 50%;
+    font-size: 0.26rem;
+    color: #222;
+    margin: 0.1rem 0;
+}
+.information_actornone{
+    display: none;
+}
+.information_actornone>ul{
+    width: 100%;
+
+
+}
+.information_actornone>ul li{
+    float: left;
+    width: 50%;
+    font-size: 0.26rem;
+    color: #222;
+    margin: 0.1rem 0;
+}
+
+.all_info{
+    color: #4da2ad;
+    font-size: 0.26rem;
+    font-weight: bolder;
+}
+
+
+.put_away{
+    color: #4da2ad;
+    font-size: 0.26rem;
+    font-weight: bolder;
+    padding:0.2rem 0.2rem 0 0.2rem;
+}
+/*精准推荐*/
+.recommend{
+    width: 100%;
+    clear: both;
+    padding: 0 0.5rem;
+
+}
+.recommend>p{
+    float: left;
+    font-size: 0.28rem;
+}
+.recommend>ul{
+    float: right;
+    margin-right: 0.8rem;
+}
+.recommend>ul li{
+    float: left;
+    color: #4da2ad;
+    padding:0.05rem 0.1rem;
+    border: 1px solid #4da2ad;
+    margin-left: 0.1rem;
+    font-size: 0.28rem;
+    border-radius: 0.1rem;
+}
+.recommend_edit{
+    width: 100%;
+}
+.recommend_edit>div>p{
+    font-size: 0.28rem;
+    margin-left: 5px;
+
+}
+.recommend_edit>div>p>span{
+    color: #4da2ad;
+}
+.recommend_edit>div{
+    float: left;
+}
+.recommend_edit>div:first-child{
+    width: 30%;
+    padding: 1%;
+}
+.recommend_edit>div:first-child img{
+    width: 100%;
+    height: 2.4rem;
+
+}
+.recommend_edit>div:last-child{
+    width: 65%;
+    height: 2.4rem;
+    /*border: 1px solid black;*/
+}
+/*图表
+*/
+.chart>div{
+    width: 100%;
+    height: 100%;
+}
+.pipei{
+    margin-top: 0.2rem;
+}
+.pipei li{
+    font-size: 0.28rem;
+    color: #222222;
+}
+
+.button_zu{
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+}
+.button_zu button{
+    width: 80%;
+    height: 45px;
+    background: #4da2ad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.button_zu button.false{
+    background: #999;
+    
+}
+
+.weui-cell__hd{
+    width: 40%;
+}
+.common-input{
+    font-size: 14px;
+    color: #222222;
+    width: 100%;
+
+}
+.add-live{
+    border: 2px solid #4da2ad;
+    color: #4da2ad;
+    width: 340px;
+    height: 44px;
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+.title-height{
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+}
+
+.look-over{
+    background:#4da2ad ;
+    height: 49px;
+    width: 100%;
+    font-size: 16px;
+    line-height: 49px;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+}
+
+.look-over img{
+    height: 10px;
+    line-height: 49px;
+    margin-right: 5px;
+}
+
+/*必填*/
+.must{
+    height: 10px;
+    width: 10px;
+}
+
+/*性别样式*/
+.option {
+    font-size: 15px;
+    text-align: right;
+    color: #a0a0a0;
+}
+
+.data{
+    font-size: 15px;
+    color: #a0a0a0;
+}
+.font-color{
+    font-size: 14px
+}
+
+/*拍摄地*/
+.toolbar .picker-button{
+    font-size: 14px;
+    line-height: 44px;
+
+}
+.toolbar{
+    height: 44px;
+}
+.toolbar .title{
+    font-size: 14px;
+    line-height: 44px;
+    height: 44px;
+}
+.weui-picker-modal{
+    height: 5rem;
+}
+.weui-picker-modal .picker-item{
+    font-size: 14px
+}
+
+.weui-picker-modal .picker-modal-inner{
+    height: 5rem;
+}
+
+.bian_shan{
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0;
+
+}
+.bian_shan img:first-child{
+ width: 0.34rem;
+    margin:  0 0.2rem;
+
+}
+.bian_shan img:last-child{
+    width: 0.4rem;
+
+}
+
+#androidDialog2 span{
+    border: 1px solid #4da2ad;
+    margin-left: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+#androidDialog2 span:hover{
+    background: #4da2ad;
+    color: white;
+}
+
+
+/*剧目类别
+*/
+.dialogs_leibie{
+    display: none;
+    width: 90%;
+    position: fixed;
+    left: 5%;
+    top: 20%;
+    z-index: 101;
+   background: white;
+}
+.dialogs_leixing{
+    display: none;
+    width: 90%;
+    position: fixed;
+    left: 5%;
+    top: 10%;
+   
+    overflow: auto;
+    z-index: 101;
+   background: white;
+}
+.overlay {
+    background: #000;
+    filter: alpha(opacity=50); /* IE的透明度 */
+    opacity: 0.5;  /* 透明度 */
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 100; /* 此处的图层要大于页面 */
+    display:none;
+
+}
+.specialty{
+    padding-left: 0.5rem;
+    margin: 10px 0 0 0;
+}
+.specialty>div{
+    float: left;
+    width: 33%;
+    margin: 0.1rem 0;
+
+}
+.specialty6{
+    padding-left: 0.5rem;
+    
+    margin: 10px 0 0 0;
+}
+.specialty6>div{
+    float: left;
+    width: 33%;
+    margin: 0.1rem 0;
+
+}
+.specialty>div input{
+    background: white;
+}
+.specialty>div label{
+    font-size: 13px;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.specialty6>div input{
+    background: white;
+}
+.specialty6>div label{
+    font-size: 12px;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+input[type="radio"] {
+    background: #4da2ad;
+    color: #4da2ad;
+
+}
+/*类型确定按钮*/
+.determine{
+    text-align: center;
+    clear: both;
+
+}
+.determine button{
+    
+}
+.look_div{
+    position: fixed;
+    bottom: 0;
+    z-index: 20;
+   height: 50px;
+   width: 100%;
+    text-align: center;
+    background: white;
+
+}
+.look-over{
+    position: fixed;
+    left: 20%;
+    bottom: 10px;
+    color: white;
+    background: #4da2ad;
+    border: none;
+    width: 60%;
+    height: 40px;
+    border-radius: 2px;
+    line-height: 40px;
+    
+}
+.look-over1{
+    position: fixed;
+    left: 20%;
+    bottom: 10px;
+    color: white;
+    background: #4da2ad;
+    border: none;
+    width: 60%;
+    height: 40px;
+    border-radius: 2px;
+    line-height: 40px;
+    
+}
+
+
+.determine{
+    text-align: center;
+    clear: both;
+
+}
+.determine button{
+    color: white;
+    background: #4da2ad;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+.add-actor{
+    height: 0.7rem;
+    width: 80%;
+    background:white ;
+    font-size: 0.28rem;
+    line-height: 0.7rem;
+    border: 1px solid #f2f2f2;
+    margin-top: 20px;
+    color: black;
+}

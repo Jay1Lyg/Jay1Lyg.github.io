@@ -1,0 +1,177 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 角色信息
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/notice_list.css')
+    script(src='/js/jquery1.1.js')
+    script(src='/js/swiper.js')
+    script(type='text/javascript', src='/js/url.js')
+    style.
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      body{
+      background: white;
+      }
+      div.photo_experience.true,div.detail_experience.true{
+      opacity:0.3;
+      }
+      .mask{
+                position: relative;
+            }
+      .mask>div>img.true{
+          position: absolute;
+          right: 5%;
+          top: 25px;
+          z-index: 100;
+          display: block;
+          transform:rotate(45deg);
+          -ms-transform:rotate(45deg);     
+          -moz-transform:rotate(45deg);    
+          -webkit-transform:rotate(45deg); 
+          -o-transform:rotate(45deg);
+          width:80px;
+      }
+      .mask>div>img.false{
+          position: absolute;
+          right: 5%;
+          top: 5%;
+          z-index: 100;
+          display: none;
+          width:80px;
+      }
+    <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="/js/jquery-weui.js"></script>
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/zepto.min.js')
+  body
+    header
+    .weui-pull-to-refresh__layer
+        .weui-pull-to-refresh__arrow
+        .weui-pull-to-refresh__preloader
+        .down 下拉刷新
+        .up 释放刷新
+        .refresh 正在刷新
+    section
+      div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+      .display_experience
+        div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+    .weui-loadmore(style='clear: both')
+      i.weui-loading
+      span.weui-loadmore__tips 正在加载
+  script.
+    var userid = !{JSON.stringify(userid)};
+    function publishCrews(page){
+      var url4=url+'/WX/wx_publishCrews/'+userid+'/'+page;
+     console.log(url4)
+      $.ajax({
+        type : "get",
+        url : url4,
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+          console.log(data);
+         var data=data.results;
+          var length=data.length;
+          var str='';
+          for(var i=0;i<length;i++){
+          var span=''
+            for(var j=0;j<data[i].tags.repertoireTpyeArray.length;j++){
+             span+='<span>'+data[i].tags.repertoireTpyeArray[j].repertoireTpyeName+'</span>'
+            };
+            
+             str+='<div class="mask"><div><img class="'+data[i].isDelete+'" src="/img/guaqi1.png"></div><div class="photo_experience '+data[i].isDelete+'"><img src="'+data[i].compress_production_image+'" alt=""></div><div class="detail_experience '+data[i].isDelete+'"><ul><li><span>剧名：</span>《'+data[i].production_crews[0].name+'》<span class="types">'+data[i].tags.categoryName+'</span></li><li><span>剧目类型：</span>'+span+'</li><li><span>拍摄周期(天)：</span>'+data[i].duration+'</li><li><span>拍摄地：</span>'+data[i].location[0].fullname+'</li></ul></div><div style="width: 100%;height: 2px;background: #eee;margin: 5px 0;padding: 0"></div><div class="about_me"><button class="my_invite" id="'+data[i].production_crews[0]._id+'">我邀请的</button><button  class="application_my">申请我的</button></div></div><div style="width: 100%;height: 5px;background: #eee;margin: 0;padding: 0"></div>'
+          };
+          console.log(span)
+          $('.display_experience').html(str)
+        },
+        error:function(){
+        alert('fail');
+        }
+      });
+    }
+
+    //加载
+    function publishCrews_jiazai(page){
+      var url4=url+'/WX/wx_publishCrews/'+userid+'/'+page;
+     console.log(url4)
+      $.ajax({
+        type : "get",
+        url : url4,
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+          console.log(data);
+         
+          var length=data.length;
+          var str='';
+          for(var i=0;i<length;i++){
+          var span=''
+            for(var j=0;j<data[i].tags.repertoireTpyeArray.length;j++){
+             span+='<span>'+data[i].tags.repertoireTpyeArray[j].repertoireTpyeName+'</span>'
+            };
+            
+             str+='<div class="mask"><div><img class="'+data[i].isDelete+'" src="/img/guaqi1.png"></div><div class="photo_experience '+data[i].isDelete+'"><img src="'+data[i].compress_production_image+'" alt=""></div><div class="detail_experience '+data[i].isDelete+'"><ul><li><span>剧名：</span>《'+data[i].production_crews[0].name+'》<span class="types">'+data[i].tags.categoryName+'</span></li><li><span>剧目类型：</span>'+span+'</li><li><span>拍摄周期(天)：</span>'+data[i].duration+'</li><li><span>拍摄地：</span>'+data[i].location[0].fullname+'</li></ul></div><div style="width: 100%;height: 2px;background: #eee;margin: 5px 0;padding: 0"></div><div class="about_me"><button class="my_invite" id="'+data[i].production_crews[0]._id+'">我邀请的</button><button  class="application_my">申请我的</button></div></div><div style="width: 100%;height: 5px;background: #eee;margin: 0;padding: 0"></div>'
+          };
+          console.log(span)
+          $('.display_experience').append(str)
+          if(data.length<5){
+            $(".weui-loadmore").css("display","none");
+            $(document.body).destroyInfinite()
+          }
+        },
+        error:function(){
+        alert('fail');
+        }
+      });
+      j++
+    }
+     publishCrews(1)
+      //我邀请的
+      $(".display_experience").on("click",".my_invite",function(){
+         var id=$(this).attr("id");
+         window.location.href=url+'/WX/page_positioninfo/'+id;
+
+      })
+      //shenqing我的e
+      $(".display_experience").on("click",".application_my",function(){
+         var id=$(this).prev().attr("id");
+         console.log(id);
+         window.location.href=url+'/WX/page_positioninfo1/'+id;
+
+      })
+       //------------------------------刷新--------------------------
+       
+          $(document.body).pullToRefresh().on("pull-to-refresh",function () {
+              setTimeout(function () {
+                  $(document.body).pullToRefreshDone();
+                   publishCrews(1)
+                   j=2; 
+                   $(document.body).infinite()
+              },2000)
+          });
+        
+        
+          //------------------------------加载---------------------------------
+          
+       var j=2;
+        var loading = false;  //状态标记
+       
+        $(document.body).infinite(1000).on("infinite", function(e) {
+
+            if(loading) return;
+            loading = true;
+            var totalpages=parseInt($(".display_experience").attr("id"));
+            console.log(totalpages)
+            setTimeout(function() {
+              console.log(j)
+              publishCrews_jiazai(j)                
+                
+                loading = false;
+            }, 1000);
+        });

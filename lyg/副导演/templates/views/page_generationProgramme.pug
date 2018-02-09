@@ -1,0 +1,158 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    title 生成方案
+    link(rel='stylesheet', href='/css/range.css')
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    style.
+      #weui-prompt-input{border:1px solid #ccc}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(src='/js/vconsole.min.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/url.js')
+    //script(type='text/javascript', src='/js/url.js')
+  body
+    h2.yan 演员预算配比
+    #c2
+      .scan1
+        span.pers0(data-ind='0')
+      .scan2
+        span.pers1(data-ind='0')
+      .scan3
+        span.pers2(data-ind='0')
+      .scan4
+        span.pers3(data-ind='0')
+      .starss
+        img#star1.star1(data-index='0', src='/img/star1.png', alt='')
+        img#star2.star2(data-index='1', src='/img/star2.png', alt='')
+        img#star3.star3(data-index='2', src='/img/star3.png', alt='')
+    .percDe
+    .color_block
+      div
+        i
+        span
+          | 领衔主演(
+          span.pec 20%
+          | )
+      div
+        i
+        span
+          | 主要演员(
+          span.pec 30%
+          | )
+    .color_block
+      div
+        i
+        span
+          | 客串演员(
+          span.pec 40%
+          | )
+      div
+        i
+        span
+          | 其它演员(
+          span.pec 10%
+          | )
+    .ps
+      p ps：滑动滑块调整演员预算配比
+    .btns
+      a.btn.btn1 手动添加方案
+      a.btn.btn2
+        | 一键生成方案
+        br
+        span （滑动滑块）
+   
+    script(src='/js/range.js')
+    script. 
+      var production_id=!{JSON.stringify(production_id)};
+      var director_id=!{JSON.stringify(director_id)};
+      var appid=!{JSON.stringify(appid)};
+      $(".btn2").click(function(){
+        
+        $.prompt({
+            title: '方案命名',
+            text: '输入标题：',
+            input: '',
+            onOK: function (input) {
+              console.log(input);
+              var leadingactor=[];
+              $(".pec").each(function(){
+                console.log(parseInt($(this).text())/100)
+                leadingactor.push(parseInt($(this).text())/100);
+              })
+              console.log(leadingactor);
+              var data={
+                production_id:production_id,
+                leadingactor_budget_ratio:leadingactor[0],
+                starringingroup_budget_ratio:leadingactor[1],
+                guestactor_budget_ratio:leadingactor[2],
+                other_budget_ratio:leadingactor[3],
+                name:input,
+                userid:director_id,
+                attribute:1
+              };
+              var all_url=url+'/WX/wx_generationProgrammebySlider';
+              $.ajax({
+                type : "post",
+                url : all_url,
+                data:data,
+                dataType : "jsonp",
+                success : function(data){
+                    console.log(data);
+                    location.href=url+'/WX/page_searchCrewsAndProgramme/'+director_id+'/'+appid;
+                    
+                },
+                error:function(err){
+                   console.log(err)
+                }
+            });
+              console.log(data)
+            },
+            onCancel: function () {
+              //点击取消
+            }
+          });
+      });
+      //手动------------------------------------
+      $(".btn1").click(function(){
+        
+        $.prompt({
+            title: '方案命名',
+            text: '输入标题：',
+            input: '',
+            onOK: function (input) {
+              console.log(input);
+              
+              var data={
+                production_id:production_id,
+                name:input,
+                userid:director_id,
+                attribute:2
+              };
+              var abyhand_url=url+'/WX/wx_generationProgrammebyhand';
+              $.ajax({
+                type : "post",
+                url : abyhand_url,
+                data:data,
+                dataType : "jsonp",
+                success : function(data){
+                    console.log(data);
+                    location.href=url+'/WX/page_searchCrewsAndProgramme/'+director_id+'/'+appid;
+                    
+                },
+                error:function(err){
+                   console.log(err)
+                }
+            });
+              console.log(data)
+            },
+            onCancel: function () {
+              //点击取消
+            }
+          });
+      })
+      

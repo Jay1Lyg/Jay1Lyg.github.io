@@ -1,0 +1,113 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告详情
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/notice_edit.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    //script(src='js/echarts.min.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+  body
+    header
+      .newactor_banner
+        img.banner_img(src='', alt='')
+        div
+          ul.tab
+            li.active 剧组信息
+            li 角色信息
+    section
+      .active.crew_info
+        div.crew_info1
+      div
+        .notice_class.leader
+          .notice_type
+            p 领携主演
+            p.jiantou
+              img(src='/img/sanyou.png', alt='')
+              img(src='/img/sanxia.png', alt='')
+          .detail_type.leader_actor
+            .leader_suitability.ling
+              .information_actor
+                ul
+                  li 职位名称：男一号
+                  li 性别：男
+                  li 年龄段：青年
+                  li 身高(cm)：1
+                p.all_info 查看全部信息
+                .information_actornone
+                  ul
+                    li 体型：偏廋
+                    li 招募数量：1
+                    li 技能特长：1
+                    li 特征：1
+                  div
+                    p(style='font-size: 14px') 人物小传
+                    textarea.weui-textarea(rows='3', style='font-size: 12px', disabled='') 你就是交换空间
+                  p.put_away 收起
+        .notice_class.starring
+          .notice_type
+            p 主要演员
+            p.jiantou
+              img(src='/img/sanyou.png', alt='')
+              img(src='/img/sanxia.png', alt='')
+          .detail_type.starring_actor
+            div.zhu
+        .notice_class.guest
+          .notice_type
+            p 客串演员
+            p.jiantou
+              img(src='/img/sanyou.png', alt='')
+              img(src='/img/sanxia.png', alt='')
+          .detail_type.guest_actor
+            div.ke
+        .notice_class.other
+          .notice_type
+            p 其他演员
+            p.jiantou
+              img(src='/img/sanyou.png', alt='')
+              img(src='/img/sanxia.png', alt='')
+          .detail_type.other_actor
+            div.qi        
+  script.
+    toggle($(".notice_type"));
+    $(".detail_type").on("click",".all_info",function () {
+    $(this).hide();
+    $(this).next(".information_actornone").show()
+    });
+    $(".detail_type").on("click",".put_away",function () {
+    $(this).parent(".information_actornone").prev(".all_info").show();
+    $(this).parent(".information_actornone").hide();
+    })
+    var btns =$(".tab li"),
+    contents =$("section>div")
+    var t = new TabView(btns,contents);
+    var productionid = !{JSON.stringify(productionid)};
+     var userid = "null";
+     var url="http://www.901vehicle.cn";
+      var juzu_url=url+'/WX/wx_searchpositionDetails/'+productionid+'/'+userid;
+      console.log(juzu_url);
+      $.ajax({
+          type : "get",
+          url : juzu_url,
+          dataType : "jsonp",
+          async:false,
+          // jsonp: "jsonpCallback",
+          success : function(data){
+              console.log(data);
+              
+              
+          },
+          error:function(err){
+             console.log(err)
+          }
+      });
+     
+     

@@ -1,0 +1,41 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 授权
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/noticeJob.css')
+    style.
+      * {
+      padding: 0;
+      margin: 0;
+      list-style: none
+      }
+      body{
+      background: #4da2ad;
+      }
+      div {
+      text-align: center;
+      width: 100%;
+      margin: 0 auto;
+      }
+      h1{
+      font-size: 28px;
+      color: white;
+      margin: 65px 0;
+      }
+      p{ width: 80%;
+      font-size: 20px;
+      color: white;
+      outline:none;
+      margin: 0 auto;
+      }
+    script(type='text/javascript').
+      // document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+  body
+    div
+      h1 授权成功
+      p 您可以前往您的专属微信公众平台点击“我的花园-发布通告”

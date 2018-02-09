@@ -1,0 +1,137 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 
+    link(rel='stylesheet', href='/css/casting.css')
+    style.
+      .attention{
+      width:100%;
+      height:50px;
+      background: #f2f2f2;
+      text-align: center;
+      }
+      .attention img{
+      width: 30px;
+      display: inline-block; vertical-align: middle;
+      }
+      .attention span{
+      line-height: 50px;
+      color:#4da2ad;
+      font-size: 16px;
+      }
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    .actorName
+    .actorPic
+      .xiaosanjiao
+        img(src='imags/501751812161802735.png', width='35', height='12', border='0', alt='')
+      .photo_dotted
+        .actorPhoto
+          img(src='imags/timg.jpg', width='500', height='300', border='0', alt='')
+      .banyuan
+        img(src='imags/64989393487718861.png', width='40', height='82', border='0', alt='')
+      // -----基本信息----
+      .line
+        .basicMessage 基本资料
+      .actorMessage
+        ul
+          li 艺　　名：张张
+          li 真实姓名：张靓婧
+          li 性　　别：女
+          li 出生日期：1990/12/15
+          li 三　　围：84/62/86
+          li 身　　高：168
+          li 体　　重：45
+          li 毕业院校：英国剑桥大学
+          li 技能特长：骑马、舞蹈
+          li 特　　征：御姐范
+      .banyuan2
+        img(src='imags/2251.png', width='60', height='112', border='0', alt='')
+      // -----参演经历----
+      .line
+        .basicMessage 参演经历
+      // ---------如果参演经历有多个，循环下边div即可----------
+      div
+        .actorExperience
+          img(src='imags/timg.jpg')
+        .program
+          p.mytitle 《向阳花开》
+          p 剧目类型：电视电影
+          p 饰演角色：付亚男
+          p 角色类型：领衔主演
+          .banyuan3
+            img(src='imags/64989393487718861.png', width='35', height='72', border='0', alt='')
+      // -----照片视频----
+      .line
+        .basicMessage 照片视频
+      // -----弹性布局----
+      .flexBox
+        .photoLeft
+          img(src='imags/timg.jpg')
+          p 正面卡胸
+        .photoRight
+          img(src='imags/timg.jpg')
+          p 左侧45度卡胸
+        .photoLeft
+          img(src='imags/timg.jpg')
+          p 右侧45度卡胸
+        .photoRight
+          img(src='imags/timg.jpg')
+          p 右侧90度卡腰
+        .photoLeft
+          img(src='imags/timg.jpg')
+          p 左侧90度卡腰
+        .photoRight
+          img(src='imags/timg.jpg')
+          p 正面卡腰
+        .photoLeft
+          img(src='imags/timg.jpg')
+          p 正面全身
+        .photoRight
+          img(src='imags/timg.jpg')
+          p 露额头正面卡胸
+        .photoLeft
+          img(src='imags/timg.jpg')
+          p 生活照
+      div(style='clear:both')
+      // -----照片视频----
+      .line
+        .basicMessage 接戏标准
+      .startContent
+        .textLeft
+          p 剧目类别：电视电影
+          p 角色类别：领衔主演
+          p 剧目类型：军旅
+          p 档期：有
+        .banyuan4
+          img(src='imags/2251.png', width='60', height='112', border='0', alt='')
+    .bottom
+      .sanjiao
+      span END
+    .attention
+      img(src='imags/attention.png', alt='')
+      span 关注
+    script.
+        var userid=!{JSON.stringify(userid)};
+        var appid=!{JSON.stringify(appid)};
+         var url_url=url+'/agent/a_userprofile/'+userid+'/null';
+        console.log(url)
+      $.ajax({
+        type : "get",
+        url : url_url,
+        dataType : "jsonp",
+        success : function(data){
+            console.log(data)
+            
+            
+
+        },
+        error:function(){
+            alert('fail');
+        }
+      });

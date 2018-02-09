@@ -1,0 +1,260 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 角色信息
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/weui2.css')
+    link(rel='stylesheet', href='/css/actor_edit_echart.css')
+    link(rel='stylesheet', href='/css/program.css')
+    style.
+      * {
+      padding: 0;
+      margin: 0;
+      list-style: none
+      }
+      body {
+      background: white
+      }
+    script(type='text/javascript').
+      // document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    script(type='text/javascript', src='/js/jquery.min.js')
+    // <script type="text/javascript" src="/js/jqWeui.js"></script>
+    script(type='text/javascript', src='/js/zepto.min.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    div.div
+  script.
+    var careerincrew_id=!{JSON.stringify(careerincrew_id)};
+    var actorbudget_id=!{JSON.stringify(actorbudget_id)};
+    function list(){
+          var juzu_url=url+'/WX/wx_searchAlternativeActorsbySlider/'+careerincrew_id+'/'+actorbudget_id;
+          console.log(juzu_url);
+          $.ajax({
+              type : "get",
+              url : juzu_url,
+              dataType : "jsonp",
+              async:false,
+              // jsonp: "jsonpCallback",
+              success : function(data){
+                  console.log(data);
+                  var datas=data;
+                  var results=data.results;
+                  var str=""
+                  for(var i=0;i<results.length;i++){
+
+                    str+=`<div class="weui_cell slidelefts">
+                            <div class="weui_cell_bd weui_cell_primary ">
+                                <div>
+                                    <div class="recommend_edit" style="height: 132px">
+                                        <div>
+                                            <img src="${results[i].image}" alt="" class="chart">
+                                        </div>
+                                        <div>
+                                            <p style="font-size: 14px">与旗下演员<span style="color:#4da2ad">${results[i].realname}</span>匹配度较高</p>
+                                            <div id="main${i}" style="width: 100px;height:100px;float: left;"></div>
+                                            <ul class="pipei">
+                                                <li>基本信息：${parseInt(results[i].basicMatchingDegree*100)}%</li>
+                                                <li>特征角色：${parseInt(results[i].featureMatchingDegree*100)}%</li>
+                                                <li>片酬需求：${parseInt(results[i].offsetMatchingDegree*100)}%</li>
+                                                <li>档期匹配：${parseInt(results[i].scheduleMatchingDegree*100)}%</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="slideleft">
+                                <span class="bg-green f-white">删除</span>
+                            </div>
+                        </div>`
+                  };
+                  $(".div").html(str)
+
+                 
+                 
+              },
+              error:function(err){
+                 console.log(err)
+              }
+          });
+        };
+        list();
+
+        //图
+         function chart(myChart,main,totalMatchingDegree,basicMatchingDegree,featureMatchingDegree,offsetMatchingDegree,scheduleMatchingDegree){
+          var myChart = echarts.init(document.getElementById(main));
+
+            var dataStyle = {
+                normal: {
+                    label: {show:false},
+                    labelLine: {show:false}
+                }
+            };
+            var placeHolderStyle = {
+                normal : {
+                    color: 'rgba(89,155,163,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle1 = {
+                normal : {
+                    color: 'rgba(125,196,205,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle2 = {
+                normal : {
+                    color: 'rgba(177,217,222,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle3 = {
+                normal : {
+                    color: 'rgba(223,241,243,0)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            
+             var option=option;
+             console.log(option)
+             option = {
+                title: {
+                    text: totalMatchingDegree+'%',
+                    //subtext: '来自紫螺科技数据',
+                    //sublink: 'https://www.baidu.com',
+                    x: 'center',
+                    y: 'center',
+                    itemGap: 10,
+                    textStyle : {
+                        color : 'rgba(30,144,255,0.8)',
+                        fontFamily : '微软雅黑',
+                        fontSize : 6,
+                        fontWeight : 'bolder',
+                    }
+                },
+                grid:{
+                    x:0,
+                    y:5,
+                    x2:50,
+                    y2:0,
+                    borderWidth:1
+                },
+                tooltip : {
+                    show: true,
+                    formatter: "{a} <br/>{b}"
+                },
+                color:[
+                     '#4da2ad','#7dc4cd','#8bd3dc','#a9dce3'
+                ],
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                series : [
+                    {
+                        name:'基本信息',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [36, 45],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:basicMatchingDegree*1000/10,
+                                name:'基本信息匹配度'+basicMatchingDegree*1000/10+'%',
+                            },
+                            {
+                                value:100-basicMatchingDegree*1000/10,
+                                name:'基本信息匹配度'+basicMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle
+                            }
+                        ]
+                    },
+                    {
+                        name:'特征角色',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [26, 35],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:featureMatchingDegree*1000/10,
+                                name:'特征角色匹配度'+featureMatchingDegree*1000/10+'%',
+                            },
+                            {
+                                value:100-featureMatchingDegree*1000/10,
+                                name:'特征角色匹配度'+featureMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle1
+                            }
+                        ]
+                    },
+                    {
+                        name:'片酬需求',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [16, 25],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:offsetMatchingDegree*1000/10,
+                                name:'片酬需求匹配度'+offsetMatchingDegree*1000/10+'%'
+                            },
+                            {
+                                value:100-offsetMatchingDegree*1000/10,
+                                name:'片酬需求匹配度'+offsetMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle2
+                            }
+                        ]
+                    },
+                     {
+                        name:'档期匹配',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [6, 15],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:scheduleMatchingDegree*1000/10,
+                                name:'档期匹配度'+scheduleMatchingDegree*1000/10+'%'
+                            },
+                            {
+                                value:100-scheduleMatchingDegree*1000/10,
+                                name:'档期匹配度'+scheduleMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle3
+                            }
+                        ]
+                    },
+                    
+                ]
+            };
+
+            myChart.setOption(option);
+      };
+   

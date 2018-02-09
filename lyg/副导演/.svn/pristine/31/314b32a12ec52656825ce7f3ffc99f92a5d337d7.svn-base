@@ -1,0 +1,161 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告列表
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/noticeJob.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript').
+      //        document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/jqWeui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+  body
+    section(style='margin-bottom: 1rem')
+      .active
+        .notice_class
+          .notice_type
+            p 领衔主演
+            p.jiantou
+              img(src='img/sanyou.png', alt='')
+              img(src='img/sanxia.png', alt='')
+          .detail_type
+            div
+              .information_actor
+                ul
+                  li 职位名称：男一号
+                  li 性别：男
+                  li 年龄段：青年
+                  li 身高(cm)：1
+                p.all_info 查看全部信息
+                .information_actornone
+                  ul
+                    li 体型：偏廋
+                    li 招募数量：1
+                    li 技能特长：1
+                    li 特征：1
+                  div
+                    p 人物小传
+                    textarea.weui-textarea(placeholder='请输入文本', rows='3')
+                  p.put_away 收起
+              p(style='width: 100%;height: 0.2rem;background:#f2f2f2')
+            .page__bd.page__bd_spacing
+              a.weui-btn.look-actor 查看演员
+        .notice_class
+          .notice_type
+            p 主要演员
+            p.jiantou
+              img(src='/img/sanyou.png', alt='')
+              img(src='/img/sanxia.png', alt='')
+          .detail_type
+            div
+              .information_actor
+                ul
+                  li 职位名称：男一号
+                  li 性别：男
+                  li 年龄段：青年
+                  li 身高(cm)：1
+                p.all_info 查看全部信息
+                .information_actornone
+                  ul
+                    li 体型：偏廋
+                    li 招募数量：1
+                    li 技能特长：1
+                    li 特征：1
+                  div
+                    p 人物小传
+                    textarea.weui-textarea(placeholder='请输入文本', rows='3')
+                  p.put_away 收起
+              p(style='width: 100%;height: 0.2rem;background:#f2f2f2')
+            .page__bd.page__bd_spacing
+              a.weui-btn.add-actor +添加角色信息
+        .notice_class
+          .notice_type
+            p 客串演员
+            p.jiantou
+              img(src='img/sanyou.png', alt='')
+              img(src='img/sanxia.png', alt='')
+          .detail_type
+            div
+              .information_actor
+                ul
+                  li 职位名称：男一号
+                  li 性别：男
+                  li 年龄段：青年
+                  li 身高(cm)：1
+                p.all_info 查看全部信息
+                .information_actornone
+                  ul
+                    li 体型：偏廋
+                    li 招募数量：1
+                    li 技能特长：1
+                    li 特征：1
+                  div
+                    p 人物小传
+                    textarea.weui-textarea(placeholder='请输入文本', rows='3')
+            .page__bd.page__bd_spacing
+              a.weui-btn.add-actor +添加角色信息
+        .notice_class
+          .notice_type
+            p 其他演员
+            p.jiantou
+              img(src='img/sanyou.png', alt='')
+              img(src='img/sanxia.png', alt='')
+          .detail_type
+            div
+              .information_actor
+                ul
+                  li 职位名称：男一号
+                  li 性别：男
+                  li 年龄段：青年
+                  li 身高(cm)：1
+                p.all_info 查看全部信息
+                .information_actornone
+                  ul
+                    li 体型：偏廋
+                    li 招募数量：1
+                    li 技能特长：1
+                    li 特征：1
+                  div
+                    p 人物小传
+                    textarea.weui-textarea(placeholder='请输入文本', rows='3')
+            .page__bd.page__bd_spacing
+              a.weui-btn.add-actor +添加角色信息
+      .page__bd.page__bd_spacing
+        a.weui-btn.release 发布并筛选
+  script.
+    toggle($(".notice_type"));
+    $(".detail_type").on("click",".all_info",function () {
+    $(this).hide();
+    $(this).next(".information_actornone").show()
+    });
+    $(".detail_type").on("click",".put_away",function () {
+    $(this).parent(".information_actornone").prev(".all_info").show();
+    $(this).parent(".information_actornone").hide();
+    })
+     var url="http://www.901vehicle.cn";
+      var agentid=!{JSON.stringify(agentid)};
+      var appid=!{JSON.stringify(appid)};
+        var url1=url+'/agent/a_searchsuccessfulmatchingcrews/'+agentid+'/1';
+        $.ajax({
+          type : "get",
+          url : url1,
+          dataType : "jsonp",
+          // jsonp: "jsonpCallback",
+          success : function(data){
+          console.log(data);
+          var obj1=data.obj1,obj2=data.obj2,obj3=data.obj3,obj4=data.obj4,obj5=data.obj5,obj6=data.obj6,obj7=data.obj7,obj8=data.obj8,obj9=data.obj9,obj10=data.obj10,obj11=data.obj11,obj12=data.obj12,obj13=data.obj13;
+          console.log(obj1,obj2,obj3,obj4,obj5,obj6,obj7,obj8,obj9,obj10,obj11,obj12,obj13)
+          //if(obj5==undefined)
+          
+          },
+          error:function(){
+          alert('fail');
+          }
+        });

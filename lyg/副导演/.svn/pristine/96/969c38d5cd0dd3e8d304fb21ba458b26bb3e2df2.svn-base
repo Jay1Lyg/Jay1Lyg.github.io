@@ -1,0 +1,79 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title feelold
+    link(rel='stylesheet', href='/css/feelold.css')
+  body
+    .feelCon
+      .huawen
+        img(src='/img/hj6.png', width='750', height='241', border='0', alt='')
+        p 《古城》
+      .mesgCon
+        .juzuMesg
+          .juzuTitle
+            img(src='/img/hj.png', width='191', height='76', border='0', alt='')
+            span 剧组信息
+          .juzuCon
+            .messLeft
+              ul
+                li 剧名：古城
+                li 剧目类型：科幻片
+                li 报名截止日期：2017-05-10
+                li 出品公司：紫螺科技
+            .messRight
+              ul
+                li 剧目类型：院线电影
+                li 拍摄地：北京
+                li 拍摄周期(天)：45
+                li 承制公司：紫螺科技
+            div(style='clear:both;')
+        .roleMesg
+          .juzuTitle
+            img(src='/img/hj.png', width='191', height='76', border='0', alt='')
+            span 角色信息
+          // -----内容多时，循环此div-----
+          .forHuan
+            .erjiTitle
+              img(src='/img/hj7.png', width='519', height='15', border='0', alt='')
+              p 领衔主演
+            .juzuCon
+              .messLeft
+                ul
+                  li 剧名：古城
+                  li 剧目类型：科幻片
+                  li 报名截止日期：2017-05-10
+                  li 出品公司：紫螺科技
+                  li 人物小传：
+              .messRight
+                ul
+                  li 剧目类型：院线电影
+                  li 拍摄地：北京
+                  li 拍摄周期(天)：45
+                  li 承制公司：紫螺科技
+              div(style='clear:both;')
+              .xiaozhuan
+          .forHuan
+            .erjiTitle
+              img(src='/img/hj7.png', width='519', height='15', border='0', alt='')
+              p 领衔主演
+            .juzuCon
+              .messLeft
+                ul
+                  li 剧名：古城
+                  li 剧目类型：科幻片
+                  li 报名截止日期：2017-05-10
+                  li 出品公司：紫螺科技
+                  li 人物小传：
+              .messRight
+                ul
+                  li 剧目类型：院线电影
+                  li 拍摄地：北京
+                  li 拍摄周期(天)：45
+                  li 承制公司：紫螺科技
+              div(style='clear:both;')
+              .xiaozhuan
+    .bottomBj
+      img(src='/img/hj2.png', width='750', height='434', border='0', alt='')

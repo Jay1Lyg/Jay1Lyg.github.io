@@ -1,0 +1,181 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title science
+    link(rel='stylesheet', href='/css/science.css')
+    style.
+      .fix{position: fixed;
+          right: 0;
+          top: 74px;
+          z-index:100;
+          width:6.2rem;
+          height:3rem}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    //script(src='js/echarts.min.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    img.fix(src='/img/gz2.png')
+    .sciMesg
+      .sciBj
+        img(src='/img/kh1.png', width='750', height='528', border='0', alt='')
+      .crewTitle
+        p.crew_name 
+        .solidBorder
+          .juTitle 剧组信息
+        .sciBorder
+          img(src='/img/kh3.png', width='750', height='199', border='0', alt='')
+        .message.crew_info
+        div(style='clear:both;')
+        .solidBorder
+          .juTitle 角色信息
+          .sciBorder
+            img(src='/img/kh3.png', width='750', height='199', border='0', alt='')
+        // ---------剧目类别增多，可循环下边div-------
+        .marginTop
+          .otherMesg.ling
+          .otherMesg.zhu
+          .otherMesg.ke
+          .otherMesg.qi      
+        .sciBj2
+          img(src='/img/kh2.png',  width='749', height='299', border='0', alt='')
+  script.
+    var productionCrew_id = !{JSON.stringify(productionCrew_id)};
+      var appid=!{JSON.stringify(appid)};
+     'use strict';
+
+                  var juzu_url = url + '/WX/wx_searchallpositionDetails/' + productionCrew_id + '/null';
+                  console.log(juzu_url);
+                  $.ajax({
+                      type: "get",
+                      url: juzu_url,
+                      dataType: "jsonp",
+                      async: false,
+                      // jsonp: "jsonpCallback",
+                      success: function success(data) {
+                          console.log(data);
+                          var data = data;
+                          var crew = data.production;
+                          var crew_info = '';
+                          var categorytag_info = "";
+                          var categorytag = data.production.categorytag;
+                          var _iteratorNormalCompletion = true;
+                          var _didIteratorError = false;
+                          var _iteratorError = undefined;
+
+                          try {
+                              for (var _iterator = categorytag.repertoireTpyeArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                                  repertoireTpye = _step.value;
+
+                                  categorytag_info += '' + repertoireTpye.repertoireTpyeName;
+                              }
+                          } catch (err) {
+                              _didIteratorError = true;
+                              _iteratorError = err;
+                          } finally {
+                              try {
+                                  if (!_iteratorNormalCompletion && _iterator.return) {
+                                      _iterator.return();
+                                  }
+                              } finally {
+                                  if (_didIteratorError) {
+                                      throw _iteratorError;
+                                  }
+                              }
+                          }
+
+                          crew_info = '<div class="messLeft">\n                            <ul>\n                                <li>\u5267\u540D\uFF1A' + crew.production_name + '</li>\n                                <li>\u5267\u76EE\u7C7B\u522B\uFF1A' + crew.categorytag.categoryName + '</li>\n                                <li>\u5267\u76EE\u7C7B\u578B\uFF1A' + categorytag_info + '</li>\n                                <li>\u62CD\u6444\u5730\uFF1A' + crew.location[0].fullname + '</li>                                \n                            </ul>\n                        </div>\n                        <div class="messRight">\n                            <ul>\n                                <li>\u62CD\u6444\u5468\u671F(\u5929)\uFF1A' + crew.duration + '</li>\n                                 <li>\u51FA\u54C1\u516C\u53F8\uFF1A' + crew.issuer_companies_name + '</li>\n                                <li>\u627F\u5236\u516C\u53F8\uFF1A' + crew.production_companys_name + '</li>\n                                <li>\u62A5\u540D\u622A\u6B62\u65E5\u671F\uFF1A' + crew.expired_date + '</li>\n                            </ul>\n                        </div>';
+                          $(".crew_info").html(crew_info);
+                          //剧名
+                          $(".crew_name").html(crew.production_name);
+                          $("title").html(crew.categorytag.categoryName + "|《" + crew.production_name + "》|演员招募");
+                          var obj2 = data.obj2;
+                          var obj3 = data.obj3;
+                          var obj4 = data.obj4;
+                          var obj5 = data.obj5;
+                          var str2 = "";
+                          var str3 = "";
+                          var str4 = "";
+                          var str5 = "";
+                          var all_str2 = "";
+                          var all_str3 = "";
+                          var all_str4 = "";
+                          var all_str5 = "";
+                          function a(obj, html, str, all_str) {
+                              if (obj == undefined) {
+                                  $(html).html();
+                              } else {
+                                  for (var i = 0; i < obj.length; i++) {
+                                      //-------------性别------------
+                                      if (obj[i].gender == 1) {
+                                          obj[i].gender = "男";
+                                      } else if (obj[i].gender == 2) {
+                                          obj[i].gender = "女";
+                                      } else if (obj[i].gender == 3) {
+                                          obj[i].gender = "不限";
+                                      };
+                                      //obj[i].genger=obj[i].genger=="1"?"男":obj[i].genger=="2"?"女":obj[i].genger=="3"?"不限";
+                                      //-------------年龄------------
+                                      if (obj[i].age == "1") {
+                                          obj[i].age = "婴幼儿";
+                                      } else if (obj[i].age == "2") {
+                                          obj[i].age = "少年";
+                                      } else if (obj[i].age == "3") {
+                                          obj[i].age = "青年";
+                                      } else if (obj[i].age == "4") {
+                                          obj[i].age = "中年";
+                                      } else if (obj[i].age == "5") {
+                                          obj[i].age = "老年";
+                                      } else if (obj[i].age == "6") {
+                                          obj[i].age = "不限";
+                                      };
+                                      //-------------体质------------
+                                      if (obj[i].shape == "1") {
+                                          obj[i].shape = "极瘦";
+                                      } else if (obj[i].shape == "2") {
+                                          obj[i].shape = "偏瘦";
+                                      } else if (obj[i].shape == "3") {
+                                          obj[i].shape = "适中";
+                                      } else if (obj[i].shape == "4") {
+                                          obj[i].shape = "健壮";
+                                      } else if (obj[i].shape == "5") {
+                                          obj[i].shape = "偏胖";
+                                      } else if (obj[i].shape == "0") {
+                                          obj[i].shape = "不限";
+                                      };
+                                      //-------------身高------------
+                                      var height;
+                                      obj[i].height = height;
+                                      if (obj[i].min_height == "" && obj[i].max_height == "") {
+                                          obj[i].height = "不限";
+                                      } else if (obj[i].min_height == "" && obj[i].max_height != "") {
+                                          obj[i].height = "<=" + obj[i].max_height;
+                                      } else if (obj[i].min_height != "" && obj[i].max_height == "") {
+                                          obj[i].height = ">=" + obj[i].min_height;
+                                      } else if (obj[i].min_height != "" && obj[i].max_height != "") {
+                                          obj[i].height = obj[i].min_height + '-' + obj[i].max_height;
+                                      };
+                                      //-------------渲染数据------------
+
+                                      str += '  <div class="messLeft">\n                                  <ul>\n                                      <li>\u804C\u4F4D\u540D\u79F0\uFF1A' + obj[i].roleTag + '</li>\n                                      <li>\u5E74\u9F84\u6BB5\uFF1A' + obj[i].age + '</li>\n                                      <li>\u4F53\u578B\uFF1A' + obj[i].shape + '</li>\n                                      <li>\u6280\u80FD\u7279\u957F\uFF1A' + obj[i].skillTag + '</li>\n                                      <li>\u62CD\u6444\u5468\u671F\uFF1B' + obj[i].workingdays + '</li>\n                                  </ul>\n                              </div>\n                              <div class="messRight">\n                                  <ul>\n                                      <li>\u6027\u522B\uFF1A' + obj[i].gender + '</li>\n                                      <li>\u8EAB\u9AD8\uFF08cm\uFF09\uFF1A' + obj[i].height + '</li>\n                                      <li>\u62DB\u52DF\u6570\u91CF\uFF1A' + obj[i].men_count + '</li>\n                                      <li>\u7279\u5F81\uFF1A' + obj[i].featureTag + '</li>\n                                  </ul>\n                              </div>\n                              <div style="clear:both"></div>\n                              <div>\n                                <p style="font-size:14px;text-align:left;">\u4EBA\u7269\u5C0F\u4F20</p>\n                                <div style="border: 1px solid white;color:white;font-size:14px;margin:0 2rem 2rem 0;text-indent:2.3rem;">' + obj[i].description + '</div>\n                              </div>';
+                                  };
+
+                                  all_str += ' <div class="erjiTitle">\n                                    <img src="/img/kh4.png" width="180" height="91" border="0" alt="">\n                                    <p>' + obj[0].roleTag + '</p>\n                                </div>\n                                <div class="message">' + str + '</div>';
+                                  $(html).html(all_str);
+                              };
+                          };
+                          a(obj2, ".ling", str2, all_str2);
+                          a(obj3, ".zhu", str3, all_str3);
+                          a(obj4, ".ke", str4, all_str4);
+                          a(obj5, ".qi", str5, all_str5);
+                      },
+                      error: function error(err) {
+                          console.log(err);
+                      }
+                  });
+                  $(".fix").click(function () {
+                      location.href = url + '/resume/page_leadUserBackToPlatform/' + appid;
+                  });

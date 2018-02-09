@@ -1,0 +1,390 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/common.css')
+    link(rel='stylesheet', href='/css/my_Delivery.css')
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    style.
+      .true{
+      opacity:0.5;
+      }
+      div.All.true{
+            opacity:0.3;
+            }
+            .mask{
+                position: relative;
+            }
+            .mask>div>img.true{
+                position: absolute;
+                right: 5%;
+                top: 15%;
+                z-index: 100;
+                display: block;
+                transform:rotate(45deg);
+                -ms-transform:rotate(45deg);     
+                -moz-transform:rotate(45deg);    
+                -webkit-transform:rotate(45deg); 
+                -o-transform:rotate(45deg);
+                width:80px;
+            }
+            .mask>div>img.false{
+                position: absolute;
+                right: 5%;
+                top: 5%;
+                z-index: 100;
+                display: none;
+                width:80px;
+            }
+            .mask>div>a>img.true{
+                position: absolute;
+                right: 5%;
+                top: 15%;
+                z-index: 100;
+                display: block;
+                transform:rotate(45deg);
+                -ms-transform:rotate(45deg);     
+                -moz-transform:rotate(45deg);    
+                -webkit-transform:rotate(45deg); 
+                -o-transform:rotate(45deg);
+                width:80px;
+            }
+            .mask>div>a>img.false{
+                position: absolute;
+                right: 5%;
+                top: 5%;
+                z-index: 100;
+                display: none;
+                width:80px;
+            }
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(src='/js/zepto.min.js')
+    script(src='/js/my_Delivery.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    script(type='text/javascript', src='/js/url.js')
+    title 邀请我的
+  body
+    .weui-pull-to-refresh__layer
+      .weui-pull-to-refresh__arrow
+      .weui-pull-to-refresh__preloader
+      .down 下拉刷新
+      .up 释放刷新
+      .refresh 正在刷新
+    // title start
+    // title end
+    // top nav start
+    .weui-tab.manage-nav
+      .weui-flex
+        .weui-flex__item.nav-tab.tab-active
+          p.tab-text 未处理
+        .weui-flex__item.nav-tab
+          p.tab-text 已接受
+        .weui-flex__item.nav-tab
+          p.tab-text 已拒绝
+    // top nav end
+    // main start
+    .manage-main(style='display:block')
+      .main-contain.main-select
+      .main-interview
+      .main-pase
+    .none_div(style='display: none')
+      img.none(src='/img/暂无记录.png', alt='')
+      p 暂无记录
+    #dialogs
+      #androidDialog1.js_dialog1(style='display: none;')
+        .weui-mask
+        .weui-dialog.weui-skin_android
+          .weui-dialog__hd(style='text-align:center')
+            strong.weui-dialog__title 提示
+          .weui-dialog__bd.realname
+            | 同意后剧组将获知您的联系方式！请保持手机畅通~
+          .weui-dialog__ft
+            a.weui-dialog__btn.weui-dialog__btn_default.cancel1 取消
+            a.sure.weui-dialog__btn.weui-dialog__btn_primary2 确定
+    // main end
+    .weui-loadmore(style='clear: both')
+      i.weui-loading
+      span.weui-loadmore__tips 正在加载
+    script.
+        $('.nav-tab').on('click', function () {
+          $(this)
+              .addClass('tab-active')
+              .siblings('div')
+              .removeClass('tab-active');
+          var $index = $(this).index();
+          console.log($index)
+          $(".manage-main>div")
+              .eq($index)
+              .addClass("main-select")
+              .siblings('.main-select')
+              .removeClass("main-select");
+              
+      });
+          var userid= !{JSON.stringify(userid)};
+          var appid= !{JSON.stringify(appid)};
+          var url_url = url+"/WX/wx_allsearchmybeinvitedinfo/";
+          function invite(page){
+           $.ajax({
+                  type : "get",
+                  url : url_url+userid+'/'+page+'/'+appid,
+                  dataType : "jsonp",
+                  // jsonp: "jsonpCallback",
+                  success : function(data){
+                      var All=data;
+                      console.log(All);
+                      console.log(data);
+                      $(".none_div").css("display","none")
+                      if(All==""){
+                          $(".none_div").css("display","block");
+                          $(".weui-loadmore").css("display", "none");
+                      }else{
+                          if(All==""){
+                                $(".none_div").css("display","block")
+                            }else{
+                                  console.log('step1');
+                                   $('.main-contain').empty();
+                                   var str1 = $('.main-contain').html();
+                                   //console.log(All.length);
+                                   $('.main-interview').empty();
+                                   var str2 = $('.main-interview').html();
+                                   $('.main-pase').empty();
+                                   var str3 = $('.main-pase').html();
+                                   
+                                    for(var i=0;i<All.length;i++){
+                                       
+                                    
+                                        if(All[i].invitestate==1){
+                                          var span='';
+                                          for(var j=0;j<All[i].production_repertoireType.length;j++){
+                                              span+=All[i].production_repertoireType[j].repertoireTpyeName
+                                          }
+                                            var url1 = url+"/WX/wx_changeinvitationstate/"+All[i].invitation_id+"/2/"+All[i].invited_id;
+                                            var url2 = url+"/WX/wx_changeinvitationstate/"+All[i].invitation_id+"/3/"+All[i].invited_id;
+                                            str1+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div  class="All '+All[i].isDelete+'"><div id="'+All[i].crews_id+'" class="all_delivery"> <p id="'+All[i].careerincrewid+'">《'+All[i].productioncrew_name+'》 <span class="border_delivery">'+All[i].production_category+'</span></p></div> <div id="'+All[i].crews_id+'" class="fen_delivery"> <p id="'+All[i].careerincrewid+'">角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p><p>见组地址： <span>'+All[i].location[0].fullname+'</span></p></div><div class="weui-flex"><div class="weui-flex__item contain-result-blue"><a style="color:#4da2ad;border:1px solid #4da2ad;padding:2px 20px;border-radius: 3px;" href="'+url2+'">拒绝</a></div><div class="weui-flex__item contain-result-blue agree"><a style="color:#4da2ad;border:1px solid #4da2ad;padding:2px 20px;border-radius: 3px;" href="'+url1+'" >同意<a></div></div><div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div></div></div>'
+                                             var  $androidDialog1 = $('#androidDialog1');
+                                              $(".main-contain").on("click",".agree",function(){
+                                               
+                                                 $androidDialog1.fadeIn(200);
+                                              })
+                                             $(".sure").on("click",function(){
+                                                  console.log(url1)
+                                                window.location.href=url1
+                                                $androidDialog1.fadeOut(200);
+                                             })
+                                          
+                                        }
+                              
+                                    }
+                                     for(var i=0;i<All.length;i++){
+                                      
+                                        if(All[i].invitestate==2){
+                                          var span='';
+                                          for(var j=0;j<All[i].production_repertoireType.length;j++){
+                                              span+=All[i].production_repertoireType[j].repertoireTpyeName
+                                          }
+                                            str2+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div  class="All '+All[i].isDelete+'"><div id="'+All[i].crews_id+'" class="all_delivery"> <p id="'+All[i].careerincrewid+'">《'+All[i].productioncrew_name+'》 <span class="border_delivery">'+All[i].production_category+'</span></div> <div id="'+All[i].crews_id+'" class="fen_delivery"> <p id="'+All[i].careerincrewid+'">角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p><p>见组地址： <span>'+All[i].location[0].fullname+'</span></p></div><div class="weui-flex__item contain-result-grey" style="float:right;margin-right:10px;color:#4da2ad">【同意邀约】</div><div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div></div>'
+                                          
+                                        }
+
+                              
+                                    }
+                                    for(var i=0;i<All.length;i++){
+                                        var span='';
+                                          for(var j=0;j<All[i].production_repertoireType.length;j++){
+                                              span+=All[i].production_repertoireType[j].repertoireTpyeName
+                                          }
+                                        if(All[i].invitestate==3){
+                                        
+                                            str3+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div  class="All all1 '+All[i].isDelete+'"><div id="'+All[i].crews_id+'" class="all_delivery"> <p id="'+All[i].careerincrewid+'">《'+All[i].productioncrew_name+'》 <span class="border_delivery">'+All[i].production_category+'</span></div> <div id="'+All[i].crews_id+'" class="fen_delivery"> <p id="'+All[i].careerincrewid+'">角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p><p>见组地址： <span>'+All[i].location[0].fullname+'</span></p></div><div class="weui-flex__item contain-result-grey" style="float:right;margin-right:10px;color:#4da2ad">【拒绝邀约】</div><div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div></div>'
+                                          
+                                        }
+
+                              
+                                    }
+                                    console.log(str3)
+                                    $('.main-contain').html(str1);
+                                   
+                                    if(str2==""){
+                                     $(".none_div").css("display","block");
+                                      $(".weui-loadmore").css("display", "none")
+                                    }else{
+                                       $('.main-interview').html(str2);
+                                    }
+                                    if( str3==""){
+                                      $(".none_div").css("display","block");
+                                      $(".weui-loadmore").css("display", "none")
+                                    }else{
+                                      $('.main-pase').html(str3);
+                                    }
+
+                            }
+                      };
+                       if (All.length <=5) {
+                        $(".weui-loadmore").css("display", "none")
+                        } 
+                      
+                  },
+                  error:function(){
+                      alert('fail');
+                  }
+            });
+          };
+           function invite_jiazai(page){
+           console.log(url+userid+'/'+page)
+           $.ajax({
+                  type : "get",
+                  url : url+userid+'/'+page,
+                  dataType : "jsonp",
+                  // jsonp: "jsonpCallback",
+                  success : function(data){
+                      var All=data;
+                      console.log(All);
+                      
+                      if(All==""){
+                          $(".none_div").css("display","block")
+                      }else{
+                          if(All==""){
+                                $(".none_div").css("display","block")
+                            }else{
+                                  console.log('step1');
+                                   
+                                   var str1 = $('.main-contain').append();
+                                   console.log(All.length);
+                                  
+                                   var str2 = $('.main-interview').append();
+                                   
+                                   var str3 = $('.main-pase').append();
+                                   
+                                    for(var i=0;i<All.length;i++){
+                                       
+                                    
+                                        if(All[i].invitestate==1){
+                                          var span='';
+                                          for(var j=0;j<All[i].production_repertoireType.length;j++){
+                                              span+=All[i].production_repertoireType[j].repertoireTpyeName
+                                          }
+                                            var url1 = url+"/WX/wx_changeinvitationstate/"+All[i].invitation_id+"/2/"+All[i].invited_id;
+                                            var url2 = url+"/WX/wx_changeinvitationstate/"+All[i].invitation_id+"/3/"+All[i].invited_id;
+                                            str1+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div  class="All '+All[i].isDelete+'"><div id="'+All[i].crews_id+'" class="all_delivery"> <p id="'+All[i].careerincrewid+'">《'+All[i].productioncrew_name+'》 <span class="border_delivery">'+All[i].production_category+'</span></p></div> <div id="'+All[i].crews_id+'" class="fen_delivery"> <p id="'+All[i].careerincrewid+'">角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p><p>见组地址： <span>'+All[i].location[0].fullname+'</span></p></div><div class="weui-flex"><div class="weui-flex__item contain-result-blue"><a style="color:#4da2ad;border:1px solid #4da2ad;padding:2px 20px;border-radius: 3px;" href="'+url2+'">拒绝</a></div><div class="weui-flex__item contain-result-blue agree"><a style="color:#4da2ad;border:1px solid #4da2ad;padding:2px 20px;border-radius: 3px;" >同意<a></div></div><div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div></div></div>'
+                                             var  $androidDialog1 = $('#androidDialog1');
+                                              $(".main-contain").on("click",".agree",function(){
+                                               
+                                                 $androidDialog1.fadeIn(200);
+                                              })
+                                             $(".sure").on("click",function(){
+                                                  console.log(url1)
+                                                window.location.href=url1
+                                                $androidDialog1.fadeOut(200);
+                                             })
+                                          
+                                        }
+                              
+                                    }
+                                     for(var i=0;i<All.length;i++){
+                                      
+                                        if(All[i].invitestate==2){
+                                          var span='';
+                                          for(var j=0;j<All[i].production_repertoireType.length;j++){
+                                              span+=All[i].production_repertoireType[j].repertoireTpyeName
+                                          }
+                                            str2+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div  class="All '+All[i].isDelete+'"><div id="'+All[i].crews_id+'" class="all_delivery"> <p id="'+All[i].careerincrewid+'">《'+All[i].productioncrew_name+'》 <span class="border_delivery">'+All[i].production_category+'</span></div> <div id="'+All[i].crews_id+'" class="fen_delivery"> <p id="'+All[i].careerincrewid+'">角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p><p>见组地址： <span>'+All[i].location[0].fullname+'</span></p></div><div class="weui-flex__item contain-result-grey" style="float:right;margin-right:10px;color:#4da2ad">【同意邀约】</div><div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div></div>'
+                                          
+                                        }
+
+                              
+                                    }
+                                    for(var i=0;i<All.length;i++){
+                                        var span='';
+                                          for(var j=0;j<All[i].production_repertoireType.length;j++){
+                                              span+=All[i].production_repertoireType[j].repertoireTpyeName
+                                          }
+                                        if(All[i].invitestate==3){
+                                        
+                                            str3+='<div class="mask"><div><img class="'+All[i].isDelete+'" src="/img/shixiao1.png"></div><div i class="All all1 '+All[i].isDelete+'"><div d="'+All[i].crews_id+'" class="all_delivery"> <p id="'+All[i].careerincrewid+'">《'+All[i].productioncrew_name+'》 <span class="border_delivery">'+All[i].production_category+'</span></div> <div id="'+All[i].crews_id+'" class="fen_delivery"> <p id="'+All[i].careerincrewid+'">角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p><p>见组地址： <span>'+All[i].location[0].fullname+'</span></p></div><div class="weui-flex__item contain-result-grey" style="float:right;margin-right:10px;color:#4da2ad">【拒绝邀约】</div><div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div></div>'
+                                          
+                                        }
+
+                              
+                                    }
+                                    console.log(str3)
+                                    $('.main-contain').append(str1);
+                                   
+                                    if(str2==""){
+                                      $(".main-interview").html('<div class="none_div1"><img src="/img/暂无记录.png" class="none"><p>暂无记录</p></div>'); 
+                                      $(".weui-loadmore").css("display", "none")
+                                       
+                                    }else{
+                                       $('.main-interview').append(str2);
+                                    }
+                                    if( str3==""){
+                                      $(".main-pase").html('<div class="none_div1"><img src="/img/暂无记录.png" class="none"><p>暂无记录</p></div>');
+                                      $(".weui-loadmore").css("display", "none")
+                                      
+                                      console.log("kkk")
+                                    }else{
+                                      $('.main-pase').append(str3);
+                                    }
+
+                            }
+                      }
+                       
+                      
+                  },
+                  error:function(){
+                      alert('fail');
+                  }
+            });
+            a++
+          }
+             
+         //点击跳转到通告详情----------------------
+            $(".manage-main").on("click",".all_delivery",function(){
+                var productionCrew_id=$(this).attr("id");
+                var careerincrewid=$(this).children("p").attr("id")
+                console.log(careerincrewid);
+                window.location.href=url+'/WX/page_searchinvitepositionsDetails/'+productionCrew_id+'/'+careerincrewid+'/'+userid;
+            })
+            $(".manage-main").on("click",".fen_delivery",function(){
+                var productionCrew_id=$(this).attr("id");
+                 var careerincrewid=$(this).children("p").attr("id");
+                  console.log(careerincrewid);
+               window.location.href=url+'/WX/page_searchinvitepositionsDetails/'+productionCrew_id+'/'+careerincrewid+'/'+userid;
+            })
+          invite(1);
+           //刷新--------------------------
+                  $(document.body).pullToRefresh().on("pull-to-refresh",function () {
+                          setTimeout(function () {
+                              $(document.body).pullToRefreshDone();
+                             invite(1);
+                            a=2;
+                          },2000)
+                      });
+
+              //------------------------------加载---------------------------------
+                      
+               var a=2;
+                var loading = false;  //状态标记
+               
+                $(document.body).infinite(1000).on("infinite", function(e) {
+
+                    if(loading) return;
+                    loading = true;
+                    //var totalpages=parseInt($(".display_experience").attr("id"));
+                    //console.log(totalpages)
+                    setTimeout(function() {
+                         invite_jiazai(a);
+                        loading = false;
+                    }, 1000);
+                });
+
+
+  
+
+    
+
+    

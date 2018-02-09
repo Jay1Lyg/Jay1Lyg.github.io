@@ -1,0 +1,40 @@
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    title 重设密码
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/serume-experience.css')
+    link(rel='stylesheet', href='/css/common.css')
+    link(rel='stylesheet', href='/css/register.css')
+  body
+    header#header
+      div
+        p 忘记密码
+    section
+      .page.panel.js_show
+        .page__bd
+          .weui-cells.weui-cells_form
+            .weui-cell.pic
+              img(src='/img/手机号-拷贝.png', alt='')
+              .weui-cell__bd
+                input#phone.weui-input.font-color(type='tel', placeholder='请输入手机号码')
+            .weui-cell.pic
+              img(src='/img/密码-拷贝.png', alt='')
+              .weui-cell__bd
+                input#pasd.weui-input.font-color(type='password', placeholder='请输入新密码')
+            .weui-cell.pic
+              img(src='/img/验证码-拷贝.png', alt='')
+              .weui-cell__bd.getcode
+                input#securitycode.weui-input.font-color(type='number', placeholder='请输入手机验证码')
+                span#J_getCode(onclick='getCode(this)') 立即获取
+                span#J_resetCode(style='display: none')
+                  b#J_second 60
+                  | 秒后重发
+        .add-btn
+          button.submitBtn 修改密码
+    script(src='/js/zepto.min.js')
+    script(src='/js/zepto.cookie.js')
+    script(src='/js/resetPassword.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')

@@ -1,0 +1,497 @@
+doctype html
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    script(src='/js/jquery.min.js')
+    script(src='/js/jqWeui.js')
+    script(src='/js/myserume.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    title 我的简历
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/resume1.css')
+    link(rel='stylesheet', href='/css/common.css')
+  body
+    script.
+            var appid = !{JSON.stringify(appId)};
+            var timestamp = !{JSON.stringify(timestamp)};
+            var nonceStr = !{JSON.stringify(nonceStr)};
+            var signature = !{JSON.stringify(signature)};
+            wx.config({
+              debug: false,
+              appId: appid,
+              timestamp: timestamp,
+              nonceStr: nonceStr,
+              signature: signature,
+              jsApiList: [
+              'chooseImage', 'uploadImage', 'downloadImage','previewImage'
+              ]
+            });
+
+            wx.ready(function(){
+                
+
+            });
+
+            window.onload=function(){
+              var gender=!{JSON.stringify(gender)};
+              var userid=!{JSON.stringify(userid)};
+              var array=!{JSON.stringify(workExpArray)};
+              var all_options = document.getElementById("one").options;
+               for (i=0; i<all_options.length; i++){
+                  if (all_options[i].value == gender)  
+                  {
+                     all_options[i].selected = true;
+                  }
+               }
+               //动态显示参演经历
+               var str = $('#Career').html()             
+                for(var i=0;i<array.length;i++){
+                  var strr="";
+                  var url="http://www.901vehicle.cn/WX/wx_searchsingleworkexp/"+userid+"/"+array[i].careerInResume_id+"/"+appid;
+                     var imageArray=array[i].image_set.imagesURLArray;
+                     for(var j =0 ;j<imageArray.length;j++){
+                       strr += '<div class="weui-flex__item floatLeft" onclick="previewImage('+i+','+j+')"><img width="100%" height="100%" src="'+imageArray[j].imagesURL+'" alt=""></div>'
+                     }
+
+                  str += '<h4 style="clear:both" class="weui-media-box__title "><img src="/img/椭圆-1-拷贝.png" alt="">'+array[i].detail.productionPublishDate+';'+array[i].detail.productionName+';'+array[i].detail.role+'<span class="write" style="float: right"><a href="'+url+'"><img src="/img/编辑-拷贝.png" style="width: 20px ;height: 20px" alt=""></a></span></h4>'
+                  str+=strr
+                }
+                 
+                $('#Career').html(str)
+              $(".imgDis").on("click",function(){
+                if($(".imgDis").attr("src")!=""){
+                    wxchooseImage1();
+                }
+              })
+              function dis() {
+                if($(".imgDis").attr("src")!=""){
+                    $(".upload").css("display","none")
+                }
+              }
+              dis();
+              $(".upload").click(function () {
+                  console.log($(this).prev("img"))
+                  if($(this).prev("img").attr("src")!=""){
+
+                  }else{
+                        alert("请您上传比例适当的封面照");
+                      wxchooseImage1();
+                  }
+              })          
+
+            }
+            $('#switchCP').click(function () {
+              alert("kk")
+              if($('#switchCP').is(':checked')) {
+                  $(".agent_tel").removeClass("displayNone")
+              }else{
+                  $(".agent_tel").addClass("displayNone")
+              }
+            })
+
+            wxchooseImage1= function () {
+                wx.chooseImage({
+                  count: 1,
+                  needResult: 1,
+                  sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                  sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                  success: function (data) {
+                      localIds = data.localIds[0].toString(); 
+                      //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                      wxuploadImage1(localIds);                
+                  },
+                  fail: function (res) {
+                     alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");
+                  }
+                });
+            };
+            //上传图片接口
+            function wxuploadImage1(e) {
+              wx.uploadImage({
+                localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得
+                isShowProgressTips: 1, // 默认为1，显示进度提示
+                success: function (res) {
+                    mediaId = res.serverId; // 返回图片的服务器端ID
+                    wxdownloadImage1(mediaId);
+                    if (rh.tostr(mediaId)) {
+                      $(".myimg").attr("src", localIds);
+                    }
+                },
+                fail: function (error) {
+                    picPath = '';
+                    localIds = '';
+                    alert(Json.stringify(error));
+                }
+              });
+            };
+        
+               function wxdownloadImage1(e) {
+                   var mediaId=e;
+                   var id=!{JSON.stringify(userid)};
+                   $.ajax({
+                            url: "http://www.901vehicle.cn/WX/uploadHeadimage",
+                            data: {
+                                media : mediaId,
+                                userid : id,
+                                appid : appid
+                            },
+                            type: "Post",
+                            dataType: "text",
+                            async : false,
+                            success: function (data) {
+                                picPath = data;
+                              //  $(".imgDis").attr("src")=picPath;
+                              var str=$(".imgSrc").html();
+                              str='<img class="imgDis" src="'+picPath+'">';
+                              $(".imgSrc").html(str);
+                              window.location.reload()
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert("提交失败" + textStatus);
+                            }
+
+                        });
+
+               }
+    form#form(action='/WX/wx_resumeBasicInfoSave',method='post', target='rfFrame')
+      header#header
+        div
+          p 我的简历
+      section
+        .banner-1
+          .page__bd.page__bd_spacing.imgSrc
+            img.imgDis(src=iconUrl, alt='')
+            a.weui-btn.upload 上传封面
+        .page.panel.js_show
+          .page__bd
+            .weui-cells__title.actor-data 基本资料
+            .weui-cells.weui-cells_form
+              .weui-cell
+                .weui-cell__hd
+                  label.weui-label.common-input
+                    img.must(style='display:inline',src='/img/必填项.png', alt='')
+                    |  艺名
+                .weui-cell__bd
+                  input.weui-input.font-color(type='hidden', value=userid,name='userid')
+                  input.weui-input.font-color(type='hidden', value=skill_id,name='skill_id')
+                  input.weui-input.font-color(type='hidden', value=appId,name='appId')
+                  input.weui-input.font-color(type='text', placeholder='请输入',value=artname,name='artname')
+              .weui-cell
+                .weui-cell__hd
+                  label.weui-label.common-input
+                    img.must(style='display:inline',src='/img/必填项.png', alt='')
+                    |  真实姓名
+                .weui-cell__bd
+                  input.weui-input.font-color(type='text', placeholder='请输入', value=realname,name='realname')
+              .weui-cell.weui-cell_select.weui-cell_select-after
+                .weui-cell__hd
+                  label.weui-label.common-input(for='')
+                    img.must(style='display:inline',src='/img/必填项.png', alt='')
+                    |  性别
+                .weui-cell__bd
+                   select#one.weui-select.option(name='gender')
+                        option(value='1', style='text-align: right') 男
+                        option(value='2', style='text-align: right') 女
+              .weui-cell
+                .weui-cell__hd
+                  label.weui-label.common-input(for='')
+                    img.must(style='display:inline',src='/img/必填项.png', alt='')
+                    |  出生年月
+                .weui-cell__bd
+                  input.weui-input.data.actorData(type='date', value=birth,name='birth')
+              .weui-cell
+                .weui-cell__hd
+                  label.weui-label.common-input
+                    img.must(style='display:inline',src='/img/必填项.png', alt='')
+                    |  身高 cm
+                .weui-cell__bd
+                  input.weui-input.font-color(type='number', pattern='[0-9]*', placeholder='请输入', value=height,name='height')
+              .weui-cell
+                .weui-cell__hd
+                  label.weui-label.common-input
+                    img.must(style='display:inline',src='/img/必填项.png', alt='')
+                    |  体重 kg
+                .weui-cell__bd
+                  input.weui-input.font-color(type='number', pattern='[0-9]*', placeholder='请输入', value=weight,name='weight')
+              .weui-cell.weui-cell_switch
+                .weui-cell__bd.common-input
+                  img.must(style='display:inline',src='/img/必填项.png', alt='')
+                  |  是否有经纪人
+                .weui-cell__ft
+                  label.weui-switch-cp(for='switchCP')
+                    input#switchCP.weui-switch-cp__input(type='checkbox',name='switchCP')
+                    .weui-switch-cp__box
+              .weui-cell.displayNone.agent_tel
+                .weui-cell__hd
+                  label.weui-label.common-input
+                    img.must(style='display:inline',src='/img/必填项.png', alt='')
+                    |  经纪人电话
+                .weui-cell__bd
+                  input.weui-input.font-color.isTel(type='number', pattern='[0-9]*', placeholder='请输入',name='agentTelphone',value=agentTelphone)
+              .weui-cell
+                .weui-cell__hd
+                  label.weui-label.common-input
+                    img.must(style='display:inline',src='/img/必填项.png', alt='')
+                    |  本人手机号 
+                .weui-cell__bd
+                  input.weui-input.font-color(disabled type='number', pattern='[0-9]*', placeholder='请输入', value=telephone,name='telephone')
+              .weui-cells__title.common-input
+                img.must(style='display:inline',src='/img/必填项.png', alt='')
+                |  技能特长
+              .weui-cells.weui-cells_form
+                .weui-cell
+                  .weui-cell__bd
+                    textarea.weui-textarea.actorData.actorData1(placeholder='有什么特长，比如说民族舞、钢琴、绘画等', rows='3',name='skill_name').form-control=skill_name
+              .weui-cells__title.common-input
+                img.must(style='display:inline',src='/img/必填项.png', alt='')
+                |  自我介绍
+              .weui-cells.weui-cells_form
+                .weui-cell
+                  .weui-cell__bd
+                    textarea.weui-textarea.actorData(placeholder='介绍一下你自己吧', rows='3', name='shortintroduce').form-control=shortintroduce
+              .add-btn
+                  a.weui-btn.submit-save 请保存以上所填信息
+              .weui-cell.add-college
+                .weui-cell__hd
+                  label.weui-label.common-input
+                    img.must(style='display:inline',src='/img/必填项.png', alt='')
+                    |  毕业院校
+                .weui-cell__bd
+                  input.weui-input(disabled='', type='text', placeholder='请输入',value=school,name='school')
+              .weui-cells__title.title-height 工作经历 
+              .weui-panel__bd.flex
+                    #Career.weui-media-box.weui-media-box_text.movie-ex
+
+              .add-btn
+                a.weui-btn.add-live +添加演艺经历
+              .weui-cells__title.title-height 照片
+                b （请上传与相框比例相似的照片）
+              .page.ninePic
+                .weui-flex
+                  .weui-flex__item.pic(onclick='wxchooseImage(9)')
+                    img#img9(src=artimage, alt='')
+                    p 艺术照
+                      span(style='color:red')  (必填项)
+                  .weui-flex__item.pic(onclick='wxchooseImage(1)')
+                    img#img1(src=frontimage, alt='')
+                    p
+                      | 正面卡胸
+                  .weui-flex__item.pic(onclick='wxchooseImage(2)')
+                    img#img2(src=leftimage45, alt='')
+                    p
+                      | 左侧45度卡胸
+                .weui-flex
+                  .weui-flex__item.pic(onclick='wxchooseImage(3)')
+                    img#img3(src=rightimage45, alt='')
+                    p
+                      | 右侧45度卡胸
+                  .weui-flex__item.pic(onclick='wxchooseImage(4)')
+                    img#img4(src=rightimage90, alt='')
+                    p
+                      | 右侧90度卡腰
+                  .weui-flex__item.pic(onclick='wxchooseImage(5)')
+                    img#img5(src=leftimage90, alt='')
+                    p
+                      | 左侧90度卡腰
+                .weui-flex
+                  .weui-flex__item.pic(onclick='wxchooseImage(6)')
+                    img#img6(src=frontimagewaist, alt='')
+                    p
+                      | 正面卡腰
+                  .weui-flex__item.pic(onclick='wxchooseImage(7)')
+                    img#img7(src=frontimageall, alt='')
+                    p
+                      | 正面全身
+                  .weui-flex__item.pic(onclick='wxchooseImage(8)')
+                    img#img8(src=frontimagehead, alt='')
+                    p
+                      | 露额头正面卡胸
+  
+            div(style='height: 35px')
+   
+    iframe#rfFrame(name='rfFrame', src='about:blank', style='display:none;')  
+
+
+
+script.
+      var appid = !{JSON.stringify(appId)};
+          $(".add-college").on( "click",function () {
+              console.log("444")
+              if($(".submit-save").hasClass('save')|| $(".font-color").val()!=""){
+                  var id=!{JSON.stringify(userid)}
+                  window.location.href="/WX/wx_searchsingleeduexp/"+id+"/"+appid;
+              }else{
+                  console.log("没有保存");
+                
+              }
+
+          });
+          $(".add-live").on("click",function () {
+               if($(".submit-save").hasClass('save')|| $(".font-color").val()!=""){
+                  var id=!{JSON.stringify(userid)};
+                  window.location.href="/WX/page_work_edit/"+id+"/"+appid;
+              }else{
+                  console.log("没有保存");
+                
+              }
+
+          });
+          previewImage=function (a,b){
+           var array=!{JSON.stringify(workExpArray)};
+           var imageArray=array[a].image_set.imagesURLArray;
+           var url=[];
+           var c=imageArray[b].imagesURL;
+           url[0]=c;
+              if(b==0) {
+                 wx.previewImage({
+                  current: '', // 当前显示图片的http链接
+                  urls: url // 需要预览的图片http链接列表
+                 });
+              }
+               if(b==1){
+                 wx.previewImage({
+                  current: '', // 当前显示图片的http链接
+                  urls: url // 需要预览的图片http链接列表
+                 });
+              }
+               if(b==2){
+                 wx.previewImage({
+                  current: '', // 当前显示图片的http链接
+                  urls: url // 需要预览的图片http链接列表
+                 });
+               }
+          }
+            wxchooseImage= function (index) {
+            var userid=!{JSON.stringify(userid)};
+            var index=index;
+             console.log(index)
+            console.log($(".weui-flex").children(".pic").eq(0).children("img").attr("src"));
+            if (index==9) {
+                if($(".weui-flex").children(".pic").eq(0).children("img").attr("src")){
+                    $.confirm("您确认要删除此照片吗？", "确认删除", function () {
+                        $.ajax({
+                            type: "Post",
+                            url: "http://www.901vehicle.cn/WX/uploadcastingimage",
+                            dataType: "text",
+                            data: {
+                                imageLocation: index,
+                                userid: userid,
+                                appid : appid
+                            },
+                            success: function (data) {
+                                $.toast("删除成功");
+                                window.location.reload()
+                                console.log($(".weui-flex").children(".pic").eq(index - 1).children("img").removeAttr("src"))
+                            }
+                        });
+                    }, function () {
+                    })
+                }else{
+                    alert("上传")
+                    wx.chooseImage({
+                        count: 1,
+                        needResult: 1,
+                        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                        success: function (data) {
+                            localIds = data.localIds[0].toString();
+                            //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                            wxuploadImage(localIds, index);
+                        },
+                        fail: function (res) {
+                            alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");
+                        }
+                    });
+                }
+
+            }else{
+                if ($(".weui-flex").children(".pic").eq(index).children("img").attr("src")) {
+                    $.confirm("您确认要删除此照片吗？", "确认删除", function () {
+                        $.ajax({
+                            type: "Post",
+                            url: "http://www.901vehicle.cn/WX/uploadcastingimage",
+                            dataType: "text",
+                            data: {
+                                imageLocation: index,
+                                userid: userid,
+                                appid : appid
+                            },
+                            success: function (data) {
+                                $.toast("删除成功");
+                                window.location.reload()
+                                console.log($(".weui-flex").children(".pic").eq(index - 1).children("img").removeAttr("src"))
+                            }
+                        });
+                    }, function () {
+                    })
+                } else {
+                    alert("上传")
+                    wx.chooseImage({
+                        count: 1,
+                        needResult: 1,
+                        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                        success: function (data) {
+                            localIds = data.localIds[0].toString();
+                            //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                            wxuploadImage(localIds, index);
+                        },
+                        fail: function (res) {
+                            alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");
+                        }
+                    });
+                }
+            }
+
+
+            };
+            //上传图片接口
+            function wxuploadImage(e,index) {
+              wx.uploadImage({
+                localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得
+                isShowProgressTips: 1, // 默认为1，显示进度提示
+                success: function (res) {
+
+                    mediaId = res.serverId; // 返回图片的服务器端ID
+                    wxdownloadImage(mediaId,index);
+                    if (rh.tostr(mediaId)) {
+                      $(".myimg").attr("src", localIds);
+                    }
+                },
+                fail: function (error) {
+                    picPath = '';
+                    localIds = '';
+                    alert(Json.stringify(error));
+                }
+              });
+            };
+        
+           function wxdownloadImage(e,index) {
+               var mediaId=e;
+               var id=!{JSON.stringify(userid)};
+               //alert(id);
+               $.ajax({  
+                              url: "http://www.901vehicle.cn/WX/uploadcastingimage",
+                              data: {
+                                  media : mediaId,
+                                  userid : id,
+                                  imageLocation:index,
+                                  appid : appid
+                              },
+                              type: "Post",
+                              dataType: "text",
+                              success: function (data) {
+                                  picPath = data;
+                                  var img_id ="#img"+index;
+                                  $(img_id).removeAttr("src")
+                                  $(img_id).attr("src", picPath);
+                              },
+                              error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                  alert("提交失败" + textStatus);
+                              }
+        
+                          });
+           }

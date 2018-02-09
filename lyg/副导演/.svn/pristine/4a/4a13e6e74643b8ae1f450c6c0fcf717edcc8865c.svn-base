@@ -1,0 +1,27 @@
+var keystone = require('keystone');
+var User = keystone.list('User');
+var PublicAccount = keystone.list('PublicAccount');
+var async = require('async');
+var urllib = require('url');
+var search = require('../../query/save_and_get_data_in_MongoDB/weixin_public_account/search.js');
+
+exports = module.exports = function(req, res) {
+  var name = req.params.name;
+  var pattern = new RegExp(name, 'i');
+  PublicAccount.model.find()
+   .where('nick_name',pattern)
+   .exec(function(err,ret){
+      if(err){
+         throw new Error(err);
+      }else{
+      	 search.PublicAccountDetailinfo(ret,function(err,result){
+             if(err){
+                throw new Error(err);
+             }else{
+             	console.log(result);
+             	res.send(result);
+             }
+      	 });
+      }
+   })
+}

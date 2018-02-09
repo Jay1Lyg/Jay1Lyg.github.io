@@ -1,0 +1,90 @@
+*{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+html{
+    font-size:62.5%;
+}
+body{
+    font-size:12px;
+    font-size:1.2rem ;
+}
+p{
+    font-size:14px;
+    font-size:1.4rem;
+}
+a{
+    text-decoration:none;
+    color:#393939;
+}
+.erjilist{
+    overflow:hidden;
+    margin-top:.2rem;
+    border-top:1px solid #ddd;
+    display:none;
+    transition:all .3s linear;
+}
+.erjilist li{
+    overflow:hidden;
+    width:120%;
+    background:#fff;
+    border-bottom:1px solid #ddd;
+}
+.erjilist li a{
+    display:block;
+    text-indent:2em;
+    -webkit-transition:all 0.3s linear;
+    transition:all 0.3s linear;
+    font-size:1.4rem;
+}
+.erjilist li i{
+    float:right;width:15%;text-align:center;
+    background:#4ea2ad;
+    color:#fff;
+}
+.erjilist li i img{
+    width:2rem;
+    height:2rem;
+    margin-left:-3rem;
+    position:relative;
+    top:0.5rem;
+}
+.swipeleft{
+    transform:translateX(-15%);
+    -webkit-transform:translateX(-15%);
+}
+.show{
+    opacity:1;
+    height:3.75rem;
+}
+.hide{
+    opacity:0;
+}
+.jiji{
+    background:#f2f2f2;
+    width:100%;
+    line-height:3.75rem;
+    font-size:1.6rem;
+    border-bottom:1px solid #fff;
+    text-indent:1em;
+    box-sizing:border-box;
+}
+.jiji b{
+    display:block;
+    float:right;
+    margin-right:2rem;
+}
+.jiji b img{
+    width:0.6rem;
+    height:0.6rem;
+    margin-top:1rem;
+}
+height:3.75rem;
+width:100%;
+line-height:3.75rem;
+.erjilist ul li{
+    height:3.7rem;
+    width:100%;
+    line-height:3.7rem;
+}

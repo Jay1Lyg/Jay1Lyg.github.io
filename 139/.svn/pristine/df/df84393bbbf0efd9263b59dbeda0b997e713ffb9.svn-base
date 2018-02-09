@@ -1,0 +1,223 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 
+    link(rel='stylesheet', href='/css/casting.css')
+    style.
+      .attention{
+      width:100%;
+      height:50px;
+      background: #f2f2f2;
+      text-align: center;
+      }
+      .attention img{
+      width: 30px;
+      display: inline-block; vertical-align: middle;
+      }
+      .attention span{
+      line-height: 50px;
+      color:#4da2ad;
+      font-size: 16px;
+      }
+      .fix{position: fixed;
+          right: 0;
+          top: 74px;
+          z-index:100;
+          width:6.2rem;
+          height:3rem}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/pinyin_dict_notone.js')
+    script(type='text/javascript', src='/js/pinyinUtil.js')
+    script(type='text/javascript', src='/js/pinyin.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    img.fix(src='/img/actor_gu.png')
+    .actorName
+    .actorPic
+      .xiaosanjiao
+        img(src='/img/501751812161802735.png', width='35', height='12', border='0', alt='')
+      .photo_dotted
+        .actorPhoto
+          img(width='189', border='0', alt='')
+      .banyuan
+        img(src='/img/64989393487718861.png', width='40', height='82', border='0', alt='')
+      // -----基本信息----
+      .line
+        .basicMessage 基本资料
+      .actorMessage
+      .banyuan2
+        img(src='/img/2251.png', width='60', height='112', border='0', alt='')
+      // -----参演经历----
+      .line.line_exet
+        .basicMessage.exet 参演经历
+      // ---------如果参演经历有多个，循环下边div即可----------
+      div.workArray
+      // -----照片视频----
+      .line
+        .basicMessage 照片视频
+      // -----弹性布局----
+      .flexBox
+      div(style='clear:both')
+      // -----照片视频----
+      .line
+        .basicMessage 接戏标准
+      .startContent
+    .bottom
+      .sanjiao
+      span END
+    script.
+        var userid=!{JSON.stringify(userid)};
+        var appid=!{JSON.stringify(appid)};
+         var url_url=url+'/agent/a_userprofile/'+userid+'/null';
+        console.log(url)
+      $.ajax({
+        type : "get",
+        url : url_url,
+        dataType : "jsonp",
+        success : function(data){
+            console.log(data);
+            var realname='';
+            var pin=data.realname;
+            var pinyin=replaceStr(pinyinUtil.getPinyin(pin));
+            console.log(replaceStr(pinyinUtil.getPinyin(pin)));
+            realname=`<p class="chinaName">${data.realname}</p>
+                      <p class="engName">${pinyin}</p>`
+            
+            
+            $(".actorName").html(realname);
+            //title命名
+            $("title").html("演员|"+pin+"|CASTING"); 
+            var arr=[data.realname];
+            //console.log(pin.toPinyin());
+            $(".actorPhoto>img").attr("src",data.CastingImageUrl.artimage);
+
+            var str1='';
+            if(data.gender==1){
+             gender="男"
+            }else if(data.gender==2){
+              gender="女"
+            }else{
+             gender="不限"
+            }
+            str1=`<ul>
+                    <li>艺&#x3000;&#x3000;名：${data.artname}</li>
+                    <li>真实姓名：${data.realname}</li>
+                    <li>性&#x3000;&#x3000;别：${gender}</li>
+                    <li>出生日期：${data.birth}</li>
+                    <li>三&#x3000;&#x3000;围（cm）：${data.bust}/${data.waist}/${data.hip}</li>
+                    <li>身&#x3000;&#x3000;高（cm）：${data.height}</li>
+                    <li>体&#x3000;&#x3000;重（kg）：${data.weight}</li>
+                    <li>毕业院校：${data.schoolname}</li>
+                    <li>技能特长：${data.skill_str}</li>
+                    <li>特&#x3000;&#x3000;征：${data.feature_str}</li>
+                </ul>`
+            $(".actorMessage").html(str1);
+            var workarray=data.workExpArray;
+            if(!workarray.length){
+              $(".line_exet").css("display","none");
+            }
+            var workArray=''
+             var imagesURL;
+
+           if(!array[i].image_set.imagesURLArray.length){
+              imagesURL=""
+
+           }else{
+            imagesURL=array[i].image_set.imagesURLArray[0].imagesURL;
+
+           };
+            for(work of workarray){
+              workArray+=`<div class="actorExperience">
+                            <img src="${imagesURL}">
+                          </div>
+                          <div class="program">
+                            <p class="mytitle">《${work.detail.productionName}》</p>
+                            <p>剧目类型：${work.detail.productionType}</p>
+                            <p>饰演角色：${work.detail.role}</p>
+                            <p>角色类型：${work.detail.roleTag}</p>
+                            <div class="banyuan3">
+                              <img src="/img/64989393487718861.png" width="35" height="72" border="0" alt="">
+                            </div>
+                          </div>  `
+            }
+            $(".workArray").html(workArray);
+            var CastingImageUrl=data.CastingImageUrl;
+            var CastingImages="";
+            CastingImages=` <div class="photoLeft">
+                              <img src='${CastingImageUrl.frontimage}'>
+                              <p>正面卡胸</p>
+                            </div>
+                            <div class="photoRight">
+                              <img src="${CastingImageUrl.leftimage45}">
+                              <p>左侧45度卡胸</p>
+                            </div>
+                            <div class="photoLeft">
+                              <img src="${CastingImageUrl.rightimage45}">
+                              <p>右侧45度卡胸</p>
+                            </div>
+                            <div class="photoRight">
+                              <img src="${CastingImageUrl.rightimage90}">
+                              <p>右侧90度卡腰</p>
+                            </div>
+                            <div class="photoLeft">
+                              <img src="${CastingImageUrl.leftimage90}">
+                              <p>左侧90度卡腰</p>
+                            </div>
+                            <div class="photoRight">
+                              <img src="${CastingImageUrl.frontimagewaist}">
+                              <p>正面卡腰</p>
+                            </div>
+                            <div class="photoLeft">
+                              <img src="${CastingImageUrl.frontimageall}">
+                              <p>正面全身</p>
+                            </div>
+                            <div class="photoRight">
+                              <img src="${CastingImageUrl.frontimagehead}">
+                              <p>露额头正面卡胸</p>
+                            </div>
+                            <div class="photoLeft">
+                              <img src="${CastingImageUrl.artimage}">
+                              <p>艺术照</p>
+                            </div>`
+            $(".flexBox").html(CastingImages);
+            var tag="";
+            var typename=data.typename.nameSet;
+            var roletag_str=data.roletag_str
+            if(data.schedule==false){
+                    var schedule='无档期';
+                  }else{
+                    var schedule='有档期';
+                  }
+            for(type of typename){
+              var str4='';
+              for (typexing of type.repertoireTypeArray){
+                str4+=`${typexing.repertoireTypeName}`
+              }
+              console.log(str4)
+              tag=`<div class="textLeft">
+                    <p>剧目类别：${type.categoryName}</p>
+                    <p>剧目类型：${str4}</p>
+                    <p>角色类别：${roletag_str}</p>
+                    <p>档期：${schedule}</p>
+                  </div>
+                  <div class="banyuan4">
+                    <img src="/img/2251.png" width="60" height="112" border="0" alt="">
+                  </div>`
+            }
+            $(".startContent").html(tag)
+
+
+            
+
+        },
+        error:function(){
+            alert('fail');
+        }
+      });
+      $(".fix").click(function(){
+        location.href=url+'/resume/page_leadUserBackToPlatform/'+appid;
+      })

@@ -1,0 +1,425 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 精选列表
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/actor_chert.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(src='/js/echarts.min.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    header
+      section
+        // 200
+        #200.number_div(style='display: block')
+          .recommend_edit(id='0.9', style='height: 132px')
+            div
+              img.chart(src='image/img1.png', alt='')
+            div
+              p
+                | 与旗下演员
+                span 刘德华
+                | 匹配度59%
+              #main(style='width: 100px;height:100px;float: left;')
+              ul.pipei
+                li
+                  span.one
+                  | 基本信息：
+                li
+                  span.two
+                  | 特征角色：
+                li
+                  span.three
+                  | 片酬需求：
+                li
+                  span.four
+                  | 档期匹配：
+          div(style='background: #f2f2f2;height: 3px;clear: both')
+        // 190
+        #190.number_div(style='display: block')
+        // 180
+        #180.number_div(style='display: block')
+        // 170
+        #170.number_div(style='display: block')
+        // 160
+        #160.number_div(style='display: block')
+        // 150
+        #150.number_div(style='display: block')
+        // 140
+        #140.number_div(style='display: block')
+        // 130
+        #130.number_div(style='display: block')
+        // 120
+        #120.number_div(style='display: block')
+        // 110
+        #110.number_div(style='display: block')
+        // 100
+        #100.number_div(style='display: block')
+        // 90
+        #90.number_div(style='display: block')
+        // 80
+        #80.number_div(style='display: block')
+        // 70
+        #70.number_div(style='display: block')
+        // 60
+        #60.number_div(style='display: block')
+        // 50
+        #50.number_div(style='display: block')
+        // 40
+        #40.number_div(style='display: block')
+        // 30
+        #30.number_div(style='display: block')
+        // 20
+        #20.number_div(style='display: block')
+        // 10
+        #10.number_div(style='display: block')
+        // 00
+        #00.number_div(style='display: block')
+        // 1-0
+        #010.number_div(style='display: block')
+        // -20
+        #020.number_div(style='display: block')
+        // -30
+        #030.number_div(style='display: block')
+      .fixed
+        ul
+          li
+            a(href='#200') 200
+          li
+            a(href='#190') 190
+          li
+            a(href='#180') 180
+          li
+            a(href='#170') 170
+          li
+            a(href='#160') 160
+          li
+            a(href='#150') 150
+          li
+            a(href='#140') 140
+          li
+            a(href='#130') 130
+          li
+            a(href='#120') 120
+          li
+            a(href='#110') 110
+          li
+            a(href='#100') 100
+          li
+            a(href='#90') 90
+          li
+            a(href='#80') 80
+          li
+            a(href='#70') 70
+          li
+            a(href='#60') 60
+          li
+            a(href='#50') 50
+          li
+            a(href='#40') 40
+          li
+            a(href='#30') 30
+          li
+            a(href='#20') 20
+          li
+            a(href='#10') 10
+          li
+            a(href='#00') 0
+          li
+            a(href='#010') -10
+          li
+            a(href='#020') -20
+          li
+            a(href='#030') -30
+  script.
+    toggle($(".notice_type"));
+    $(".detail_type").on("click",".all_info",function () {
+    $(this).hide();
+    $(this).next(".information_actornone").show()
+    });
+    $(".detail_type").on("click",".put_away",function () {
+    $(this).parent(".information_actornone").prev(".all_info").show();
+    $(this).parent(".information_actornone").hide();
+    })
+    var btns =$(".tab li"),
+    contents =$("section>div")
+    var t = new TabView(btns,contents);
+    var myChart = echarts.init(document.getElementById('main'));
+    //    var myChart1 = echarts.init(document.getElementById('main1'));
+    //    var myChart2 = echarts.init(document.getElementById('main2'));
+    //    var myChart3 = echarts.init(document.getElementById('main3'));
+    //app.title = '极坐标系下的堆叠柱状图';
+    var dataStyle = {
+    normal: {
+    label: {show:false},
+    labelLine: {show:false}
+    }
+    };
+    var placeHolderStyle = {
+    normal : {
+    color: 'rgba(0,0,0,0)',
+    label: {show:false},
+    labelLine: {show:false}
+    },
+    emphasis : {
+    color: 'rgba(0,0,0,0)'
+    }
+    };
+    var x=59;
+    var y=69;
+    var z=23;
+    var suitability=65;
+    option = {
+    title: {
+    text: suitability+'%',
+    //subtext: '紫螺',
+    //sublink: 'https://www.baidu.com',
+    x: 'center',
+    y: 'center',
+    itemGap: 10,
+    textStyle : {
+    color : '#4da2ad',
+    fontFamily : '微软雅黑',
+    fontSize : 20,
+    fontWeight : 'bolder',
+    }
+    },
+    grid:{
+    x:0,
+    y:5,
+    x2:50,
+    y2:0,
+    borderWidth:1
+    },
+    //        tooltip : {
+    //            show: true,
+    //            formatter: "{a} <br/>{b}"
+    //        },
+    color:[
+    '#4da2ad','#adebf3','#cee7ea','#222222'
+    ],
+    //        legend: {
+    //            orient : 'vertical',
+    //            x : document.getElementById('main').offsetWidth/1.7,
+    //            y : 0,
+    //            itemGap:12,
+    //            data:['基本信息匹配度'+x+'%','29%的人表示生活压力很大','3%的人表示“我姓曾”']
+    //        },
+    toolbox: {
+    show : false,
+    feature : {
+    mark : {show: true},
+    dataView : {show: true, readOnly: false},
+    restore : {show: true},
+    saveAsImage : {show: true}
+    }
+    },
+    series : [
+    {
+    name:'基本信息',
+    type:'pie',
+    clockWise:false,
+    radius : [35, 40],
+    itemStyle : dataStyle,
+    data:[
+    {
+    value:x,
+    name:'基本信息匹配度'+x+'%',
+    },
+    {
+    value:100-x,
+    name:'invisible',
+    itemStyle : placeHolderStyle
+    }
+    ]
+    },
+    {
+    name:'特征角色',
+    type:'pie',
+    clockWise:false,
+    radius : [30, 35],
+    itemStyle : dataStyle,
+    data:[
+    {
+    value:y,
+    name:'特征角色匹配度'+x+'%',
+    },
+    {
+    value:100-y,
+    name:'invisible',
+    itemStyle : placeHolderStyle
+    }
+    ]
+    },
+    {
+    name:'片酬需求',
+    type:'pie',
+    clockWise:false,
+    radius : [25, 30],
+    itemStyle : dataStyle,
+    data:[
+    {
+    value:z,
+    name:'片酬需求匹配度'
+    },
+    {
+    value:100-z,
+    name:'invisible',
+    itemStyle : placeHolderStyle
+    }
+    ]
+    },
+    //            {
+    //                name:'档期匹配',
+    //                type:'pie',
+    //                clockWise:false,
+    //                radius : [20, 25],
+    //                itemStyle : dataStyle,
+    //                data:[
+    //                    {
+    //                        value:3,
+    //                        name:'档期匹配度'
+    //                    },
+    //                    {
+    //                        value:97,
+    //                        name:'invisible',
+    //                        itemStyle : placeHolderStyle
+    //                    }
+    //                ]
+    //            }
+    ]
+    };
+    myChart.setOption(option);
+    //    myChart1.setOption(option);
+    //    myChart2.setOption(option);
+    //    myChart3.setOption(option);
+    var fixed_height=$(".fixed").height();
+    var otop1=$("#200").height(),
+    otop2=$("#190").offset().top,
+    otop3=$("#180").offset().top,
+    otop4=$("#170").offset().top,
+    otop5=$("#160").offset().top,
+    otop6=$("#150").offset().top,
+    otop7=$("#140").offset().top,
+    otop8=$("#130").offset().top,
+    otop9=$("#120").offset().top,
+    otop10=$("#110").offset().top,
+    otop11=$("#100").offset().top,
+    otop12=$("#90").offset().top,
+    otop13=$("#80").offset().top,
+    otop14=$("#70").offset().top,
+    otop15=$("#60").offset().top,
+    otop16=$("#50").offset().top,
+    otop17=$("#40").offset().top,
+    otop18=$("#30").offset().top,
+    otop19=$("#20").offset().top,
+    otop20=$("#10").offset().top,
+    otop21=$("#00").offset().top,
+    otop22=$("#010").offset().top,
+    otop23=$("#020").offset().top,
+    otop24=$("#030").offset().top;
+    console.log(otop1);
+    $(window).scroll(function (){
+    var st = $(this).scrollTop();
+    console.log(st);
+    //        var otop=$("#2222").offset().top;
+    if(otop1>st){
+    console.log(otop1);
+    console.log(st);
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(0)").addClass("active");
+    }else if(otop2<st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(1)").addClass("active");
+    } if(otop3<=st){
+    //            alert("ll")
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(2)").addClass("active");
+    } if(otop4<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(3)").addClass("active");
+    } if(otop5<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(4)").addClass("active");
+    } if(otop6<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(5)").addClass("active");
+    } if(otop7<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(6)").addClass("active");
+    } if(otop8<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(7)").addClass("active");
+    } if(otop9<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(8)").addClass("active");
+    } if(otop10<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(9)").addClass("active");
+    } if(otop11<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(10)").addClass("active");
+    } if(otop12<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(11)").addClass("active");
+    } if(otop13<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(12)").addClass("active");
+    } if(otop14<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(13)").addClass("active");
+    } if(otop15<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(14)").addClass("active");
+    } if(otop16<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(15)").addClass("active");
+    } if(otop17<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(16)").addClass("active");
+    } if(otop18<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(17)").addClass("active");
+    }
+    if(otop19<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(18)").addClass("active");
+    }
+    if(otop20<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(19)").addClass("active");
+    }
+    if(otop21<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(20)").addClass("active");
+    }
+    if(otop22<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(21)").addClass("active");
+    }
+    if(otop23<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(22)").addClass("active");
+    }
+    if(otop24<=st){
+    $(".fixed ul li a").removeClass("active")
+    $(".fixed ul li a:eq(23)").addClass("active");
+    }
+    })
+    $(".fixed ul li").on("click","a",function () {
+    $(".fixed ul li a").removeClass("active");
+    $(this).addClass("active");
+    });
+      
+      //var userArray = !{JSON.stringify(userArray)};
+      console.log("lllll")
+     

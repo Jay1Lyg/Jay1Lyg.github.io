@@ -1,0 +1,83 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/weui2.css')
+    link(rel='stylesheet', href='/css/weui3.css')
+    // <link rel="stylesheet" href="css/weui.css" />
+    link(rel='stylesheet', href='/css/notice_list.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      .ppp{
+      clear: both;
+      font-weight: bold;
+      text-align: center;
+      z-index: 1000;
+      background: #fff;
+      color: #000;
+      mix-blend-mode: lighten;
+      height: 90px;
+      font-size: 50px;
+      z-index: 100;
+      position: fixed;
+      top: 50px;
+      left: 150px;
+      }
+    // <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+    // //<script type="text/javascript" src="js/jquery-weui.js"></script>
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/zepto.min.js')
+  body
+    header
+    section
+  script.
+    window.onload=function(){ 
+
+     $("section").on("click",".delete",function () {
+      alert("删除")
+      })
+      $("section").on("click",".bianji",function () {
+      alert("编辑")
+      });
+       var userid = !{JSON.stringify(userid)};
+        var url="http://www.901vehicle.cn";
+        function juzu(page){
+         var url4=url+'/WX/wx_publishCrews/'+userid+'/'+page;
+          $.ajax({
+              type : "get",
+              url : url4,
+              dataType : "jsonp",
+              // jsonp: "jsonpCallback",
+              success : function(data){
+              console.log(data);
+               var length=data.length;
+                var str='';
+                for(var i=0;i<length;i++){
+                var span=''
+                  for(var j=0;j<data[i].tags.repertoireTpyeArray.length;j++){
+                   span+='<span>'+data[i].tags.repertoireTpyeArray[j].repertoireTpyeName+'</span>'
+                  };
+                  
+                   str+='<div class="weui_cell slidelefts"><div class="weui_cell_bd weui_cell_primary "><div class="display_experience"><div><div class="photo_experience"><img src="'+data[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span>剧名：</span>《'+data[i].production_crews[0].name+'》<span class="types">古装</span></li><li><span>剧目类型：</span>'+span+'</li><li><span>拍摄周期：</span>'+data[i].duration+'</li><li><span>拍摄地：</span>'+data[i].location[0].fullname+'</li></ul></div><div class="zhixiang"><img src="/img/jiantou.png" alt=""></div></div></div></div><div class="slideleft"><span style="background:#4da2ad;color:#fff">编辑</span><span class="bg-green f-white">删除</span></div></div>'
+                };
+                   
+                console.log(span)
+                $('section').html(str)
+              
+              },
+              error:function(){
+              alert('fail');
+              }
+            });
+        }
+        juzu(1)
+      } 
+  script(src='/js/slideleft.js')
+    
+     

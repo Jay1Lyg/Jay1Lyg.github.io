@@ -1,0 +1,14 @@
+var keystone = require('keystone');
+var searchUser = require('../../query/util/getJssdkConfig.js');
+var config = require('../../public/conf/common.js');
+exports = module.exports = function (req, res) {
+  var url = config.homeEntry.url+req.url;
+  var productionCrew_id=req.params.productionCrew_id;
+  console.log('------params------');
+  console.log(req.params);
+  console.log('------params------');
+
+  res.render('page_positioninfo', {
+      productionCrew_id : productionCrew_id,
+  });
+};

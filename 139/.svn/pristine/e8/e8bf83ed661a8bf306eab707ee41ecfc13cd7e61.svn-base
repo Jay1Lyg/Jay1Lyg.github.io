@@ -1,0 +1,299 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 备选演员
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/weui2.css')
+    link(rel='stylesheet', href='/css/actor_edit_echart.css')
+    link(rel='stylesheet', href='/css/program.css')
+    style.
+      * {
+      padding: 0;
+      margin: 0;
+      list-style: none
+      }
+      body {
+      background: white
+      }
+      .small-font{
+            width: 120%;
+            font-size: 12px;
+            -webkit-transform-origin-x: 0;
+            -webkit-transform: scale(0.90);
+        }
+    script(type='text/javascript').
+      // document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    script(type='text/javascript', src='/js/jquery.min.js')
+    // <script type="text/javascript" src="/js/jqWeui.js"></script>
+    script(type='text/javascript', src='/js/zepto.min.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/echarts.min.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    div.div
+  script.
+    var careerincrew_id=!{JSON.stringify(careerincrew_id)};
+    var actorbudget_id=!{JSON.stringify(actorbudget_id)};
+    var programme_id=!{JSON.stringify(programme_id)};
+    function list(){
+          var juzu_url=url+'/WX/wx_searchAlternativeActorsbySlider/'+careerincrew_id+'/'+actorbudget_id+'/1';
+          console.log(juzu_url);
+          $.ajax({
+              type : "get",
+              url : juzu_url,
+              dataType : "jsonp",
+              async:false,
+              // jsonp: "jsonpCallback",
+              success : function(data){
+                  console.log(data);
+                   if(!data.results.length){
+                    alert('暂无演员，请去演员列表中添加');
+                    }
+                  var datas=data;
+                  var results=data.results;
+                  var str=""
+                  for(var i=0;i<results.length;i++){
+                    var source="";
+                    if(results[i].source=='1'){
+                      source="备选"
+                    }
+                     if(results[i].source=='2'){
+                      source="我邀请的"
+                    }
+                    if(results[i].source=='3'){
+                      source="申请我的"
+                    }
+            
+                    str += "<div class=\"weui_cell slidelefts\">\n                            <div class=\"weui_cell_bd weui_cell_primary actor_info\" id=\"" + results[i]._id + "\">\n                                <div>\n                                    <div class=\"recommend_edit\" style=\"height: 132px\">\n                                        <div style=\"position: relative\">\n                                            <img src=\"" + results[i].image + "\" alt=\"\" class=\"chart\">\n                                            <div style=\"width:95%;position: absolute;bottom:10px;color: white;background: rgba(22,22,22,0.6);text-align: center\">\n                                                <p class=\"small-font\">\u6765\u6E90\uFF1A" + source + "</p>\n                                            </div>\n                                        </div>\n                                        <div>\n                                            <p style=\"font-size: 14px\">\u4E0E\u65D7\u4E0B\u6F14\u5458<span style=\"color:#4da2ad\">" + results[i].realname + "</span>\u5339\u914D\u5EA6\u8F83\u9AD8</p>\n                                            <div id=\"main" + i + "\" style=\"width: 100px;height:100px;float: left;\"></div>\n                                            <ul class=\"pipei\">\n                                                <li><span class=\"one\"></span>\u57FA\u672C\u4FE1\u606F\uFF1A" + parseInt(results[i].basicMatchingDegree * 100) + "%</li>\n                                                <li><span class=\"two\"></span>\u7279\u5F81\u89D2\u8272\uFF1A" + parseInt(results[i].featureMatchingDegree * 100) + "%</li>\n                                                <li><span class=\"three\"></span>\u7247\u916C\u9700\u6C42\uFF1A" + parseInt(results[i].offsetMatchingDegree * 100) + "%</li>\n                                                <li><span class=\"four\"></span>\u6863\u671F\u5339\u914D\uFF1A" + parseInt(results[i].scheduleMatchingDegree * 100) + "%</li>\n                                            </ul>\n                                        </div>\n                                    </div>\n\n                                </div>\n\n                            </div>\n                            <div class=\"slideleft\">\n                                <span style=\"background:#4da2ad\" class=\" f-white\" >\u5220\u9664</span>\n                            </div>\n                        </div>";
+                  };
+                  $(".div").html(str);
+                  if(!results){
+                    $.alert("暂无演员，请去演员列表添加演员")
+                  }
+                   for(var j=0;j<results.length;j++){
+                   var scheduleMatchingDegree=parseInt(results[j].scheduleMatchingDegree*100);
+                   var totalMatchingDegree=parseInt(results[j].totalMatchingDegree*100);
+                     chart('myChart'+j,'main'+j,totalMatchingDegree,results[j].basicMatchingDegree,results[j].featureMatchingDegree,results[j].offsetMatchingDegree,scheduleMatchingDegree)
+                   };
+                   ///滑动
+                   window.slideleft=(function($){var listItem=$(".weui_cell_bd"),listOpts=$(".slideleft");var onthel=false,isScroll=false,initX=0,initY=0,endX=0,endY=0,moveX=0,expandLi=null;var slideMaxWid=listOpts.width();var handleSlide=(function(){listItem.on("touchstart",function(e){if(expandLi){if(expandLi.parent().index()!==$(this).parent().index()){if(Math.abs(endY-initY)<Math.abs(endX-initX)){e.preventDefault()}expandLi.css("-webkit-transform","translateX("+0+"px)")}}initX=e.targetTouches[0].pageX;initY=e.targetTouches[0].pageY;moveX=$(this).offset().left;$(this).on("touchmove",function(e){var curY=e.targetTouches[0].pageY;var curX=e.targetTouches[0].pageX;var X=curX-initX;$(this).removeClass("animated");if(Math.abs(endY-initY)<Math.abs(endX-initX)){e.preventDefault();if(moveX==0){if(X>0){$(this).css("-webkit-transform","translateX("+0+"px)")}else{if(X<0){if(X<-slideMaxWid){X=-slideMaxWid}$(this).css("-webkit-transform","translateX("+X+"px)")}}}else{if(moveX<0){onthel=true;if(X>0){if(X-slideMaxWid>0){$(this).css("-webkit-transform","translateX("+0+"px)")}else{$(this).css("-webkit-transform","translateX("+(X-slideMaxWid)+"px)")}}else{$(this).addClass("animated");$(this).css("-webkit-transform","translateX("+0+"px)")}}}}else{isScroll=true}})});listItem.on("touchend",function(e){endX=e.changedTouches[0].pageX;endY=e.changedTouches[0].pageY;var X=endX-initX;$(this).addClass("animated");if(X>-20||onthel||isScroll){$(this).css("-webkit-transform","translateX("+0+"px)");onthel=false;isScroll=false}else{$(this).css("-webkit-transform","translateX("+(-slideMaxWid)+"px)");expandLi=$(this)}})})()})(Zepto);function echo(stringA,stringB){var hello="你好";alert("hello world")};
+
+                 
+                 
+              },
+              error:function(err){
+                 console.log(err)
+              }
+          });
+        };
+        list();
+
+        //图
+         function chart(myChart,main,totalMatchingDegree,basicMatchingDegree,featureMatchingDegree,offsetMatchingDegree,scheduleMatchingDegree){
+          var myChart = echarts.init(document.getElementById(main));
+
+            var dataStyle = {
+                normal: {
+                    label: {show:false},
+                    labelLine: {show:false}
+                }
+            };
+            var placeHolderStyle = {
+                normal : {
+                    color: 'rgba(89,155,163,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle1 = {
+                normal : {
+                    color: 'rgba(125,196,205,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle2 = {
+                normal : {
+                    color: 'rgba(177,217,222,0.2)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var placeHolderStyle3 = {
+                normal : {
+                    color: 'rgba(223,241,243,0)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            
+             var option=option;
+             console.log(option)
+             option = {
+                title: {
+                    text: totalMatchingDegree+'%',
+                    //subtext: '来自紫螺科技数据',
+                    //sublink: 'https://www.baidu.com',
+                    x: 'center',
+                    y: 'center',
+                    itemGap: 10,
+                    textStyle : {
+                        color : 'rgba(30,144,255,0.8)',
+                        fontFamily : '微软雅黑',
+                        fontSize : 6,
+                        fontWeight : 'bolder',
+                    }
+                },
+                grid:{
+                    x:0,
+                    y:5,
+                    x2:50,
+                    y2:0,
+                    borderWidth:1
+                },
+                tooltip : {
+                    show: true,
+                    formatter: "{a} <br/>{b}"
+                },
+                color:[
+                     '#4da2ad','#7dc4cd','#8bd3dc','#a9dce3'
+                ],
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                series : [
+                    {
+                        name:'基本信息',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [36, 45],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:basicMatchingDegree*1000/10,
+                                name:'基本信息匹配度'+basicMatchingDegree*1000/10+'%',
+                            },
+                            {
+                                value:100-basicMatchingDegree*1000/10,
+                                name:'基本信息匹配度'+basicMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle
+                            }
+                        ]
+                    },
+                    {
+                        name:'特征角色',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [26, 35],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:featureMatchingDegree*1000/10,
+                                name:'特征角色匹配度'+featureMatchingDegree*1000/10+'%',
+                            },
+                            {
+                                value:100-featureMatchingDegree*1000/10,
+                                name:'特征角色匹配度'+featureMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle1
+                            }
+                        ]
+                    },
+                    {
+                        name:'片酬需求',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [16, 25],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:offsetMatchingDegree*1000/10,
+                                name:'片酬需求匹配度'+offsetMatchingDegree*1000/10+'%'
+                            },
+                            {
+                                value:100-offsetMatchingDegree*1000/10,
+                                name:'片酬需求匹配度'+offsetMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle2
+                            }
+                        ]
+                    },
+                     {
+                        name:'档期匹配',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [6, 15],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:scheduleMatchingDegree*1000/10,
+                                name:'档期匹配度'+scheduleMatchingDegree*1000/10+'%'
+                            },
+                            {
+                                value:100-scheduleMatchingDegree*1000/10,
+                                name:'档期匹配度'+scheduleMatchingDegree*1000/10+'%',
+                                itemStyle : placeHolderStyle3
+                            }
+                        ]
+                    },
+                    
+                ]
+            };
+
+            myChart.setOption(option);
+      };
+
+      //点击跳转演员详情
+      $(".div").on("click",".actor_info",function(){
+        console.log("dianji");
+        var userid=$(this).attr("id");
+        location.href=url+'/WX/page_AlternativeActorsDetails/'+userid+'/'+careerincrew_id+'/'+programme_id+'/'+actorbudget_id;
+        //WX/page_AlternativeActorsDetails/:userid/:careerincrew_id/:programme_id/:actorbudget_id
+      })
+      //删除=================
+
+      $(".div").on("click",".slideleft>span",function(){
+        console.log("dianji");
+        
+        var userid=$(this).parent().prev().attr("id");
+        var delete_url_actor=url+'/WX/wx_deleteAlternativeActors/'+userid+'/'+careerincrew_id;
+        console.log(userid)
+        $.ajax({
+              type : "get",
+              url : delete_url_actor,
+              dataType : "jsonp",
+              // jsonp: "jsonpCallback",
+              success : function(data){
+                  console.log(data);
+                  list();
+                 
+                 
+              },
+              error:function(err){
+                 console.log(err)
+              }
+          });
+        
+      })
+   

@@ -1,0 +1,71 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告列表
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/noticeJob.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript').
+      //        document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/jqWeui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+  body
+    section(style='margin-bottom: 1rem')
+      .obj1
+      .obj2
+      .obj3
+      .obj4
+      .obj5
+      .obj6
+      .obj7
+      .obj8
+      .obj9
+      .obj10
+      .obj11
+      .obj12
+      .obj13
+  script.
+    
+     var url="http://www.901vehicle.cn";
+      var agentid=!{JSON.stringify(agentid)};
+      var appid=!{JSON.stringify(appid)};
+        var url1=url+'/agent/a_searchsuccessfulmatchingcrews/'+agentid+'/1';
+        $.ajax({
+          type : "get",
+          url : url1,
+          dataType : "jsonp",
+          // jsonp: "jsonpCallback",
+          success : function(data){
+          console.log(data);
+          var obj1=data.obj1,obj2=data.obj2,obj3=data.obj3,obj4=data.obj4,obj5=data.obj5,obj6=data.obj6,obj7=data.obj7,obj8=data.obj8,obj9=data.obj9,obj10=data.obj10,obj11=data.obj11,obj12=data.obj12,obj13=data.obj13;
+          console.log(obj1,obj2,obj3,obj4,obj5,obj6,obj7,obj8,obj9,obj10,obj11,obj12,obj13)
+          if(obj5==undefined){
+            var str5=$(".obj5").html();
+          }else{
+            str5='<div class="notice_class"><div class="notice_type" ><p>形象片</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="img/sanxia.png" alt=""></p></div><div class="detail_type "></div></div>'
+            $(".obj5").html(str5);
+          }
+          
+
+
+            toggle($(".notice_type"));
+            $(".detail_type").on("click",".all_info",function () {
+            $(this).hide();
+            $(this).next(".information_actornone").show()
+            });
+            $(".detail_type").on("click",".put_away",function () {
+            $(this).parent(".information_actornone").prev(".all_info").show();
+            $(this).parent(".information_actornone").hide();
+            })
+          },
+          error:function(){
+          alert('fail');
+          }
+        });

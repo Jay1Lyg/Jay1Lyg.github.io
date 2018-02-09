@@ -1,0 +1,169 @@
+
+
+/*精准推荐*/
+.recommend{
+    width: 100%;
+    clear: both;
+    padding: 0 0.5rem;
+
+}
+.recommend>p{
+    float: left;
+    font-size: 0.28rem;
+}
+.recommend>ul{
+    float: right;
+    margin-right: 0.8rem;
+}
+.recommend>ul li{
+    float: left;
+    color: #4da2ad;
+    padding:0.05rem 0.1rem;
+    border: 1px solid #4da2ad;
+    margin-left: 0.1rem;
+    font-size: 0.28rem;
+    border-radius: 0.1rem;
+}
+.recommend_edit{
+    width: 100%;
+}
+.recommend_edit>div>p{
+    font-size: 0.28rem;
+    margin-left: 5px;
+
+}
+.recommend_edit>div>p>span{
+    color: #4da2ad;
+}
+.recommend_edit>div{
+    float: left;
+}
+.recommend_edit>div:first-child{
+    width: 30%;
+    padding: 1%;
+}
+.recommend_edit>div:first-child img{
+    width: 100%;
+    height: 2.4rem;
+
+}
+.recommend_edit>div:last-child{
+    width: 65%;
+    height: 2.4rem;
+    /*border: 1px solid black;*/
+}
+/*图表
+*/
+.chart>div{
+    width: 100%;
+    height: 100%;
+}
+.pipei{
+    margin-top: 0.2rem;
+}
+.pipei li{
+    font-size: 0.28rem;
+    color: #222222;
+}
+
+.button_zu{
+    width: 100%;
+    text-align: center;
+}
+.button_zu button{
+    width: 80%;
+    height: 45px;
+    background: #4da2ad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+
+/*固定边框*/
+.fixed{
+    width: 25px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    /*border: 1px solid red;*/
+    background: -webkit-linear-gradient(#51a09a,#90c9d3); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#51a09a,#90c9d3); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#51a09a,#90c9d3); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#51a09a,#90c9d3); /* 标准的语法 */
+}
+.fixed p{
+    font-size: 12px;
+    color: white;
+}
+.fixed ul{
+     height: 100%;
+     display: flex; flex-direction:column;
+    text-align: center;
+ }
+.fixed ul li {
+    color: white;
+    font-size: 10px;
+    flex: 1;
+}
+
+.fixed .fixed_header{
+    text-align: center;
+    font-weight:900;
+    font-size:15px;
+    margin:7px 0;
+    line-height:16px;
+}
+
+.fixed ul li a{
+    color: #c9c9c9;
+    font-size: 10px;
+
+}
+.fixed ul li a.active{
+    color: #fff;
+    font-size: 14px;
+
+}
+
+.range{
+    width: 10px;
+    height: 5px;
+    position: fixed;
+    right: 15px;
+    background: #999;
+    top:0;
+    z-index: 505;
+}
+
+
+.one{
+    float: left;
+    width: 0.2rem;
+    height: 0.2rem;
+    background: #4da2ad;
+    margin-top: 0.15rem;
+}
+.two{
+    float: left;
+    width: 0.2rem;
+    height: 0.2rem;
+    background: #adebf3;
+    margin-top: 0.15rem;
+}
+.three{
+    float: left;
+    width: 0.2rem;
+    height: 0.2rem;
+    background: #cee7ea;
+    margin-top: 0.15rem;
+}
+.four {
+    float: left;
+    width: 0.2rem;
+    height: 0.2rem;
+    background: #222222;
+    margin-top: 0.15rem;
+}

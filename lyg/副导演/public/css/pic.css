@@ -1,0 +1,46 @@
+.outImgCover{
+        width:100%;
+        height:700px;
+        background:black;
+        position: fixed;
+        top:0;left: 0;
+        z-index: 100;
+      }
+      .outImgCover>div .cover{
+        margin:auto;
+        position: absolute;
+        left:0;top:0;right:0;bottom: 0;
+        border:2px solid #fff;
+        background: #000;
+        opacity: 1;
+      }
+      .outImgCover img{
+        width:500px;
+        position: relative;
+        bottom:0;right:0;
+      }
+      .opt{
+        background: #000;
+        opacity: .6;
+        z-index: 7;
+        position:absolute;
+      }
+      .op1{
+        top:0;left:0;
+      }
+      .op2{
+        /* height:246.4px; */
+        top:0; right:0;
+      }
+      .op3{
+        bottom:0;   right:0;
+      }
+      .op4{
+        bottom:0;  left:0;
+      }
+      #cutImg{
+        position: absolute;
+        left:0;
+        top:0;
+        z-index: 100;
+      }

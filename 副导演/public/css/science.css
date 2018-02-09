@@ -1,0 +1,102 @@
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+html{
+	font-size:62.5%;
+}
+body{
+	font-size:12px;
+	font-size:1.2rem ;
+}
+p{
+	font-size:14px;
+	font-size:1.4rem;
+}
+.sciMesg{
+	width:100%;
+	position:relative;
+	background:#071724;
+}
+.sciMesg .sciBj img{
+	width:100%;
+	height:22rem;
+	position:absolute;
+}
+.sciBorder img{
+	width:100%;
+	height:8.3rem;
+	margin-top:-2.5rem;
+}
+.crewTitle{
+	position:relative;
+	top:2rem;
+}
+.crewTitle p{
+	color:#fff;
+	text-align:center;
+	font-size:2.5rem;
+}
+.juTitle{
+	color:#fff;
+	text-align:center;
+	font-size:1.6rem;
+	margin-top:2rem;
+}
+.erjiTitle{
+	width:7.5rem;
+	height:3.8rem;
+	margin:0 auto;
+	margin-top:-0.7rem;
+	margin-bottom:1rem;
+}
+.erjiTitle img{
+	width:7.5rem;
+	height:3.8rem;
+	text-align:center;
+}
+.erjiTitle p{
+	font-size:1.6rem;
+	position:relative;
+	top:-3rem;
+}
+.message{
+	width:100%;
+	padding-left:2rem;
+	box-sizing:border-box;
+	line-height:22px;
+}
+.message .messLeft{
+	margin-right:1rem;
+}
+.message .messLeft,
+.message .messRight{
+	float:left;
+}
+.message .messLeft ul li,
+.message .messRight ul li{
+	font-size:1.4rem;
+	color:#fff;
+}
+.otherMesg{
+	width:100%;
+}
+.xiaozhuan{
+	width:90%;
+	min-height:3rem;
+	padding:5px 0px 0px 8px;
+	border:1px solid #f17a3d;
+	border-radius:3px;
+	margin:1rem 0;
+}
+.sciBj2{
+	z-index:-1;
+}
+.sciBj2 img{
+	width:100%;
+	height:12.5rem;
+}
+.marginTop{
+	margin-top:-3rem;
+}

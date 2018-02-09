@@ -1,0 +1,56 @@
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+html{
+	font-size:62.5%; 
+}
+body{
+	font-size:12px;
+	font-size:1.2rem ;
+}
+p{
+	font-size:14px;
+	font-size:1.4rem;
+}
+.modelCon{
+	width:100%;
+	display:flex;
+	justify-content:space-between;
+	flex-wrap:wrap;
+}
+.photo{
+	width:14rem;
+	height:20rem;
+	float:left;
+	margin:5px 5px 0px 5px;
+}
+.photo img{
+	width:14rem;
+	height:18rem;
+}
+.photo  p{
+	text-align:center;
+}
+#selfDe{
+	width:14rem;
+	height:17.7rem;
+	border:2px solid #e4e4e4;
+	border-radius:2px;
+}
+.selfDefined{
+	width:10.41rem;
+	height:3.33rem;
+	background:#f2f2f2;
+	margin:0 auto;
+	margin-top:7rem;
+}
+.selfDefined p{
+	text-align:center;
+	line-height:3.33rem;
+}
+.selfDefined p span{
+	font-size:2.5rem;
+	color:#797979;
+} 

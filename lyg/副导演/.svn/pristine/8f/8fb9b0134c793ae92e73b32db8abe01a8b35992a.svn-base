@@ -1,0 +1,81 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title model
+    link(rel='stylesheet', href='/css/model.css')
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    .modelCon
+      .flexBox
+        .photo
+          img.qingchun(src='/img/qc.png', width='360', height='430', border='0', alt='')
+          p 青春
+        .photo
+          img.huaijiu(src='/img/hjs.png', width='360', height='430', border='0', alt='')
+          p 怀旧
+        .photo
+          img.xiangcun(src='/img/xs.png', width='360', height='430', border='0', alt='')
+          p 乡村
+        .photo
+          img.jingsong(src='/img/jsS.png', width='360', height='430', border='0', alt='')
+          p 惊悚
+        .photo
+          img.kehuan(src='/img/khS.png', width='360', height='430', border='0', alt='')
+          p 科幻
+        #selfDe.photo
+          .selfDefined
+            p
+              span +
+              | 自定义
+      div(style='clear:both')
+  script.
+        var productionCrew_id=!{JSON.stringify(productionCrew_id)};
+        var appid=!{JSON.stringify(appid)};
+     //------------------------------点击跳转模板页--------------------------
+         // ---------青春------------
+          $(".photo img.qingchun").click(function(){
+              var naticeUrl = url + '/WX/page_YouthTemplate/' + productionCrew_id + '/' + appid;
+              location.href=naticeUrl;
+          });
+          // ---------怀旧------------
+          $(".photo img.huaijiu").click(function(){
+              var naticeUrl2 = url + '/WX/page_NostalgiaTemplate/' + productionCrew_id + '/' + appid;
+              location.href=naticeUrl2;
+          });
+           // ---------乡村------------
+          $(".photo img.xiangcun").click(function(){
+              var naticeUrl3 = url + '/WX/page_RuralTemplate/' + productionCrew_id + '/' + appid;
+              location.href=naticeUrl3;
+          });
+           // ---------惊悚------------
+          $(".photo img.jingsong").click(function(){
+              var naticeUrl4= url + '/WX/page_ThrillerTemplate/' + productionCrew_id + '/' + appid;
+              location.href=naticeUrl4;
+          });
+           // ---------科幻------------
+          $(".photo img.kehuan").click(function(){
+              var naticeUrl5= url + '/WX/page_ScienceTemplate/' + productionCrew_id + '/' + appid;
+              location.href=naticeUrl5;
+          });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

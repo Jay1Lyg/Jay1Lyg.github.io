@@ -1,0 +1,157 @@
+//
+   Created by Admin on 2017/7/31.
+
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(http-equiv='X-UA-Compatible', content='ie=edge')
+        link(rel='stylesheet', href='/css/weui.css')
+        link(rel='stylesheet', href='/css/my_Delivery.css')
+        link(rel='stylesheet', href='/css/jqueryWeui.css')
+        script(type='text/javascript', src='/js/jquery-2.1.4.js')
+        script(type='text/javascript', src='/js/jquery-weui.js')
+        script(src='/js/zepto.min.js')
+        script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+        script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+        title 我申请的
+    body
+        .weui-pull-to-refresh__layer
+          .weui-pull-to-refresh__arrow
+          .weui-pull-to-refresh__preloader
+          .down 下拉刷新
+          .up 释放刷新
+          .refresh 正在刷新
+        // title start
+        header.manage-header
+            div
+                p 我申请的
+        // title end
+        // top nav start
+        .weui-tab.manage-nav
+            .weui-flex
+                .weui-flex__item.nav-tab.tab-active
+                    p.tab-text 全部
+                .weui-flex__item.nav-tab
+                    p.tab-text 面试
+                .weui-flex__item.nav-tab
+                    p.tab-text 不合适
+        // top nav end
+        // main start
+        .manage-main
+            .main-contain.main-select
+            .main-interview
+            .main-pase
+        .none_div(style='display: none')
+            p 暂无记录
+            img.none(src='/img/暂无记录.png', alt='')
+        .weui-loadmore(style='clear: both')
+          i.weui-loading
+          span.weui-loadmore__tips 正在加载
+        script.
+            $(function(){
+                $('.nav-tab').on('click', function () {
+                    $(this)
+                        .addClass('tab-active')
+                        .siblings('div')
+                        .removeClass('tab-active');
+                    var $index = $(this).index();
+                    console.log($index)
+                    $(".manage-main>div")
+                        .eq($index)
+                        .addClass("main-select")
+                        .siblings('.main-select')
+                        .removeClass("main-select");
+                });
+
+
+                var user_id= !{JSON.stringify(userid)};
+                var appid= !{JSON.stringify(appid)};
+                var url ="http://www.901vehicle.cn/WX/wx_searchapplyposition/";
+                var first=0;
+                //var currentPage=1;
+                var time=new Date();
+                $('.nav-tab').on('click', function () {
+                    $(this)
+                        .addClass('tab-active')
+                        .siblings('div')
+                        .removeClass('tab-active');
+                    var $index = $(this).index();
+                    var index = $(this).index();
+                    $(".manage-main>div")
+                        .eq($index)
+                        .addClass("main-select")
+                        .siblings('.main-select')
+                        .removeClass("main-select");
+                        delive(1,index)
+                    
+                });
+                delive(1,1)
+                //点击跳转到通告详情----------------------
+                $(".manage-main").on("click",".All",function(){
+                    var productionCrew_id=$(this).attr("id");
+                    window.location.href='http://www.901vehicle.cn/WX/page_searchpositionsDetails/'+productionCrew_id;
+                });
+                function delive(currentPage,index){
+                    $.ajax({
+                        type : "get",
+                        url : url+user_id+"/"+currentPage+"/"+index+"/"+time+"/"+appid,
+                        dataType : "jsonp",
+                        // jsonp: "jsonpCallback",
+                        success : function(data){
+                            var All=data;
+                            $(".none_div").css("display","none")
+                            if(All.length==""){
+                                $(".none_div").css("display","block")
+                            }else{
+                                if(index==0){
+                                    $('.main-contain').empty();
+                                    var str = $('.main-contain').html();
+                                    for(var i=0;i<All.length;i++){
+                                        var span='';
+                                        for(var j=0;j<All[i].repertoireTpyeArray.length;j++){
+                                            span+=All[i].repertoireTpyeArray[j].repertoireTpyeName
+                                        }
+
+                                        str+='<div id="'+All[i].crews_id+'" class="All"><div class="all_delivery"> <p>《'+All[i].crews_name+'》 <span class="border_delivery">'+All[i].category+'</span><span class="time_delivery">'+All[i].registration_date+'</span></p> </div> <div class="fen_delivery"> <p>角色/职位： <span>'+All[i].role_name+'</span></p> <p>剧目类型: <span>'+span+'</span></p><p>见组地址： <span>'+All[i].location+'</span></p> </div> <div class="delivery_ed"> <p class="is_receive'+All[i].is_receive+'"></p> </div> <div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div>'
+                                    }
+                                    $('.main-contain').html(str);
+                                    $(".is_receive1").html("【面试邀约】");
+                                    $(".is_receive0").html("【投递成功】");
+                                    $(".is_receive2").html("【不合适】");
+                                }else if(index==1){
+                                    $('.main-interview').empty();
+                                    var str1 = $('.main-interview').html();
+                                    for(var i=0;i<All.length;i++){
+                                        
+                                        var span='';
+                                        for(var j=0;j<All[i].repertoireTpyeArray.length;j++){
+                                            span+=All[i].repertoireTpyeArray[j].repertoireTpyeName
+                                        }
+                                        str1+='<div id="'+All[i].crews_id+'" class="All"><div class="all_delivery"> <p>《'+All[i].crews_name+'》 <span class="border_delivery">'+All[i].category+'</span><span class="time_delivery">'+All[i].registration_date+'</span></p> </div> <div class="fen_delivery"> <p>角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p> <p>见组地址： <span>'+All[i].location+'</span></p> </div> <div class="delivery_ed"> <p class="is_receive">【面试邀约】</p> </div> <div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div>'
+                                    }
+                                    $('.main-interview').html(str1);
+                                }else if(index==2){
+                                    $('.main-pase').empty();
+                                    var str2 = $('.main-pase').html();
+                                    for(var i=0;i<All.length;i++){
+                                       
+                                        var span='';
+                                        for(var j=0;j<All[i].repertoireTpyeArray.length;j++){
+                                            span+=All[i].repertoireTpyeArray[j].repertoireTpyeName
+                                        }
+                                        str2+='<div id="'+All[i].crews_id+'" class="All"><div class="all_delivery"> <p>《'+All[i].crews_name+'》 <span class="border_delivery">'+All[i].category+'</span><span class="time_delivery">'+All[i].registration_date+'</span></p> </div> <div class="fen_delivery"> <p>角色/职位： <span>'+All[i].role_name+'</span></p><p>剧目类型: <span>'+span+'</span></p> <p>见组地址： <span>'+All[i].location+'</span></p> </div> <div class="delivery_ed"> <p class="is_receive">【不合适 】</p> </div> <div class="hui" style="width: 100%;height: 10px;background: #eee;clear: both"></div> </div>'
+                                    }
+                                    $('.main-pase').html(str2);
+                                }
+                            }
+                            console.log(All);
+                        },
+                        error:function(){
+                            alert('fail');
+                        }
+                    });
+                }
+                
+            })    

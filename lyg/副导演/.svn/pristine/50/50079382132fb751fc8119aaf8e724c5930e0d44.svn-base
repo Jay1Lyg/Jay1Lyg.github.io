@@ -1,0 +1,86 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title 通告列表
+    style.
+      *{
+      margin:0;
+      padding:0;
+      list-style:none;
+      }
+      html{
+      font-size:62.5%;
+      }
+      body{
+      font-size:12px;
+      font-size:1.2rem ;
+      }
+      p{
+      font-size:14px;
+      font-size:1.4rem;
+      }
+      .listDiv .listUl li{
+      width:100%;
+      height:3.75rem;
+      line-height:3.75rem;
+      font-size:1.6rem;
+      background:#f2f2f2;
+      border-bottom:1px solid #fff;
+      padding-left:2rem;
+      box-sizing:border-box;
+      }
+      .listDiv .listUl li b{
+      display:block;
+      width:1.8rem;
+      height:1.8rem;
+      background:url(/img/go1.png) no-repeat;
+      background-size:100%;
+      float:right;
+      margin:0.9rem 2rem 0 0;
+      }
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    //script(src='js/echarts.min.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    .listDiv
+      ul.listUl
+    div(style='clear:right;')
+  script.
+    var director_id=!{JSON.stringify(director_id)};
+    var appid=!{JSON.stringify(appid)};
+    function list(page){
+      var juzu_url=url+'/WX/wx_publishCrews/'+director_id+'/'+page;
+      console.log(juzu_url);
+      $.ajax({
+          type : "get",
+          url : juzu_url,
+          dataType : "jsonp",
+          async:false,
+          // jsonp: "jsonpCallback",
+          success : function(data){
+              console.log(data);
+              var datas=data;
+              var str='';
+              for(data of datas){
+                str+=`<li id="${data.id}">剧名：${data.production_crews[0].name}<b></b></li>`
+              }
+             $(".listUl").html(str)
+             
+          },
+          error:function(err){
+             console.log(err)
+          }
+      });
+    };
+    list(1);
+    $(".listUl").on("click","li",function(){
+        var production_id=$(this).attr("id");
+      location.href=url+'/WX/page_generationProgramme/'+director_id+'/'+appid+'/'+production_id;
+    })
+    
+
+

@@ -1,0 +1,70 @@
+var keystone = require('keystone'),
+	Address = keystone.list('Address'),
+	Areainfo = keystone.list('Areainfo'),
+	Category = keystone.list('Category'),
+	Production = keystone.list('Production'),
+	ProductionCrews = keystone.list('ProductionCrews'),
+	ProductionCompany = keystone.list('ProductionCompany'),
+	Issuer = keystone.list('Issuer'),
+	RoleCategory = keystone.list('RoleCategory'),
+	Role = keystone.list('Role'),
+	User = keystone.list('User'),
+	CareerInCrew = keystone.list('CareerInCrew'),
+    Category = keystone.list('Category'); 
+var async = require('async');
+var config = require('../../public/conf/common.js');
+exports = module.exports = function(req, res) {
+	var userid = req.params.user_id;
+	var result=[];
+	Production.model.find()
+	 .where('isCreated',true)
+	 .where('createdBy',userid)
+	 .populate('production_crews category location')
+	 .sort("-createdAt")
+	 .exec(function(err,ret){
+       if(err){
+         throw new Error(err);
+       }else{
+       	  async.eachSeries(ret,function(item,next){
+            var data={};
+            console.log('ppp');
+            console.log(item);
+            console.log(item.production_crews.length);
+            console.log(item.production_crews.length!=0);
+            if(item.production_crews.length!=0){
+	            data.name=item.name;
+				data.investmentAmount=item.investmentAmount;
+				data.duration=item.duration;
+				data.production_companys=item.production_companys;
+				data.issuer_companies=item.issuer_companies;
+				data.publishDate=item.publishDate;
+				data.isCreated=item.isCreated;
+				data.isOfficial=item.isOfficial;
+				data.introduction=item.introduction;
+				data.category_id=item.category[0]._id;
+				data.category=item.category[0].name;
+				data.production_crewId=item.production_crews[0]._id;
+				data.location=item.location[0].fullname;
+				(item.images.length>0) ? (data.production_image = config.homeEntry.url+'WX/poster/production/' + item._id+'/'+(item.images)[item.images.length-1].originalname) : (data.production_image="") ;
+	            result.push(data);
+	            next();
+            }else{
+            	next();
+            }
+
+       	  },function(err){
+             if(err){
+               throw new Error(err);
+             }else{
+             	console.log('_______________');
+             	console.log(result);
+             	res.render('page_publicCrews',{
+				  data:result				
+			   });
+			
+             }
+       	  })
+       }
+	 })
+
+}

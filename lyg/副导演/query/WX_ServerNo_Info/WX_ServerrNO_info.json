@@ -1,0 +1,18 @@
+[
+	{
+		"Servername": "紫螺安全",
+		"AppID": "wx7ced785ebc43ac12",
+		"AppSecret": "17efd929898e90a1cdabed4e791c348d"
+		
+	},
+	{
+		"Servername": "开始app",
+		"AppID": "wx3138c8f31598d0a7",
+		"AppSecret": "4af50c3cd51f6ecb4e481785670c57f1"
+	},
+	{
+		"Servername": "副导演助手",
+		"AppID": "wx1beb5bae19621613",
+		"AppSecret": ""
+	}
+]

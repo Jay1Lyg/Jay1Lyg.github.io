@@ -1,0 +1,328 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 演员管理
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/Amanage.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      .white{color:white}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    .weui-pull-to-refresh__layer
+      .weui-pull-to-refresh__arrow
+      .weui-pull-to-refresh__preloader
+      .down 下拉刷新
+      .up 释放刷新
+      .refresh 正在刷新
+    header
+      .header
+        .search
+          // 搜索内容
+          #searchBar.weui-search-bar
+            form.weui-search-bar__form
+              .weui-search-bar__box
+                input#searchInput.weui-search-bar__input(type='search',disabled, value='搜索', required='')
+                a#searchClear.weui-icon-clear(href='javascript:')
+        ul.tab
+          li.active 全部演员
+          li 男演员
+          li 女演员
+    section
+      .all_actor
+        .active
+          // 全部
+          // 参演经历
+          .display_experience.actor1
+        div
+          .display_experience.actor2
+        div
+          .display_experience.actor3
+    div.div(style='margin:0 auto;text-align:center;display:none;')
+      img(src='/img/kong.png',style='margin:40% auto;height:160px;width:165px')
+      p(style='color:#aeaeae;font-size:14px;') 暂无演员
+    .weui-loadmore
+      i.weui-loading
+      span.weui-loadmore__tips 正在加载
+    div.totalPages(style="display:none")      
+  script.
+    var agentid=!{JSON.stringify(agentid)};
+      var appid=!{JSON.stringify(appid)};
+      function TabView(btns,contents){
+          var _this = this;
+          this.btns = btns;
+          this.contents = contents;
+          this.len = this.btns.length;
+          for(var i=0;i<this.len;i++){
+              this.btns[i].index = i;
+              this.btns[i].onclick = function(){
+                  _this.tab(this)
+              };
+          }
+      }
+      TabView.prototype.tab = function(obj){
+          var _index = obj.index;
+          var index=_index+1;
+          i=2;
+          console.log(index)
+          $.ajax({
+            type : "get",
+            url : url+'/agent/a_searchActorsUnderAgent/'+agentid+'/'+appid+'/'+index+'/1',
+            dataType : "jsonp",
+            success : function(data){
+                console.log(data)
+                var array=data.results;
+                $('.actor'+index).empty();
+                $(".div").css("display","none");
+                var str = $('.actor'+index).html();   
+                if(array.length){
+                  for(var i=0;i<array.length;i++){
+                   // var url3='http://www.901vehicle.cn/WX/page_deliveryActor/'+array[i].user_id;
+                        if(array[i].schedule==false){
+                          var schedule='无';
+                        }else{
+                          var schedule='有';
+                        }
+                        if(array[i].Representativework=="no"){
+                           var Representativework="无"
+                          }else{
+                           var Representativework="《"+array[i].Representativework+"》";
+                          }
+                       
+                         str +='<div class="position"><div class="actor_edit"><div class="photo_experience"><img src="'+array[i].iconUrl+'"></div><div class="detail_experience"><ul><li><span>姓名：</span>'+array[i].name+'</li><li><span>特征：</span>'+array[i].feature+'</li><li><span>档期：</span>'+schedule+'</li><li><span>代表作：</span>'+Representativework+'</li></ul></div></div><div class="edit_delete"><ul><li><a href="'+url+'/agent/a_page_userInfoEdit/'+array[i].userid+'/'+agentid+'/'+appid+'" class="white">编辑</a></li><li  class="delete" id="'+array[i].userid+'">删除</li></ul></div></div>'                                                                                          
+                  };
+                  $('.actor'+index).html(str); 
+                }else{
+                  $(".div").css('display','block')
+                }      
+                
+                
+                if(array.length<5){
+                    $(".weui-loadmore").css("display","none");
+                  }
+
+            },
+            error:function(){
+                alert('fail');
+            }
+          });
+          for(var j=0;j<this.len;j++){
+              this.btns[j].classList.remove('active');
+              this.contents[j].classList.remove('active');
+          }
+          obj.classList.add('active');
+          this.contents[_index].classList.add('active')
+      }
+
+      function ptrajax(index,page){
+            $.ajax({
+              type : "get",
+              url : url+'/agent/a_searchActorsUnderAgent/'+agentid+'/'+appid+'/'+index+'/'+page,
+              dataType : "jsonp",
+              success : function(data){
+                  console.log(data)
+                  var array=data.results;
+                  $('.actor'+index).empty()
+                  var str = $('.actor'+index).html();  
+                  if(array.length){
+                      for(var i=0;i<array.length;i++){
+                     // var url3=url+'/WX/page_deliveryActor/'+array[i].user_id;
+                      if(array[i].schedule==false){
+                          var schedule='无';
+                        }else{
+                          var schedule='有';
+                        }
+                      if(array[i].Representativework=="no"){
+                        var Representativework="无"
+                      }else{
+                      var Representativework="《"+array[i].Representativework+"》";
+                      }
+                     str +='<div class="position"><div class="actor_edit"><div class="photo_experience"><img src="'+array[i].iconUrl+'"></div><div class="detail_experience"><ul><li><span>姓名：</span>'+array[i].name+'</li><li><span>特征：</span>'+array[i].feature+'</li><li><span>档期：</span>'+schedule+'</li><li><span>代表作：</span><span class="li11">'+Representativework+'</span></li></ul></div></div><div class="edit_delete"><ul><li><a href="'+url+'/agent/a_page_userInfoEdit/'+array[i].userid+'/'+agentid+'/'+appid+'" class="white">编辑</a></li><li  class="delete" id="'+array[i].userid+'">删除</li></ul></div></div>'
+                                                                                                                
+                    }
+                     $('.actor'+index).html(str);
+                  }else{
+                      $(".div").css('display','block')
+                  }         
+                  
+                 
+                  var totalPages=data.totalPages;
+                  $(".totalPages").empty(); 
+                  var strpage=$(".totalPages").html();
+                  strpage='<p>'+totalPages+'</p>';
+                  $(".totalPages").html(strpage);
+                  if(array.length<10){
+                    $(".weui-loadmore").css("display","none");
+                  }
+
+
+
+              },
+              error:function(){
+                  alert('fail');
+              }
+            }); 
+          }
+            ptrajax(1,1)
+
+
+            //刷新
+            $(document.body).pullToRefresh().on("pull-to-refresh", function() {
+              setTimeout(function() {
+                if(!$(".all_actor>div").eq(0).is(':hidden')){
+                 
+                   ptrajax(1,1)
+                 
+                }else if(!$(".all_actor>div").eq(1).is(':hidden')){
+                  ptrajax(2,1)
+                  
+                }else {
+                   ptrajax(3,1)
+                 
+                }
+                $(document.body).pullToRefreshDone();
+              }, 2000);
+            });
+            //滚动加载ajax
+            function infiniteajax(index,page){
+              $.ajax({
+                type : "get",
+                url : url+'/agent/a_searchActorsUnderAgent/'+agentid+'/'+appid+'/'+index+'/'+page,
+                dataType : "jsonp",
+                success : function(data){
+                    console.log(data)
+                    console.log(page)
+                    console.log(index)
+                    var array=data.results;
+                    var str = $('.actor'+index).html();           
+                    for(var i=0;i<array.length;i++){
+                     // var url3='http://www.901vehicle.cn/WX/page_deliveryActor/'+array[i].user_id;
+                          if(array[i].schedule==false){
+                            var schedule='无';
+                          }else{
+                            var schedule='有';
+                          }
+                          if(array[i].Representativework=="no"){
+                            var Representativework="无"
+                          }else{
+                            var Representativework="《"+array[i].Representativework+"》";
+                          }
+
+                          
+
+                           str +='<div class="position"><div class="actor_edit"><div class="photo_experience"><img src="'+array[i].iconUrl+'"></div><div class="detail_experience"><ul><li><span>姓名：</span>'+array[i].name+'</li><li><span>特征：</span>'+array[i].feature+'</li><li><span>档期：</span>'+schedule+'</li><li><span>代表作：</span>'+Representativework+'</li></ul></div></div><div class="edit_delete"><ul><li><a href="'+url+'/agent/a_page_userInfoEdit/'+array[i].userid+'/'+agentid+'/'+appid+'" class="white">编辑</a></li><li class="delete" id="'+array[i].userid+'">删除</li></ul></div></div>'                                                                                          
+                    }
+                    $('.actor'+index).html(str); 
+                    if(array.length<10){
+                    $(".weui-loadmore").css("display","none");
+                  } 
+                },
+                error:function(){
+                    alert('fail');
+                }
+              }); 
+            }
+            //滚动加载
+            var loading = false;
+            var i=1;
+            $(document.body).infinite().on("infinite", function() {
+              if(loading) return;
+              loading = true;
+              
+              var totalPages=$(".totalPages").text();
+             
+              var page=parseInt(totalPages)
+              console.log("总页数："+page)
+              setTimeout(function() {
+                if(!$(".all_actor>div").eq(0).is(':hidden')){
+                  if(i<page){
+                    i++;
+                    infiniteajax(1,i);
+                    console.log(i)
+                  }else{
+                   $(".weui-loadmore").css("display","none");
+                   $.alert("数据加载完了","加载完毕");
+                   return
+                  }
+                 
+                }else if(!$(".all_actor>div").eq(1).is(':hidden')){
+                  if(i<page){
+                    i++
+                    infiniteajax(2,i);
+                    console.log(i)
+                  }else{
+                   $(".weui-loadmore").css("display","none");
+                   $.alert("数据加载完了","加载完毕");
+                   return
+                  }
+                }else {
+                 if(i<page){
+                    i++;
+                    infiniteajax(3,i);
+                    console.log(i)
+                  }else{
+                   $(".weui-loadmore").css("display","none");
+                   $.alert("数据加载完了","加载完毕");
+                   return;
+                   
+                  }
+                 
+                }
+                loading = false;
+              }, 2000);
+            });
+
+    var btns =$(".tab li"),
+    contents =$(".all_actor>div")
+    var t = new TabView(btns,contents);
+    edit($(".display_experience"));
+    function edit(actor) {
+      actor.on("click",".actor_edit",function () {
+        if($(this).next().is(":hidden")){
+          $(this).next().show();
+        }else{
+          $(this).next().hide();
+        }
+      })
+    }
+
+     $(".display_experience").on("click",".delete",function(){
+      
+      var $this=$(this);
+      var userid=$this.attr("id")
+      //var deleteurl=url+"/agent/a_deletesingleworkexp/"+careerInResume_id;
+      var url='http://www.kaishiapp.com/agent/a_deletesingleActor/'+agentid+'/'+userid
+      //alert('deleteurl')
+      //alert(deleteurl)
+        $.ajax({
+        type : "get",
+        url : url,
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+          console.log(data);
+          $.alert("删除成功");
+          
+         console.log($this.parent().parent().parent(".position")) 
+         $this.parent().parent().parent(".position").empty()
+
+         
+          
+        },
+        error:function(){
+        alert('fail');
+        }
+      });
+      })
+       $("#searchBar").click(function(){
+              $(location).attr('href', '/agent/a_page_searchAgentActorByname/'+agentid+'/'+appid);
+            })
+// 

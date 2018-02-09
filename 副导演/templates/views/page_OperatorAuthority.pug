@@ -1,0 +1,47 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 授权
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/noticeJob.css')
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    style.
+      * {
+      padding: 0;
+      margin: 0;
+      list-style: none
+      }
+      body{
+      background: #4da2ad;
+      }
+      div {
+      width: 100%;
+      }
+      button{
+      width: 70%;
+      position: fixed;
+      top: 40%;
+      left: 15%;
+      height: 45px;
+      background: white;
+      border-radius: 5px;
+      border: none;
+      font-size: 14px;
+      color: #4da2ad;
+      outline:none;
+      }
+   
+
+  body
+    div
+      button 一键获取发布权限
+    script(type='text/javascript').
+      // document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+      var url= !{JSON.stringify(url)};
+      $("button").click(function(){
+        window.location.href=url;
+      })

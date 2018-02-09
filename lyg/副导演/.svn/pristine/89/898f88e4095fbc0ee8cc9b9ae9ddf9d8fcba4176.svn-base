@@ -1,0 +1,205 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告详情
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/notice_edit.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(src='js/echarts.min.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+  body
+    header
+      .newactor_banner
+        img.banner_img(src='', alt='')
+        div
+          ul.tab
+            li.active 剧组信息
+            li 角色信息
+    section
+      .active.crew_info
+        div.crew_info1
+          p
+            span 剧名：
+            | 非官方的
+          p
+            span 通告类型：
+            | 大扫除v
+          p
+            span 拍摄地：
+            | 时常发生的v
+          p
+            span 见组地址：
+            | 新车上周
+          p
+            span 出品公司：
+            | 调查vASD
+          p
+            span 承制公司：
+            | 富士达
+          p
+            span 拍摄周期（天）:
+            | 2222
+      div
+        .notice_class.leader
+          .notice_type
+            p 领携主演
+            p.jiantou
+              img(src='image/sanyou.png', alt='')
+              img(src='image/sanxia.png', alt='')
+          .detail_type.leader_actor
+            .leader_suitability
+              .information_actor
+                ul
+                  li 职位名称：男一号
+                  li 性别：男
+                  li 年龄段：青年
+                  li 身高(cm)：1
+                p.all_info 查看全部信息
+                .information_actornone
+                  ul
+                    li 体型：偏廋
+                    li 招募数量：1
+                    li 技能特长：1
+                    li 特征：1
+                  div
+                    p(style='font-size: 14px') 人物小传
+                    textarea.weui-textarea(rows='3', style='font-size: 12px', disabled='') 你就是交换空间
+                  p.put_away 收起
+            .button_zu
+              button 我要进组
+        .notice_class.starring
+          .notice_type
+            p 主要演员
+            p.jiantou
+              img(src='image/sanyou.png', alt='')
+              img(src='image/sanxia.png', alt='')
+          .detail_type.starring_actor
+            div
+              .information_actor
+                ul
+                  li 职位名称：男一号
+                  li 性别：男
+                  li 年龄段：青年
+                  li 招募数量：1
+                div
+                  p(style='font-size: 14px') 职位描述
+                  textarea.weui-textarea(style='font-size: 12px', disabled='', placeholder='请输入文本', rows='3')
+              // //匹配
+              .guest_suitability.suitability
+                .recommend
+                  p 精准推荐
+                  ul
+                    li 上一批
+                    li 换一批
+                div(style='border-bottom: 1px solid rgba(242, 242, 242, 1);clear: both')
+                .recommend_edit
+                  div
+                    img.chart(src='image/img1.png', alt='')
+                  div
+                    #main(style='width: 130px;height:130px;float: left;')
+                    ul.pipei
+                      li 基本信息：
+                      li 特征角色：
+                      li 片酬需求：
+                      li 档期匹配：
+              div(style='background: #f2f2f2;height: 0.2rem;clear: both')
+        .notice_class.guest
+          .notice_type
+            p 客串演员
+            p.jiantou
+              img(src='image/sanyou.png', alt='')
+              img(src='image/sanxia.png', alt='')
+          .detail_type.guest_actor
+            div
+              .information_actor
+                ul
+                  li 职位名称：男一号
+                  li 性别：男
+                  li 年龄段：青年
+                  li 招募数量：1
+                div
+                  p 职位描述
+                  textarea.weui-textarea(placeholder='请输入文本', rows='3')
+              // //匹配
+              .guest_suitability.suitability
+                .recommend
+                  p 精准推荐
+                  ul
+                    li 上一批
+                    li 换一批
+                div(style='border-bottom: 1px solid rgba(242, 242, 242, 1);clear: both')
+                .recommend_edit
+                  div
+                    img.chart(src='image/img1.png', alt='')
+                  div
+                    #main(style='width: 130px;height:130px;float: left;')
+                    ul.pipei
+                      li 基本信息：
+                      li 特征角色：
+                      li 片酬需求：
+                      li 档期匹配：
+              div(style='background: #f2f2f2;height: 0.2rem;clear: both')
+            // //匹配度
+        .notice_class.other
+          .notice_type
+            p 其他演员
+            p.jiantou
+              img(src='image/sanyou.png', alt='')
+              img(src='image/sanxia.png', alt='')
+          .detail_type.other_actor
+            div
+              div
+            // //匹配度
+            .other_suitability
+              p hjsdgkjvvvv
+  script.
+    toggle($(".notice_type"));
+    $(".detail_type").on("click",".all_info",function () {
+    $(this).hide();
+    $(this).next(".information_actornone").show()
+    });
+    $(".detail_type").on("click",".put_away",function () {
+    $(this).parent(".information_actornone").prev(".all_info").show();
+    $(this).parent(".information_actornone").hide();
+    })
+    var btns =$(".tab li"),
+    contents =$("section>div")
+    var t = new TabView(btns,contents);
+    var productionCrew_id = !{JSON.stringify(productionCrew_id)};
+     var userid = !{JSON.stringify(userid)};
+     var url="http://www.901vehicle.cn";
+      var juzu_url=url+'/WX/wx_searchpositionDetails/'+productionCrew_id+'/'+userid;
+      console.log(juzu_url);
+      $.ajax({
+          type : "get",
+          url : juzu_url,
+          dataType : "jsonp",
+          async:false,
+          // jsonp: "jsonpCallback",
+          success : function(data){
+              console.log(data);
+              var crew_info=data.production;
+              console.log(crew_info);
+              $(".banner_img").attr("src",crew_info[0].production_image);
+              var crew_str='';
+              crew_str='<p><span>剧名：</span>'+crew_info.production_name+'</p><p><span>通告类别：</span>'+crew_info.categorytag.categoryName+'</p><p><span>剧目类型：</span>'+crew_info.categorytag.repertoireTpyeArray.repertoireTpyeName+'</p><p><span>拍摄地：</span>'+crew_info.location_name[0].name+'</p><p><span>拍摄周期（天）:</span>'+crew_info.duration+'</p><p><span>出品公司：</span>'+crew_info.production_companys_name+'</p><p><span>承制公司：</span>'+crew_info.issuer_companies_name+'</p>'
+              $(".crew_info1").html(crew_str)
+             //var str= $(".display_experience").html();
+              for(var i=0;i<data.length;i++){
+                  str+=''
+              }
+              //$(".display_experience").html(str);
+              
+          },
+          error:function(err){
+             console.log(err)
+          }
+      });

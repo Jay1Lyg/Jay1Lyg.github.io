@@ -1,0 +1,214 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告列表
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/noticeJob.css')
+    link(rel='stylesheet', href='/css/list.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      .obj{clear:both}
+      .detail_experience{
+        width:62%;
+      }
+    script(type='text/javascript').
+      //document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/jqWeui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    section(style='margin-bottom: 1rem')
+      .obj1.obj
+      .obj2.obj
+      .obj3.obj
+      .obj4.obj
+      .obj5.obj
+      .obj6.obj
+      .obj7.obj
+      .obj8.obj
+      .obj9.obj
+      .obj10.obj
+      .obj11.obj
+      .obj12.obj
+      .obj13.obj
+      .obj14.obj
+    div.div(style='margin:0 auto;text-align:center;display:none;')
+      img(src='/img/kong.png',style='margin:0 auto;height:160px;width:165px')
+      p(style='color:#aeaeae;font-size:14px;') 暂无通告
+  script.
+      var agentid=!{JSON.stringify(agentid)};
+      var appid=!{JSON.stringify(appid)};
+        var url1=url+'/agent/a_searchsuccessfulmatchingcrews/'+agentid+'/'+appid;
+        $.ajax({
+          type : "get",
+          url : url1,
+          dataType : "jsonp",
+          // jsonp: "jsonpCallback",
+          success : function(data){
+          console.log(data);
+          if(!data.length){
+            $(".div").css("display","block")
+          }
+          var obj1=data.obj1,obj2=data.obj2,obj3=data.obj3,obj4=data.obj4,obj5=data.obj5,obj6=data.obj6,obj7=data.obj7,obj8=data.obj8,obj9=data.obj9,obj10=data.obj10,obj11=data.obj11,obj12=data.obj12,obj13=data.obj13,obj14=data.obj14;
+          console.log(obj1,obj2,obj3,obj4,obj5,obj6,obj7,obj8,obj9,obj10,obj11,obj12,obj13)
+          if(obj1==undefined){
+            var str1=$(".obj1").html();
+          }else{
+            for(var i=0;i<obj1.length;i++){
+              var str1_edit='';
+              str1_edit+='<div id="'+obj1[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj1[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj1[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj1[i].name+'》<span class="types">'+obj1[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj1[i].duration+'</li><li><span>拍摄地：</span>'+obj1[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj1[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 100%;height: 0;background: #f1f1f1;clear: both"></div>'
+            }
+            str1='<div class="notice_class"><div class="notice_type" ><p>不限</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str1_edit+'</div></div>'
+            $(".obj1").html(str1);
+          };
+          if(obj2==undefined){
+            var str2=$(".obj2").html();
+          }else{
+            for(var i=0;i<obj2.length;i++){
+              var str2_edit='';
+              str2_edit+='<div id="'+obj2[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj2[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj2[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj2[i].name+'》<span class="types">'+obj2[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj2[i].duration+'</li><li><span>拍摄地：</span>'+obj2[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj2[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 100%;height: 0;background: #f1f1f1;clear: both"></div>'
+            }
+            str2='<div class="notice_class"><div class="notice_type" ><p>VR视频</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str2_edit+'</div></div>'
+            $(".obj2").html(str2);
+          };
+          if(obj3==undefined){
+            var str3=$(".obj3").html();
+          }else{
+            for(var i=0;i<obj3.length;i++){
+              var str3_edit='';
+              str3_edit+='<div id="'+obj3[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj3[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj3[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj3[i].name+'》<span class="types">'+obj3[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj3[i].duration+'</li><li><span>拍摄地：</span>'+obj3[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj3[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 100%;height: 0;background: #f1f1f1;clear: both"></div>'
+            }
+            str3='<div class="notice_class"><div class="notice_type" ><p>其他</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str3_edit+'</div></div>'
+            $(".obj3").html(str3);
+          };
+          if(obj4==undefined){
+            var str4=$(".obj4").html();
+          }else{
+            for(var i=0;i<obj4.length;i++){
+              var str4_edit='';
+              str4_edit+='<div id="'+obj4[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj4[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj4[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj4[i].name+'》<span class="types">'+obj4[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj4[i].duration+'</li><li><span>拍摄地：</span>'+obj4[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj4[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 100%;height: 0;background: #f1f1f1;clear: both"></div>'
+            }
+            str4='<div class="notice_class"><div class="notice_type" ><p>广告片</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str4_edit+'</div></div>'
+            $(".obj4").html(str4);
+          };
+          if(obj5==undefined){
+            var str5=$(".obj5").html();
+          }else{
+            for(var i=0;i<obj5.length;i++){
+              var str5_edit='';
+              str5_edit+='<div id="'+obj5[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj5[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj5[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj5[i].name+'》<span class="types">'+obj5[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj5[i].duration+'</li><li><span>拍摄地：</span>'+obj5[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj5[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 100%;height: 0;background: #f1f1f1;clear: both"></div>'
+            }
+            str5='<div class="notice_class"><div class="notice_type" ><p>形象片</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str5_edit+'</div></div>'
+            $(".obj5").html(str5);
+          };
+          if(obj6==undefined){
+            var str6=$(".obj6").html();
+          }else{
+            for(var i=0;i<obj6.length;i++){
+              var str6_edit='';
+              str6_edit+='<div id="'+obj6[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj6[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj6[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj6[i].name+'》<span class="types">'+obj6[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj6[i].duration+'</li><li><span>拍摄地：</span>'+obj6[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj6[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 600%;height: 0;background: #f6f6f6;clear: both"></div>'
+            }
+            str6='<div class="notice_class"><div class="notice_type" ><p>微电影</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str6_edit+'</div></div>'
+            $(".obj6").html(str6);
+          };
+          if(obj7==undefined){
+            var str7=$(".obj7").html();
+          }else{
+            for(var i=0;i<obj7.length;i++){
+              var str7_edit='';
+              str7_edit+='<div id="'+obj7[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj7[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj7[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj7[i].name+'》<span class="types">'+obj7[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj7[i].duration+'</li><li><span>拍摄地：</span>'+obj7[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj7[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 700%;height: 0;background: #f7f7f7;clear: both"></div>'
+            }
+            str7='<div class="notice_class"><div class="notice_type" ><p>电视剧</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str7_edit+'</div></div>'
+            $(".obj7").html(str7);
+          };
+          if(obj8==undefined){
+            var str8=$(".obj8").html();
+          }else{
+            for(var i=0;i<obj8.length;i++){
+              var str8_edit='';
+              str8_edit+='<div id="'+obj8[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj8[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj8[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj8[i].name+'》<span class="types">'+obj8[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj8[i].duration+'</li><li><span>拍摄地：</span>'+obj8[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj8[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 800%;height: 0;background: #f8f8f8;clear: both"></div>'
+            }
+            str8='<div class="notice_class"><div class="notice_type" ><p>电视电影</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str8_edit+'</div></div>'
+            $(".obj8").html(str8);
+          };
+          if(obj9==undefined){
+            var str9=$(".obj9").html();
+          }else{
+            for(var i=0;i<obj9.length;i++){
+              var str9_edit='';
+              str9_edit+='<div id="'+obj9[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj9[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj9[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj9[i].name+'》<span class="types">'+obj9[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj9[i].duration+'</li><li><span>拍摄地：</span>'+obj9[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj9[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 900%;height: 0;background: #f9f9f9;clear: both"></div>'
+            }
+            str9='<div class="notice_class"><div class="notice_type" ><p>短视频</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str9_edit+'</div></div>'
+            $(".obj9").html(str9);
+          };
+          if(obj10==undefined){
+            var str10=$(".obj10").html();
+          }else{
+            for(var i=0;i<obj10.length;i++){
+              var str10_edit='';
+              str10_edit+='<div id="'+obj10[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj10[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj10[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj10[i].name+'》<span class="types">'+obj10[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj10[i].duration+'</li><li><span>拍摄地：</span>'+obj10[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj10[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 1000%;height: 0;background: #f10f10f10;clear: both"></div>'
+            }
+            str10='<div class="notice_class"><div class="notice_type" ><p>纪录片</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str10_edit+'</div></div>'
+            $(".obj10").html(str10);
+          };
+          if(obj11==undefined){
+            var str11=$(".obj11").html();
+          }else{
+            for(var i=0;i<obj11.length;i++){
+              var str11_edit='';
+              str11_edit+='<div id="'+obj11[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj11[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj11[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj11[i].name+'》<span class="types">'+obj11[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj11[i].duration+'</li><li><span>拍摄地：</span>'+obj11[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj11[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 1100%;height: 0;background: #f11f11f11;clear: both"></div>'
+            }
+            str11='<div class="notice_class"><div class="notice_type" ><p>网络大电影</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str11_edit+'</div></div>'
+            $(".obj11").html(str11);
+          };
+          if(obj12==undefined){
+            var str12=$(".obj12").html();
+          }else{
+            for(var i=0;i<obj12.length;i++){
+              var str12_edit='';
+              str12_edit+='<div id="'+obj12[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj12[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj12[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj12[i].name+'》<span class="types">'+obj12[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj12[i].duration+'</li><li><span>拍摄地：</span>'+obj12[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj12[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 1200%;height: 0;background: #f12f12f12;clear: both"></div>'
+            }
+            str12='<div class="notice_class"><div class="notice_type" ><p>网络电视剧</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str12_edit+'</div></div>'
+            $(".obj12").html(str12);
+          };
+          if(obj13==undefined){
+            var str13=$(".obj13").html();
+          }else{
+            for(var i=0;i<obj13.length;i++){
+              var str13_edit='';
+              str13_edit+='<div id="'+obj13[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj13[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj13[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj13[i].name+'》<span class="types">'+obj13[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj13[i].duration+'</li><li><span>拍摄地：</span>'+obj13[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj13[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 1300%;height: 0;background: #f13f13f13;clear: both"></div>'
+            }
+            str13='<div class="notice_class"><div class="notice_type" ><p>视频栏目</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str13_edit+'</div></div>'
+            $(".obj13").html(str13);
+          };
+          if(obj14==undefined){
+            var str14=$(".obj14").html();
+          }else{
+            for(var i=0;i<obj14.length;i++){
+              var str14_edit='';
+              str14_edit+='<div id="'+obj14[i].productioncrews_id[0]._id+'"><div class="photo_experience"><img src="'+obj14[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span style="color: #4da2ad;font-size:14px">《'+obj14[i].nick_name+'》</span></li><li><span>剧名：</span>《'+obj14[i].name+'》<span class="types">'+obj14[i].categorytag.categoryName+'</span></li><li><span>拍摄周期：</span>'+obj14[i].duration+'</li><li><span>拍摄地：</span>'+obj14[i].location[0].fullname+'</li><li>与您旗下<span style="color: #4da2ad">'+obj14[i].match_number+'</span>名演员匹配度高</li></ul></div></div><div class="hui" style="width: 1400%;height: 0;background: #f14f14f14;clear: both"></div>'
+            }
+            str14='<div class="notice_class"><div class="notice_type" ><p>院线电影</p><p class="jiantou"><img src="/img/sanyou.png" alt=""><img src="/img/sanxia.png" alt=""></p></div><div class="detail_type ">'+str14_edit+'</div></div>'
+            $(".obj14").html(str14);
+          };
+          
+
+
+            toggle($(".notice_type"));
+           
+            $(".detail_type>div").click(function(){
+              var productionCrew_id=$(this).attr("id");
+              console.log(productionCrew_id);
+              window.location.href=url+'/agent/a_page_positionDetails/'+agentid+'/'+productionCrew_id;
+            })
+          },
+          error:function(){
+          alert('fail');
+          }
+        });

@@ -1,0 +1,380 @@
+.manage-header {
+    height: 48px;
+    width: 100%;
+}
+
+.manage-header div {
+    position: relative;
+}
+
+.manage-header div img {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    margin: 16px 0 0 5px;
+}
+
+.manage-header div p {
+    color: #222222;
+    font-size: 16px;
+    font-family: 微软雅黑;
+    line-height: 48px;
+    text-align: center;
+}
+
+.manage-nav {
+    text-align: center;
+    width: 100%;
+    font-size: 15px;
+    color: #a0a0a0;
+}
+
+.manage-nav>div>div {
+    padding-bottom: 5px;
+}
+
+.manage-nav .tab-active {
+    color: #4da2ad;
+    border-bottom: 1px solid #4da2ad;
+}
+
+.manage-main>div {
+    display: none;
+}
+
+
+.manage-main .main-contain {
+    margin-top: 10px;
+}
+
+.manage-main .main-contain .contain-result-grey,
+.manage-main .main-contain .contain-result-blue {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.manage-main .main-contain .contain-result-grey {
+    color: #a0a0a0;
+}
+
+.manage-main .main-contain .contain-result-blue {
+    color: #4da2ad;
+}
+
+.manage-main .main-contain>ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 15px;
+    background-color: #f7f7f7;
+}
+
+.manage-main .main-contain>ul>li {
+    width: 49.5%;
+}
+
+.manage-main .main-contain>ul>li>a {
+    position: relative;
+}
+
+.manage-main .main-contain img {
+    width: 100%;
+}
+
+.manage-main .main-contain a .contain-cover {
+    width: 100%;
+    position: absolute;
+    height: 25px;
+    bottom: 4px;  
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    line-height: 25px;
+    font-size: 14px;
+}
+
+.manage-main .main-contain .contain-item2>div:first-child {
+    text-align: right;
+}
+
+.manage-main .main-contain .contain-item2 .contain-cover {
+    right: 0;
+}
+
+.manage-main .main-contain .item-cert {
+    line-height: 32px;
+    font-size: 16px;
+    position: relative;
+    background-color: #fff;
+}
+
+.manage-main .main-contain .actor-name {
+    display: inline-block;
+    font-size: 16px;
+    left: 15px;
+}
+
+.manage-main .main-contain .contain-cert {
+    display: inline-block;
+    left: 15px;
+    top: 4px;
+}
+
+.manage-main .actor-name,
+.manage-main .contain-cert {
+    position: relative;
+}
+
+.manage-main .main-contain .contain-cert {
+    width: 62px;
+    height: 18px;
+    border: 1px solid #4da2ad;
+    border-radius: 10px;
+    font-size: 12px;
+    position: relative;
+    line-height: 20px;
+    color: #4da2ad;
+}
+
+.manage-main .main-contain .contain-cert img {
+    width: 26%;
+    position: absolute;
+    left: 2px;
+    top: 1px;
+}
+
+.manage-main .main-contain .contain-cert p {
+    position: absolute;
+    left: 20px;
+}
+
+.manage-main .main-select {
+    display: block;
+}
+
+
+
+.manage-main .main-interview {
+    margin-top: 10px;
+}
+
+.manage-main .main-interview .contain-result-grey,
+.manage-main .main-interview .contain-result-blue {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.manage-main .main-interview .contain-result-grey {
+    color: #a0a0a0;
+}
+
+.manage-main .main-interview .contain-result-blue {
+    color: #4da2ad;
+}
+
+.manage-main .main-interview>ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 15px;
+    background-color: #f7f7f7;
+}
+
+.manage-main .main-interview>ul>li {
+    width: 49.5%;
+}
+
+.manage-main .main-interview>ul>li>a {
+    position: relative;
+}
+
+.manage-main .main-interview img {
+    width: 100%;
+}
+
+.manage-main .main-interview a .contain-cover {
+    width: 100%;
+    position: absolute;
+    height: 25px;
+    bottom: 4px;  
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    line-height: 25px;
+    font-size: 14px;
+}
+
+.manage-main .main-interview .contain-item2>div:first-child {
+    text-align: right;
+}
+
+.manage-main .main-interview .contain-item2 .contain-cover {
+    right: 0;
+}
+
+.manage-main .main-interview .item-cert {
+    line-height: 32px;
+    font-size: 16px;
+    position: relative;
+    background-color: #fff;
+}
+
+.manage-main .main-interview .actor-name {
+    display: inline-block;
+    font-size: 16px;
+    left: 15px;
+}
+
+.manage-main .main-interview .contain-cert {
+    display: inline-block;
+    left: 15px;
+    top: 4px;
+}
+
+.manage-main .actor-name,
+.manage-main .contain-cert {
+    position: relative;
+}
+
+.manage-main .main-interview .contain-cert {
+    width: 62px;
+    height: 18px;
+    border: 1px solid #4da2ad;
+    border-radius: 10px;
+    font-size: 12px;
+    position: relative;
+    line-height: 20px;
+    color: #4da2ad;
+}
+
+.manage-main .main-interview .contain-cert img {
+    width: 26%;
+    position: absolute;
+    left: 2px;
+    top: 1px;
+}
+
+.manage-main .main-interview .contain-cert p {
+    position: absolute;
+    left: 20px;
+}
+
+
+
+
+
+
+
+.manage-main .main-pase{
+    margin-top: 10px;
+}
+
+.manage-main .main-pase .contain-result-grey,
+.manage-main .main-pase .contain-result-blue {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.manage-main .main-pase .contain-result-grey {
+    color: #a0a0a0;
+}
+
+.manage-main .main-pase .contain-result-blue {
+    color: #4da2ad;
+}
+
+.manage-main .main-pase>ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 15px;
+    background-color: #f7f7f7;
+}
+
+.manage-main .main-pase>ul>li {
+    width: 49.5%;
+}
+
+.manage-main .main-pase>ul>li>a {
+    position: relative;
+}
+
+.manage-main .main-pase img {
+    width: 100%;
+}
+
+.manage-main .main-pase a .contain-cover {
+    width: 100%;
+    position: absolute;
+    height: 25px;
+    bottom: 4px;  
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    line-height: 25px;
+    font-size: 14px;
+}
+
+.manage-main .main-pase .contain-item2>div:first-child {
+    text-align: right;
+}
+
+.manage-main .main-pase .contain-item2 .contain-cover {
+    right: 0;
+}
+
+.manage-main .main-pase .item-cert {
+    line-height: 32px;
+    font-size: 16px;
+    position: relative;
+    background-color: #fff;
+}
+
+.manage-main .main-pase .actor-name {
+    display: inline-block;
+    font-size: 16px;
+    left: 15px;
+}
+
+.manage-main .main-pase .contain-cert {
+    display: inline-block;
+    left: 15px;
+    top: 4px;
+}
+
+.manage-main .actor-name,
+.manage-main .contain-cert {
+    position: relative;
+}
+
+.manage-main .main-pase .contain-cert {
+    width: 62px;
+    height: 18px;
+    border: 1px solid #4da2ad;
+    border-radius: 10px;
+    font-size: 12px;
+    position: relative;
+    line-height: 20px;
+    color: #4da2ad;
+}
+
+.manage-main .main-pase .contain-cert img {
+    width: 26%;
+    position: absolute;
+    left: 2px;
+    top: 1px;
+}
+
+.manage-main .main-pase .contain-cert p {
+    position: absolute;
+    left: 20px;
+}
+.a{
+    color: #666666
+}

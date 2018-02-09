@@ -1,0 +1,272 @@
+doctype html
+html(lang='zh-CN')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+        title 更多推荐
+        link(rel='stylesheet', href='/css/jqueryWeui.css')
+        link(rel='stylesheet', href='/css/weui.css')
+        link(rel='stylesheet', href='/css/actor_chert.css')
+        style.
+            *{padding: 0;margin: 0;list-style: none}
+            .one{background:#599ba3;}
+            .two{background:#7dc4cd;}
+            .three{background:#b1d9de;}
+            .four{background:#dff1f3;}
+            .pan_a,.pan_a:hover{text-decoration:none; color:black}
+        script(type='text/javascript', src='/js/jquery-2.1.4.js')
+        script(src='/js/echarts.min.js')
+        script(type='text/javascript', src='/js/jquery-weui.js')
+        script(type='text/javascript', src='/js/rootfont.js')
+        script(type='text/javascript', src='/js/tab.js')
+        script(type='text/javascript', src='/js/url.js')
+    body
+        section
+            #numberDiv.number_div(style='display: block')
+                div(style='background: #f2f2f2;height: 3px;clear: both')
+            #200.number_div(style='display: block')
+        .range
+    script.
+        //  伪造数据
+        var careerincrew_id = !{JSON.stringify(careerincrew_id)};
+        var actorbudget_id = null;
+        var scorls = [];
+        var attribute = !{JSON.stringify(attribute)};
+        var pan_url=url+'/WX/wx_searchMoreMatchingActors/'+careerincrew_id+'/'+attribute+'/'+actorbudget_id+'/'+1;
+        console.log(pan_url);
+        var pan_result;
+        var atr = [];
+        var arr = [];
+        var director_id = !{JSON.stringify(director_id)};
+       'use strict';
+
+        $.ajax({
+            url: pan_url,
+            type: 'get',
+            dataType: 'jsonp',
+            success: function success(data) {
+                console.log(data);
+                console.log(1);
+                pan_result = data.results;
+                if (data.results.length == 0) {
+                    $.alert('暂无演员！');
+                } else {
+                    render();
+                }
+            },
+            error: function error() {
+                console.log('出错啦');
+            }
+        });
+        /**
+        * :
+        * SalaryoffsetValue:1.8
+        actorbudget_id:"5a434e060f3cfa9312c32de4"
+        artimage:"http://www.901vehicle.cn/WX/casting/artimage/5a333481a19d75d15db43c01/lOSbW8aeMJTIs_vB3DOIJStAYeXkVKEfc5bEPhTrIwHsUMy9BD2HQWM0LyvMUfKu.jpg"
+        basicInfo_degree:0.85   //基本信息匹配度
+        careerincrew_id:"5a431525ff6fb10b3a4a6d63"
+        feature_degree:1        //性格匹配度
+        paycheck_degree:0       //片酬匹配度
+        realname:"潘军浩"
+        schedule_degree:1       //档期匹配度
+        total_degree:0.6475     //总体匹配度
+        user_id:"5a333481a19d75d15db43c01"
+        * */
+
+        //  渲染页面左右 两侧
+        function render() {
+            //var data = pan_result.sort(function(a,b){return b-a}),str='';
+            for (var k = 0, m = 210; k <= 23; k++) {
+                m -= 10;
+                atr.push(m);
+            }
+            //循环数组 制造二维数组
+            atr.forEach(function (item) {
+                arr[item] = [];
+                pan_result.forEach(function (ite) {
+                    var num = parseInt(ite.SalaryoffsetValue * 100);
+                    if (item >= num && num > item - 10) {
+                        arr[item].push(ite);
+                    }
+                });
+            });
+
+            var k = -1;
+            var str = '';
+            //循环二维数组 渲染页面
+            for (var i = 0; i < atr.length; i++) {
+                str += '<div id="' + atr[i] + '"></div>';
+                arr[atr[i]].forEach(function (item, index) {
+                    str += '<a class=\'pan_a\' href="' + (url + '/WX/page_MatchActorsDetails/' + item.user_id + '/' + item.careerincrew_id + '/' + director_id) + '"> <div data-num="' + item + '" class="recommend_edit" style="height: 132px">\n                  <div>\n                  <img src="' + item.artimage + '" alt="" class="chart">\n                  </div>\n                  <div>\n                  <p>\u4E0E\u6F14\u5458<span>' + item.realname + '</span>\u5339\u914D\u5EA6' + parseInt(item.total_degree * 100) + '%</p>\n                  <div class="pan_pei_' + (i + '_' + index) + '" style="width: 100px;height:100px;float: left;"></div>\n                  <ul class="pipei">\n                  <li><span class="one"></span>\u57FA\u672C\u4FE1\u606F\uFF1A' + parseInt(item.basicInfo_degree * 100) + '%</li>\n                  <li><span class="two"></span>\u7279\u5F81\u89D2\u8272\uFF1A' + parseInt(item.feature_degree * 100) + '%</li>\n                  <li><span class="three"></span>\u7247\u916C\u9700\u6C42\uFF1A' + parseInt(item.paycheck_degree * 100) + '%</li>\n                  <li><span class="four"></span>\u6863\u671F\u5339\u914D\uFF1A' + parseInt(item.schedule_degree * 100) + '%</li>\n                  </ul>\n                  </div>\n                  </div> <div style="clear:both"></div>\n                    </a>\n                    ';
+                });
+            }
+            $('#numberDiv').html(str);
+            /**pei形状图**/
+            for (var k = 0; k < atr.length; k++) {
+
+                arr[atr[k]].forEach(function (item, index) {
+                    console.log('pan_pei_' + k + '_' + index);
+                    var x = parseInt(item.basicInfo_degree * 100),
+                        y = parseInt(item.feature_degree * 100),
+                        z = parseInt(item.paycheck_degree * 100),
+                        α = parseInt(item.schedule_degree * 100);
+                    var myChart = echarts.init(document.getElementsByClassName('pan_pei_' + k + '_' + index)[0]);
+
+                    var dataStyle = {
+                        normal: {
+                            label: { show: false },
+                            labelLine: { show: false }
+                        }
+                    };
+                    var placeHolderStyle = {
+                        normal: {
+                            color: 'rgba(89,155,163,0.2)',
+                            label: { show: false },
+                            labelLine: { show: false }
+                        },
+                        emphasis: {
+                            color: 'rgba(0,0,0,0)'
+                        }
+                    };
+                    var placeHolderStyle1 = {
+                        normal: {
+                            color: 'rgba(125,196,205,0.2)',
+                            label: { show: false },
+                            labelLine: { show: false }
+                        },
+                        emphasis: {
+                            color: 'rgba(0,0,0,0)'
+                        }
+                    };
+                    var placeHolderStyle2 = {
+                        normal: {
+                            color: 'rgba(177,217,222,0.2)',
+                            label: { show: false },
+                            labelLine: { show: false }
+                        },
+                        emphasis: {
+                            color: 'rgba(0,0,0,0)'
+                        }
+                    };
+                    var placeHolderStyle3 = {
+                        normal: {
+                            color: 'rgba(223,241,243,0)',
+                            label: { show: false },
+                            labelLine: { show: false }
+                        },
+                        emphasis: {
+                            color: 'rgba(0,0,0,0)'
+                        }
+                    };
+                    option = {
+                        title: {
+                            text: parseInt(item.total_degree * 100) + '%',
+                            x: 'center',
+                            y: 'center',
+                            itemGap: 20,
+                            textStyle: {
+                                color: 'rgba(30,144,255,0.8)',
+                                fontFamily: '微软雅黑',
+                                fontSize: 20,
+                                fontWeight: 'bolder'
+                            }
+                        },
+                        color: ['#599ba3', '#7dc4cd', '#b1d9de', '#dff1f3', '#4da2ad'],
+                        series: [{
+                            name: '基本信息',
+                            type: 'pie',
+                            clockWise: false,
+                            radius: [35, 40],
+                            itemStyle: dataStyle,
+                            data: [{
+                                value: x,
+                                name: '基本信息匹配度' + x + '%'
+                            }, {
+                                value: 100 - x,
+                                name: 'invisible',
+                                itemStyle: placeHolderStyle
+                            }]
+                        }, {
+                            name: '角色特征',
+                            type: 'pie',
+                            clockWise: false,
+                            radius: [30, 35],
+                            itemStyle: dataStyle,
+                            data: [{
+                                value: y,
+                                name: '角色特征匹配度' + y + '%'
+                            }, {
+                                value: 100 - y,
+                                name: 'invisible',
+                                itemStyle: placeHolderStyle1
+                            }]
+                        }, {
+                            name: '片酬需求',
+                            type: 'pie',
+                            clockWise: false,
+                            radius: [25, 30],
+                            itemStyle: dataStyle,
+                            data: [{
+                                value: z,
+                                name: '片酬需求匹配度' + z + '%'
+                            }, {
+                                value: 100 - z,
+                                name: 'invisible',
+                                itemStyle: placeHolderStyle2
+                            }]
+                        }, {
+                            name: '档期匹配',
+                            type: 'pie',
+                            clockWise: false,
+                            radius: [20, 25],
+                            itemStyle: dataStyle,
+                            data: [{
+                                value: α,
+                                name: '档期匹配度' + α + '%'
+                            }, {
+                                value: 100 - α,
+                                name: 'invisible',
+                                itemStyle: placeHolderStyle3
+                            }]
+                        }]
+                    };
+                    myChart.setOption(option);
+                });
+            }
+
+            var html = '';
+            for (var j = 0; j < atr.length; j++) {
+                html += '<li><a data-id="' + j + '" href="#' + atr[j] + '">' + atr[j] + '</a></li>';
+            }
+            //$('.fixed ul').html(html);
+
+            var pan_num = parseInt(pan_result[0].SalaryoffsetValue * 10) + 1;
+            if (pan_num > 0) {}
+
+            $('.fixed ul li a').on('click', function (e) {
+                $('.fixed>ul>li>a ').removeClass('active');
+                $(e.target).addClass('active');
+            });
+
+            //    移动 右边跟着动的逻辑
+            $('.number_div>div').each(function (i, e) {
+                scorls.push($(e).offset().top);
+            });
+        }
+
+        // 页面滚动时 改变active;
+        (function () {
+            $(window).scroll(function (event) {
+                var winHeight = $(window).scrollTop();
+                var ind;
+                for (var i = 0; i < scorls.length; i++) {
+                    if (scorls[i] >= winHeight) {
+                        ind = i;
+                        $('.fixed>ul>li>a').removeClass('active');
+                        $('.fixed>ul>li:eq(' + ind + ') a').addClass('active');
+                        return;
+                    }
+                }
+            });
+        })();

@@ -1,0 +1,329 @@
+/**
+ * This file is where you define your application routes and controllers.
+ *
+ * Start by including the middleware you want to run for every request;
+ * you can attach middleware to the pre('routes') and pre('render') events.
+ *
+ * For simplicity, the default setup for route controllers is for each to be
+ * in its own file, and we import all the files in the /routes/views directory.
+ *
+ * Each of these files is a route controller, and is responsible for all the
+ * processing that needs to happen for the route (e.g. loading data, handling
+ * form submissions, rendering the view template, etc).
+ *
+ * Bind each route pattern your application should respond to in the function
+ * that is exported from this module, following the examples below.
+ *
+ * See the Express application routing documentation for more information:
+ * http://expressjs.com/api.html#app.VERB
+ */
+
+var keystone = require('keystone');
+var cors = require('cors');
+var middleware = require('./middleware');
+var importRoutes = keystone.importer(__dirname);
+
+// Common Middleware
+keystone.pre('routes', middleware.initLocals);
+keystone.pre('render', middleware.flashMessages);
+
+// Import Route Controllers
+var routes = {
+	views: importRoutes('./views'),
+};
+// Setup Route Bindings
+exports = module.exports = function (app) {
+
+
+    app.use(cors());
+	// Views
+	app.get('/', routes.views.index);
+	app.get('/blog/:category?', routes.views.blog);
+	app.get('/blog/post/:post', routes.views.post);
+	app.get('/gallery', routes.views.gallery);
+	app.all('/contact', routes.views.contact);
+
+
+	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
+	// app.get('/protected', middleware.requireUser, routes.views.protected);
+	/*
+	*
+	*
+	*    微信页面的url
+	*
+	*
+	*/
+	app.get('/AuthTestView', routes.views.AuthTestView);//授权页面测试  authod@yizheng
+
+	/*
+	*
+	*     微信第三方平台的授权认证
+	*
+	*/
+	app.post('/ServerAuth', routes.views.ServerAuth);//第三方平台的授权认证  author@yizheng
+	app.post('/getMessage/:APPID?', routes.views.getMessage);//公众号消息与事件接收URL  author@yizheng
+	app.all('/crypted', routes.views.crypted);//node.js aes解密测试  author@yizheng
+	app.all('/WexinAuth', routes.views.WexinAuth);//微信授权流程逻辑  author@yizheng
+	app.all('/SolveAuthCode', routes.views.SolveAuthCode);// 处理预授权码的问题  author@yizheng
+	app.all('/GetWeiXinAdminInfo',  routes.views.GetWeiXinAdminInfo);// 拉取授权方管理员的信息 author@yizheng
+	app.all('/WebpageAuthorization/:index',  routes.views.WebpageAuthorization);// 网页授权 author@dongjia
+    /*
+    *
+    *       微信js安全接口域名认证
+    *
+    *
+    */
+    app.all('/MP_verify_jbYJ26O7GiwqY3wr\.txt', routes.views.MP_verify_jbYJ26O7GiwqY3wr);  //紫螺安全
+    app.all('/MP_verify_Tz6FhEU9IYDoAbCX\.txt', routes.views.MP_verify_Tz6FhEU9IYDoAbCX);  //小潘副导演工作室
+    app.all('/MP_verify_39nwxlJeiaY4fXMW\.txt', routes.views.MP_verify_39nwxlJeiaY4fXMW);//副导演助手
+    app.all('/MP_verify_pZcf884YHBUHNqhS\.txt', routes.views.MP_verify_pZcf884YHBUHNqhS);//副导演王钶的工作室
+	 /*
+	*
+	*     js_SDK 获取config信息
+	*
+	*/
+	app.get('/JssdkConfig',routes.views.JssdkConfig);
+
+
+    /*
+    *
+    *    注册登陆相关接口
+    *
+    */
+    app.get('/WX/SMSverification', routes.views.SMSverification);//注册--发送验证码
+    app.get('/WX/SMSverificationForChangePsw', routes.views.SMSverificationForChangePsw);//修改密码--发送验证码
+    app.post('/WX/wx_sendtelphoneandpassword', routes.views.wx_sendtelphoneandpassword);// 注册后台
+    app.post('/WX/wx_signin', routes.views.wx_signin);//登录后台接口
+    app.get('/WX/page_register/:index?/:openid/:appid', routes.views.page_register);//注册页面
+    app.get('/WX/page_signin/:index?/:openid/:appid', routes.views.page_signin);//登录页面
+    app.get('/WX/page_changePassword/:index/:openid/:appid', routes.views.page_changePassword);//修改密码页面
+    app.get('/WX/page_alreadySignin', routes.views.page_alreadySignin);//已经登录提示页面
+    app.get('/Wx/wx_changeuserpassword', routes.views.wx_changeuserpassword);// 改变用户密码
+
+    
+    /*
+	*
+	*     副导演--简历相关接口
+	*
+	*/  
+    app.all('/WX/wx_JudgeResume', routes.views.wx_JudgeResume);//判断用户是否填写过简历
+    app.post('/WX/wx_BasicInfoSave', routes.views.wx_BasicInfoSave);//新---副导演--保存简历第一步，第二步，第三步，第四步与经纪人共用，见经纪人模块
+    app.post('/WX/wx_editResumeInfo', routes.views.wx_editResumeInfo);//编辑演员资料
+    app.post('/WX/uploadcastingimage', routes.views.wx_uploadcastingimage);//上传casting照片
+    app.post('/WX/uploadcareerimage', routes.views.wx_uploadcareerimage);//上传剧照
+    app.post('/WX/uploadHeadimage', routes.views.wx_uploadHeadimage);//上传封面
+    app.get('/WX/casting/:location?/:userid/:imagename', routes.views.wx_showCasting);//显示casting照片
+    app.get('/WX/career/:location?/:userid/:imagename', routes.views.wx_showCareerImage);//显示剧照
+    app.get('/WX/users/:mediaid/:imagename', routes.views.wx_showUserIcon);//显示封面照
+    app.get('/WX/page/:userid/:appid',routes.views.page);//点击简历管理跳转的页面，在该页面ajax请求后台接口，判断当前用户是否填写过简历
+    app.get('/WX/page_addNewActors/:userid/:appid', routes.views.page_addNewActors);//新————添加新用户
+    app.get('/WX/page_userInfoEdit/:userid/:appid', routes.views.page_userInfoEdit);//演员详情编辑页面
+
+
+	app.post('/WX/wx_resumeBasicInfoSave', routes.views.wx_resumeBasicInfoSave);//旧（没被应用）
+	app.post('/WX/wx_savesingleeduexp', routes.views.wx_savesingleeduexp);//旧（没被应用）
+	app.post('/WX/wx_savesingleskill', routes.views.wx_savesingleskill);//旧（没被应用）
+	app.post('/WX/wx_savemyintroduce', routes.views.wx_savemyintroduce);//旧（没被应用）
+	app.post('/WX/wx_savesingleworkexp', routes.views.wx_savesingleworkexp);//旧（没被应用）
+	app.get('/WX/wx_searchmyintroduce/:userid', routes.views.wx_searchmyintroduce);//旧（没被应用）
+	app.get('/WX/wx_searchsingleeduexp/:userid/:appid', routes.views.wx_searchsingleeduexp);//旧（没被应用）
+	app.get('/WX/wx_searchsingleworkexp/:userid/:careerInResume_id/:appid', routes.views.wx_searchsingleworkexp);//旧（没被应用）
+	app.get('/WX/wx_searchsingleskill/:userid/:careerInResume_id', routes.views.wx_searchsingleskill);//旧（没被应用）
+    app.get('/WX/wx_userprofile/:userid/:appid', routes.views.wx_userprofile);//旧（没被应用）
+    app.get('/WX/delete/wx_singleworkexp/:careerinresumeid/:userid/:appId', routes.views.wx_deletesingleworkexp);//旧（没被应用）
+    app.get('/page_basicinfo',routes.views.page_basicinfo);//旧（没被应用）
+    app.get('/WX/page_work_edit/:userid/:appid',routes.views.page_work_edit);//旧（没被应用）
+
+
+    /*
+
+    *副导演--发布通告
+
+    */
+    app.get('/WX/page_productionDetail/:user_id/:openid',routes.views.page_productionDetail);//发布通告的通告信息页面 author@zheng
+    app.all('/WX/page_posterInfo/:production_id/:production_crews_id/:user_id/:openid',routes.views.page_posterInfo);//海报页面 author@zheng
+    app.all('/WX/wx_publishpositionInfo/:user_id/:openid', routes.views.wx_publishpositionInfo);// 发布通告---保存剧目信息
+    app.all('/WX/uploadposterimage/:production_id/:user_id', routes.views.uploadposterimage);//上传海报
+    app.all('/WX/page_roleList/:user_id/:production_id/:production_crews_id/:openid', routes.views.page_roleList);//发布第三步--（1）层页面 
+    app.all('/WX/page_positionDetail/:user_id/:production_crews_id/:openid/:roletag_id/:production_id',routes.views.page_positionDetail);//发布第三步-- 添加角色页面
+    app.all('/WX/page_editpositionDetail/:careerincrewid',routes.views.page_editpositionDetail);//发布第三步--编辑角色页面
+    app.all('/WX/wx_pubulishpositiondetail/:user_id/:production_crews_id/:openid/:roletag_id', routes.views.wx_pubulishpositiondetail);//将添加的角色信息保存
+    app.all('/WX/wx_searchoneroleinfo/:careerincrewid', routes.views.wx_searchoneroleinfo);//发布职位---查询单条角色信息
+    app.all('/WX/wx_searchallroleinfo/:production_crews_id', routes.views.wx_searchallroleinfo);//发布职位---查询所有角色信息
+    app.all('/WX/wx_editroleinfo/:careerincrewid', routes.views.wx_editroleinfo);//发布职位---编辑单条角色信息
+    app.all('/WX/wx_deleteroleinfo/:careerincrewid', routes.views.wx_deleteroleinfo);//发布职位---删除单条角色信息
+    app.all('/WX/wx_postposition/:productionid/:userid/:appid/:openid/:production_crews_id', routes.views.wx_postposition);//发布职位--点击发布并筛选--发布通告
+    app.get('/WX/poster/:location?/:productionid/:imagename', routes.views.wx_showPoster);
+    app.get('/WX/page_cansee', routes.views.page_cansee);//发布权限提示页面
+    app.post('/WX/wx_postproject',routes.views.wx_postproject);// 发布职位中的项目管理方法 （旧，未应用）
+    app.get('/WX/wx_searchposter/:productionid/:author/:crewsId', routes.views.wx_searchposter);//（旧，未应用）
+    app.post('/WX/uploadPoster', routes.views.wx_uploadPoster);//（旧，未应用）
+    app.post('/WX/wx_postpositionInfo',routes.views.wx_postpositionInfo);// 发布职位信息（旧，未应用）
+    app.get('/WX/page_uploadPoster/:productionid/:crewsId/:author',routes.views.page_uploadPoster);//（旧，未应用）
+    app.all('/WX/page_positionDetail2/:user_id/:production_crews_id/:openid/:firstCreate',routes.views.page_positionDetail2);//发布通告的职位信息页面（旧，未应用）
+
+
+      /*
+
+    *副导演--通告列表
+
+    */
+    app.get('/WX/page_allpositions/:user_id/:appid/:openid', routes.views.page_allpositions);//通告列表---剧组列表渲染页面
+    app.all('/WX/wx_allcrewlist/:page?/:appid/:openid/:time?', routes.views.wx_allcrewlist);//通告列表，查询剧组列表
+    app.all('/WX/wx_searchpositionDetails/:productionCrew_id/:user_id', routes.views.wx_searchpositionDetails);//通告列表，剧目详情
+    app.all('/WX/wx_applyforposition/:user_id?/:author_id?/:careerincrew_id?', routes.views.wx_applyforposition);// 申请职位，关联应聘者
+    app.all('/WX/wx_matchproduction/:page?/:appid/:openid/:time/:categoryid/:repertoiretypeid/:isregistered', routes.views.wx_matchproduction);//通告列表，条件筛选
+    app.get('/WX/page_searchPositions/:openid?/:appid?/:userid', routes.views.page_searchPositions);//搜索页面--（待定）
+    app.all('/WX/wx_allfuzzyquerry/:index?/:name?/:page?/:openid?/:appid', routes.views.wx_allfuzzyquerry);// 模糊搜索项目和职位 index:0全文搜索 1搜项目 2搜职位（待定）
+    app.all('/WX/wx_positionList/:productionCrew_id/:user_id', routes.views.wx_positionList);//剧组下职位列表页面（旧，未使用）
+    app.all('/WX/page_positionList/:productionCrew_id/:user_id/:appid', routes.views.page_positionList);//剧组下职位列表>>通告列表（旧，未使用）
+    app.all('/WX/wx_allpositions/:productiontype?/:rolecategory?/:area?/:isregistered?/:page?/:name?/:appid/:openid/:time?', routes.views.wx_allpositions);//（旧，未使用）
+
+
+    /*
+    *
+    *     副导演--演员列表
+    *
+    */  
+    app.get('/WX/page_actorInfo/:appid/:openid/:userid',routes.views.page_actorInfo);//渲染演员搜索页面
+    app.get('/WX/page_actorDetail/:user_id/:authorid',routes.views.page_actorDetail);////渲染演员详情页面
+
+    app.all('/WX/wx_getalluserresums/:page?/:age?/:sex?/:appid/:openid', routes.views.wx_getalluserresums);//检索简历
+    app.all('/WX/wx_getactorresums/:index?/:user_id', routes.views.wx_getactorresums);//检索演员的简历信息 
+      //演员列表---邀请
+      app.all('/WX/wx_searchusercareerincrewsisregisterandinvitestate/:inviter_id?/:invited_id?/:page?', routes.views.wx_searchusercareerincrewsisregisterandinvitestate);//返回邀请人发布的职位（旧--未使用）
+      app.all('/WX/wx_searchusercareerincrewsgroupbycrew/:inviter_id?/:invited_id?/:page?', routes.views.wx_searchusercareerincrewsgroupbycrew);//返回邀请人发布的职位，以剧组为单位
+      app.post('/WX/wx_sendinvitation', routes.views.wx_sendinvitation);//发送邀请（待定）
+
+    /*
+    *
+    *     获取标签
+    *
+    */  
+
+    app.get('/WX/wx_allproductiontypes/:page?/:name?', routes.views.wx_allproductiontypes);//获取剧目类别标签
+    app.get('/WX/wx_allrolecategories/:page?/:name?', routes.views.wx_allrolecategories);//获取角色类别标签
+    app.get('/WX/wx_allrepertoiretype/:category_id', routes.views.wx_allrepertoiretype);//根据剧目类别id查询剧目类型
+  
+  
+    /*
+
+    *副导演--角色信息
+
+    */
+    app.get('/WX/page_publishCrews/:user_id',routes.views.page_publishCrews);// 渲染页面--通过用户id检索其发布过的所有的剧组
+    app.all('/WX/wx_publishCrews/:user_id/:page',routes.views.wx_publishCrews);// 通过用户id检索其发布过的所有的剧组
+    app.get('/WX/wx_publishPosition/:production_crewId?/:currentPage?/:time?', routes.views.wx_publishPosition);// 发布管理模块，通过用户id检索其发布过的所有的职位（旧--未使用）
+    app.all('/WX/wx_publicMoreposition/:careerInCrews_id/:user_id', routes.views.wx_publicMoreposition);// 报名的详细信息>>发布管理（旧--未使用）
+       //我邀请的
+        app.all('/WX/page_Inviterdrecord/:user_id?', routes.views.page_Inviterdrecord);//查询用户邀请别人的信息---页面（旧--待定）
+        app.all('/WX/wx_allsearchmyinvitation/:user_id?/:page?', routes.views.wx_allsearchmyinvitation);// 查询用户邀请别人的信息（旧--待定）
+        app.all('/WX/wx_allsearchmyinvitationActor/:careerincrewid/:page', routes.views.wx_allsearchmyinvitationActor);// 查询副导演邀请的演员列表
+        app.get('/WX/page_RefuseactorInfo/:userid',routes.views.page_RefuseactorInfo);//拒绝邀请的演员资料（旧--待定）
+
+
+       //申请我的
+        app.get('/WX/page_deliveryActor/:user_id',routes.views.page_deliveryActor);//查询演员详情
+        app.get('/WX/page_candidateinfo/:careerincrew_id', routes.views.page_candidateinfo);//申请人管理页面
+        app.all('/WX/wx_searchcandidatesinfo/:careerincrew_id?/:currentPage?/:index', routes.views.wx_searchcandidatesinfo);//查询该条职位的候选人
+       //查询候选人详细信息-----/agent/a_userprofile/:userid/null
+        app.all('/WX/wx_receivecandidates/:user_id?/:careerincrew_id?/:status?', routes.views.wx_receivecandidates);//评阅简历者接收（或拒绝）简历，根据候选人的id检索到相应的简历，更改is_receive的状态码变为1（或2）（请查看Resume模型）
+
+    
+    /*地址级联操作的三个接口*/
+    app.all('/app/mallnativeplace', routes.views.mallnativeplace);//auther@cincan   获取所有的省份
+	app.all('/app/mallcityunderprovince/:parencode?', routes.views.mallcityunderprovince);//auther@cincan   获取省份下面的所有市
+	app.all('/app/malldistrictundercity/:parencode?', routes.views.malldistrictundercity);//auther@cincan   获取市下面所有的县和区
+    /*
+
+    *副导演--散户--投递记录
+
+    */
+    app.all('/WX/page_deliveryRecords/:user_id/:appid',routes.views.page_deliveryRecords);//投递记录页面
+    app.all('/WX/wx_searchapplyposition/:user_id?/:currentPage?/:index?/:time?/:appid',  routes.views.wx_searchapplyposition);//投递记录
+
+    /*
+
+    app.all('/WX/wx_positionList/:productionCrew_id/:user_id', routes.views.wx_positionList);//剧组下职位列表页面
+    app.all('/WX/page_positionList/:productionCrew_id/:user_id/:appid', routes.views.page_positionList);//剧组下职位列表>>通告列表
+    app.get('/WX/wx_publishPosition/:production_crewId?/:currentPage?/:time?', routes.views.wx_publishPosition);// 发布管理模块，通过用户id检索其发布过的所有的职位
+    app.all('/WX/wx_publishCrews/:user_id',routes.views.wx_publishCrews);// 发布管理模块，通过用户id检索其发布过的所有的剧组
+
+    app.all('/WX/wx_searchusercareerincrewsisregisterandinvitestate/:inviter_id?/:invited_id?/:page?', routes.views.wx_searchusercareerincrewsisregisterandinvitestate);//返回邀请人发布的职位
+    app.post('/WX/wx_sendinvitation', routes.views.wx_sendinvitation);//发送邀请
+    app.all('/WX/page_Invitedrecord/:user_id', routes.views.page_Invitedrecord);
+    app.all('/WX/wx_allsearchmybeinvitedinfo/:user_id?/:page?', routes.views.wx_allsearchmybeinvitedinfo);// 查询用户被邀请的信息
+    app.all('/WX/wx_changeinvitationstate/:invitation_id?/:state/:invited_id?', routes.views.wx_changeinvitationstate);//改变邀请状态
+    app.all('/WX/page_Inviterdrecord/:user_id?', routes.views.page_Inviterdrecord);//查询用户邀请别人的信息---页面
+    app.all('/WX/wx_allsearchmyinvitation/:user_id?/:page?', routes.views.wx_allsearchmyinvitation);// 查询用户邀请别人的信息
+    app.all('/WX/wx_allsearchmyinvitationActor/:careerincrewid', routes.views.wx_allsearchmyinvitationActor);// 查询副导演邀请的演员列表
+    app.get('/WX/page_RefuseactorInfo/:userid',routes.views.page_RefuseactorInfo);//拒绝邀请的演员资料
+    
+    app.get('/page_uploadPic', function(req, res, next){
+        var fs = require('fs');
+        var form = fs.readFileSync('./public/html/uploadPic.html', {encoding: 'utf8'});
+        res.send(form);
+    });
+   
+    app.all('/WX/wx_upload', routes.views.wx_uploadPic.upload);//上传图片素材的接口
+    app.all('/WX/wx_uploadPic/:picturematerial_id', routes.views.wx_uploadPic.uploadPic);//上传图片素材的接口
+
+
+ /*
+    *
+    *     ----------------------经纪人------------------------
+    *
+ */ 
+    //app.post('/agent/a', routes.views.a);//剧目类型导入脚本
+    app.get('/agent/a_page', routes.views.a_page);//剧目类型导入脚本--页面
+    app.get('/agent/a', routes.views.a);//剧目类型导入脚本
+
+    app.get('/agent/a_page_cansee', routes.views.a_page_cansee);//普通用户权限提示页面
+    app.get('/agent/a_page_resumPhoto', routes.views.a_page_resumPhoto);//普通用户权限提示页面
+    app.get('/agent/a_page_addNewActors/:agent_id/:appid', routes.views.a_page_addNewActors);//添加新用户--基本信息页面
+    app.get('/agent/a_page_actorList/:agent_id/:appid', routes.views.a_page_actorList);//查询公司旗下演员
+    app.get('/agent/a_page_actorManage/:agent_id/:appid', routes.views.a_page_actorManage);//演员管理页面
+    app.get('/agent/a_page_userInfo/:userid/:appid', routes.views.a_page_userInfo);//演员详情页面-----旗下艺人
+    app.get('/agent/a_page_userInfoEdit/:userid/:agentid/:appid', routes.views.a_page_userInfoEdit);//演员详情编辑页面-----演员管理
+    app.get('/agent/a_page_searchAgentActorByname/:agent_id/:appid', routes.views.a_page_searchAgentActorByname);//演员管理===演员搜索
+    app.get('/agent/a_page_searchCompanyActorByname/:appid', routes.views.a_page_searchCompanyActorByname);//旗下艺人===演员搜索
+
+
+    app.all('/agent/a_WexinAuth', routes.views.a_WexinAuth);//微信授权流程逻辑  
+    app.all('/agent/a_SolveAuthCode', routes.views.a_SolveAuthCode);// 处理预授权码的问题 
+    app.all('/agent/a_GetWeiXinAdminInfo',  routes.views.a_GetWeiXinAdminInfo);// 拉取授权方管理员的信息
+    app.all('/agent/a_WebpageAuthorization/:index',  routes.views.a_WebpageAuthorization);// 网页授权 author@dongjia 
+
+    app.post('/agent/a_signin', routes.views.a_signin);//登录 
+    //经纪人————演员模块   
+    app.get('/agent/a_userprofile/:userid/:appid', routes.views.a_userprofile);//查询用户简历详情
+    app.post('/agent/a_SaveBasicInfo', routes.views.a_SaveBasicInfo);//添加演员--第一步：基本信息
+    app.post('/agent/a_savesingleworkexp', routes.views.a_savesingleworkexp);//添加演员--第二步：参演经历
+    app.post('/agent/a_saveCareerType', routes.views.a_saveCareerType);//添加演员--第四步：保存剧目类型和剧目类别
+    app.post('/agent/a_deleteCategory', routes.views.a_deleteCategory);//添加演员--第四步：删除剧目类别
+    app.post('/agent/a_saveStandardOfPlay', routes.views.a_saveStandardOfPlay);//添加演员--第四步：接戏标准
+    app.post('/agent/a_saveVideoUrl', routes.views.a_saveVideoUrl);//添加演员--第三步：保存用户视频url
+    app.get('/agent/a_searchActorsUnderAgent/:agentid/:appid/:index/:page', routes.views.a_searchActorsUnderAgent);//查询当前经纪人旗下的演员
+    app.get('/agent/a_searchActorsUnderCompany/:agentid/:appid/:index/:page', routes.views.a_searchActorsUnderCompany);//查询公司旗下所有的演员
+    app.get('/agent/a_deletesingleworkexp/:careerinresumeid', routes.views.a_deletesingleworkexp);//删除参演经历
+    app.post('/agent/a_editResumeInfo', routes.views.a_editResumeInfo);//编辑演员资料
+    app.get('/agent/a_deletesingleActor/:agentid/:userid', routes.views.a_deletesingleActor);//删除演员资料
+    app.all('/agent/a_searchCompanyActorByname/:appid/:name', routes.views.a_searchCompanyActorByname);//经纪人>>旗下艺人>>根据姓名搜索演员
+    app.all('/agent/a_searchAgentActorByname/:appid/:name/:agentid', routes.views.a_searchAgentActorByname);//经纪人>>演员管理>>根据姓名搜索演员
+
+    app.get('/agent/a_allroletypes/:page?/:name?', routes.views.a_allroletypes);//获取角色类别
+    app.get('/agent/a_allskilltypes/:page?/:name?', routes.views.a_allskilltypes);//获取技能类别
+    app.get('/agent/a_allfeaturetypes/:page?/:name?', routes.views.a_allfeaturetypes);//获取特征类别
+    app.get('/agent/a_searchsingleworkexp/:userid/:careerInResume_id/:appid', routes.views.a_searchsingleworkexp);//查询单条参演经历
+    app.get('/agent/a_searchAllworkexp/:userid', routes.views.a_searchAllworkexp);//查询所有参演经历
+    app.post('/agent/a_uploadcareerimage', routes.views.a_uploadcareerimage);//上传剧照
+    //邀请我的
+    app.get('/agent/a_inquiryInvitationRecord/:agentid', routes.views.a_inquiryInvitationRecord);//经纪人查询旗下演员受邀情况
+    app.get('/agent/a_inquiryInvitationRecordDetail/:agentid/:production_id', routes.views.a_inquiryInvitationRecord);//经纪人>>邀请我的>>查询通告详情
+    app.get('/agent/a_inquiryInvitationActor/:careerincrew_id/:agentid', routes.views.a_inquiryInvitationActor);//经纪人>>邀请我的>>查询通告详情>>查询被邀请的演员（还差一步，需要等到匹配完成后做）
+    app.all('/agent/a_changeinvitationstate/:invitation_id?/:state/:invited_id?', routes.views.a_changeinvitationstate);//经纪人>>改变邀请状态
+   //我申请的
+    app.all('/agent/a_searchapplycrews/:agentid', routes.views.a_searchapplycrews);//经纪人>>我申请的>>剧组列表
+
+
+};

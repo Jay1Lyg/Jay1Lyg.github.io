@@ -1,0 +1,123 @@
+doctype html
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    title 上传封面
+    link(rel='stylesheet', href='/../css/weui.css')
+    link(rel='stylesheet', href='/../css/second.css')
+    link(rel='stylesheet', href='/../css/common.css')
+  body   
+    header#header
+      div
+        p 上传封面
+    section
+      .banner-1
+        //<img src=imagesURL alt="">
+        img#img1(src=imagesURL alt='')
+      .p(style='font-size:14px;padding:8px;text-align:center;display:none') 提示:点击“上传封面”会覆盖同一剧组的所有海报封面，可直接点击“下一步”。
+          .page__bd.page__bd_spacing(style='margin-top: 80px')
+      a.weui-btn.upload(onclick='wxchooseImage()') 上传封面
+    footer
+      .page__bd.page__bd_spacing
+        a.weui-btn.look-over(href='http://www.kaishiapp.com/WX/page_positionDetail/'+user_id+'/'+production_crews_id+'/'+openid+'/'+firstCreate) 下一步
+    script(src='/../js/zepto.min.js')
+    script(src='/../js/zepto.cookie.js')
+    script(src='/../js/myserume.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+script.
+    var appid = !{JSON.stringify(appId)};
+    var timestamp = !{JSON.stringify(timestamp)};
+    var nonceStr = !{JSON.stringify(nonceStr)};
+    var signature = !{JSON.stringify(signature)};
+    var production_id = !{JSON.stringify(production_id)};
+    var user_id = !{JSON.stringify(user_id)};
+    var openid = !{JSON.stringify(openid)};
+    var firstCreate = !{JSON.stringify(firstCreate)};
+    //var production_crews_id = !{JSON.stringify(production_crews_id)};
+     wx.config({
+      debug: false,
+      appId: appid,
+      timestamp: timestamp,
+      nonceStr: nonceStr,
+      signature: signature,
+      jsApiList: [
+      'chooseImage', 'uploadImage', 'downloadImage','previewImage'
+      ]
+    });
+
+    wx.ready(function(){
+        
+
+    });
+    var img=$("#img1").attr("src");
+    console.log(img)
+    function no() {
+        if (img=="") {
+            $(".p").css("display","none")
+        }else{
+            $(".p").css("display","block")
+        }
+    }
+    no()
+    wxchooseImage= function () {
+
+        wx.chooseImage({
+        count: 1,
+        needResult: 1,
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+        success: function (data) {
+        localIds = data.localIds[0].toString();
+        //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+        wxuploadImage(localIds);
+        },
+        fail: function (res) {
+        alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");
+        }
+        });
+    };
+    //上传图片接口
+    function wxuploadImage(e) {
+        wx.uploadImage({
+            localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得
+            isShowProgressTips: 1, // 默认为1，显示进度提示
+            success: function (res) {
+                mediaId = res.serverId; // 返回图片的服务器端ID
+                wxdownloadImage(mediaId);
+                //if (rh.tostr(mediaId)) {
+                //    $(".myimg").attr("src", localIds);
+                //}
+            },
+            fail: function (error) {
+                picPath = '';
+                localIds = '';
+                alert(Json.stringify("上传失败，请检查您的网络！"));
+            }
+        });
+    };
+        function wxdownloadImage(e) {
+             var mediaId=e;
+            $.ajax({
+                url: "http://www.kaishiapp.com/WX/uploadposterimage/"+production_id+"/"+user_id,
+                data: {
+                media : mediaId,
+                appid : appid,
+            },
+            type: "Post",
+            dataType: "text",
+            success: function (data) {
+                picPath = data;
+                //var str='<img src="'+picPath+'" alt="">';
+                $("#img1").removeAttr("src")
+                $("#img1").attr("src", picPath);
+               // $(".banner-1").html(str);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("提交失败" + textStatus);
+            }
+        });
+    }

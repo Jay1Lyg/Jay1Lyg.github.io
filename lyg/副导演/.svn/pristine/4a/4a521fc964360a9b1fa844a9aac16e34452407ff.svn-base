@@ -1,0 +1,267 @@
+doctype html
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    // <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    meta(name='viewport', content='width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    title 发布通告
+    script(type='text/javascript').
+         //document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/common.css')
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/giveNotice.css')
+  body
+    header#header
+      div
+        p 剧目信息
+    section(style='margin-bottom:50px')
+      .page.panel.js_show
+        .page__bd
+          .weui-cells__title.actor-data
+          .weui-cells.weui-cells_form
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input  剧名
+              .weui-cell__bd
+                input.weui-input.font-color.production_name(name='production_name', type='text', placeholder='请输入')
+            #showAndroidDialog2.weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input  剧目类别
+              .weui-cell__bd
+                input.weui-input.font-color.categoryid(name='category_id', disabled, type='text', placeholder='请选择')
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input  剧目类型
+              .weui-cell__bd.hou
+                input.weui-input.font-color.repertoireTpye(name='category_id',disabled, type='text', placeholder='请选择')
+            .weui-cell
+              .weui-cell__hd(style='width: 40%')
+                label.weui-label.common-input  拍摄地
+              .weui-cell__bd
+                input#start.areaCode.weui-input.font-color(name='areaCode', type='text', placeholder='请输入', value='北京 北京市 东城区', readonly='', data-code='110101', data-codes='110000,110000,110101')
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input  见组地址：
+              .weui-cell__bd
+                input.production_address_obj.weui-input.font-color.actorData(name='production_address_obj', type='text', placeholder='请输入')
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input 报名截止日期
+              .weui-cell__bd
+                input.expired_date.weui-input.font-color.actorData(name='expired_date', type='date', placeholder='请输入')
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input  拍摄周期（天）
+              .weui-cell__bd
+                input.date.weui-input.font-color.actorData(name='date', type='number', placeholder='请输入')
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input  出品公司（选填）
+              .weui-cell__bd
+                input.production_companies.weui-input.font-color(name='production_companies', type='text', placeholder='请输入')
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input  承制公司（选填）
+              .weui-cell__bd
+                input.issuser_companies.weui-input.font-color(name='issuser_companies', type='text', placeholder='请输入')
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input  投资规模（万元）
+                p(style='color:#666;font-size:0.15rem') (对外不公布)
+              .weui-cell__bd
+                input.account.weui-input.font-color(name='account', type='number', placeholder='请输入')
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input  演员预算（万元）
+                p(style='color:#666;font-size:0.15rem') (对外不公布)
+              .weui-cell__bd
+                input.actorBudget.weui-input.font-color(name='actorBudget', type='number', placeholder='请输入')
+    footer
+      .page__bd.page__bd_spacing
+        a.weui-btn.look-over 下一步
+    #androidDialog1.dialogs_leibie(style='display: none;')
+      img.quxiao(src='/img/quxiao.png', alt='', style='width:15px;float:right;padding:0.4rem 0.5rem 0 0')
+      .specialty.clearfix
+    #androidDialog2.dialogs_leixing(style='display: none;')
+      .specialty6.clearfix
+      .determine
+        button(style='margin-top:20px') 确定
+    .overlay
+    script(src='/js/jquery.min.js')
+    script(src='/js/cityPicker.js')
+    script(src='/js/jqWeui.js')
+    script(type='text/javascript', src='/js/url.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    script.
+      var user_id = !{JSON.stringify(user_id)};
+      var openid = !{JSON.stringify(openid)};
+      var appid = !{JSON.stringify(appid)};
+      $("#start").cityPicker({
+      title:"选择拍摄地",
+      onChange:function (picker,values) {
+      var a=values[2];
+      console.log(a);
+      }
+      });
+      var url3=url+"/WX/wx_allproductiontypes/1/null";
+     
+      var $androidDialog1 = $('#androidDialog1');
+      $('#showAndroidDialog2').on('click', function(){
+         $.ajax({
+        type : "get",
+        url : url3,
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+          var dataOne=data;
+          console.log(data);
+          $('.specialty').empty()
+          var str = $('.specialty').html()
+          for(var i=0;i<dataOne.length;i++){
+          str += '<div class="leibie"><input  type="radio"  name="specialty" value="'+data[i].name+'" id="'+data[i].id+'"><label  >'+data[i].name+'</label></div>'
+          }
+          $('.specialty').html(str)
+          $('#androidDialog1').css("display","block");
+          $('.overlay').css("display","block");
+          $(".overlay").css({ "width": $(document).width(), "height": $(document).height() });
+        },
+        error:function(){
+          alert('fail');
+        }
+      });
+        
+      });
+
+
+      //---------------------------点击类别弹出类型----------------------------------
+      $(".specialty").on("click",".leibie",function(){
+         //$(".quxiao").css("display","none")
+         var id=$(this).children("input").attr("id");
+         var url20=url+'/WX/wx_allrepertoiretype/'+id;
+         var name=$(this).children("label").html();
+         $('.dialogs_leibie').css("display","none");
+         $(".categoryid").val(name);
+         $(".categoryid").attr("id",id);
+         $(".repertoireTpye").attr("id",id);
+         
+             console.log(name)
+            $.ajax({
+              type : "get",
+              url : url20,
+              dataType : "jsonp",
+              success : function(data){
+
+                $(".specialty6").empty();
+                var specialty = $(".specialty6").html();
+                var length=data.length;
+                for(var i=0;i<length;i++){
+                  specialty += '<div><input  type="checkbox" name="specialty6" value="'+data[i].name+'" id="'+data[i].id+'"><label class="label" for="'+data[i].id+'">'+data[i].name+'</label></div>'
+                }
+                  $(".specialty6").html(specialty);
+                $('.dialogs_leibie').css("display","none");
+                $(".dialogs_leixing").css("display","block");
+               
+                console.log(data);
+              },
+              error:function(err){
+                console.log(err)
+              }
+            });
+      })
+      //-----------------获取类型id------------------------
+       
+      $(".determine").click(function(){
+        var repertoireTpye=[];
+       var repertoireName=[];
+        $('input[name="specialty6"]:checked').each(function () {
+           repertoireTpye.push($(this).attr("id"))
+         })
+        $('input[name="specialty6"]:checked').each(function () {
+           repertoireName.push($(this).val())
+         })
+         if(repertoireTpye.length===0){
+          alert("请选择类型")
+         }else{
+            $(".dialogs_leixing").css("display","none");
+           console.log(repertoireTpye);
+           console.log(repertoireName);
+           
+           //$(".repertoireTpye").val('');
+           //$("repertoireTpye").attr("value","");
+           $(".repertoireTpye").val(repertoireName);
+           $(".repertoireTpye").attr("id","");
+           $(".repertoireTpye").attr("id",repertoireTpye);
+           $(".overlay").css("display","none");
+           repertoireName=[];
+           repertoireTpye=[];
+         }
+        
+
+        })
+      
+        //-----------------------点击叉号取消选择------------------------
+      $('#androidDialog1').on('click','.quxiao', function(){
+        $('#androidDialog1').css("display","none");
+        $('.overlay').css("display","none");
+        
+      });
+      //----------------------提交表单---------------------------------
+      $(".look-over").click(function () {
+         var code = $("#start").attr("data-code");
+        var production_name = $(".production_name").val();
+        var categoryid = $(".categoryid").attr("id");
+        var areaCode = $(".areaCode").val();
+        var production_companies = $(".production_companies").val();
+        var issuser_companies = $(".issuser_companies").val();
+        var account = $(".account").val();
+        var date = $(".date").val();
+        var expired_date = $(".expired_date").val();
+        var production_address_obj = $(".production_address_obj").val();
+        var actorBudget = $(".actorBudget").val();
+        var repertoireTpye_id=$(".repertoireTpye").attr("id");
+        if (production_name&&categoryid&&areaCode&&account&&date&&expired_date&&production_address_obj&&actorBudget) {
+         
+        var repertoireTpye= repertoireTpye_id.split(",");
+
+        var params = {
+            user_id:user_id,
+            openid:openid,
+            production_name: production_name,
+            categoryid: categoryid,
+            areaCode: areaCode,
+            code: code,
+            production_companies: production_companies,
+            issuser_companies: issuser_companies,
+            account: account,
+            date: date,
+            repertoireTpye:repertoireTpye,
+            expired_date:expired_date,
+            production_address_obj:production_address_obj,
+            actorBudget:actorBudget
+          };
+          console.log(params)
+          console.log(params);
+          $.ajax({
+            url: url+'/WX/wx_publishpositionInfo/' + user_id + '/' + openid+'/'+appid,
+            data: params,
+            type: "Post",
+            dataType: "text",
+            success: function (data) {
+              console.log(data)
+              $(window).attr('location', data);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+              alert("请求服务器失败");
+            }
+          });
+        } else {
+          console.log("没有填完");
+          $.alert("没有完善信息")
+          
+        }
+      });
+      
+
+      

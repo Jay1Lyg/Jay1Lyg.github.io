@@ -1,0 +1,125 @@
+doctype html
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    title 通告详情
+    script(src='/js/zepto.min.js')
+    script(type='text/javascript', src='/js/url.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    script(src='/js/notice.js')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/notice.css')
+    script.
+           window.onload=function(){
+               var array = !{JSON.stringify(infomation)};
+               var str = $('.one').html() 
+               
+                for(var i=0;i<array.length;i++){
+                   str +='<div class="exptv-info"><div class="info-name"><p>剧名</p><p>剧目类型</p><p>拍摄地</p><p>出品公司</p><p>承制公司</p><p>投资规模</p><p>拍摄周期</p></div><div class="info-content"><p>'+array[i].crews_name+'</p><p>'+array[i].production_category_name+'</p><p>'+array[i].location_name[0].name+'</p><p>'+array[i].production_companys_name+'</p><p>'+array[i].issuer_companies_name+'</p><p>'+array[i].investmentAmount+'</p><p>'+array[i].duration+'</p></div></div><div class="exptv-detail"><p>欢迎大家投递简历！</p></div><div class="exptv-danger"><img src="/img/举报.png" alt=""><p>如遇无效、虚假、诈骗信息，请立即举报！</p><p>如涉及缴费要求，请谨慎辨别</p></div>'    
+                  console.log(str);
+                }                                     
+                $('.one').html(str)
+                
+                var str1 = $('.two').html() 
+                for(var i=0;i<array.length;i++){
+                  if(array[i].gender=='1'){
+                  var gender='男';
+                   }
+                   if(array[i].gender=='2'){
+                      var gender='女';
+                   }
+                   if(array[i].gender=='3'){
+                      var gender='不限';
+                   }
+                   if(array[i].age=='1'){
+                     var age='婴幼儿';
+                   }
+                   if(array[i].age=='2'){
+                      var age='少年';
+                   }
+                   if(array[i].age=='3'){
+                      var age='青年';
+                   }
+                   if(array[i].age=='4'){
+                  var age='中年';
+                   }
+                   if(array[i].age=='5'){
+                      var age='老年';
+                   }
+                   if(array[i].age=='6'){
+                      var age='不限';
+                   }
+                  str1+='<div class="exptv-info"><div class="info-name"><p>职位名称</p><p>部门</p><p>年龄段</p><p>性别</p><p>招募数量</p><p>面试地址</p></div><div class="info-content"><p>'+array[i].role_name+'</p><p>'+array[i].roleCategory+'</p><p>'+age+'</p><p>'+gender+'</p><p>'+array[i].men_count+'</p><p>'+array[i].address_name+'</p></div></div><div class="exptv-detail"></div> </div><p style="font-size:14px;margin-left:14px;color:#222">人物小传/职位描述</p><p style="font-size:14px;color:#666666;margin-left:14px">'+array[i].description+'</p>'
+                }
+                $('.two').html(str1)
+                var user_id = !{JSON.stringify(user_id)};
+                var authorid = !{JSON.stringify(authorid)};
+                var careerincrew_id = !{JSON.stringify(careerincrew_id)};
+                var url_url = url+"/WX/wx_applyforposition/"+user_id+"/"+authorid+"/"+careerincrew_id;
+                $(".btn1").on("click",function () {
+                    if(user_id == authorid){
+                        alert("当前用户不能报自己发布的职位！")
+                    }else{
+                        $.ajax({
+                            type: "get",
+                            url: url_url,
+                            dataType: "jsonp",
+                            // jsonp: "jsonpCallback",
+                            success: function (data) {
+                            console.log(data);
+                                if (user_id == data.subscribers) {
+                                    alert("当前用户不能报自己发布的职位！")
+                                } else {
+                                    if (data.sign_up) {
+                                    console.log('1');
+                                        alert("不能重复报名！")
+                                    } if(data.sign_up==false) {
+                                    console.log('2');
+                                        alert("投递成功！")
+                                    }if(data.status==false){
+                                    console.log('3');
+                                        alert("请完善简历！")
+                                    }
+                                }
+
+                            },
+                            error: function () {
+                                alert('投递失败！');
+                            }
+                        });
+                    }
+
+                });   
+            }
+
+           
+  body
+     
+    // banner start
+    .notice-banner
+      img.banner-img(src=production_image, alt='')
+      a(href='javascript:history.go(-1);location.reload()')
+        img.banner-icon(src='/img/矩形-1-拷贝.png', alt='')
+    // banner end
+    // container start
+    .notice-container
+      .weui-tab
+        .weui-navbar
+          .weui-flex__item.container-tab
+            p.tab-text.tab-active 通告信息
+          .weui-flex__item.container-tab
+            p.tab-text 职位列表
+      .contain-page
+        .page-base.page-select
+          .exp-tv.one
+        .page-role
+          .exp-tv.two
+            
+      // container end
+    // footer start
+    footer.notice-footer
+      a.btn1 我要进组
+    // footer end
+    

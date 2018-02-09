@@ -1,0 +1,57 @@
+var keystone = require('keystone'),
+	ActorBudget = keystone.list('ActorBudget'),
+	ProgrammeMatchActor = keystone.list('ProgrammeMatchActor'),
+	Programme = keystone.list('Programme'),
+	ProgrammeInCareer = keystone.list('ProgrammeInCareer'),
+	Production = keystone.list('Production'),
+	ProgrammeInProduction = keystone.list('ProgrammeInProduction');
+var async = require('async');
+var config = require('../../public/conf/common.js');
+var search = require('../../query/save_and_get_data_in_MongoDB/programme/search.js');
+var urllib = require('url');
+
+exports = module.exports = function(req, res) {
+   var userid = req.params.userid;
+   ProgrammeInProduction.model.find()
+   .where('user_id',userid)
+   .exec(function(err,programme){
+       if(err){
+          throw new Error(err);
+       }else{
+       	  async.eachSeries(programme,function(item,next){
+       	  	var data = {};
+             Production.model.findOne()
+             .where('_id',item.production_id)
+             .exec(function(err,production){
+                if(err){
+                   throw new Error(err);
+                }else{
+                   data.production_name = production.name;
+                   data.production_id = production._id;
+                   Programme.model.find()//查询每个项目下的方案
+                   .where('programmeinproduction',item._id)
+                   .exec(function(err,programmes){
+                       if(err){
+                          throw new Error(err);
+                       }else{
+                       	  var programmeArray = [];
+                       	  async.eachSeries(programmes,function(item1,next){
+                             var programmeinfo = {};
+                             programmeinfo.programme_name = item1.name;
+                             programmeinfo.actorbudget_id = item1.actorbudget_id;
+                             programmeinfo.programmeinproduction = item1.programmeinproduction;
+                             programmeinfo.attribute = item1.attribute;
+                             programmeArray.push(programmeinfo);
+                             next();
+                       	  },function(){
+                       	  	
+                       	  });
+                       }
+                   })
+                }
+             })
+       	  });
+       	  
+       }
+   })
+}

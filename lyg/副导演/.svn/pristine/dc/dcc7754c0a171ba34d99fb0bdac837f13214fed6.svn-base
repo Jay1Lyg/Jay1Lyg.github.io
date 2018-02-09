@@ -1,0 +1,220 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告列表
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/notice_list.css')
+    //script(src='js/jquery1.1.js')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      body{
+      background: white;
+      }
+      .htit{line-height:1rem;padding:0 .3rem;color:#ff8e2e;font-size: .4rem;margin:1rem 0 .4rem 0}
+        .wrapper01 {position:relative;height: 1rem;width: 100%;overflow: hidden;margin:0 auto;border-bottom:1px solid #ccc}
+        .wrapper01 .scroller {position:absolute}
+        .wrapper01 .scroller li {height: 1rem;color:#333;float: left;line-height: 1rem;font-size: .4rem;text-align: center;}
+        .wrapper01 .scroller li a{color:#333;display:block;margin:0 .3rem}
+        .wrapper01 .scroller li.cur a{color:#4da2ad;}
+    <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="/js/jquery-weui.js"></script>
+    //script(type='text/javascript', src='/js/rootfont.js')
+    // <script type="text/javascript" src="js/tab.js"></script>
+    //script(type='text/javascript', src='/js/zepto.min.js')
+  body
+    .weui-pull-to-refresh__layer
+      .weui-pull-to-refresh__arrow
+      .weui-pull-to-refresh__preloader
+      .down 下拉刷新
+      .up 释放刷新
+      .refresh 正在刷新
+    header
+      #retr.wrapper.wrapper01
+        .scroller
+          ul.clearfix.clearfix1
+      #wrapper02.wrapper.wrapper01
+        .scroller
+          ul.clearfix.clearfix2
+      #wrapper03.wrapper.wrapper01
+        .scroller
+          ul.clearfix
+            li
+              a 全部
+            li
+              a 已认证
+            li
+              a 未认证
+    section
+      div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+      .display_experience
+    .weui-loadmore(style='clear: both')
+      i.weui-loading
+      span.weui-loadmore__tips 正在加载
+  script(type='text/javascript', src='/js/flexible.js')
+  script(type='text/javascript', src='/js/iscroll.js')
+  script(type='text/javascript', src='/js/navbarscroll.js')
+  // <script src="js/notice_nav.js"></script>
+  script.
+    $(function(){
+        var appid = !{JSON.stringify(appid)};
+         var openid = !{JSON.stringify(openid)};
+         var userid = !{JSON.stringify(userid)};
+        var url="http://www.901vehicle.cn";
+        var url3=url+"/WX/wx_allproductiontypes/1/null";
+        var time=$.now();
+
+        //------------------------------刷新--------------------------
+        $(document.body).pullToRefresh().on("pull-to-refresh",function () {
+              setTimeout(function () {
+                  $(document.body).pullToRefreshDone();
+                  console.log($(".clearfix2").length)
+                  var  clearfix2=$(".clearfix2").html();
+                  if(clearfix2.length==0||clearfix2==null){
+                   all_notice(1)
+                  }else{
+                  leibie_url(1,categoryid,repertoiretypeid,isregistered)
+                  }
+              },2000)
+          });
+          //------------------------------加载---------------------------------
+          var loading = false;  //状态标记
+            $(document.body).infinite().on("infinite", function() {
+              if(loading) return;
+              loading = true;
+              setTimeout(function() {
+                $("#list").append("<p> 我是新加载的内容 </p>");
+                loading = false;
+              }, 1500);   //模拟延迟
+            });
+
+        console.log(time);
+        function all_notice(page){
+            var all_url=url+'/WX/wx_allcrewlist/'+page+'/'+appid+'/'+openid+'/'+time;
+            console.log(all_url);
+            $.ajax({
+                type : "get",
+                url : all_url,
+                dataType : "jsonp",
+                async:false,
+                // jsonp: "jsonpCallback",
+                success : function(data){
+                    console.log(data);
+                    $(".display_experience").empty();
+                   var str= $(".display_experience").html();
+                    for(var i=0;i<data.length;i++){
+                    var type=''
+                     for(var j=0;j<data[i].categorytag.repertoireTpyeArray.length;j++){
+                        type+='<span style="margin-right:5px;">'+data[i].categorytag.repertoireTpyeArray[j].repertoireTpyeName+'</span>';
+                        console.log(type)
+                        }
+                        str+='<a href="http://www.901vehicle.cn/WX/page_positionsDetails/'+userid+'/'+data[i].productioncrews_id[0]._id+'/'+appid+'/'+openid+'"><div><div class="photo_experience"><img src="'+data[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span>剧名：</span>《'+data[i].name+'》<span class="types">'+data[i].categorytag.categoryName+'</span></li><li><span>剧目类型：</span>'+type+'</li><li><span>拍摄周期：</span>'+data[i].duration+'</li><li><span>拍摄地：</span>'+data[i].location[0].fullname+'</li></ul></div><div class="zhixiang"><img src="/img/jiantou.png" alt=""></div></div></a><div style="width: 100%;height: 5px;background: #eee;margin: 0;padding: 0"></div>'
+                    }
+                    $(".display_experience").html(str);
+                    if (data.length <=3) {
+                        $(".weui-loadmore").css("display", "none")
+                    } 
+                    
+                },
+                error:function(err){
+                   console.log(err)
+                }
+            });
+        }
+         all_notice(1)
+        
+        console.log(url3);
+        $.ajax({
+            type : "get",
+            url : url3,
+            dataType : "jsonp",
+            async:false,
+            // jsonp: "jsonpCallback",
+            success : function(data){
+                console.log(data);
+                $(".clearfix1").empty();
+                var str=$(".clearfix1").html();
+                for(var i=0;i<data.length;i++){
+                str+='<li id="'+data[i].id+'"><a >'+data[i].name+'</a></li>'
+                }
+
+                $(".clearfix1").html(str);
+                $('#retr').navbarscroll();
+            },
+            error:function(){
+            alert('fail');
+        }
+        });
+        var categoryid="null";
+        var repertoiretypeid="null";
+        var isregistered="null";
+        $('#retr').on("click","li",function(){
+            categoryid=$(this).attr("id");
+            var url4=url+'/WX/wx_allrepertoiretype/'+categoryid;
+
+            console.log(url4);
+            console.log(categoryid);
+            $.ajax({
+            type : "get",
+            url : url4,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+                console.log(data);
+                $(".clearfix2").empty();
+                var str=$(".clearfix2").html();
+                for(var i=0;i<data.length;i++){
+                str+='<li id="'+data[i].id+'" ><a href="javascript:void(0)">'+data[i].name+'</a></li>'
+                }
+                $(".clearfix2").html(str);
+                $(".scroller>.clearfix:first-child").css("color","#4da2ad");
+                $('#wrapper02').navbarscroll();
+                leibie_url(1,categoryid,repertoiretypeid,isregistered)
+            },
+            error:function(){
+            alert('fail');
+            }
+            });
+        });
+        console.log(categoryid);
+        $('#wrapper03').navbarscroll();
+        $('#wrapper02').on("click","li",function(){
+          repertoiretypeid=$(this).attr("id");
+            console.log(repertoiretypeid);
+            leibie_url(1,categoryid,repertoiretypeid,isregistered)
+        });
+        function leibie_url(page,categoryid,repertoiretypeid,isregistered){
+          var leibie_url=url+'/WX/wx_matchproduction/'+page+'/'+appid+'/'+openid+'/'+time+'/'+categoryid+'/'+repertoiretypeid+'/'+isregistered;
+          console.log(leibie_url);
+           $.ajax({
+            type : "get",
+            url : leibie_url,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+                console.log(data);
+
+                $(".display_experience").empty();
+                var str= $(".display_experience").html();
+                    for(var i=0;i<data.length;i++){
+                    var type='';
+                      for(var j=0;j<data[i].repertoireTpyeArray.length;j++){
+                         type+='<span style="margin-right:5px;">'+data[i].repertoireTpyeArray[j].repertoireTpyeName+'</span>';
+                        }
+                        str+='<a href="http://www.901vehicle.cn/WX/page_positionsDetails/'+userid+'/'+data[i].production_crews[0]._id+'/'+appid+'/'+openid+'"><div><div class="photo_experience"><img src="'+data[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span>剧名：</span>《'+data[i].name+'》<span class="types">'+data[i].categoryName+'</span></li><li><span>剧目类型：</span>'+type+'</li><li><span>拍摄周期：</span>'+data[i].duration+'</li><li><span>拍摄地：</span>'+data[i].location[0].fullname+'</li></ul></div><div class="zhixiang"><img src="/img/jiantou.png" alt=""></div></div></a><div style="width: 100%;height: 5px;background: #eee;margin: 0;padding: 0"></div>'
+                    }
+                    $(".display_experience").html(str);
+                
+            },
+            error:function(){
+              alert('fail');
+            }
+            });
+        }
+
+        
+
+    });

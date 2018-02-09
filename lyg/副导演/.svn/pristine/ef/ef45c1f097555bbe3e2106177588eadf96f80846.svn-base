@@ -1,0 +1,143 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title panic
+    link(rel='stylesheet', href='/css/panic.css')
+  body
+    .panic
+      .panicHead
+        img(src='/img/js5.png', width='750', height='573', border='0', alt='')
+      .panicTitle
+        b
+          img(src='/img/js3.png', width='114', height='14', border='0', alt='')
+        p 古城
+        b
+          img(src='/img/js1.png', width='114', height='14', border='0', alt='')
+        div(style='clear:both;')
+      .jzMesg
+        .jzDetail
+          ul
+            li 剧名：古城
+            li 剧目类型：科幻片
+            li 报名截止日期：2017-05-10
+            li 出品公司：紫螺科技
+            li 剧名：古城
+            li 剧目类型：科幻片
+            li 报名截止日期：2017-05-10
+            li 出品公司：紫螺科技
+        .jzTitle
+          img(src='/img/js7.png', width='99', height='267', border='0', alt='')
+          p
+            | 剧
+            br
+            | 组
+            br
+            | 信
+            br
+            | 息
+            br
+        div(style='clear:both;')
+      div
+        .roleMsge
+          .rmLeft
+            .roleTitle
+              img(src='/img/js7.png', width='99', height='267', border='0', alt='')
+              p
+                | 角
+                br
+                | 色
+                br
+                | 信
+                br
+                | 息
+                br
+            .rolealist
+              p
+                | 领
+                br
+                | 衔
+                br
+                | 主
+                br
+                | 演
+                br
+          .rmRight
+            ul
+              li 剧名：古城
+              li 剧目类型：科幻片
+              li 报名截止日期：2017-05-10
+              li 出品公司：紫螺科技
+              li 剧名类型：古城
+              li 拍摄地：北京
+              li 拍摄周期(天)：45
+              li 承制公司：紫螺科技
+              li 人物小传：
+              li
+                .xiaozhuan
+            ul
+              li 剧名：古城
+              li 剧目类型：科幻片
+              li 报名截止日期：2017-05-10
+              li 出品公司：紫螺科技
+              li 剧名类型：古城
+              li 拍摄地：北京
+              li 拍摄周期(天)：45
+              li 承制公司：紫螺科技
+              li 人物小传：
+              li
+                .xiaozhuan
+          div(style='clear:both;')
+        .roleMsge
+          .rmLeft
+            .roleTitle
+              img(src='/img/js7.png', width='99', height='267', border='0', alt='')
+              p
+                | 角
+                br
+                | 色
+                br
+                | 信
+                br
+                | 息
+                br
+            .rolealist
+              p
+                | 主
+                br
+                | 要
+                br
+                | 演
+                br
+                | 员
+                br
+          .rmRight
+            ul
+              li 剧名：古城
+              li 剧目类型：科幻片
+              li 报名截止日期：2017-05-10
+              li 出品公司：紫螺科技
+              li 剧名类型：古城
+              li 拍摄地：北京
+              li 拍摄周期(天)：45
+              li 承制公司：紫螺科技
+              li 人物小传：
+              li
+                .xiaozhuan
+            ul
+              li 剧名：古城
+              li 剧目类型：科幻片
+              li 报名截止日期：2017-05-10
+              li 出品公司：紫螺科技
+              li 剧名类型：古城
+              li 拍摄地：北京
+              li 拍摄周期(天)：45
+              li 承制公司：紫螺科技
+              li 人物小传：
+              li
+                .xiaozhuan
+          div(style='clear:both;')
+      .bottomImg
+        img(src='/img/js4.png', width='750', height='346', border='0', alt='')

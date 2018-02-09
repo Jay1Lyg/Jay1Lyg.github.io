@@ -1,0 +1,167 @@
+doctype html
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    title 发布通告
+    link(rel='stylesheet', href='/../css/weui.css')
+    link(rel='stylesheet', href='/../css/noticeJob.css')
+    link(rel='stylesheet', href='/../css/jqueryWeui.css')
+    link(rel='stylesheet', href='/../css/common.css')
+  body
+    header#header
+      div
+        p 职位信息
+    section(style='height:100%;')
+      .page.panel.js_show
+          .weui-cells.weui-cells_form
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input
+                  img.must(style='display: inline', src='/../img/必填项.png', alt='')
+                  |  职位名称
+              .weui-cell__bd
+                input.weui-input.font-color.position(name='position', type='text', placeholder='请输入')
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input
+                  img.must(style='display: inline', src='/../img/必填项.png', alt='')
+                  |  部门
+              .weui-cell__bd
+                input#picker.weui-input.font-color.department(name='department', type='text', placeholder='请选择')
+            .weui-cell.weui-cell_select.weui-cell_select-after
+              .weui-cell__hd
+                label.weui-label.common-input
+                  img.must(style='display: inline', src='/../img/必填项.png', alt='')
+                  |  年龄段
+              .weui-cell__bd
+                select.weui-select.option.select_age(name='select_age')
+                  option(value='1', style='text-align: right') 婴幼儿
+                  option(value='2', style='text-align: right') 少年
+                  option(value='3', style='text-align: right') 青年
+                  option(value='4', style='text-align: right') 中年
+                  option(value='5', style='text-align: right') 老年
+                  option(value='6', style='text-align: right') 不限
+            .weui-cell.weui-cell_select.weui-cell_select-after
+              .weui-cell__hd
+                label.weui-label.common-input(for='')
+                  img.must(style='display: inline', src='/../img/必填项.png', alt='')
+                  |  性别
+              .weui-cell__bd
+                select.weui-select.option.select_sex(name='select_sex')
+                  option(value='1', style='text-align: right') 男
+                  option(value='2', style='text-align: right') 女
+                  option(value='3', style='text-align: right') 不限
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input
+                  img.must(style='display: inline', src='/../img/必填项.png', alt='')
+                  |  招募数量
+              .weui-cell__bd
+                input.recruit_number.weui-input.font-color(name='recruit_number', type='number', placeholder='请输入')
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input
+                  img.must(style='display: inline', src='/../img/必填项.png', alt='')
+                  |  见组地址
+              .weui-cell__bd
+                input.weui-input.font-color.recruit_adress(name='recruit_adress', type='text', placeholder='请输入')
+            .weui-cell
+              .weui-cell__hd
+                label.weui-label.common-input(for='')
+                  img.must(style='display: inline', src='/../img/必填项.png', alt='')
+                  |  截止时间
+              .weui-cell__bd
+                input.weui-input.data.actorData.time_end(name='time_end', type='date', value='')
+            .weui-cells__title.common-input
+              img.must(style='display: inline', src='/../img/必填项.png', alt='')
+              |  职位描述
+            .weui-cells.weui-cells_form
+              .weui-cell
+                .weui-cell__bd
+                  textarea.weui-textarea.actorData.describe(name='describe', placeholder='描述', rows='10')
+   
+    footer
+      .page__bd.page__bd_spacing
+        a#subMit.weui-btn.look-over 发布通告
+    script(src='/../js/jquery.min.js')
+    script(src='/../js/jquery.cookie.js')
+    script(src='/../js/jqWeui.js')
+    script(src='/../js/cityPicker.js')
+    script(type='text/javascript', src='/js/url.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    script.
+      $("#picker").picker({
+      title: "请选择",
+      cols: [
+      {
+      textAlign: 'center',
+      values: ['供应商',  '其他', '出品', '制片', '后期', '器材', '场景', '宣发', '导演', '录影', '摄影','服装','演员', '经纪人', '编剧','美术','造型','道具','音乐']
+      }
+      ]
+      });
+      console.log($.cookie("userId"));
+     
+      var user_id = !{JSON.stringify(user_id)};
+      var production_crews_id = !{JSON.stringify(production_crews_id)};
+      var openid = !{JSON.stringify(openid)};
+      var firstCreate = !{JSON.stringify(firstCreate)};
+      $("#subMit").on("click",function () {
+          if($(".actorData").val()===""){
+              console.log("没有填完");
+              alert("没有完善信息")
+          }else {
+              var position=$(".position").val();
+              var department=$(".department").val();
+              var select_age=$(".select_age").val();
+              var select_sex=$(".select_sex").val();
+              var recruit_number=$(".recruit_number").val();
+              var recruit_adress=$(".recruit_adress").val();
+              var time_end=$(".time_end").val();
+              var describe=$(".describe").val();
+              var params =  {
+                  position:position,
+                  department:department,
+                  select_age:select_age,
+                  select_sex:select_sex,
+                  recruit_number:recruit_number,
+                  recruit_adress:recruit_adress,
+                  time_end:time_end,
+                  describe:describe,
+                  firstCreate:firstCreate
+              };
+              console.log(params);
+              $.ajax({
+                  url: url+'/WX/wx_pubulishpositiondetail2/'+user_id+'/'+production_crews_id+'/'+openid,
+                  data: params,
+                  type: "Post",
+                  dataType: "text",
+                  success: function (data) {
+                    var data1 = JSON.parse(data);
+                    var flag = data1.isOK;
+                    if(flag){
+                      $.modal({
+                          title:"成功",
+                          text:"发布通告成功，还要继续发布吗？",
+                          buttons:[{
+                              text: "发布完成", onClick: function () {
+                                  console.log("确定")
+                                  $(window).attr('location', data1.url);
+                                  //window.location.href=data1.url;
+
+                              },
+                          },{text:"继续发布",onClick:function () {
+                                  console.log("取消")
+                                  window.location.reload()
+                              }}]
+                      });
+                    }
+                  },
+                  error: function (XMLHttpRequest, textStatus, errorThrown) {
+                      alert("请求服务器失败");
+                  }
+              });
+             
+          }
+      });

@@ -1,0 +1,255 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 
+    link(rel='stylesheet', href='/css/casting.css')
+    link(rel='stylesheet', href='/css/actor_edti1.css')
+    style.
+      .attention{
+      width:100%;
+      height:50px;
+      background: #f2f2f2;
+      text-align: center;
+      }
+      .attention img{
+      width: 30px;
+      display: inline-block; vertical-align: middle;
+      }
+      .attention span{
+      line-height: 50px;
+      color:#4da2ad;
+      font-size: 16px;
+      }
+      .fix{position: fixed;
+          right: 0;
+          top: 74px;
+          z-index:100;
+          width:6.2rem;
+          height:3rem}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/pinyin_dict_notone.js')
+    script(type='text/javascript', src='/js/pinyinUtil.js')
+    script(type='text/javascript', src='/js/pinyin.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    img.fix(src='/img/actor_gu.png')
+    .actorName
+    .actorPic
+      .xiaosanjiao
+        img(src='/img/501751812161802735.png', width='35', height='12', border='0', alt='')
+      .photo_dotted
+        .actorPhoto
+          img(width='189', border='0', alt='')
+      .banyuan
+        img(src='/img/64989393487718861.png', width='40', height='82', border='0', alt='')
+      // -----基本信息----
+      .line
+        .basicMessage 基本资料
+      .actorMessage
+      .banyuan2
+        img(src='/img/2251.png', width='60', height='112', border='0', alt='')
+      // -----参演经历----
+      .line.line_exet
+        .basicMessage.exet 参演经历
+      // ---------如果参演经历有多个，循环下边div即可----------
+      div.workArray
+      // -----照片视频----
+      .line
+        .basicMessage 照片视频
+      // -----弹性布局----
+      .flexBox
+      div(style='clear:both')
+      // -----照片视频----
+      .line
+        .basicMessage 接戏标准
+      .startContent
+    .bottom
+      .sanjiao
+      span END
+    .overlay1
+    script.
+        var userid=!{JSON.stringify(userid)};
+        var appid=!{JSON.stringify(appid)};
+       'use strict';
+
+        var url_url = url + '/agent/a_userprofile/' + userid + '/null';
+        $.ajax({
+          type: "get",
+          url: url_url,
+          dataType: "jsonp",
+          success: function success(data) {
+            console.log(data);
+            var realname = '';
+            var pin = data.realname;
+            var pinyin = replaceStr(pinyinUtil.getPinyin(pin));
+            console.log(replaceStr(pinyinUtil.getPinyin(pin)));
+            realname = '<p class="chinaName">' + data.realname + '</p>\n                      <p class="engName">' + pinyin + '</p>';
+
+            $(".actorName").html(realname);
+            //title命名
+            $("title").html("演员|" + pin + "|CASTING");
+            var arr = [data.realname];
+            //console.log(pin.toPinyin());
+            $(".actorPhoto>img").attr("src", data.CastingImageUrl.artimage);
+
+            var str1 = '';
+            if (data.gender == 1) {
+              gender = "男";
+            } else if (data.gender == 2) {
+              gender = "女";
+            } else {
+              gender = "不限";
+            }
+            str1 = '<ul>\n                    <li>\u827A&#x3000;&#x3000;\u540D\uFF1A' + data.artname + '</li>\n                    <li>\u771F\u5B9E\u59D3\u540D\uFF1A' + data.realname + '</li>\n                    <li>\u6027&#x3000;&#x3000;\u522B\uFF1A' + gender + '</li>\n                    <li>\u51FA\u751F\u65E5\u671F\uFF1A' + data.birth + '</li>\n                    <li>\u4E09&#x3000;&#x3000;\u56F4\uFF08cm\uFF09\uFF1A' + data.bust + '/' + data.waist + '/' + data.hip + '</li>\n                    <li>\u8EAB&#x3000;&#x3000;\u9AD8\uFF08cm\uFF09\uFF1A' + data.height + '</li>\n                    <li>\u4F53&#x3000;&#x3000;\u91CD\uFF08kg\uFF09\uFF1A' + data.weight + '</li>\n                    <li>\u6BD5\u4E1A\u9662\u6821\uFF1A' + data.schoolname + '</li>\n                    <li>\u6280\u80FD\u7279\u957F\uFF1A' + data.skill_str + '</li>\n                    <li>\u7279&#x3000;&#x3000;\u5F81\uFF1A' + data.feature_str + '</li>\n                </ul>';
+            $(".actorMessage").html(str1);
+            var workarray = data.workExpArray;
+            if (!workarray.length) {
+              $(".line_exet").css("display", "none");
+            }
+            var workArray = '';
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+              for (var _iterator = workarray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                work = _step.value;
+
+                workArray += '<div class="actorExperience">\n                            <img src="' + work.image_set.imagesURLArray[0].imagesURL + '">\n                          </div>\n                          <div class="program">\n                            <p class="mytitle">\u300A' + work.detail.productionName + '\u300B</p>\n                            <p>\u5267\u76EE\u7C7B\u578B\uFF1A' + work.detail.productionType + '</p>\n                            <p>\u9970\u6F14\u89D2\u8272\uFF1A' + work.detail.role + '</p>\n                            <p>\u89D2\u8272\u7C7B\u578B\uFF1A' + work.detail.roleTag + '</p>\n                            <div class="banyuan3">\n                              <img src="/img/64989393487718861.png" width="35" height="72" border="0" alt="">\n                            </div>\n                          </div>  ';
+              }
+            } catch (err) {
+              _didIteratorError = true;
+              _iteratorError = err;
+            } finally {
+              try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                  _iterator.return();
+                }
+              } finally {
+                if (_didIteratorError) {
+                  throw _iteratorError;
+                }
+              }
+            }
+
+            $(".workArray").html(workArray);
+            var CastingImageUrl = data.CastingImageUrl;
+            var CastingImages = "";
+            CastingImages = ' <div class="photoLeft">\n                              <div class="imgHeight">\n                                <img src=\'' + CastingImageUrl.frontimage + '\'>\n                              </div>\n                              <p>\u6B63\u9762\u5361\u80F8</p>\n                            </div>\n                            <div class="photoRight">\n                              <div class="imgHeight">\n                                <img src="' + CastingImageUrl.leftimage45 + '">\n                              </div>\n                              <p>\u5DE6\u4FA745\u5EA6\u5361\u80F8</p>\n                            </div>\n                            <div class="photoLeft">\n                               <div class="imgHeight">\n                                <img src="' + CastingImageUrl.rightimage45 + '">\n                               </div>\n                              <p>\u53F3\u4FA745\u5EA6\u5361\u80F8</p>\n                            </div>\n                            <div class="photoRight">\n                                 <div class="imgHeight">\n                                    <img src="' + CastingImageUrl.rightimage90 + '">\n                                 </div>\n                              <p>\u53F3\u4FA790\u5EA6\u5361\u8170</p>\n                            </div>\n                            <div class="photoLeft">\n                                 <div class="imgHeight">\n                                    <img src="' + CastingImageUrl.leftimage90 + '">\n                                 </div>\n                              <p>\u5DE6\u4FA790\u5EA6\u5361\u8170</p>\n                            </div>\n                            <div class="photoRight">\n                                 <div class="imgHeight">\n                                    <img src="' + CastingImageUrl.frontimagewaist + '">\n                                 </div>\n                              <p>\u6B63\u9762\u5361\u8170</p>\n                            </div>\n                            <div class="photoLeft">\n                                <div class="imgHeight">\n                                 <img src="' + CastingImageUrl.frontimageall + '">\n                                </div>\n                              <p>\u6B63\u9762\u5168\u8EAB</p>\n                            </div>\n                            <div class="photoRight">\n                                <div class="imgHeight">\n                                 <img src="' + CastingImageUrl.frontimagehead + '">\n                                </div>\n                              <p>\u9732\u989D\u5934\u6B63\u9762\u5361\u80F8</p>\n                            </div>\n                            <div class="photoLeft">\n                                <div class="imgHeight">\n                                 <img src="' + CastingImageUrl.artimage + '">\n                                </div>\n                              <p>\u827A\u672F\u7167</p>\n                            </div>';
+            $(".flexBox").html(CastingImages);
+            var tag = "";
+            var typename = data.typename.nameSet;
+            var roletag_str = data.roletag_str;
+            if (data.schedule == false) {
+              var schedule = '无档期';
+            } else {
+              var schedule = '有档期';
+            }
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+              for (var _iterator2 = typename[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                type = _step2.value;
+
+                var str4 = '';
+                var _iteratorNormalCompletion3 = true;
+                var _didIteratorError3 = false;
+                var _iteratorError3 = undefined;
+
+                try {
+                  for (var _iterator3 = type.repertoireTypeArray[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                    typexing = _step3.value;
+
+                    str4 += '' + typexing.repertoireTypeName;
+                  }
+                } catch (err) {
+                  _didIteratorError3 = true;
+                  _iteratorError3 = err;
+                } finally {
+                  try {
+                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                      _iterator3.return();
+                    }
+                  } finally {
+                    if (_didIteratorError3) {
+                      throw _iteratorError3;
+                    }
+                  }
+                }
+
+                console.log(str4);
+                tag = '<div class="textLeft">\n                    <p>\u5267\u76EE\u7C7B\u522B\uFF1A' + type.categoryName + '</p>\n                    <p>\u5267\u76EE\u7C7B\u578B\uFF1A' + str4 + '</p>\n                    <p>\u89D2\u8272\u7C7B\u522B\uFF1A' + roletag_str + '</p>\n                    <p>\u6863\u671F\uFF1A' + schedule + '</p>\n                  </div>\n                  <div class="banyuan4">\n                    <img src="/img/2251.png" width="60" height="112" border="0" alt="">\n                  </div>';
+              }
+            } catch (err) {
+              _didIteratorError2 = true;
+              _iteratorError2 = err;
+            } finally {
+              try {
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                  _iterator2.return();
+                }
+              } finally {
+                if (_didIteratorError2) {
+                  throw _iteratorError2;
+                }
+              }
+            }
+
+            $(".startContent").html(tag);
+            //图片的预览功能
+            function thum($img) {
+              var divWid = parseFloat($img.parent().css('width')) * 1.3;
+              $img.parent().css('height', divWid);
+              var width = parseFloat($img.css('width'));
+              var height = parseFloat($img.css('height'));
+              if (width > height) {
+                $img.addClass('Wid');
+              } else {
+                $img.addClass('Hei');
+              }
+            }
+            $(".actorPhoto img").each(function (index, item) {
+              picRreLook(item);
+            });
+            $(".actorExperience img").each(function (index, item) {
+              picRreLook(item);
+            });
+
+            $(".flexBox img").each(function (index, item) {
+              thum($(item));
+              picRreLook(item);
+            });
+
+            //为图片添加点击预览功能(封装)
+            function picRreLook(img) {
+              $(img).each(function () {
+                if ($(this).attr("src")) {
+                  $(this).click(function () {
+                    if ($(this).hasClass("scale")) {
+                      $(this).removeClass("scale");
+                      $(".overlay1").css("display", "none");
+                      $('html,body').removeClass('ovfHiden');
+                    } else {
+                      $(this).addClass("scale");
+                      $(".overlay1").css("display", "block");
+                      $(".overlay1").css({ "width": $(document).width(), "height": $(document).height() });
+                      $('html,body').addClass('ovfHiden');
+                    }
+                  });
+                } else {}
+              });
+            }
+          },
+          error: function error() {
+            alert('fail');
+          }
+        });
+        $(".fix").click(function () {
+          location.href = url + '/resume/page_leadUserBackToPlatform/' + appid;
+        });

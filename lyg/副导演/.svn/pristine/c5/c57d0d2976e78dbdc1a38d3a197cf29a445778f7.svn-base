@@ -1,0 +1,154 @@
+doctype html
+html(lang='zh-CN')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+        title 副导演广场
+        link(rel='stylesheet', href='/css/jqueryWeui.css')
+        link(rel='stylesheet', href='/css/weui.css')
+        style.
+            * {
+                padding: 0;
+                margin: 0;
+                list-style: none
+            }
+
+            .list {
+                height: 45px;
+                width: 100%;
+                background: #f2f2f2;
+                padding: 5px;
+                box-sizing: border-box;
+            }
+
+            .list > img {
+                width: 35px;
+                border-radius: 50%;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 15px;
+            }
+
+            .list > span {
+                font-size: 14px;
+                margin-top: 5px;
+            }
+        script(type='text/javascript', src='/js/jquery-2.1.4.js')
+        script(type='text/javascript', src='/js/jquery-weui.js')
+        script(type='text/javascript', src='/js/rootfont.js')
+        script(type='text/javascript', src='/js/tab.js')
+
+
+    body
+        .weui-pull-to-refresh__layer
+            .weui-pull-to-refresh__arrow
+            .weui-pull-to-refresh__preloader
+            .down 下拉刷新
+            .up 释放刷新
+            .refresh 正在刷新
+        header
+            .header
+                .search
+                    // 搜索内容
+                    #searchBar.weui-search-bar
+                        form.weui-search-bar__form
+                            .weui-search-bar__box
+                                input#searchInput.weui-search-bar__input(type='search', placeholder='搜索', required='')
+                                a#searchClear.weui-icon-clear(href='javascript:')
+                            label#searchText.weui-search-bar__label(style='transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);')
+                                i.weui-icon-search
+                                span 搜索
+                        a.lookfor(style='color: #4da2ad;font-size: 0.28rem;padding: 0.1rem') 搜索
+        section(style='clear:both',ontouchstart='')
+            div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+            .display_experience
+            //.weui-loadmore(style='clear: both')
+                //i.weui-loading
+                //span.weui-loadmore__tips 正在加载
+    script.
+        var myappid = !{JSON.stringify(myappid)};
+        var user_id = !{JSON.stringify(user_id)};
+        var url = "http://www.901vehicle.cn";
+        //循环列表
+        var url_1 = url + '/WX/wx_searchalldirectorpublicaccounts/1';
+        //console.log(url_1);
+        //var appid1;
+        function pullUpdate(url_1,url,user_id,myappid){
+         $.ajax({
+                type : "get",
+                url : url_1,
+                dataType : "jsonp",
+                success : function(data){
+                    console.log(data);
+                   var html="";
+                    for(var results of data.results){
+                        html+=`
+                                <div id="${results.appid}" class= "list" >
+                                    <img src = "${results.head_img}">
+                                    <span> ${results.nick_name}</span >
+                                </div >
+                        `;
+                        $(".display_experience").html(html);
+                    }
+                },
+                error:function(err){
+                    console.log(err)
+                }
+            });
+        }
+        pullUpdate(url_1,url,user_id,myappid);
+
+        $(".lookfor").click(function(){
+            var name=$("#searchInput").val();
+            if(name==""){
+                alert("请输入关键词！");
+            }else{
+                var nameUrl = url + '/WX/wx_searchpublicaccountsByName/'+name+'/1';
+                $.ajax({
+                    type:"POST",
+                    url:nameUrl,
+                    dataType:"jsonp",
+                    success:function(data){
+                        console.log(data);
+                        var data=data;
+                        if(data.length){
+                           
+                             $("section").html("");
+                            var html="";
+                            for(var result of data){
+                                html+= `
+                                   <div id="${result.appid}" class= "list list1" >
+                                    <img src = "${result.head_img}">
+                                    <span> ${result.nick_name} </span >
+                                   </div >
+                                `;
+                                $("section").html(html);
+                            }
+                        }else{
+                            $("section").html('<div style="text-align:center" ><p style="font-size:16px">没有符合您要求的选项</p></div>');
+                        }
+                    },
+                    error:function(){
+                        console.log(error);
+                    }
+                })
+            }
+        });
+
+        $("section").on("click",".list",function(){
+            var director_appid=$(this).attr("id");
+            var jumpUrl=url+'/agent/a_page_CrewListsUderAgent/'+director_appid+'/'+user_id;
+           location.href=jumpUrl;
+        });
+        //--------------------------下拉刷新-------------------------------------
+        $(document.body).pullToRefresh().on("pull-to-refresh", function () {
+              setTimeout(function (){
+                  $(document.body).pullToRefreshDone();
+                  pullUpdate(url_1,url,user_id,myappid);
+                  console.log("刷新了");
+              }, 2000);
+         });
+        //-------------------------上拉加载-------------------------------------
+
+

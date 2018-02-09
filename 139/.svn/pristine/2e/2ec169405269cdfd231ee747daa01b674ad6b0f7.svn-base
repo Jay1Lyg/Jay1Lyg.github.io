@@ -1,0 +1,79 @@
+/**
+*author@zheng 
+*上传影视海报的接口
+*
+*/
+var keystone = require('keystone'),
+  	Production = keystone.list('Production');
+var fs = require("fs");
+var query = require('../../query/util/downImageToNative.js');
+var config = require('../../public/conf/common.js');
+
+exports = module.exports = function(req, res) {
+	var productionid = req.params.production_id;
+	var user_id = req.params.user_id;
+	var mediaId = req.body.media;
+	var appid = req.body.appid;
+    var medianame=mediaId+'.jpg';
+    var path='images/production/';
+    var item={};
+	query.downlodePoster(mediaId, productionid, user_id,appid, function(err){//从官方服务器下载图片到自己服务器
+	     if(err){
+	        res.send(err);
+	     }else{//将图片保存到数据库
+	       Production.model.findOne()
+	        .where('_id',productionid)
+	        .exec(function(err,ret){
+	           if(err){
+	              throw new Error(err);
+	           }else{
+	           	  if(ret.images.length==0){
+                       item.filename = productionid+'/'+mediaId+'.jpg';
+		               item.originalname=medianame;
+		               item.path=path;
+		               ret.images.push(item);
+		               ret.save(function(err){
+		                  if(err){
+		                    res.send(err);
+		                  }else{
+		                  	var  imagesURL = config.homeEntry.url+'WX/poster/production/'+ productionid+'/'+ mediaId+'.jpg';
+		                    res.send(imagesURL);
+		                  }
+		               })
+	           	  }else{
+		                fs.unlink(process.cwd()+'/images/production/'+productionid+'/'+(ret.images)[0].originalname, function(err) {
+		                    if (err) {
+		                      return console.error(err);
+		                      }
+		                      console.log("deleted");
+		                      // ret.images=[];
+		                      // ret.save(function(err){
+		                      // 	 if (err) console.log('delete images failed');
+		                      // })
+		                		item.filename=productionid+'/'+mediaId+'.jpg'; 
+				               	item.originalname=medianame;
+				               	item.path=path;
+				               	ret.images.shift();
+				               	ret.images.push(item);
+				               	ret.save(function(err){
+				                  if(err){
+				                    res.send(err);
+				                  }else{
+				                  	var  imagesURL = config.homeEntry.url+'WX/poster/production/'+ productionid+'/'+ mediaId+'.jpg';
+				                    res.send(imagesURL);
+				                  }
+				               })
+		                });
+
+
+                        
+                   }
+	               
+	           }
+	        })
+	     }
+  	});
+
+}
+
+

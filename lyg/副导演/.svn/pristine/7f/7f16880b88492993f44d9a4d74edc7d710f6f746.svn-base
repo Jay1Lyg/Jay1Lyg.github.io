@@ -1,0 +1,378 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 演员详情
+    // <link rel="stylesheet" href="/css/reset.css">
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/actor_edti.css')
+    link(rel='stylesheet', href='/css/fixed.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    header
+      .newactor_banner
+        div.myImg
+
+
+
+        div
+          ul.tab
+            li.active 基本资料
+            li 参演经历
+            li 照片视频
+            li 接戏标准
+    section
+      // 基本资料
+      .information.active
+        // 资料
+        // 基本资料
+        .weui-cells.weui-cells_form.weuiOne.font-color
+      .experience
+        .display_experience
+      .photos
+
+        // 接戏标准
+      .standard
+        // 接戏标准
+        .weui-cells.weui-cells_form.weuiTwo
+    footer
+      .newactor_button.btn_standard
+        button 添加到方案
+
+    script.
+        (()=>{
+                //基本资料
+              var btns =$(".tab li"),
+              contents =$("section>div")
+              var t = new TabView(btns,contents);
+              var userid=!{JSON.stringify(userid)};
+              var careerincrew_id=!{JSON.stringify(careerincrew_id)};
+              var programme_id=!{JSON.stringify(programme_id)};
+              var actorbudget_id=!{JSON.stringify(actorbudget_id)};
+              var url_url=url+'/agent/a_userprofile/'+userid+'/null';
+              $.ajax({
+                type:"GET",
+                url:url_url,
+                dataType:"jsonp",
+                success:function(data){
+                    console.log(data);
+                     function common(data){
+                       if(data){
+                          if(data.gender=="1"){
+                              data.gender="男";
+                          }else if(data.gender=="2"){
+                              data.gender="女";
+                          }else if(data.gender=="3"){
+                              data.gender="不限";
+                          }
+                      }
+                   }
+                   common(data);
+
+
+                   /*$(".phone").click(function(e){
+                        e.preventDefault();
+                        $(".contactalert2").show();
+                         var conPhone="";
+                         conPhone+=`
+                            <p>联系人电话：${data.telephone}</p>
+                            <a class="confirm" href="tel://${data.telephone}">联系他</a>
+                            <a class="cancel">取消</a>
+                         `;
+                         $(".contactalert2").html(conPhone);
+
+                         console.log($(".contactalert2 .confirm").attr("href"));
+                         $(".cancel").click(function(e){
+                             e.preventDefault();
+                             $(".contactalert2").hide();
+                         });
+                     });*/
+                   var html1="";
+                   html1+=`
+                      <img src="${data.iconUrl}" alt="">
+                   `;
+                   $(".myImg").html(html1);
+                    var html="";
+                    html+=`
+                         <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label common-input"> 艺名</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input font-color name" type="text"  placeholder="请输入艺名" value="${data.artname}" disabled>
+                            </div>
+                         </div>
+                         <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label common-input">真实姓名</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input font-color" type="text" placeholder="请输入真实姓名" value="${data.realname}" disabled>
+                            </div>
+                         </div>
+                         <div class="weui-cell weui-cell_select weui-cell_select-after">
+                            <div class="weui-cell__hd">
+                                <label for="" class="weui-label  common-input"> 性别</label>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input font-color" type="text" placeholder="性别" value="${data.gender}" disabled>
+                            </div>
+                         </div>
+                         <div class="weui-cell">
+                            <div class="weui-cell__hd"><label for="" class="weui-label common-input"> 出生年月</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input  font "  type="date" value="${data.birth}" disabled>
+                            </div>
+                         </div>
+                         <div class="weui-cell">
+                            <div class="weui-cell__hd"><label for="" class="weui-label common-input"> 三围</label></div>
+                            <div class=" measurements">
+                                <input class="weui-input "  type="type" value="${data.bust}" placeholder="bust" disabled>
+                                <input class="weui-input "  type="type" value="${data.waist}" placeholder="waist" disabled>
+                                <input class="weui-input "  type="type" value="${data.hip}" placeholder="hip" disabled>
+                            </div>
+                         </div>
+                         <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label common-input" > 身高(cm)</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input font-color" type="number" pattern="[0-9]*" placeholder="请输入身高" value="${data.height}" disabled>
+                            </div>
+                         </div>
+                         <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label common-input" >体重(kg)</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input font-color" type="number"  pattern="[0-9]*" placeholder="请输入体重" value="${data.weight}" disabled>
+                            </div>
+                         </div>
+                         <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label common-input" >毕业院校</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input font-color" type="text"  placeholder="请输入毕业院校" value="${data.schoolname}" disabled>
+                            </div>
+                         </div>
+                         <div class="weui-cell add-college" >
+                            <div class="weui-cell__hd"><label class="weui-label common-input"> 技能特长</label></div>
+                            <div class="weui-cell__bd">
+                                <span class="font-color">${data.skill_str}</span>
+
+                            </div>
+                         </div>
+                         <div class="weui-cell add-college myfeather" >
+                            <div class="weui-cell__hd"><label class="weui-label common-input"> 特征</label></div>
+                            <div class="weui-cell__bd specialty">
+                                <span class="font-color">${data.feature_str}</span>
+                            </div>
+                         </div>
+                    `;
+                    $(".weuiOne").html(html);
+                    console.log(data.workExpArray);
+                    if(data.workExpArray.length!=0){
+                        for(var i=0;i<data.workExpArray.length;i++){
+                          var img="";
+                          if(data.workExpArray[i].image_set.imagesURLArray.length==0){
+                            img="";
+                          }else{
+                            img+=`${data.workExpArray[i].image_set.imagesURLArray[0].imagesURL}`;
+                          }
+                           var html2="";
+                           html2+=`
+                              <div>
+                                 <div class="photo_experience">
+                                     <img src="${data.workExpArray[0].image_set.imagesURLArray[0].imagesURL}" alt="">
+                                 </div>
+                                 <div class="detail_experience font-color" >
+                                    <ul class="lineHeight">
+                                        <li><span>剧&#x3000名：</span>《${data.workExpArray[0].detail.productionName}》</li>
+                                        <li><span>剧目类型：</span>${data.workExpArray[0].detail.productionType}</li>
+                                        <li><span>饰演角色：</span>${data.workExpArray[0].detail.role}</li>
+                                        <li><span>角色类型：</span>${data.workExpArray[0].detail.roleTag}</li>
+                                    </ul>
+                                 </div>
+                              </div>
+                             `;
+                             $(".display_experience").html(html2);
+                        }
+
+                    }else{
+                      $(".display_experience").html("");
+
+                    }
+                    var html3="";
+                    html3+=`
+                          <div class="casting">
+                           <div>
+                            <div>
+                                <img src="${data.CastingImageUrl.frontimagewaist}" alt="">
+                            </div>
+                            <p>正面卡胸</p>
+                           </div>
+                           <div>
+                            <div>
+                                <img src="${data.CastingImageUrl.leftimage45}" alt="">
+                            </div>
+                            <p>左侧45度卡胸</p>
+                           </div>
+                           <div>
+                            <div>
+                                <img src="${data.CastingImageUrl.rightimage45}" alt="">
+                            </div>
+                            <p>右侧45度卡胸</p>
+                           </div>
+                           <div>
+                            <div>
+                                <img src="${data.CastingImageUrl.rightimage90}" alt="">
+                            </div>
+                            <p>右侧90度卡腰</p>
+                           </div>
+                           <div>
+                            <div>
+                                <img src="${data.CastingImageUrl.leftimage90}" alt="">
+                            </div>
+                            <p>左侧90度卡腰</p>
+                           </div>
+                           <div>
+                            <div>
+                                <img src="${data.CastingImageUrl.frontimagewaist}" alt="">
+                            </div>
+                            <p>正面卡腰</p>
+                           </div>
+                           <div>
+                            <div>
+                                <img src="${data.CastingImageUrl.frontimageall}" alt="">
+                            </div>
+                            <p>正面全身</p>
+                           </div>
+                           <div>
+                            <div>
+                                <img src="${data.CastingImageUrl.frontimagehead}" alt="">
+                            </div>
+                            <p>露额头正面卡胸</p>
+                           </div>
+                           <div>
+                            <div>
+                                <img src="${data.CastingImageUrl.artimage}" alt="">
+                            </div>
+                            <p>艺术照</p>
+                           </div>
+                          </div>
+                          <div class="url">
+                              <h4 class="h4">视频</h4>
+                              <div>
+                                  <p>url:<div>${data.videoset.videos}</div></p>
+                              </div>
+                          </div>
+                    `;
+                    $(".photos").html(html3);
+                    var html5="";
+                    for(var result of data.typename.nameSet){
+                        var html6="";
+                            //如果length大于1,就添加/，并且去掉最后一个/;如果length小于1，就不添加。
+                            if(result.repertoireTypeArray.length>=2){
+                                for(var results of result.repertoireTypeArray){
+                                    html6+=`${results.repertoireTypeName}/`;
+                                }
+                                html6=html6.replace(/^\s+|\s+$/g,"").slice(0,-1);
+                            }else{
+                                for(var results of result.repertoireTypeArray){
+                                    html6+=`${results.repertoireTypeName}`;
+                                }
+                            }
+                        html5+=`
+                           ${result.categoryName}:${html6}<br/>
+                        `;
+                    }
+                     if(data.schedule==false){
+                        data.schedule="无";
+                     }else if(data.schedule==true){
+                        data.schedule="有";
+                     }
+
+                       var html4="";
+                       html4+=`
+                            <div class="weui-cell" >
+                               <div class="weui-cell__hd"><label class="weui-label common-input">剧目类别类型</label></div>
+                               <div class="weui-cell__bd specialty">
+                                   <span class="font-color">${html5}</span>
+
+                               </div>
+                            </div>
+                            <div class="weui-cell" >
+                               <div class="weui-cell__hd"><label class="weui-label common-input">角色类别</label></div>
+                               <div class="weui-cell__bd specialty">
+                                   <span class="font-color">${data.roletag_str}</span>
+                               </div>
+                            </div>
+                            <div class="weui-cell" >
+                               <div class="weui-cell__hd"><label class="weui-label common-input">档期：</label></div>
+                               <div class="weui-cell__bd specialty">
+                                   <input class="weui-input font-color" type="text" value="${data.schedule}" disabled>
+                               </div>
+                            </div>
+                       `;
+                       $(".weuiTwo").html(html4);
+                },
+                error:function(err){
+                    console.log(err);
+                }
+              });
+
+              $(".newactor_button button").click(function(){
+
+              var buttonurl=url+'/WX/wx_addActorToProgramme/'+userid+'/'+careerincrew_id+'/'+programme_id+'/'+actorbudget_id;
+              //console.log(buttonurl);
+                $.ajax({
+                    type:"GET",
+                    url:buttonurl,
+                    dataType:"jsonp",
+                    success:function(data){
+                      console.log(data);
+                      if(data.canadd==false){
+                        alert("满三条不可再添加！");
+                      }else if(data.alreadyAdd == true){
+                        alert("已经添加，不可重复添加！");
+                      }else if( data.programmestate == 2){
+                        alert("添加成功");
+                      }
+                    },
+                    error:function(err){
+                        console.log(err);
+                    }
+                });
+              });
+
+
+        })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

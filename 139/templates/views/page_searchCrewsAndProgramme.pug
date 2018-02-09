@@ -1,0 +1,152 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    title 方案管理 
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/left.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="/js/jquery-weui.js"></script>
+    <script type="text/javascript" src="/js/url.js"></script>
+
+  body
+    section
+      .list
+        ul.list_ul
+      script(src='/js/left.js')
+      script.
+        var director_id=!{JSON.stringify(director_id)};
+        var appid=!{JSON.stringify(appid)};
+       "use strict";
+
+          function list() {
+            var juzu_url = url + '/WX/wx_searchProgrammeList/' + director_id;
+            console.log(juzu_url);
+            $.ajax({
+              type: "get",
+              url: juzu_url,
+              dataType: "jsonp",
+              async: false,
+              // jsonp: "jsonpCallback",
+              success: function success(data) {
+                console.log(data);
+                var datas = data;
+                var str = '';
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                  for (var _iterator = datas[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    data = _step.value;
+
+                    var strArr = "";
+                    var programmeArrays = data.programmeArray;
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                      for (var _iterator2 = programmeArrays[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        programmeArray = _step2.value;
+
+                        strArr += "<li class=\"li\" id=\"" + programmeArray.actorbudget_id + "\"><a id=\"" + programmeArray.programme_id + "\">" + programmeArray.programme_name + "<i id=\"" + programmeArray.attribute + "\"><img src=\"/img/delete2.png\" width=\"40\" height=\"40\" border=\"0\" alt=\"\"> </i></a></li>";
+                      }
+                    } catch (err) {
+                      _didIteratorError2 = true;
+                      _iteratorError2 = err;
+                    } finally {
+                      try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                          _iterator2.return();
+                        }
+                      } finally {
+                        if (_didIteratorError2) {
+                          throw _iteratorError2;
+                        }
+                      }
+                    }
+
+                    str += "<li class=\"jiji\">\n                          \u5267\u540D\uFF1A" + data.production_name + "\n                            <b>\n                              <img src=\"/img/jian2.png\" width=\"12\" height=\"18\" border=\"0\" alt=\"\" class=\"img\">\n                             </b> \n                          <div class=\"erjilist\">\n                            <ul id=\"" + data.production_id + "\">\n                              " + strArr + "\n                            </ul>\n                          </div>\n                        </li>";
+                  }
+                } catch (err) {
+                  _didIteratorError = true;
+                  _iteratorError = err;
+                } finally {
+                  try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                      _iterator.return();
+                    }
+                  } finally {
+                    if (_didIteratorError) {
+                      throw _iteratorError;
+                    }
+                  }
+                }
+
+                $(".list_ul").html(str);
+              },
+              error: function error(err) {
+                console.log(err);
+              }
+            });
+          };
+          list();
+
+          //点击跳转页面------------------------
+          $(".list_ul").on("click", ".li", function (event) {
+
+            var _this = $(this),
+                production_id = _this.parent().attr("id"),
+                programme_id = _this.children().attr("id"),
+                attribute = _this.children().children().attr("id"),
+                actorbudget_id = _this.attr("id");
+            if (attribute == "1") {
+              location.href = url + '/WX/page_searchProgrammeDetailsAboutSlider/' + production_id + '/' + programme_id + '/' + attribute + '/' + actorbudget_id + '/' + director_id;
+            } else {
+              location.href = url + '/WX/page_searchProgrammeDetailsAboutHand/' + production_id + '/' + programme_id + '/' + attribute + '/' + director_id;
+            }
+            event.preventDefault();
+            event.stopPropagation(); 
+             return false;
+          });
+          //删除方案
+           $(".list_ul").on("click", "i", function (event) {
+           console.log("kkk");
+           var $this=$(this);
+           var programme_id=$(this).parent().attr("id");
+           $.confirm({
+              title: '删除？',
+              text: '确定要删除这个方案吗？',
+              onOK: function () {
+                //点击确认
+                  var delete_url = url + '/WX/wx_deleteProgramme/'+programme_id;
+                  console.log(delete_url);
+                  $.ajax({
+                    type: "get",
+                    url: delete_url,
+                    dataType: "jsonp",
+                    async: false,
+                    // jsonp: "jsonpCallback",
+                    success: function success(data) {
+                      console.log(data);
+                      $this.parent().parent().empty();
+
+                    
+                    },
+                    error: function error(err) {
+                      console.log(err);
+                    }
+                  });
+              },
+              onCancel: function () {
+              }
+            });
+           
+            event.stopPropagation(); 
+            event.preventDefault(); 
+            return false;
+          });
+

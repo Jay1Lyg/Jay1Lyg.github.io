@@ -1,0 +1,53 @@
+doctype html
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    script(src='/js/zepto.min.js')
+    script(src='/js/college.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    title 毕业院校
+    link(rel='stylesheet', href='/css/college.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/serume-experience.css')
+    link(rel='stylesheet', href='/css/common.css')
+  body
+    header#header
+      div
+        a(href='javascript:history.go(-1);location.reload()')
+          img(src='/img/矩形-1-拷贝.png', alt='')
+        p 毕业院校
+    section
+      form(action='/WX/wx_savesingleeduexp',method='post')
+        .page.panel.js_show
+          .page__bd
+            .weui-cells.weui-cells_form
+              .weui-cell.pic
+                img.imging(src='/img/填写.png', alt='')
+                img.active.imged(src='/img/填写完毕.png', alt='')
+                .weui-cell__bd
+                  input(type='hidden', name='userid',value=userid)
+                  input(type='hidden', name='school_id',value=school_id)
+                  input(type='hidden', name='major_id',value=major_id)
+                  input(type='hidden', name='eduExp_id',value=eduExp_id)
+                  input(type='hidden', name='appid',value=appid)
+                  input.weui-input.font-color.font1(type='text', placeholder='学校名称',name='school',value=school)
+              .weui-cell.pic(style='margin-top:10px')
+                img.imging(src='/img/填写.png', alt='')
+                img.active.imged(src='/img/填写完毕.png', alt='')
+                .weui-cell__bd
+                  input.weui-input.font-color.font2(type='text', placeholder='所学专业',name='major',value=major)
+              .weui-cell.pic(style='margin-top:10px')
+                img.imging(src='/img/填写.png', alt='')
+                img.active.imged(src='/img/填写完毕.png', alt='')
+                .weui-cell__bd
+                  span.span-none 毕业年份
+                  input.weui-input.data.font-color.font3(type='date', style='color: black;font-size: 15px ;width: 50%',name='duration',value=duration)
+              .weui-cell.pic(style='margin-top:10px')
+                img.imging(src='/img/填写.png', alt='')
+                img.active.imged(src='/img/填写完毕.png', alt='')
+                .weui-cell__bd
+                  input.weui-input.font-color.font4(type='text', placeholder='学历',name='certificate',value=certificate)   
+            .add-btn
+              a.weui-btn.submit-save 保存以上所填信息

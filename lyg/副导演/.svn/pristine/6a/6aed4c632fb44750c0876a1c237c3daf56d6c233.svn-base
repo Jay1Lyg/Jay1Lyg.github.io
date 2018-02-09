@@ -1,0 +1,46 @@
+/**
+   将最近一天内的通告查询出来放入数据库，每四小时执行一次
+     1.查询出平台上最近一天的通告
+     2.查询出平台上所有经纪人及旗下演员
+     3.匹配
+     4.将匹配结果保存到数据库
+     5.将最近一天之前的数据清空
+**/
+
+var schedule = require("node-schedule");
+var keystone = require('keystone'),
+    Actor = keystone.list('Actor');
+var async = require('async');
+var search = require('../../query/save_and_get_data_in_MongoDB/position/search.js');
+
+function schedulePositionsAday(){
+	var rule2     = new schedule.RecurrenceRule();  
+	var times2    = [1,5,9,13,17,21];  
+	rule2.hour  = times2; 
+	var edate=new Date(); //现在的时间（秒）
+	var ndate=new Date()-86400000;//一天前的时间（秒）
+	schedule.scheduleJob(rule2, function(){  
+	  Production.model.find()
+	   .where({'createdAt':{$gt:(ndate)}})
+	   .where({'createdAt':{$lt:(edate)}})
+	   .where('isCreated',true)
+	   .populate('production_crews category location')
+	   .sort("-createdAt")
+	   .exec(function(err,ret){
+         if(err){
+            throw new Error(err);
+         }else{
+            // search.findMatchProduction(ret,function(err,ret1){
+            //    if(err){
+            //      throw new Error(err);
+            //    }else{
+               	 
+            //    }
+            // });
+         }
+	   })
+
+	}); 
+}
+
+schedulePositionsAday();

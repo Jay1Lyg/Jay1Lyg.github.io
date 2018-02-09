@@ -1,0 +1,272 @@
+doctype html
+html(lang='zh-cmn-Hans')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+
+        title 演艺经历
+        link(rel='stylesheet', href='/css/weui.css')
+        link(rel='stylesheet', href='/css/serume-experience.css')
+        link(rel='stylesheet', href='/css/common.css')
+        link(rel='stylesheet', href='/css/jqueryWeui.css')
+    body
+        header#header
+            div
+                a(href='http://www.901vehicle.cn/WX/wx_userprofile/'+userid+'/'+appId)
+                    img(src='/img/矩形-1-拷贝.png', alt='')
+                p 演艺经历
+        section
+            form(action='/WX/wx_savesingleworkexp',method='post')
+                .page__bd
+                    .weui-cells.weui-cells_form
+                        .weui-cell.pic
+                            img.imging(src='/img/填写.png', alt='')
+                            img.active.imged(src='/img/填写完毕.png', alt='')
+                            .weui-cell__bd
+                                input(type='hidden',value=userid,name='userid')
+                                input(type='hidden',value=production_id,name='production_id')
+                                input(type='hidden',value=workexp_roleId,name='workexp_roleId')
+                                input(type='hidden',value=careerInResume_id,name='careerInResume_id')
+                                input.weui-input.font-color.font1(type='text', placeholder='影片名',value=production_name,name='production_name')
+                        .weui-cell.pic
+                            img.imging(src='/img/填写.png', alt='')
+                            img.active.imged(src='/img/填写完毕.png', alt='')
+                            .weui-cell__bd
+                                span.span-none 上映时间
+                                input.weui-input.data.font-color.font2(type='date', style='color: #a0a0a0;font-size: 15px;width: 50%',value=productionPublishDate,name='productionPublishDate')
+                        .weui-cell.pic
+                            img.imging.moveing(src='/img/填写.png', alt='')
+                            img.active.imged.moved(src='/img/填写完毕.png', alt='')
+                            .weui-cell__bd
+                                input#picker1.weui-input.font-color.font3( type='text', placeholder='影片类型',value=workexp_productionType,name='workexp_productionType')
+                                input.weui-input( type='hidden',value=appId,name='appId')
+                                // // disabled="false"
+                        .weui-cell.pic
+                            img.imging(src='/img/填写.png', alt='')
+                            img.active.imged(src='/img/填写完毕.png', alt='')
+                            .weui-cell__bd
+                                input.weui-input.font-color.font4(type='text', placeholder='角色名',value=workexp_roleName,name='workexp_roleName')
+                        .weui-cell.pic
+                            img.imging.actoring(src='/img/填写.png', alt='')
+                            img.active.imged.actored(src='/img/填写完毕.png', alt='')
+                            .weui-cell__bd
+                                input.weui-input.font-color.font5(type='text', placeholder='角色类型',value='演员',name='workexp_roleCategoryName')
+                .add-btn
+                    a.weui-btn.submit-save 保存以上所填信息
+                .weui-cells__title.common-input 添加照片
+                    b （保存以上信息后才能上传）
+                    .page
+                        .flex.one
+                .page__bd.page__bd_spacing(style='margin-top: 40px;clear:both;')
+                    a.weui-btn.upload(onclick='wxchooseImage(5)') 上传照片
+                .add-btn
+                    a.weui-btn.add-live(href='/WX/delete/wx_singleworkexp/'+careerInResume_id+'/'+userid+'/'+appId) 删除此工作经历
+        script(src='/js/zepto.min.js')
+        script(src='/js/jquery.min.js')
+        script(src='/js/jqWeui.js')
+        script(src='/js/myserume2.js')
+        script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+        script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+        script.
+            var appid = !{JSON.stringify(appId)};
+            var timestamp = !{JSON.stringify(timestamp)};
+            var nonceStr = !{JSON.stringify(nonceStr)};
+            var signature = !{JSON.stringify(signature)};
+            wx.config({
+                debug: false,
+                appId: appid,
+                timestamp: timestamp,
+                nonceStr: nonceStr,
+                signature: signature,
+                jsApiList: [
+                    'chooseImage', 'uploadImage', 'downloadImage', 'previewImage'
+                ]
+            });
+
+            wx.ready(function () {
+
+            });
+
+            window.onload = function () {
+                var userid = !{JSON.stringify(userid)};
+                var careerInResume_id = !{JSON.stringify(careerInResume_id)};
+                var imageArray = !{JSON.stringify(careerImage)};
+
+
+                //动态显示参演经历
+                var str = $('.one').html()
+                //'+url+'
+                for (var i = 0; i < imageArray.length; i++) {
+                    var url = imageArray[i].imagesURL;
+                    str += '<div class="weui-flex__item picture"><img id="[i]" src="' + imageArray[i].imagesURL + '" alt=""></div>'
+                }
+                $('.one').html(str)
+
+
+                // var a = document.createElement('a');
+                // a.className = 'weui-btn weui-btn_plain-primary';
+                // a.href='http://www.901vehicle.cn/WX/delete/wx_singleworkexp/'+careerInResume_id+'/'+userid;
+                // a.innerText="删除演艺经历";
+                // imageList.appendChild(a);
+                $(".one").on("click", "div", function () {
+                    var userid = !{JSON.stringify(userid)};
+                    var careerInResume_id = !{JSON.stringify(careerInResume_id)};
+                    var $this = $(this);
+                    first = $(this).index();
+                    console.log(first)
+                    console.log($this.children("img").attr("src"));
+                    if ($this.children("img").attr("src") === "") {
+                    } else {
+                        $.confirm("您确认要删除此照片吗？", "确认删除", function () {
+                            $.ajax({
+                                type: "Post",
+                                url: "http://www.901vehicle.cn/WX/uploadcareerimage",
+                                dataType: "text",
+                                data: {
+                                    userid: userid,
+                                    careerInResume_id: careerInResume_id,
+                                    index: first,
+                                    appid:appid
+                                },
+                                success: function (data) {
+                                    $.toast("删除成功");
+                                    window.location.reload()
+                                    console.log($this.children("img").removeAttr("src"))
+                                }
+                            });
+                        }, function () {
+                        })
+                    }
+                });
+
+
+            };
+            wxchooseImage=function (first) {
+                if (!$(".font-color").val()) {
+                    alert("请完善以上信息")
+                } else {
+                    if ($(".flex>div").length == 3) {
+                        alert("只能传3张")
+                    } else {
+                        wx.chooseImage({
+                            count: 1,
+                            needResult: 1,
+                            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                            success: function (data) {
+                                localIds = data.localIds[0].toString();
+                                //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                                wxuploadImage(localIds, first);
+                            },
+                            fail: function (res) {
+                                alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");
+                            }
+                        });
+                    }
+                }
+            }
+            function previewImage(e) {
+                var imageArray = !{JSON.stringify(careerImage)};
+                var url = [];
+                var a = imageArray[e].imagesURL
+                url[0] = a;
+                if (e == 0) {
+                    wx.previewImage({
+                        current: '', // 当前显示图片的http链接
+                        urls: url // 需要预览的图片http链接列表
+                    });
+                }
+                if (e == 1) {
+                    wx.previewImage({
+                        current: '', // 当前显示图片的http链接
+                        urls: url // 需要预览的图片http链接列表
+                    });
+                }
+                if (e == 2) {
+                    wx.previewImage({
+                        current: '', // 当前显示图片的http链接
+                        urls: url // 需要预览的图片http链接列表
+                    });
+                }
+
+            }
+
+
+
+            //上传图片接口
+            function wxuploadImage(e, first) {
+                wx.uploadImage({
+                    localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得
+                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                    success: function (res) {
+
+                        mediaId = res.serverId; // 返回图片的服务器端ID
+                        wxdownloadImage(mediaId, first);
+                        if (rh.tostr(mediaId)) {
+                            $(".myimg").attr("src", localIds);
+                        }
+                        alert('上传成功！');
+                    },
+                    fail: function (error) {
+                        picPath = '';
+                        localIds = '';
+                        alert(Json.stringify(error));
+                    }
+                });
+            };
+
+            function wxdownloadImage(e, first) {
+                var mediaId = e;
+                var userid = !{JSON.stringify(userid)};
+                var careerInResume_id = !{JSON.stringify(careerInResume_id)};
+                var imageArray = !{JSON.stringify(careerImage)};
+                //var careerImage_id=imageArray[first].CareerImage_id;
+                if (first == 5) {
+                    var careerImage_id = 'null';
+                } else {
+                    var careerImage_id = imageArray[first].CareerImage_id;
+                }
+
+                $.ajax({
+                    url: "http://www.kaishiapp.com/WX/uploadcareerimage",
+                    data: {
+                        media : mediaId,
+                        userid : userid,
+                        careerInResume_id : careerInResume_id,
+                        index:'',
+                        appid:appid
+
+                    },
+                    type: "Post",
+                    dataType: "text",
+                    success: function (data) {
+                        picPath = data;
+                        var str = $('.one').html()
+                        str+='<div class="weui-flex__item picture"><img id="[i]" src="' + picPath + '" alt=""></div>'
+                        $('.one').html(str)
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("提交失败" + textStatus);
+                    }
+
+                });
+            };
+        script.
+            $("#picker").picker({
+                title: "请选择",
+                cols: [
+                    {
+                        textAlign: 'center',
+                        values: ['供应商', '全部', '其他', '出品', '制片', '后期', '器材', '场景', '宣发', '导演', '录影', '摄影', '服装', '演员', '经纪人', '编剧', '美术', '造型', '道具', '音乐']
+                    }
+                ]
+            });
+            $("#picker1").picker({
+                title: "请选择",
+                cols: [
+                    {
+                        textAlign: 'center',
+                        values: ['VR视频', '全部', '其他', '广告片', '形象片', '微电影', '电视剧', '电视电影', '短视频', '纪录片', '网络大电影', '网络电视剧', '视频栏目', '院线电影']
+                    }
+                ]
+            });

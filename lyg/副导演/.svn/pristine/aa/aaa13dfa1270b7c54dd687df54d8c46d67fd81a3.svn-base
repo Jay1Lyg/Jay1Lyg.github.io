@@ -1,0 +1,24 @@
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    title 部署菜单
+    link(rel='stylesheet', href='/../css/weui.css')
+    link(rel='stylesheet', href='/../css/serume-experience.css')
+    link(rel='stylesheet', href='/../css/common.css')
+    link(rel='stylesheet', href='/../css/register.css')
+  body
+    header#header
+      div
+        a(href='')
+          img(src='/../img/x-灰.png', alt='')
+        p 授权
+    section(style='height: 100%')
+      div(style='text-align: center;margin-top: 20%')
+        h2(style='color: #0BB20C;font-family: 微软雅黑') 点击下面按钮部署您的项目
+      .add-btn(style='margin-top:50%')
+        a(href=url).weui-btn.weui-btn_primary 一键部署
+    script(src='/../js/zepto.min.js')
+    script(src='/../js/zepto.cookie.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')

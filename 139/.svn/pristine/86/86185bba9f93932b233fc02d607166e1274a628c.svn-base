@@ -1,0 +1,1732 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 我的简历
+    // <link rel="stylesheet" href="css/reset.css">
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/broker.css')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    //script(type='text/javascript', src='/js/vconsole.min.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/url.js')
+    script(type='text/javascript', src='/js/SM.js')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      .weui-picker-modal .picker-modal-inner{
+            height: 5rem;
+        }
+        .weui-picker-modal{
+        height:8rem
+        }
+  body
+    header
+      .newactor_banner
+        div
+          ul
+            li.active 基本资料
+            li 参演经历
+            li 照片视频
+            li 接戏标准
+    section
+      // 基本资料
+      .information.active
+        // 资料
+        // 基本资料
+        .weui-cells.weui-cells_form
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input  真实姓名
+            .weui-cell__bd
+              input.weui-input.font-color.realname(type='text', placeholder='请输入真实姓名')
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input 艺名
+            .weui-cell__bd
+              input.weui-input.font-color.artname(type='text', placeholder='请输入艺名')
+          .weui-cell.weui-cell_select.weui-cell_select-after
+            .weui-cell__hd
+              label.weui-label.common-input(for='')  性别
+            .weui-cell__bd
+              select.weui-select.option.gender(name='select2')
+                option(value='1', style='text-align: right') 男
+                option(value='2', style='text-align: right') 女
+                option(value='0', style='text-align: right') 不限
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input(for='')  出生年月
+            .weui-cell__bd
+              input.weui-input.font.birth(type='date')
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input(for='')  三围（cm）
+            .measurements
+              input.weui-input.bust.font-color(type='number',  placeholder='胸围' )
+              input.weui-input.waist.font-color(type='number', placeholder='腰围' )
+              input.weui-input.hip.font-color(type='number', placeholder='臀围')
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input  身高 cm
+            .weui-cell__bd
+              input.weui-input.font-color.height(type='number', pattern='[0-9]*', placeholder='请输入身高')
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input 体重 kg
+            .weui-cell__bd
+              input.weui-input.font-color.weight(type='number', pattern='[0-9]*', placeholder='请输入体重')
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input 毕业院校
+            .weui-cell__bd
+              input.weui-input.font-color.schoolname(type='text', placeholder='请输入毕业院校')
+          .weui-cell.weui-cell_switch
+                .weui-cell__bd.common-input
+                  |  是否有经纪人
+                .weui-cell__ft
+                  label.weui-switch-cp(for='switchCP')
+                    input#switchCP.weui-switch-cp__input(type='checkbox',name='switchCP')
+                    .weui-switch-cp__box
+          .weui-cell.displayNone.agent_tel
+            .weui-cell__hd
+              label.weui-label.common-input
+                |  经纪人电话
+            .weui-cell__bd
+              input.weui-input.font-color.agentTelphone(type='number', pattern='[0-9]*', placeholder='请输入经纪人电话',name='agentTelphone',value="")
+          .weui-cell.add-college
+            .weui-cell__hd
+              label.weui-label.common-input  技能特长
+            .weui-cell__bd.specialty1.specialty
+          .weui-cell.add-college
+            .weui-cell__hd
+              label.weui-label.common-input  特征
+            .weui-cell__bd.specialty2
+        //
+          保存按钮
+        .newactor_button.btn_information
+          button 保存并进行下一步
+      // 参演经历
+      .experience
+        // 参演经历
+        .display_experience
+        .add_experience(style='margin-top:0.5rem')
+          button 添加演绎经历
+        .newactor_button.btn_experience
+          button 保存并进行下一步
+      // 照片视屏
+      .photos
+        // 照片视屏
+        .cover_photo
+          h4.h4 上传封面照
+            b (必填)
+          div
+            img(src='')
+        .casting
+          h4.h4 照片
+          div
+            div
+              img#img1(src='', alt='')
+            p 正面卡胸
+          div
+            div
+              img#img2(src='', alt='')
+            p 左侧45度卡胸
+          div
+            div
+              img#img3(src='', alt='')
+            p 右侧45度卡胸
+          div
+            div
+              img#img4(src='', alt='')
+            p 右侧90度卡腰
+          div
+            div
+              img#img5(src='', alt='')
+            p 左侧90度卡腰
+          div
+            div
+              img#img6(src='', alt='')
+            p 正面卡腰
+          div
+            div
+              img#img7(src='', alt='')
+            p 正面全身
+          div
+            div
+              img#img8(src='', alt='')
+            p 露额头正面卡胸
+          div
+            div
+              img#img9(src='', )
+            p 艺术照
+             b (必填)
+        .url
+          h4.h4 视频
+          div
+            p
+              | 视频链接：
+              input.videourl(type='text')
+        .newactor_button.btn_photos
+          button.san_save 保存并进行下一步
+      // 接戏标准
+      .standard
+        // 接戏标准
+        .weui-cells.weui-cells_form
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input 剧目类别
+            .weui-cell__bd.specialty3
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input 剧目类型
+            .weui-cell__bd.category
+          .weui-cell
+            .weui-cell__hd
+              label.weui-label.common-input 角色类别
+            .weui-cell__bd.specialty4
+          .weui-cell.weui-cell_select.weui-cell_select-after
+            .weui-cell__hd
+              label.weui-label.common-input(for='') 片酬（万元/日）：
+              p.no (对外不公布)
+            .weui-cell__bd
+              input.weui-input.font-color.money(type='number',  placeholder='请输入片酬')
+          .weui-cell.weui-cell_switch
+            .weui-cell__bd.common-input.dang 档期：
+            .weui-cell__ft
+              input.weui-switch.schedule(type='checkbox',checked='checked')
+        .newactor_button.btn_standard
+          button 保存
+    .overlay
+    .userid(style="display:none")
+    .dialogs_a
+      .page__bd.dialogs_save
+        .weui-cells.weui-cells_form(style='clear:both')
+          .weui-cell.pic
+            .weui-cell__bd
+              input.weui-input.font-color.production_name(type='text', placeholder='影片名')
+          #showAndroidDialog2.weui-cell.pic
+            .weui-cell__bd
+              input#picker.weui-input.font-color.workexp_productionType(type='text', placeholder='影片类型')
+              // // disabled="false"
+          .weui-cell.pic
+            .weui-cell__bd
+              input.weui-input.font-color.workexp_roleName(type='text', placeholder='角色名')
+          #showAndroidDialog1.weui-cell.pic
+            .weui-cell__bd
+              input#moveActor.weui-input.font-color.workexp_roleTagName(type='text', placeholder='角色类型')
+          .newactor_buttonsave
+            button.save_experience 保存并上传照片
+          .weui-cells__title.common-input 添加照片
+          .page.page1
+            .picture
+              div.picture_actor
+          .newactor_buttonsave
+            button.sure_experience(style="display:none;margin-top:0.5rem") 确定
+    .dialogs_a
+      .page__bd.dialogs_delete
+    .dialogs_a.dialogs_leixing
+      .page__bd.specialty5
+      .button_sure
+        button(style="clear:both") 确定
+        p.name1(style='display:none')
+    .dialogs_a.dialogs_leixing1
+      .page__bd.specialty6
+      .button_sure1
+        button(style="clear:both") 确定
+        p.name2(style='display:none')
+    script.
+      var userid=!{JSON.stringify(userid)};
+      var index=!{JSON.stringify(index)};
+      var appId = !{JSON.stringify(appId)};
+      var timestamp = !{JSON.stringify(timestamp)};
+      var nonceStr = !{JSON.stringify(nonceStr)};
+      var signature = !{JSON.stringify(signature)};
+       wx.config({
+          debug: false,
+          appId: appId,
+          timestamp: timestamp,
+          nonceStr: nonceStr,
+          signature: signature,
+          jsApiList: [
+          'chooseImage', 'uploadImage', 'downloadImage','previewImage'
+          ]
+        });
+
+        wx.ready(function(){
+            
+
+        });
+        //判断填到了第几步
+        function index_active(){
+          if(index=='2'){
+                $(".information").removeClass("active")
+                $(".experience").addClass("active")
+                $(".newactor_banner div ul li").removeClass("active")
+                $(".newactor_banner div ul li").eq(1).addClass("active")
+          }else if(index=='3'){
+            $(".information").removeClass("active")
+            $(".experience").removeClass("active")
+            $(".photos").addClass("active")
+            $(".newactor_banner div ul li").removeClass("active")
+            $(".newactor_banner div ul li").eq(2).addClass("active")
+            }else if(index=='4'){
+              $(".information").removeClass("active")
+              $(".experience").removeClass("active")
+              $(".photos").removeClass("active")
+              $(".standard").addClass("active")
+              $(".newactor_banner div ul li").removeClass("active")
+              $(".newactor_banner div ul li").eq(3).addClass("active")
+            }
+        };
+        index_active();
+       
+        var url1=url+"/agent/a_allskilltypes/1/null";
+        $.ajax({
+          type : "get",
+          url : url1,
+          dataType : "jsonp",
+          // jsonp: "jsonpCallback",
+          success : function(data){
+          console.log(data);
+          var specialty = $(".specialty1").html();
+          var length=data.length;
+          for(var i=0;i<length;i++){
+            specialty += '<div><input  type="checkbox" name="specialty1" value="" id="'+data[i].id+'"><label for="'+data[i].id+'">'+data[i].name+'</label></div>'
+          }
+            $(".specialty1").html(specialty);
+          },
+          error:function(){
+          alert('fail');
+          }
+        });
+        //特征
+        var url2=url+"/agent/a_allfeaturetypes/1/null";
+        $.ajax({
+          type : "get",
+          url : url2,
+          dataType : "jsonp",
+          // jsonp: "jsonpCallback",
+          success : function(data){
+           console.log(data);
+            var specialty = $(".specialty2").html();
+            var length=data.length;
+          for(var i=0;i<length;i++){
+            specialty += '<div><input  type="checkbox" name="specialty2" value="" id="'+data[i].id+'"><label for="'+data[i].id+'">'+data[i].name+'</label></div>'
+          }
+            $(".specialty2").html(specialty);
+          },
+          error:function(){
+          alert('fail');
+          }
+        });
+        //剧目类bie
+        var url3=url+"/WX/wx_allproductiontypes/1/null";
+        $.ajax({
+          type : "get",
+          url : url3,
+          dataType : "jsonp",
+          // jsonp: "jsonpCallback",
+          success : function(data){
+            console.log(data);
+            var specialty = $(".specialty3").html();
+            var length=data.length;
+            for(var i=0;i<length;i++){
+              specialty += '<div class="leibie" ><input  type="checkbox" name="specialty3" value="" id="'+data[i].id+'"><label >'+data[i].name+'</label></div>'
+            }
+            $(".specialty3").html(specialty);
+          },
+          error:function(){
+          alert('fail');
+          }
+        });
+        //角色类型
+        var url4=url+"/agent/a_allroletypes/1/null";
+        $.ajax({
+          type : "get",
+          url : url4,
+          dataType : "jsonp",
+          // jsonp: "jsonpCallback",
+          success : function(data){
+            console.log(data);
+            var specialty = $(".specialty4").html();
+            var length=data.length;
+            for(var i=0;i<length;i++){
+              specialty += '<div><input  type="checkbox" name="specialty4" value="" id="'+data[i].id+'"><label for="'+data[i].id+'">'+data[i].name+'</label></div>'
+            }
+            $(".specialty4").html(specialty);
+          },
+          error:function(){
+          alert('fail');
+          }
+        });
+        //    基本资料
+        window.onload=function(){
+        $(".btn_information").on("click",function () {
+        
+        //        第一步提交
+        //获取数据
+          var url5=url+"/WX/wx_BasicInfoSave"
+          
+          var skillArray=[];
+          $('input[name="specialty1"]:checked').each(function () {
+          skillArray.push($(this).attr("id"))
+          });
+          var featureArray=[];
+          $('input[name="specialty2"]:checked').each(function () {
+          featureArray.push($(this).attr("id"))
+          });
+         
+         
+          var realname=$(".realname").val(),
+              artname=$(".artname").val(),
+              gender=$(".gender").val(),
+              birth=$(".birth").val(),
+              height=$(".height").val(),
+              bust=$(".bust").val(),
+              waist=$(".waist").val(),
+              hip=$(".hip").val(),
+              weight=$(".weight").val(),
+              schoolname=$(".schoolname").val(),
+              agentTelphone=$(".agentTelphone").val();
+          
+          var data={
+              userid:userid,
+              agentTelphone:agentTelphone,
+              realname:realname,
+              artname:artname,
+              gender:gender,
+              birth:birth,
+              height:height,
+              bust:bust,
+              waist:waist,
+              hip:hip,
+              weight:weight,
+              appId:appId,
+              schoolname:schoolname,
+              skillArray:skillArray,
+              featureArray:featureArray
+          }
+          console.log(data)
+          if(realname&&artname&&gender&&birth&&height&&bust&&waist&&hip&&weight&&schoolname&&skillArray.length>0&&featureArray.length>0){
+            $.ajax({
+              type : "post",
+              url : url5,
+              data:data,
+              dataType : "jsonp",
+              // jsonp: "jsonpCallback",
+              success : function(data){
+               console.log(data);
+              
+
+                $(".information").removeClass("active")
+                $(".experience").addClass("active")
+                $(".newactor_banner div ul li").removeClass("active")
+                $(".newactor_banner div ul li").eq(1).addClass("active")
+              },
+              error:function(err){
+                console.log(err)
+              }
+            }).fail(function(errorThrown) {
+                console.log(errorThrown);
+            });
+          }else{
+            $.alert("请完善以上所有信息")
+          }
+            
+
+        });
+        //    参演经历
+        $(".btn_experience").click(function () {
+          $(".experience").removeClass("active")
+          $(".photos").addClass("active")
+          $(".newactor_banner div ul li").removeClass("active")
+          $(".newactor_banner div ul li").eq(2).addClass("active")
+        });
+        //    照片视屏==================================================================================
+        $(".btn_photos").click(function () {
+         
+          if(!$(".cover_photo .coverpic").attr("src")){
+              $.alert("封面照为必填项")
+           }else if(!$("#img9").attr("src")){
+              $.alert("艺术照为必填项")
+           }else{
+            //上传视频url===============================================
+             //var userid=$(".user_id").html();
+              var videourl=$(".videourl").val();
+              var video_url=url+"/agent/a_saveVideoUrl";
+              var data={
+                userid:userid,
+                videourl:videourl
+              }
+              $.ajax({
+                type : "post",
+                url : video_url,
+                data:data,
+                dataType : "jsonp",
+                // jsonp: "jsonpCallback",
+                success : function(data){
+                 console.log(data)
+                 $.alert("保存成功")
+                
+
+                  $(".photos").removeClass("active")
+                  $(".standard").addClass("active")
+                  $(".newactor_banner div ul li").removeClass("active")
+                  $(".newactor_banner div ul li").eq(3).addClass("active")
+                },
+                error:function(err){
+                  console.log(err)
+                }
+              }).fail(function(errorThrown) {
+                  console.log(errorThrown);
+              });
+           }
+
+        })
+        //接戏标准+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        $(".btn_standard").click(function () {
+          var category=[];
+           $('input[name="specialty3"]:checked').each(function () {
+              category.push($(this).attr("id"))
+            });
+            var role_tag=[];
+           $('input[name="specialty4"]:checked').each(function () {
+              role_tag.push($(this).attr("id"))
+            });
+            var paycheck=$(".money").val();
+            var schedule=$(".schedule").is(':checked')
+            console.log(schedule)
+            //var userid=$(".user_id").html();
+            
+            var standardurl=url+"/agent/a_saveStandardOfPlay";
+            if(paycheck&&category.length>0&&role_tag.length>0){
+               var data={
+                userid:userid,
+                schedule:schedule,
+                paycheck:paycheck,
+                category:category,
+                role_tag:role_tag
+
+              }
+              console.log(data)
+              $.ajax({
+                type : "post",
+                url : standardurl,
+                data:data,
+                dataType : "jsonp",
+                // jsonp: "jsonpCallback",
+                success : function(data){
+                 console.log(data)
+                 if(schedule==true){
+                  $(".dang").empty();
+                   $(".dang").html("有档期")
+                 }
+                 if(schedule==false){
+                  $(".dang").empty();
+                   $(".dang").html("没有档期")
+                 }
+                 $.modal({
+                  title: "成功",
+                  text: "添加成功",
+                  buttons: [
+                    { text: "确定", onClick: function(){ 
+                      window.location.href = '/WX/page_userInfoEdit/'+userid+'/'+appId;
+                     } },
+                  ]
+                  });
+                  
+              
+                },
+                error:function(err){
+                  console.log(err)
+                }
+              }).fail(function(errorThrown) {
+                  console.log(errorThrown);
+              });
+            }else{
+              $.alert("没有完善信息")
+            }
+            
+          
+        })
+        //添加演绎经历
+        $(".add_experience").click(function () {
+          var str='<div></div><div style="clear:both" class="weui-cells weui-cells_form"><img class="quxiao" src="/img/quxiao.png" style="width:15px;float:right;padding:0.2rem 0.2rem 0.2rem 0"><div style="clear:both" class="weui-cell pic"><div class="weui-cell__bd"><input class="weui-input font-color production_name" type="text" placeholder="影片名" ></div></div><div class="weui-cell pic" id="showAndroidDialog2"><div class="weui-cell__bd"><input class="weui-input font-color workexp_productionType" type="text" placeholder="影片类型" id="picker"/></div></div><div class="weui-cell pic"><div class="weui-cell__bd"><input class="weui-input font-color  workexp_roleName" type="text" placeholder="角色名"></div></div><div class="weui-cell pic" id="showAndroidDialog1"><div class="weui-cell__bd"><input class="weui-input font-color workexp_roleTagName" type="text"   placeholder="角色类型" id="moveActor"></div></div><div class="newactor_buttonsave " ><button class="save_experience">保存并上传剧照</button></div><div class="weui-cells__title common-input tian_wen" style="display:none">添加照片</div><div class="page" style="display:none"><div class="picture picid"><div  class="picture_actor"><img src="" alt=""></div></div></div><div style="display:none" class="newactor_buttonsave" ><button class="sure_experience">确定</button></div></div>'
+          $(".dialogs_save").empty();
+          $(".dialogs_save").append(str);
+          $(".dialogs_save").css("display","block");
+          $(".overlay").css("display","block");
+          $(".overlay").css({ "width": $(document).width(), "height": $(document).height() });
+          $(" #picker").picker({
+                    title: "请选择",
+                    cols: [
+                        {
+                            textAlign: 'center',
+                            values: ['VR视频', '广告片', '形象片', '微电影', '电视剧', '电视电影', '短视频', '纪录片', '网络大电影', '网络电视剧', '视频栏目', '院线电影','其他']
+                        }
+                    ]
+                });
+
+             $(" #moveActor").picker({
+              title: "请选择",
+              cols: [
+                  {
+                      textAlign: 'center',
+                      values: [ '领衔主演', '跟组主演', '客串演员','其它']
+                  }
+              ]
+              });
+          
+          })
+        //确定保存
+         $(".dialogs_save").on("click",".sure_experience",function () {
+         
+          //var userid=$(".user_id").html();
+          var url8=url+"/agent/a_searchAllworkexp/"+userid;
+         // alert(url8)
+          $.ajax({
+            type : "get",
+            url : url8,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+              //alert(data);
+               $(".dialogs_save").css("display","none");
+              $(".overlay").css("display","none");
+              console.log(data);
+              $(".display_experience").empty();
+              var str=$(".display_experience").html();
+              var array=data.workExpArray;
+              for(var i=0;i<array.length;i++){
+               var imagesURL;
+              if(array[i].image_set.imagesURLArray.length==0){
+                imagesURL=""
+              }else{
+                imagesURL=array[i].image_set.imagesURLArray[0].imagesURL
+              }
+                str+='<div ><div class="photo_experience"><img src="'+imagesURL+'" alt=""></div><div class="detail_experience"><img class="careerInResume_id" id="'+array[i].careerInResume_id+'" src="/img/img11.png" alt=""><ul><li><span>剧&#x3000名：</span>'+array[i].detail.productionName+'</li><li><span>剧目类型：</span>'+array[i].detail.productionType+'</li><li><span>饰演角色：</span>'+array[i].detail.role+'</li><li><span>角色类型：</span>'+array[i].detail.roleTag+'</li></ul></div><div class="'+array[i].careerInResume_id+'" id="delete_experience"><p>删除</p></div></div>'
+              }
+              
+              $(".display_experience").html(str)
+              },
+            error:function(){
+              alert('fail');
+              }
+            });
+
+
+          
+        });
+        function url8(){
+            //var userid=$(".user_id").html();
+          var url8=url+"/agent/a_searchAllworkexp/"+userid;
+          //alert(url8)
+          $.ajax({
+            type : "get",
+            url : url8,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+              //alert(data);
+              console.log(data);
+              $(".display_experience").empty();
+              var str=$(".display_experience").html();
+              var array=data.workExpArray;
+              //alert(array[0].image_set.imagesURLArray[0].imagesURL)
+              for(var i=0;i<array.length;i++){
+                var imagesURL;
+              if(array[i].image_set.imagesURLArray.length==0){
+                imagesURL=""
+              }else{
+                imagesURL=array[i].image_set.imagesURLArray[0].imagesURL
+              }
+                str+='<div ><div class="photo_experience"><img src="'+imagesURL+'" alt=""></div><div class="detail_experience"><img class="careerInResume_id" id="'+array[i].careerInResume_id+'" src="/img/img11.png" alt=""><ul><li><span>剧&#x3000名：</span>'+array[i].detail.productionName+'</li><li><span>剧目类型：</span>'+array[i].detail.productionType+'</li><li><span>饰演角色：</span>'+array[i].detail.role+'</li><li><span>角色类型：</span>'+array[i].detail.roleTag+'</li></ul></div><div class="'+array[i].careerInResume_id+'" id="delete_experience"><p>删除</p></div></div>'
+              }
+              
+              $(".display_experience").html(str)
+              },
+            error:function(){
+              alert('fail');
+              }
+            });
+
+        }
+
+        //保存并上传照片
+         //--------------------------------------------上传剧照---第二步-----------------------------------
+                     
+        $(".dialogs_save").on("click",".save_experience",function () {
+         
+         //var userid=$(".user_id").html();
+          var url6=url+"/agent/a_savesingleworkexp";
+          var production_name=$(".production_name").val();
+          var workexp_productionType=$(".workexp_productionType").val();
+          var workexp_roleName=$(".workexp_roleName").val();
+          var workexp_roleTagName=$(".workexp_roleTagName").val();
+          
+          var datas={
+              userid:userid,
+              production_id:"",
+              workexp_roleId:"",
+              careerInResume_id:"",
+              production_name:production_name,
+              workexp_productionType:workexp_productionType,
+              workexp_roleName:workexp_roleName,
+              workexp_roleTagName:workexp_roleTagName
+          }
+          if(production_name&&workexp_productionType&&workexp_roleName&&workexp_roleTagName){
+            $.ajax({
+                type : "post",
+                url : url6,
+                data:datas,
+                dataType : "jsonp",
+                // jsonp: "jsonpCallback",
+                success : function(data){
+                var careerInResume_id=data.careerInResume_id;
+               $(".picid").attr("id",careerInResume_id);
+                 console.log(data);
+                  $.alert("保存成功，请添加剧照",function(){
+
+                   wxchooseImage()
+                   $(".save_experience").css("display","none")
+                   $(".sure_experience").css("display","block")
+                   $(".picture_actor").css("display","block")
+                   $(".page").css("display","block")
+                  $(".tian_wen").css("display","block")
+                  $(".newactor_buttonsave").css("display","block")
+
+                  
+                   
+                  });
+
+                 
+                  function wxchooseImage() {
+                          
+                              wx.chooseImage({
+                                  count: 1,
+                                  needResult: 1,
+                                  sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                                  sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                                  success: function (data) {
+                                      localIds = data.localIds[0].toString();
+                                      //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                                      wxuploadImage(localIds);
+                                  },
+                                  fail: function (res) {
+                                      alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");
+                                  }
+                              });
+                         
+
+                       //上传图片接口
+                        function wxuploadImage(e) {
+                            wx.uploadImage({
+                                localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                isShowProgressTips: 1, // 默认为1，显示进度提示
+                                success: function (res) {
+                                    mediaId = res.serverId; // 返回图片的服务器端ID
+                                    wxdownloadImage(mediaId);
+                                    if (rh.tostr(mediaId)) {
+                                        $(".myimg").attr("src", localIds);
+                                    }
+                                    //alert('上传成功！');
+                                },
+                                fail: function (error) {
+                                    picPath = '';
+                                    localIds = '';
+                                    //alert(Json.stringify(error));
+                                }
+                            });
+                        };
+
+                        function wxdownloadImage(e) {
+                            var mediaId = e;
+                            //alert(data.careerInResume_id);
+                            //alert(userid);
+                            //alert(appId);
+
+                            var careerInResume_id = data.careerInResume_id;
+                            //var imageArray = !{JSON.stringify(careerImage)};
+                            $.ajax({
+                                url: url+"/agent/a_uploadcareerimage",
+                                data: {
+                                    media : mediaId,
+                                    userid : userid,
+                                    index : 1,
+                                    careerInResume_id : careerInResume_id,
+                                    appid:appId
+
+                                },
+                                async:false,
+                                type: "Post",
+                                dataType: "text",
+                                success: function (data) {
+                                    //alert(data)
+                                    //alert($('.dialogs_save .picture_actor'))
+                                    //alert($('.picture_actor'))
+                                 
+                                   var str = $('.dialogs_save .picture_actor').html()
+                                    str='<img style="width:100%;height:100%"  src="'+data+'" alt="">'
+                                    $('.dialogs_save .picture_actor').html(str);
+                                     var dataK={};
+                                  var urls=url+"/agent/a_uploadcompresscareerimage";
+                                  dataK.userid=userid;
+                                  dataK.careerInResume_id=careerInResume_id;
+                                  dataK.index=1;
+                                  dataK.imgData=data;
+                                  sendMSG(data,urls,dataK,0.4);
+                                   
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    alert("提交失败" + textStatus);
+                                }
+
+                            });
+                            
+
+                        };
+                   }
+                 
+                
+                
+                },
+                error:function(err){
+                  console.log(err)
+                }
+              }).fail(function(errorThrown) {
+                  console.log(errorThrown);
+              });
+          }else{
+            //alert("请完善信息")
+          }
+          
+        });
+        //    编辑修改
+        $(".display_experience").on("click","img",function () {
+          var $this=$(this).attr("id");
+          //var userid=$(".user_id").html();
+          console.log($this)
+          
+          $(".dialogs_delete").css("display","block");
+          $(".overlay").css("display","block");
+          $(".overlay").css({ "width": $(document).width(), "height": $(document).height() });
+
+          //获取相应内容
+          var url9=url+"/agent/a_searchsingleworkexp/"+userid+"/"+$this+"/"+appId;
+          console.log(url9)
+          //alert(url8)
+          $.ajax({
+            type : "get",
+            url : url9,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+              //alert(data);
+              console.log(data);
+              var detail=data.workExpArray;
+              console.log(detail)
+              var str=$(".dialogs_delete").html();
+              var imagesURL;
+              if(detail[0].image_set.imagesURLArray.length==0){
+                imagesURL=""
+              }else{
+                imagesURL=detail[0].image_set.imagesURLArray[0].imagesURL
+              }
+              str='<div class="weui-cells weui-cells_form"><div class="weui-cell pic"><div class="weui-cell__bd"><input class="weui-input font-color production_name" type="text" placeholder="" value="'+detail[0].detail.productionName+'"></div></div><div class="weui-cell pic" id="showAndroidDialog2"><div class="weui-cell__bd"><input class="weui-input font-color workexp_productionType" type="text"  placeholder="" value="'+detail[0].detail.productionType+'" id="picker1"/></div></div><div class="weui-cell pic"><div class="weui-cell__bd"><input class="weui-input font-color  workexp_roleName" type="text" placeholder="" value="'+detail[0].detail.role+'"></div></div><div class="weui-cell pic" id="showAndroidDialog1"><div class="weui-cell__bd"><input class="weui-input font-color workexp_roleTagName" type="text"  placeholder="" value="'+detail[0].detail.roleTag+'" id="moveActor1"></div></div><div class="newactor_buttonsave " ><button class="resave_experience" id="'+detail[0].careerInResume_id+'">保存</button><p style="display:none" class="production_id" id="'+detail[0].detail.production_id+'"></p><p style="display:none" class="role_id" id="'+detail[0].detail.role_id+'"></p></div><div class="weui-cells__title common-input">添加照片</div><div class="page" ><div class="picture picture1"><div class="picture_actor"><img style="width:100%;height:100%;" src="'+imagesURL+'" alt=""></div></div></div><div class="newactor_buttonsave " ><button  class="resure_experience">退出</button></div></div>'
+              $(".dialogs_delete").html(str);
+               $(" #moveActor1").picker({
+                  title: "请选择",
+                  cols: [
+                      {
+                          textAlign: 'center',
+                          values: ['领衔主演', '跟组主演', '客串演员','其它']
+                      }
+                  ]
+              });
+              $(" #picker1").picker({
+                    title: "请选择",
+                    cols: [
+                        {
+                            textAlign: 'center',
+                            values: ['VR视频','其他', '广告片', '形象片', '微电影', '电视剧', '电视电影', '短视频', '纪录片', '网络大电影', '网络电视剧', '视频栏目', '院线电影','其他']
+                        }
+                    ]
+                });
+              
+              },
+            error:function(){
+              alert('fail');
+              }
+            });
+         
+
+        });
+       
+        //删除演艺经历
+        $(".display_experience").on("click","#delete_experience",function(){
+        var careerInResume_id=$(this).attr("class");
+        //alert(careerInResume_id);
+        var deleteurl=url+"/agent/a_deletesingleworkexp/"+careerInResume_id;
+        //alert(deleteurl)
+          $.ajax({
+          type : "get",
+          url : deleteurl,
+          dataType : "jsonp",
+          // jsonp: "jsonpCallback",
+          success : function(data){
+            console.log(data);
+            $.alert("删除成功");
+            url8()
+           
+            
+          },
+          error:function(){
+          alert('fail');
+          }
+        });
+        })
+        //重新保存
+        $(".dialogs_delete").on("click",".resave_experience",function(){
+          var $this=$(this);
+          //var userid=$(".user_id").html();
+          var careerInResume_id=$(this).attr("id");
+          var production_id=$(this).next().attr("id")
+          var url10=url+"/agent/a_savesingleworkexp"
+           var production_name=$(".dialogs_delete .production_name").val();
+          var workexp_productionType=$(".dialogs_delete .workexp_productionType").val();
+          var workexp_roleName=$(".dialogs_delete .workexp_roleName").val();
+          var workexp_roleTagName=$(".dialogs_delete .workexp_roleTagName").val();
+          var  workexp_roleId=$(this).next().next().attr("id")
+          
+          var data={
+              userid:userid,
+              production_id:production_id,
+              careerInResume_id:careerInResume_id,
+              production_name:production_name,
+              workexp_productionType:workexp_productionType,
+              workexp_roleName:workexp_roleName,
+              workexp_roleTagName:workexp_roleTagName,
+              workexp_roleId:workexp_roleId
+          }
+          console.log(data)
+          if(production_name&&workexp_productionType&&workexp_roleName&&workexp_roleTagName){
+            $.ajax({
+                type : "post",
+                url : url10,
+                data:data,
+                dataType : "jsonp",
+                // jsonp: "jsonpCallback",
+                success : function(data){
+                 console.log(data);
+                  $.alert("保存成功")
+                   
+                   
+                },
+                error:function(err){
+                  console.log(err)
+                }
+              }).fail(function(errorThrown) {
+                  console.log(errorThrown);
+              });
+          }else{
+            alert("请完善信息")
+          }
+          });
+        //编辑重新上传照片
+         $(".dialogs_delete").on("click",".picture1",function(){
+             
+             //var userid=$(".user_id").html();
+             wxchooseImage() 
+             function wxchooseImage() {
+                          
+                              wx.chooseImage({
+                                  count: 1,
+                                  needResult: 1,
+                                  sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                                  sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                                  success: function (data) {
+                                      localIds = data.localIds[0].toString();
+                                      //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                                      wxuploadImage(localIds);
+                                  },
+                                  fail: function (res) {
+                                      alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");
+                                  }
+                              });
+                         
+
+                       //上传图片接口
+                        function wxuploadImage(e) {
+                            wx.uploadImage({
+                                localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                isShowProgressTips: 1, // 默认为1，显示进度提示
+                                success: function (res) {
+                                    mediaId = res.serverId; // 返回图片的服务器端ID
+                                    wxdownloadImage(mediaId);
+                                    if (rh.tostr(mediaId)) {
+                                        $(".myimg").attr("src", localIds);
+                                    }
+                                    alert('上传成功！');
+                                },//
+                                fail: function (error) {
+                                    picPath = '';
+                                    localIds = '';
+                                    //alert(Json.stringify(error));
+                                }
+                            });
+                        };
+
+                        function wxdownloadImage(e) {
+                            var mediaId = e;
+                            
+                           
+                            //var userid=$(".user_id").html();
+                            var careerInResume_id=$(".resave_experience").attr("id");
+                            //var imageArray = !{JSON.stringify(careerImage)};
+                            $.ajax({
+                                url: url+"/agent/a_uploadcareerimage",
+                                data: {
+                                    media : mediaId,
+                                    userid : userid,
+                                    index : 2,
+                                    careerInResume_id : careerInResume_id,
+                                    appid:appId
+
+                                },
+                                async:false,
+                                type: "Post",
+                                dataType: "text",
+                                success: function (data) {
+                                    //alert($('.dialogs_delete .picture_actor'))
+                                    //alert($('.picture_actor'))
+                                 
+                                   var str = $('.dialogs_delete .picture_actor').html()
+                                    str='<img style="width:100%;height:100%"  src="'+data+'" alt="">'
+                                    $('.dialogs_delete .picture_actor').html(str);
+                                     var dataK={};
+                                  var urls=url+"/agent/a_uploadcompresscareerimage";
+                                  dataK.userid=userid;
+                                  dataK.careerInResume_id=careerInResume_id;
+                                  dataK.index=2;
+                                  sendMSG(data,urls,dataK,0.4);
+                                   
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    alert("提交失败" + textStatus);
+                                }
+
+                            });
+                            
+
+                        };
+                   }
+                 
+         })
+
+         $(".dialogs_save").on("click",".picture_actor",function(){
+             
+             //var userid=$(".user_id").html();
+             wxchooseImage() 
+             function wxchooseImage() {
+                          
+                              wx.chooseImage({
+                                  count: 1,
+                                  needResult: 1,
+                                  sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                                  sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                                  success: function (data) {
+                                      localIds = data.localIds[0].toString();
+                                      //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                                      wxuploadImage(localIds);
+                                  },
+                                  fail: function (res) {
+                                      alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");
+                                  }
+                              });
+                         
+
+                       //上传图片接口
+                        function wxuploadImage(e) {
+                            wx.uploadImage({
+                                localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                isShowProgressTips: 1, // 默认为1，显示进度提示
+                                success: function (res) {
+                                    mediaId = res.serverId; // 返回图片的服务器端ID
+                                    wxdownloadImage(mediaId);
+                                    if (rh.tostr(mediaId)) {
+                                        $(".myimg").attr("src", localIds);
+                                    }
+                                    alert('上传成功！');
+                                },//
+                                fail: function (error) {
+                                    picPath = '';
+                                    localIds = '';
+                                    //alert(Json.stringify(error));
+                                }
+                            });
+                        };
+
+                        function wxdownloadImage(e) {
+                            var mediaId = e;
+                            
+                           
+                            //var userid=$(".user_id").html();
+                            var careerInResume_id=$(".picid").attr("id");
+                            //var imageArray = !{JSON.stringify(careerImage)};
+                            $.ajax({
+                                url: url+"/agent/a_uploadcareerimage",
+                                data: {
+                                    media : mediaId,
+                                    userid : userid,
+                                    index : 2,
+                                    careerInResume_id : careerInResume_id,
+                                    appid:appId
+
+                                },
+                                async:false,
+                                type: "Post",
+                                dataType: "text",
+                                success: function (data) {
+                                    //alert($('.dialogs_save .picture_actor'))
+                                    //alert($('.picture_actor'))
+                                 
+                                   var str = $('.dialogs_save .picture_actor').html()
+                                    str='<img style="width:100%;height:100%"  src="'+data+'" alt="">'
+                                    $('.dialogs_save .picture_actor').html(str) ;
+                                    var dataK={};
+                                  var urls=url+"/agent/a_uploadcompresscareerimage";
+                                  dataK.userid=userid;
+                                  dataK.careerInResume_id=careerInResume_id;
+                                  dataK.index=2;
+                                  sendMSG(data,urls,dataK,0.4);
+                                   
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    alert("提交失败" + textStatus);
+                                }
+
+                            });
+                            
+
+                        };
+                   }
+                 
+         })
+
+       
+       
+        //确定编辑完成
+         $(".dialogs_delete").on("click",".resure_experience",function(){
+          $(".dialogs_delete").css("display","none");
+          $(".overlay").css("display","none");
+          url8()
+         });
+          }
+          function picker(){
+          $(" #picker").picker({
+                    title: "请选择",
+                    cols: [
+                        {
+                            textAlign: 'center',
+                            values: ['VR视频', '广告片', '形象片', '微电影', '电视剧', '电视电影', '短视频', '纪录片', '网络大电影', '网络电视剧', '视频栏目', '院线电影','其他']
+                        }
+                    ]
+                });
+            
+          }
+        
+          
+
+          //------------------------------------------第三步-------------------------------------
+           
+          $(".cover_photo").on("click","div",function(){
+            wxchooseImage()
+            function wxchooseImage() {
+                          
+                              wx.chooseImage({
+                                  count: 1,
+                                  needResult: 1,
+                                  sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                                  sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                                  success: function (data) {
+                                      localIds = data.localIds[0].toString();
+                                      //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                                      wxuploadImage(localIds);
+                                  },
+                                  fail: function (res) {
+                                      alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");
+                                  }
+                              });
+                         
+
+                       //上传图片接口
+                        function wxuploadImage(e) {
+                            wx.uploadImage({
+                                localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                isShowProgressTips: 1, // 默认为1，显示进度提示
+                                success: function (res) {
+                                    mediaId = res.serverId; // 返回图片的服务器端ID
+                                    wxdownloadImage(mediaId);
+                                    if (rh.tostr(mediaId)) {
+                                        $(".myimg").attr("src", localIds);
+                                    }
+                                    //alert('上传成功！');
+                                },
+                                fail: function (error) {
+                                    picPath = '';
+                                    localIds = '';
+                                    alert(Json.stringify(error));
+                                }
+                            });
+                        };
+
+                        function wxdownloadImage(e) {
+                            var mediaId = e;
+                            //alert(data.careerInResume_id);
+                            //alert(userid);
+                            //alert(appId);
+                            //var userid=$(".user_id").html();
+                            //var careerInResume_id = data.careerInResume_id;
+                            //var imageArray = !{JSON.stringify(careerImage)};
+                            $.ajax({
+                                url: url+"/WX/uploadHeadimage",
+                                data: {
+                                    media : mediaId,
+                                    userid : userid,
+                                    appid:appId
+
+                                },
+                                async:false,
+                                type: "Post",
+                                dataType: "text",
+                                success: function (data) {
+                                    //alert(data)
+                                    //alert($('.dialogs_save .picture_actor'))
+                                    //alert($('.picture_actor'))
+                                    $(".cover_photo div").empty();
+                                  var str = $(".cover_photo div").html();
+                                  str='<img class="coverpic" src="'+data+'">';
+                                  $(".cover_photo div").html(str);
+                                  var urls=url+'/WX/uploadCompressHeadimage';
+                                  let dataK={};
+                                  dataK.userid=userid;
+                                  dataK.media=mediaId;
+                                  dataK.appid=appId;
+                                  console.log(urls,userid);
+                                  sendMSG(data,urls,dataK,0.4)
+                                   
+                                   
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    alert("提交失败" + textStatus);
+                                }
+
+                            });
+                            
+
+                        };
+                   }
+          })
+           $(".casting>div").on("click",function(){
+            console.log($(this).index());
+            var index=$(this).index();
+            var $this=$(this);
+            console.log($(this).children("div").eq(0).children("img").attr("src"));
+            wxchooseImage(index)
+            function wxchooseImage(index) {
+              //var userid=$(".user_id").html();
+              var index=index;
+               console.log(index)
+              // alert(index);
+              console.log($(this).children("div").eq(0).children("img").attr("src"));
+              
+                  if ($this.children("div").eq(0).children("img").attr("src")) {
+                      $.confirm("您确认要删除此照片吗？", "确认删除", function () {
+                          $.ajax({
+                              type: "Post",
+                              url: url+"/WX/uploadcastingimage",
+                              dataType: "text",
+                              data: {
+                                  imageLocation: index,
+                                  userid: userid,
+                                  appid : appId
+                              },
+                              success: function (data) {
+                                $.alert("删除成功")
+                                var img_id ="#img"+index;
+                                $(img_id).removeAttr("src");
+
+                                  
+                                 
+                              }
+                          });
+                      }, function () {
+                      })
+                  } else {
+                      //alert("上传")
+                      wx.chooseImage({
+                          count: 1,
+                          needResult: 1,
+                          sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                          sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                          success: function (data) {
+                              localIds = data.localIds[0].toString();
+                              //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                              wxuploadImage(localIds, index);
+                          },
+                          fail: function (res) {
+                              alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");
+                          }
+                      });
+                  }
+              
+
+
+              };
+              //上传图片接口
+              function wxuploadImage(e,index) {
+                wx.uploadImage({
+                  localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得
+                  isShowProgressTips: 1, // 默认为1，显示进度提示
+                  success: function (res) {
+                      mediaId = res.serverId; // 返回图片的服务器端ID
+                      wxdownloadImage(mediaId,index);
+                      if (rh.tostr(mediaId)) {
+                        $(".myimg").attr("src", localIds);
+                      }
+                  },
+                  fail: function (error) {
+                      picPath = '';
+                      localIds = '';
+                     // alert(Json.stringify(error));
+                  }
+                });
+              };
+          
+             function wxdownloadImage(e,index) {
+                 var mediaId=e;
+                // var userid=$(".user_id").html();
+                 //alert(id);
+                 $.ajax({  
+                    url: url+"/WX/uploadcastingimage",
+                    data: {
+                        media : mediaId,
+                        userid : userid,
+                        imageLocation:index,
+                        appid : appId
+                    },
+                    type: "Post",
+                    dataType: "text",
+                    success: function (data) {
+                      //alert(data)
+                      
+                      var img_id ="#img"+index;
+                      $(img_id).removeAttr("src");
+                      $(img_id).attr("src", data);
+                       var urlBody='/WX/uploadCompresscastingimage';
+
+                    var urlA = url+urlBody; 
+                    var dataK={};
+                    dataK.imageLocation=index;
+                    dataK.imgData=data;
+                    dataK.userid=userid;
+                    console.log(dataK)
+                    sendMSG(data,urlA,dataK,0.4);
+                        
+                        
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("提交失败" + textStatus);
+                    }
+
+                });
+             }
+
+          })
+          //---------------------选择类别-----------------------------------
+          
+          $(".specialty3").on("click",".leibie",function(){
+            console.log($(this).children("input").prop('disabled'))
+            $(this).children("input").attr('checked','checked')
+            $(this).children("input").attr('disabled','disabled')
+            //$(this).children("input").attr('checked','checked')
+            //if($(this).children("input").prop('disabled')){
+              
+              var id=$(this).children("input").attr("id");
+              var wname=$(this).children("label").html();
+              console.log(wname)
+              $(".name1").html(wname);
+              $(".name1").attr("id",id);
+              
+              var url20=url+'/WX/wx_allrepertoiretype/'+id;
+               console.log(url20)
+              $.ajax({
+                type : "get",
+                url : url20,
+                dataType : "jsonp",
+                success : function(data){
+                  $(".dialogs_leixing").css("display","block");
+                  $(".overlay").css("display","block");
+                  $(".overlay").css({ "width": $(document).width(), "height": $(document).height() });
+
+                  console.log(data);
+                  $(".specialty5").empty();
+                  var specialty = $(".specialty5").html();
+                  var length=data.length;
+                  for(var i=0;i<length;i++){
+                    specialty += '<div><input  type="checkbox" name="specialty5" value="'+data[i].name+'" id="'+data[i].id+'"><label class="label" for="'+data[i].id+'">'+data[i].name+'</label></div>'
+                  }
+                    $(".specialty5").html(specialty);
+                },
+                error:function(err){
+                  console.log(err)
+                }
+              });
+            //}else{
+             // alert("警用")
+            //}
+            
+           
+
+
+        })
+        function html(){
+          if($('input[name="specialty2"]:checked')){
+            $('input[name="specialty2"]:checked').next().addclass("ll")
+          }
+          
+        }
+        
+          var c="[]";
+          var jsonarray = eval('('+c+')');
+           var b="[]";
+          var json = eval('('+b+')');
+
+          //------------------------------  确定添加类型-------------------------------------------------------
+         $(".dialogs_leixing").on("click",".button_sure",function(){
+            console.log("kkk")
+             //var userid=$(".user_id").html();
+             var tagename=$(this).children(".name1").html();
+
+            var tagid=$(this).children(".name1").attr("id");
+            var featureArray=[];
+            $('input[name="specialty5"]:checked').each(function () {
+            featureArray.push($(this).val())
+            });
+            var reper_id=[];
+            $('input[name="specialty5"]:checked').each(function () {
+            reper_id.push($(this).attr("id"))
+            });
+            console.log(reper_id)
+            //alert(userid)
+            var arr  =
+                {    "userid":userid,
+                    "category_id" : tagid,
+                    "repertoireType" : reper_id
+                };
+              var leixing2=url+'/agent/a_saveCareerType';
+             if(reper_id.length===0){
+                alert("请选择类型")
+             }else{
+              $(".dialogs_leixing").css("display","none");
+              $(".overlay").css("display","none");
+              $.ajax({
+                type : "post",
+                url : leixing2,
+                data:arr,
+                dataType : "jsonp",
+                 //jsonp: "jsonpCallback",
+                success : function(data){
+                  //alert("chengg")
+                  $(".category").empty();
+                  //$(".category .allleixing").empty();
+                  console.log(data)
+                  
+                  var str=$(".category").html();
+                  for(var i=0;i<data.length;i++){
+                    var span='';
+                     for(var j=0;j<data[i].repertoireTypeArray.length;j++){
+                      span+='<span style="margin-left:0.1rem" id="'+data[i].repertoireTypeArray[j].repertoireTypeid+'"class=" leixing1" >'+data[i].repertoireTypeArray[j].repertoireTypeName+'<span>'
+                    }
+                     str += '<div ><img id="'+data[i].categoryid+'" class="delete" src="/img/shanchu.png" width="20px" style="vertical-align:middle"><label  class="leibie1"> '+data[i].categoryName+'</label><div style="display:inline" class="allleixing">'+span+'</div><img id="'+data[i].categoryid+'" style="vertical-align:middle"  class="xiulei" src="/img/scrm.png" width="20px"><span  style="color:#4da2ad;font-size:0.26rem">编辑<span></div>'
+                    
+                  }
+                  console.log(span)
+                  $(".category").html(str);
+
+              
+               },
+                error:function(err){
+                  console.log(err);
+                  alert("fail")
+                }
+              })
+             }
+           
+            
+              //jsonarray.push(arr);
+             
+
+              //json=jsonarray;
+             console.log(jsonarray)
+            //$(".specialty5").length();
+            
+        })
+
+        //-----------------------------------------删除类型===============================
+        $(".category").on("click",".delete",function(){
+         var category_id=$(this).attr("id");
+         //var userid=$(".user_id").html();
+          var $specialty3 = $(".specialty3").children(".leibie").children('#'+category_id);
+          $specialty3.attr('checked',false)
+          $specialty3.removeAttr("disabled")
+         console.log(category_id);
+         var data  =
+                {    "userid":userid,
+                    "category_id" : category_id,
+                };
+            var url21=url+'/agent/a_deleteCategory';
+             console.log(url21)
+            $.ajax({
+              type : "post",
+              url : url21,
+              data:data,
+              dataType : "jsonp",
+              success : function(data){
+                console.log(data);
+                $(".category").empty();
+                  console.log(data)
+                  var str=$(".category").html();
+                  for(var i=0;i<data.length;i++){
+                      var span='';
+                     for(var j=0;j<data[i].repertoireTypeArray.length;j++){
+                      span+='<span style="margin-left:0.1rem" id="'+data[i].repertoireTypeArray[j].repertoireTypeid+'"class=" leixing1" >'+data[i].repertoireTypeArray[j].repertoireTypeName+'<span>'
+                    }
+                     str += '<div ><img style="vertical-align:middle" id="'+data[i].categoryid+'" class="delete" src="/img/shanchu.png" width="20px"><label  class="leibie1"> '+data[i].categoryName+'</label><div style="display:inline" class="allleixing">'+span+'</div><img id="'+data[i].categoryid+'" style="vertical-align:middle"  class="xiulei" src="/img/scrm.png" width="20px"><span  style="color:#4da2ad;font-size:0.26rem">编辑<span></div>'
+                    
+                  }
+                  console.log(str)
+                  $(".category").html(str);
+                 
+                  console.log($specialty3.attr('checked',false))
+
+              },
+              error:function(err){
+                console.log(err)
+              }
+            });
+        })
+        //------------------------------修改剧目类型------------------------------------------------
+        $(".category").on("click",".xiulei",function(){
+          var id=$(this).attr("id");
+          var allleixing=$(this).prev(".allleixing");
+          $.each(allleixing, function(){
+            console.log($(this).children().attr("id"));
+             
+            });
+          console.log(allleixing)
+            $(".name2").attr("id",id);
+            
+            var url20=url+'/WX/wx_allrepertoiretype/'+id;
+             console.log(url20)
+            $.ajax({
+              type : "get",
+              url : url20,
+              dataType : "jsonp",
+              success : function(data){
+                $(".dialogs_leixing1").css("display","block");
+                $(".overlay").css("display","block");
+                $(".overlay").css({ "width": $(document).width(), "height": $(document).height() });
+
+                console.log(data);
+                $(".specialty6").empty();
+                var specialty = $(".specialty6").html();
+                var length=data.length;
+                for(var i=0;i<length;i++){
+                  specialty += '<div><input  type="checkbox" name="specialty6"  id="'+data[i].id+'"><label class="label" for="'+data[i].id+'">'+data[i].name+'</label></div>'
+                }
+                  $(".specialty6").html(specialty);
+                  console.log(specialty)
+              },
+              error:function(err){
+                console.log(err)
+              }
+            });
+        })
+
+
+
+        //===================================确定修改类型------------------------------------------------
+        $(".dialogs_leixing1").on("click",".button_sure1",function(){
+            console.log("kkk")
+             //var userid=$(".user_id").html();
+             
+
+            var tagid=$(this).children(".name2").attr("id");
+            var reper_id=[];
+            $('input[name="specialty6"]:checked').each(function () {
+            reper_id.push($(this).attr("id"))
+            });
+            console.log(reper_id)
+            //alert(userid)
+            var arr22  =
+                {    "userid":userid,
+                    "category_id" : tagid,
+                    "repertoireType" : reper_id
+                };
+                console.log(arr22)
+              var leixing3=url+'/agent/a_saveCareerType';
+             if(reper_id.length===0){
+                alert("请选择类型")
+             }else{
+              $(".dialogs_leixing1").css("display","none");
+              $(".overlay").css("display","none");
+              $.ajax({
+                type : "post",
+                url : leixing3,
+                data:arr22,
+                dataType : "jsonp",
+                success : function(data){
+                  //alert("chengg")
+                  $(".category").empty();
+                  console.log(data)
+                  
+                  var str=$(".category").html();
+                  for(var i=0;i<data.length;i++){
+                    var span='';
+                     for(var j=0;j<data[i].repertoireTypeArray.length;j++){
+                      span+='<span style="margin-left:0.1rem" id="'+data[i].repertoireTypeArray[j].repertoireTypeid+'"class=" leixing1" >'+data[i].repertoireTypeArray[j].repertoireTypeName+'<span>'
+                    }
+                     str += '<div ><img style="vertical-align:middle" id="'+data[i].categoryid+'" class="delete" src="/img/shanchu.png" width="20px"><label  class="leibie1"> '+data[i].categoryName+'</label><div style="display:inline" class="allleixing">'+span+'</div><img style="vertical-align:middle" id="'+data[i].categoryid+'"  class="xiulei" src="/img/scrm.png" width="20px"><span  style="color:#4da2ad;font-size:0.26rem">编辑<span></div>'
+                    
+                  }
+                  console.log(arr22)
+                  $(".category").html(str);
+
+              
+               },
+                error:function(err){
+                  console.log(err);
+                  alert("fail")
+                }
+              })
+             }
+           
+            
+              
+            
+        })
+
+       // ===============================================是否有经纪人
+        $('#switchCP').click(function () {
+              //alert("kk")
+              if($('#switchCP').is(':checked')) {
+                  $(".agent_tel").removeClass("displayNone")
+              }else{
+                  $(".agent_tel").addClass("displayNone")
+              }
+            })
+
+
+
+       //----------------------------------------------取消添加演绎经历------------
+          $(".dialogs_save").on("click",".quxiao",function(){
+           $(".dialogs_save").css("display","none");
+           $(".overlay").css("display","none");
+            
+              });
+          $(".dialogs_leixing").on("click",".quxiao",function(){
+            $(".dialogs_leixing").css("display","none");
+            $(".overlay").css("display","none");
+                   
+
+          });
+
+          function wxchooseImage() {
+                          
+                              wx.chooseImage({
+                                  count: 1,
+                                  needResult: 1,
+                                  sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                                  sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                                  success: function (data) {
+                                      localIds = data.localIds[0].toString();
+                                      //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                                      wxuploadImage(localIds);
+                                  },
+                                  fail: function (res) {
+                                      alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");
+                                  }
+                              });
+                         
+
+                       //上传图片接口
+                        function wxuploadImage(e) {
+                            wx.uploadImage({
+                                localId: e, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                isShowProgressTips: 1, // 默认为1，显示进度提示
+                                success: function (res) {
+                                    mediaId = res.serverId; // 返回图片的服务器端ID
+                                    wxdownloadImage(mediaId);
+                                    if (rh.tostr(mediaId)) {
+                                        $(".myimg").attr("src", localIds);
+                                    }
+                                    //alert('上传成功！');
+                                },
+                                fail: function (error) {
+                                    picPath = '';
+                                    localIds = '';
+                                    //alert(Json.stringify(error));
+                                }
+                            });
+                        };
+
+                        function wxdownloadImage(e) {
+                            var mediaId = e;
+                            //alert(data.careerInResume_id);
+                            //alert(userid);
+                            //alert(appId);
+
+                            var careerInResume_id = data.careerInResume_id;
+                            //var imageArray = !{JSON.stringify(careerImage)};
+                            $.ajax({
+                                url: url+"/agent/a_uploadcareerimage",
+                                data: {
+                                    media : mediaId,
+                                    userid : userid,
+                                    index : 1,
+                                    careerInResume_id : careerInResume_id,
+                                    appid:appId
+
+                                },
+                                async:false,
+                                type: "Post",
+                                dataType: "text",
+                                success: function (data) {
+                                    //alert(data)
+                                    //alert($('.dialogs_save .picture_actor'))
+                                    //alert($('.picture_actor'))
+                                 
+                                   var str = $('.dialogs_save .picture_actor').html()
+                                    str='<img style="width:100%;height:100%"  src="'+data+'" alt="">'
+                                    $('.dialogs_save .picture_actor').html(str) 
+                                   
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    alert("提交失败" + textStatus);
+                                }
+
+                            });
+                            
+
+                        };
+                   };
+
+
+
+         

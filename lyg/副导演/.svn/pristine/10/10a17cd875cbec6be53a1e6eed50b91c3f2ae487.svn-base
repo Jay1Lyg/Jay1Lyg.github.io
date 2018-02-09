@@ -1,0 +1,209 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告列表
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/notice_list.css')
+    script(src='js/jquery1.1.js')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      body{
+      background: white;
+      }
+      .htit{line-height:35px;padding:0 .3rem;color:#ff8e2e;font-size: .4rem;margin:1rem 0 .4rem 0}
+      .wrapper01 {position:relative;height: 35px;width: 100%;overflow: hidden;margin:0 auto;border-bottom:1px solid #ccc}
+      .wrapper01 .scroller {position:absolute}
+      .wrapper01 .scroller li {height: 1rem;color:#333;float: left;line-height: 35px;font-size: 14px;text-align: center;}
+      .wrapper01 .scroller li a{color:#333;display:block;margin:0 .3rem}
+      .wrapper01 .scroller li.cur a{color:#4da2ad;}
+    <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
+    // //<script type="text/javascript" src="/js/jquery-weui.js"></script>
+    script(type='text/javascript', src='/js/rootfont.js')
+    // <script type="text/javascript" src="js/tab.js"></script>
+    //script(type='text/javascript', src='/js/zepto.min.js')
+  body
+    header
+      #retr.wrapper.wrapper01
+        .scroller
+          ul.clearfix.clearfix1
+      #wrapper02.wrapper.wrapper01
+        .scroller
+          ul.clearfix.clearfix2
+            li
+              a 不限
+            li
+              a 不限
+            li
+              a 不限
+            li
+              a 不限
+            li
+              a 不限
+            li
+              a 不限
+      #wrapper03.wrapper.wrapper01
+        .scroller
+          ul.clearfix
+            li
+              a 全部
+            li
+              a 已认证
+            li
+              a 未认证
+    section
+      div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+      .display_experience
+        div
+          .photo_experience
+            img(src='img/banner.png', alt='')
+          .detail_experience
+            ul
+              li
+                span 剧名：
+                | 《寡妇》
+                span.types 古装
+              li
+                span 剧目类型：2举办的时刻人
+                | b
+              li
+                span 拍摄周期：
+                | 123
+              li
+                span 拍摄地：
+                | 1 自噶是的v人
+          .zhixiang
+            img(src='img/jiantou.png', alt='')
+        div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+        div
+          .photo_experience
+            img(src='img/banner.png', alt='')
+          .detail_experience
+            ul
+              li
+                span 剧名：
+                | 《寡妇》
+                span.types 古装
+              li
+                span 剧目类型：2举办的时刻人
+                | b
+              li
+                span 拍摄周期：
+                | 123
+              li
+                span 拍摄地：
+                | 1 自噶是的v人
+          .zhixiang
+            img(src='img/jiantou.png', alt='')
+        div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+        div
+          .photo_experience
+            img(src='img/banner.png', alt='')
+          .detail_experience
+            ul
+              li
+                span 剧名：
+                | 《寡妇》
+                span.types 古装
+              li
+                span 剧目类型：2举办的时刻人
+                | b
+              li
+                span 拍摄周期：
+                | 123
+              li
+                span 拍摄地：
+                | 1 自噶是的v人
+          .zhixiang
+            img(src='img/jiantou.png', alt='')
+        div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+  script(type='text/javascript', src='/js/flexible.js')
+  script(type='text/javascript', src='/js/iscroll.js')
+  script(type='text/javascript', src='/js/navbarscroll.js')
+  // <script src="js/notice_nav.js"></script>
+  script.
+    $(function(){
+        var appid = !{JSON.stringify(appid)};
+         var openid = !{JSON.stringify(openid)};
+        var url="http://www.901vehicle.cn";
+        var url3=url+"/WX/wx_allproductiontypes/1/null";
+        var time=$.now();
+        console.log(time);
+        function all_notice(page){
+            var all_url=url+'/WX/wx_allcrewlist/'+page+'/'+appid+'/'+openid+'/'+time;
+            console.log(all_url);
+            $.ajax({
+                type : "get",
+                url : all_url,
+                dataType : "jsonp",
+                async:false,
+                // jsonp: "jsonpCallback",
+                success : function(data){
+                    console.log(data);
+                    
+                },
+                error:function(err){
+                   console.log(err)
+                }
+            });
+        }
+         all_notice(1)
+        
+        console.log(url3);
+        $.ajax({
+            type : "get",
+            url : url3,
+            dataType : "jsonp",
+            async:false,
+            // jsonp: "jsonpCallback",
+            success : function(data){
+                console.log(data);
+                $(".clearfix1").empty();
+                var str=$(".clearfix1").html();
+                for(var i=0;i<data.length;i++){
+                str+='<li id="'+data[i].id+'"><a >'+data[i].name+'</a></li>'
+                }
+                $(".clearfix1").html(str);
+                $('#retr').navbarscroll();
+            },
+            error:function(){
+            alert('fail');
+        }
+        });
+        $('#retr').on("click","li",function(){
+            var id=$(this).attr("id");
+            var url4=url+'/WX/wx_allrepertoiretype/'+id;;
+            console.log(url4)
+            $.ajax({
+            type : "get",
+            url : url4,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+                console.log(data);
+                $(".clearfix2").empty();
+                var str=$(".clearfix2").html();
+                for(var i=0;i<data.length;i++){
+                str+='<li id="'+data[i].id+'" ><a href="javascript:void(0)">'+data[i].name+'</a></li>'
+                }
+                $(".clearfix2").html(str);
+                $(".scroller>.clearfix:first-child").css("color","#4da2ad");
+                //                    $('#wrapper02').navbarscroll({
+                //                        defaultSelect:6,
+                //                        endClickScroll:function(obj){
+                //                            console.log(obj.attr("id"))
+                //                        }
+                //
+                //                    });
+                $('#wrapper02').navbarscroll();
+            },
+            error:function(){
+            alert('fail');
+            }
+            });
+        });
+        $('#wrapper03').navbarscroll();
+    });

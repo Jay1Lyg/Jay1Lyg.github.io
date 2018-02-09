@@ -1,0 +1,125 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/weui2.css')
+    link(rel='stylesheet', href='/css/weui3.css')
+    // <link rel="stylesheet" href="css/weui.css" />
+    link(rel='stylesheet', href='/css/notice_list.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      .ppp{
+      clear: both;
+      font-weight: bold;
+      text-align: center;
+      z-index: 1000;
+      background: #fff;
+      color: #000;
+      mix-blend-mode: lighten;
+      height: 90px;
+      font-size: 50px;
+      z-index: 100;
+      position: fixed;
+      top: 50px;
+      left: 150px;
+      }
+    // <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+    // //<script type="text/javascript" src="js/jquery-weui.js"></script>
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/zepto.min.js')
+  body
+    header
+    section
+      // 、、 <img src="img/img1.png" alt="">
+      .weui_cell.slidelefts
+        .weui_cell_bd.weui_cell_primary
+          .display_experience
+            div
+              .photo_experience
+                img(src='img/banner.png', alt='')
+              .detail_experience
+                ul
+                  li
+                    span 剧名：
+                    | 《寡妇》
+                    span.types 古装
+                  li
+                    span 剧目类型：
+                    | 2举办的时刻人vjbkdvbjhksjdb
+                  li
+                    span 拍摄周期：
+                    | 1vjhjh人
+                  li
+                    span 拍摄地：
+                    | 1 自噶是的v人
+              .zhixiang
+                img(src='img/jiantou.png', alt='')
+        .slideleft
+          span.bianji(style='background:#4da2ad;color:#fff') 编辑
+          span.bg-green.f-white.delete 删除
+      .weui_cell.slidelefts
+        .weui_cell_bd.weui_cell_primary
+          .display_experience
+            div
+              .photo_experience
+                img(src='img/img1.png', alt='')
+              .detail_experience
+                ul
+                  li
+                    span 剧名：
+                    | 《寡妇》
+                    span.types 古装
+                  li
+                    span 剧目类型：
+                    | 2举办的时刻人
+                  li
+                    span 拍摄周期：
+                    | 1vjhjh人
+                  li
+                    span 拍摄地：
+                    | 1 自噶是的v人
+              .zhixiang
+                img(src='img/jiantou.png', alt='')
+        .slideleft
+          span(style='background:#4da2ad;color:#fff') 编辑
+          span.bg-green.f-white 删除
+      .weui_cell.slidelefts
+        .weui_cell_bd.weui_cell_primary
+          .display_experience
+            div
+              .photo_experience
+                img(src='img/img1.png', alt='')
+              .detail_experience
+                ul
+                  li
+                    span 剧名：
+                    | 《寡妇》
+                    span.types 古装
+                  li
+                    span 剧目类型：
+                    | 2举办的时刻人
+                  li
+                    span 拍摄周期：
+                    | 1vjhjh人
+                  li
+                    span 拍摄地：
+                    | 1 自噶是的v人
+              .zhixiang
+                img(src='img/jiantou.png', alt='')
+        .slideleft
+          span(style='background:#4da2ad;color:#fff') 编辑
+          span.bg-green.f-white 删除
+  script(src='js/slideleft.js')
+  script.
+    $("section").on("click",".delete",function () {
+    alert("删除")
+    })
+    $("section").on("click",".bianji",function () {
+    alert("编辑")
+    })

@@ -1,0 +1,26 @@
+var keystone = require('keystone');
+var User = keystone.list('User');
+var PublicAccount = keystone.list('PublicAccount');
+var BoundAgentAndActor = keystone.list('BoundAgentAndActor');
+var async = require('async');
+var urllib = require('url');
+var search = require('../../query/save_and_get_data_in_MongoDB/weixin_public_account/search.js');
+
+exports = module.exports = function(req, res) {
+	var page = req.params.page;
+	var appid = req.params.appid;
+    BoundAgentAndActor.paginate({
+      page: page,
+      perPage:10,
+      maxPages: 10
+     })
+     .where('appid',appid)
+     .where('allok',true)
+     .exec(function(err,ret){
+       if(err){
+         throw new Error(err);
+       }else{
+          actors.currentPage = ret.currentPage;
+          actors.totalPages = ret.totalPages;
+
+}

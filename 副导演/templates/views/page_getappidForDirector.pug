@@ -1,0 +1,75 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 授权
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/noticeJob.css')
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    style.
+      * {
+      padding: 0;
+      margin: 0;
+      list-style: none
+      }
+      body{
+      background: #4da2ad;
+      }
+      div {
+      margin-top: 30%;
+      width: 100%;
+      text-align: center;
+      }
+      p{
+      color: white;
+      font-size: 20px;
+      margin-bottom: 5%;
+      }
+      input {
+      width: 70%;
+      border: none;
+      height:45px;
+      border-radius: 5px;
+      margin-bottom:20% ;
+      outline:none;
+      font-size: 14px;
+      }
+      input::placeholder{
+      text-align: center;
+      }
+      button{
+      width: 70%;
+      height: 40px;
+      background: white;
+      border-radius: 5px;
+      border: none;
+      font-size: 14px;
+      color: #4da2ad;
+      outline:none;
+      }
+  body
+    div
+      p 请输入您的发布授权ID号码
+      form#form(action='/WX/wx_getappidForDirector', method='post')
+        input(type='text', placeholder='发布授权ID号码',name='appid')
+      button.btn 提交
+    script.
+      var index=!{JSON.stringify(index)};
+      if(index==2){
+        alert("该公众号管理员未进行授权")
+      }
+      $(".btn").click(function(){
+        console.log("l")
+        var appid=$(".appid").val();
+        console.log(appid)
+        if(appid==""){
+          alert("发布授权ID号码不能为空")
+        }else{
+          $("#form").submit();
+          //var index=!{JSON.stringify(index)};
+        }
+        
+      });

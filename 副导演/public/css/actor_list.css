@@ -1,0 +1,170 @@
+*{
+    margin: 0;padding: 0;list-style: none;
+}
+.photo_font{
+    padding: 10px;
+}
+.photo_font>a>div{
+    float: left;
+    width: 46%;
+
+    padding: 2%;
+    box-shadow: none;
+
+}
+.photo_font>a>div>div{
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;  
+    float:left;
+    margin:1%
+}
+.photo_font>a>div>div>img{
+  
+   
+}
+.photo_font>a>div p{
+    font-size:12px ;
+    display: inline-block;
+    margin-right: 10px;
+    color: black;
+}
+.photo_font>a>div b{
+    color: #4da2ad;
+    border: 1px solid #4da2ad;
+    padding: 0 5px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+.Hei{
+    width:100%;
+    height:auto;
+  }
+  .Wid{
+    width:auto;
+    height:100%;
+  }
+/*-------------------------侧边栏---------------------------*/
+.sidebar{
+    position: fixed;
+    width: 70%;
+    height: auto;
+    /*border: 1px solid red;*/
+    background: white;
+    top:0;
+    bottom: 0;
+    right: -75%;
+    z-index: 100;
+    overflow:auto;
+}
+#panel{
+    text-align: center;
+    line-height: 44px;
+    font-size: 14px;
+}
+#panel img{
+    width: 12px;
+    margin-left: 10px;
+}
+#menu label{
+    font-size: 12px;
+    color:#666;
+    overflow: hidden;
+   
+   
+
+
+}
+#menu input::placeholder{
+    font-size: 12px;
+}
+#menu select{
+    font-size: 12px;
+    color:#666;
+}
+#menu textarea{
+    font-size: 12px;
+}
+.specialty>div{
+    float: left;
+    width: 33%;
+    margin: 0.15rem 0;
+    overflow: hidden;
+}
+
+/*复选框样式*/
+.specialty{
+    width: 100%;
+}
+.specialty>div input{
+    background: white;
+}
+.specialty>div label{
+    font-size: 12px;
+}
+
+.filter{
+    width: 100%;
+    margin: 10px 0;
+}
+.filter button{
+    width: 100%;
+    height: 30px;
+    background: #4da2ad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+
+.overlay {
+    background: #000;
+    filter: alpha(opacity=50); /* IE的透明度 */
+    opacity: 0.3;  /* 透明度 */
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 66; /* 此处的图层要大于页面 */
+    display:none;
+
+}
+
+.weui-cell__hd{
+    width: 85px;
+}
+/*禁止滚动*/
+.ovfHiden{overflow: hidden;height: 100%;}
+
+.tabDown ul li.bgcolor{
+    background: #4da2ad;
+    color: white;
+   border:1px solid white;
+}
+
+/*精选*/
+.jinxuan{
+    display: none;
+    opacity: 0;
+    width: 100%;
+    filter:alpha(opacity=0); /* IE */
+    -moz-opacity:0; /* 老版Mozilla */
+    -khtml-opacity:0; /* 老版Safari */
+    position: fixed;
+    top: 0 ;
+    bottom: 0;
+    left: 0;
+
+  z-index: 502;
+    background: white
+
+}
+.tabUp{
+    width:100%;
+    height:44px;
+    background:#f2f2f2;
+}

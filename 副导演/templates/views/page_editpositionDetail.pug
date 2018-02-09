@@ -1,0 +1,177 @@
+doctype html
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    title 发布通告
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/noticeJob.css')
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/common.css')
+  body
+    // <form action='' method='post' id="form" target="rfFrame">
+    header#header
+      div
+        p 角色信息
+    section(style='margin-bottom:1.8rem')
+      .page.panel.js_show.edit
+    footer
+      .page__bd.page__bd_spacing
+        a#subMit.weui-btn.look-over 确定
+    script(src='/js/jquery.min.js')
+    script(src='/js/jquery.cookie.js')
+    script(src='/js/jqWeui.js')
+    script(src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/url.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    script.
+        var careerincrewid = !{JSON.stringify(careerincrewid)};
+        var edit_url=url+'/WX/wx_searchoneroleinfo/'+careerincrewid;
+        console.log(edit_url);
+      $.ajax({
+        type : "get",
+        url : edit_url,
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+         console.log(data);
+         var str='';
+         str='<div class="page__bd"><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input"> 职位名称</label></div><div class="weui-cell__bd"><input name="role" class="weui-input font-color role" type="text" placeholder="请输入" value="'+data.role+'"></div></div><div class="weui-cell weui-cell_select weui-cell_select-after"><div class="weui-cell__hd"><label for="" class="weui-label  common-input"> 性别</label></div><div class="weui-cell__bd"><select class="weui-select option select_sex" name="select_sex"><option value="1" style="text-align: right">男</option><option value="2" style="text-align: right">女</option><option value="3" style="text-align: right">不限</option></select></div></div><div class="weui-cell weui-cell_select weui-cell_select-after"><div class="weui-cell__hd"><label class="weui-label  common-input"> 年龄段</label></div><div class="weui-cell__bd"><select class="weui-select option select_age" name="select_age"><option value="1" style="text-align: right">婴幼儿</option><option value="2" style="text-align: right">少年</option><option value="3" style="text-align: right">青年</option><option value="4" style="text-align: right">中年</option><option value="5" style="text-align: right">老年</option><option value="6" style="text-align: right">不限</option></select></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input"> 招募数量</label></div><div class="weui-cell__bd"><input value="'+data.men_count+'" name="recruit_number" class="recruit_number weui-input font-color" type="text" placeholder="请输入"></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input"> 身高</label></div><div class="weui-cell__bd"><input style="float:left;width:30%" name="min_height" class="weui-input font-color min_height height" type="text" placeholder="请输入" value="'+data.min_height+'"><span style="float:left;margin-right:20%">-</span><input name="max_height" class=" height weui-input font-color max_height" type="text" placeholder="请输入" style="float:left;width:30%" value="'+data.max_height+'"></div></div><div class="weui-cell weui-cell_select weui-cell_select-after"><div class="weui-cell__hd"><label for="" class="weui-label  common-input"> 体型</label></div><div class="weui-cell__bd"><select class="weui-select option shape" name="shape"><option value="0" style="text-align: right">不限</option><option value="1" style="text-align: right">瘦子</option><option value="2" style="text-align: right">偏瘦</option><option value="3" style="text-align: right">适中</option><option value="4" style="text-align: right">健硕</option><option value="5" style="text-align: right">胖子</option></select></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input">角色预算</label></div><div class="weui-cell__bd"><input value="'+data.role_paycheck+'" name="role_paycheck" class="role_paycheck weui-input font-color" type="text" placeholder="请输入"></div></div><div class="weui-cell"><div class="weui-cell__hd"><label class="weui-label common-input">拍摄周期（天）</label></div><div class="weui-cell__bd"><input value="'+data.workingdays+'" name="role_paycheck" class="workingdays weui-input font-color" type="text" placeholder="请输入"></div></div><div class="weui-cell add-college" ><div class="weui-cell__hd"><label class="weui-label common-input"> 技能特长</label></div><div class="weui-cell__bd specialty1"><div><input  type="checkbox" name="specialty" value="" id="id"><label for="id">不限</label></div><div><input  type="checkbox" name="specialty" value="" id="id"><label for="id">不限</label></div></div></div><div class="weui-cell add-college" ><div class="weui-cell__hd"><label class="weui-label common-input"> 特征</label></div><div class="weui-cell__bd specialty2"><div><input  type="checkbox" name="specialty" value="" id="id"><label for="id">不限</label></div><div><input  type="checkbox" name="specialty" value="" id="id"><label for="id">不限</label></div></div></div><div><div class="weui-cells__title common-input">人物小传</div><div class="weui-cells weui-cells_form"><div class="weui-cell"><div class="weui-cell__bd"><textarea name="describe" class="weui-textarea actorData describe" placeholder="描述" rows="3">'+data.description+'</textarea></div></div></div></div></div>'
+         $(".edit").html(str);
+         var skill=data.SkillTagid;
+          var feature=data.FeatureTagid;
+          console.log(skill)
+          $(".select_sex").val(data.gender);
+          $(".select_age").val(data.age);
+          $(".shape").val(data.shape);
+         
+          var url1=url+"/agent/a_allskilltypes/1/null";
+          $.ajax({
+            type : "get",
+            url : url1,
+            async: true,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+            console.log(data);
+            $(".specialty1").empty()
+            var specialty = $(".specialty1").html();
+            var length=data.length;
+            for(var i=0;i<length;i++){
+              specialty += '<div><input  type="checkbox" name="specialty1"  id="'+data[i].id+'"><label for="'+data[i].id+'">'+data[i].name+'</label></div>'
+            }
+              $(".specialty1").html(specialty);
+            for(var j=0;j<skill.length;j++){
+               var hh=skill[j];
+                var jing="#";
+                var skill1=jing+hh
+                console.log(skill1)
+                $(skill1).attr("checked",true);
+                
+              }
+            },
+            error:function(){
+            alert('fail');
+            }
+          });
+          //特征
+          var url2=url+"/agent/a_allfeaturetypes/1/null";
+          $.ajax({
+            type : "get",
+            url : url2,
+            async: true,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+             console.log(data);
+             $(".specialty2").empty()
+              var specialty = $(".specialty2").html();
+              var length=data.length;
+            for(var i=0;i<length;i++){
+              specialty += '<div><input  type="checkbox" name="specialty2" value="" id="'+data[i].id+'"><label for="'+data[i].id+'">'+data[i].name+'</label></div>'
+            }
+              $(".specialty2").html(specialty);
+              for(var j=0;j<feature.length;j++){
+               var hh=feature[j];
+                var jing="#";
+                var feature1=jing+hh
+                //console.log(skill1)
+                $(feature1).attr("checked",true);
+                
+              }
+            },
+            error:function(){
+            alert('fail');
+            }
+          });
+
+
+
+          
+        },
+        error:function(){
+          alert('fail');
+        }
+      });
+
+      //------------------------------重新保存------------------------------------
+       $(".look-over").click(function(){
+          var skillTag=[];
+          $('input[name="specialty1"]:checked').each(function () {
+            skillTag.push($(this).attr("id"))
+          });
+          var featureTag=[];
+          $('input[name="specialty2"]:checked').each(function () {
+            featureTag.push($(this).attr("id"))
+          });
+          var select_sex=$(".select_sex").val();
+          var recruit_number=$(".recruit_number").val();
+          var describe=$(".describe").val();
+          var select_age=$(".select_age").val();
+          var shape=$(".shape").val();
+          var min_height=$(".min_height").val();
+          var max_height=$(".max_height").val();
+          var role=$(".role").val();
+          var role_paycheck=$(".role_paycheck").val();
+          var workingdays=$(".workingdays").val();
+          
+          var data={
+              select_sex:select_sex,
+              recruit_number:recruit_number,
+              describe:describe,
+              select_age:select_age,
+              shape:shape,
+              min_height:min_height,
+              max_height:max_height,
+              skillTag:skillTag,
+              featureTag:featureTag,
+              role:role,
+              role_paycheck:role_paycheck,
+              workingdays:workingdays
+
+          }
+          console.log(data)
+          if(select_sex&&workingdays&&recruit_number&&describe&&role&&featureTag.length!=0&&skillTag.length!=0){
+            var url20=url+'/WX/wx_editroleinfo/'+careerincrewid;
+          
+            $.ajax({
+              type : "post",
+              url : url20,
+              dataType : "jsonp",
+              data:data,
+              // jsonp: "jsonpCallback",
+              success : function(data){
+               console.log(data);
+                window.location.href=document.referrer;
+              },
+              error:function(){
+              alert('fail');
+              }
+           
+         
+          });
+           }else{
+            alert("请完善信息")
+           }
+        })

@@ -1,0 +1,135 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 演员详情
+    // <link rel="stylesheet" href="/css/reset.css">
+    // <link rel="stylesheet" href="/css/jqueryWeui.css">
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/actor_edti.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      .newactor_banner>div.fixed_tel{
+      width: 35%;
+      height: 40px;
+      /*border: 1px solid red;*/
+      position: fixed;
+      right: -7%;
+      top:12%;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.3);
+      }
+      .newactor_banner>div.fixed_tel span{
+      color: white;
+      font-size: 14px;
+      position: fixed;
+      right: 3%;
+      line-height: 40px;
+      }
+      .newactor_banner>div.fixed_tel img{
+      width: 20px;
+      height: 20px;
+      position: fixed;
+      right: 20%;
+      top:13.3%;
+      }
+      .agree_actor1{
+      width: 100%;
+      height: 60px;
+      position: fixed;
+      bottom: 0;
+      /*right: 5px;*/
+      /*left: 5px;*/
+      z-index: 100;
+      background: rgba(242, 242, 242, 1);
+      }
+      .agree_actor1 button{
+      margin-top: 10px;
+      width: 30%;
+      height: 45px;
+      float: left;
+      margin-left: 10px;
+      background: #4da2ad;
+      color: white;
+      border: none;
+      bottom: 0;
+      border-radius: 5px;
+      }
+      /*电话弹窗*/
+      .delog_tel{
+      display: none;
+      width: 60%;
+      position: fixed;
+      left: 20%;
+      top: 40%;
+      z-index: 201;
+      background: white;
+      border-radius: 5px;
+      }
+      .delog_tel p{
+      font-size: 14px;
+      margin: 10px 10px;
+      clear: both;
+      }
+      .delog_tel p>a{
+      font-size: 14px;
+      color: #333;
+      }
+      .ovfHiden{overflow: hidden;height: 100%;}
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    // <script type="text/javascript" src="/js/jquery-weui.js"></script>
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+  body
+    header
+      .newactor_banner
+        img(src='/img/img1.png', alt='')
+        .fixed_tel
+          img(src='/img/tel.png', alt='')
+          span 联系剧组
+        div
+          ul.tab
+            li.active 基本资料
+            li 参演经历
+            li 照片视频
+            li 接戏标准
+    // 同意按钮--------------
+    .agree_actor1
+      button 拒绝申请
+      button(style='visibility:hidden') 添加到备选方案
+      button 同意申请
+    section(style='margin-bottom: 65px')
+      // 基本资料
+      .information.active
+        // 资料
+        // 基本资料
+        
+      .experience
+        // 参演经历
+      .photos
+        // 照片视屏
+      .standard
+    .delog_tel
+      span(style='color: #4da2ad;font-size: 14px;float: right;margin: 5px;') 取消
+      p(style='border-bottom: 1px solid #999')
+        a(href='18334680915') 18334680915
+      p 见组地址：北京市东城区
+    .overlay1
+    script.
+      //    基本资料
+      var btns =$(".tab li"),
+      contents =$("section>div")
+      var t = new TabView(btns,contents);
+      $(".fixed_tel").click(function(){
+      $(".delog_tel").css("display","block");
+      $(".overlay1").css("display","block");
+      $('html,body').addClass('ovfHiden');
+      $(".overlay1").css({ "width": $(document).width(), "height": $(document).height() });
+      })
+      $(".delog_tel>span").click(function(){
+      $(".delog_tel").css("display","none");
+      $(".overlay1").css("display","none");
+      $('html,body').removeClass('ovfHiden');
+      })

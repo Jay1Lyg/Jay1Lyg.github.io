@@ -1,0 +1,98 @@
+﻿var keystone = require('keystone'),
+    CareerInCrew = keystone.list('CareerInCrew');
+var async = require('async');
+var format = require('./format.js');
+var Production = keystone.list('Production');
+var Invitation = keystone.list('Invitation');
+
+
+// ******************************** Query Functions **********************************************************
+var findPositions = function( /*start, end,*/ currentPage, pageSize, callback){
+	var curPage = currentPage || 0;  
+	var pSize = pageSize || 10;
+	
+	var q1 = CareerInCrew.paginate({
+		page: curPage,
+		perPage: pSize,
+		maxPages: 10000
+	 }).select('name salary_paid_by salary_amount createdAt expired_date benifit_tags requirement_tags crews_object')
+	 //.where('createAt', {"$gte": start, "$lt": end})
+	 //.where('author', authorname)
+	 .populate('crews_object benifit_tags requirement_tags')
+	 .sort('-expired_date')
+	 //.exec(callback);		
+	 .exec( function(err, positions){
+        format.formatPositionResult(positions, function(err,ret){
+			if(err){
+				return callback(err, null);
+			}else{
+				return callback(null, ret);
+			}
+		});
+	 });
+};
+//auther@cincna 搜寻用户的邀请演员的记录
+var findUserInvitation = function(user_id , page , callback){
+	Invitation.paginate({
+		page: page,
+		perPage: 6,
+		maxPages: 10
+	 })
+	.where('inviter',user_id)
+	.sort('-createdAt')
+	.exec( function(err, ret){
+			Invitation.model.find()
+			.where('inviter',user_id)
+			.exec(function(err,invition){
+				 format.formatInvitation(ret, function(err,invitationset){
+					if(err){
+						var results = {};
+						 results.total = invitationset.length;
+						 results.invitations = invitationset;
+						return callback(err, results);	
+					}else{
+						var results = {};
+						 results.total = invitationset.length;
+						 results.invitations = invitationset;
+						return callback(null, results);	
+					}
+				}); 	
+
+			});
+				 
+
+	});
+}
+
+
+var findUserBeInvitedInfo = function(user_id , page , callback){
+	Invitation.paginate({
+		page: page,
+		perPage: 20,
+		maxPages: 20
+	 })
+	.where('invited',user_id)
+	.sort('-createdAt')
+	.exec( function(err, ret){
+		  format.formatBeInvitedInfo(ret, function(err,invitationset){
+			if(err){
+				var results = {};
+				 results.total = invitationset.length;
+				 results.invitations = invitationset;
+				
+				return callback(err, results);	
+			}else{
+				var results = {};
+				 results.total = invitationset.length;
+				 results.invitations = invitationset;
+				return callback(null, results);	
+			}
+		}); 	
+	});
+}
+
+module.exports = {
+	findPositions: findPositions, 
+	findUserInvitation: findUserInvitation,
+	findUserBeInvitedInfo: findUserBeInvitedInfo,
+}

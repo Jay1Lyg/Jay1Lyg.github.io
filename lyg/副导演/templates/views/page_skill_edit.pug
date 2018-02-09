@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+  body
+    form(action='/WX/wx_savesingleskill', method='post')
+      center
+        input(type='hidden' ,name='userid' ,value=userid)
+        br
+        input(type='hidden' ,name='skill_id' ,value=skill_id)
+        br
+        input(type='text' ,name='skill_name' ,value=skill_name)
+        br
+        a(href='http://www.901vehicle.cn/WX/wx_userprofile/'+userid) 返回
+        input(type='submit',value='保存')

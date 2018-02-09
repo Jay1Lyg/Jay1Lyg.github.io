@@ -1,0 +1,109 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 角色信息
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/notice_list.css')
+    script(src='/js/jquery1.1.js')
+    script(src='/js/swiper.js')
+    style.
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      body{
+      background: white;
+      }
+    // <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+    // //<script type="text/javascript" src="js/jquery-weui.js"></script>
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/zepto.min.js')
+  body
+    header
+    section
+      div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+      .display_experience
+        div
+          .photo_experience
+            img(src='/img/banner.png', alt='')
+          .detail_experience
+            ul
+              li
+                span 剧名：
+                | 《寡妇》
+                span.types 古装
+              li
+                span 剧目类型：2举办的时刻人
+                | b
+              li
+                span 拍摄周期：
+                | 123
+              li
+                span 拍摄地：
+                | 1 自噶是的v人
+          .zhixiang
+            img(src='img/jiantou.png', alt='')
+          div(style='width: 100%;height: 2px;background: #eee;margin: 5px 0;padding: 0')
+          .about_me
+            button 我邀请的
+            button 申请我的
+        div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+        div
+          .photo_experience
+            img(src='/img/banner.png', alt='')
+          .detail_experience
+            ul
+              li
+                span 剧名：
+                | 《寡妇》
+                span.types 古装
+              li
+                span 剧目类型：2举办的时刻人
+                | b
+              li
+                span 拍摄周期：
+                | 123
+              li
+                span 拍摄地：
+                | 1 自噶是的v人
+          .zhixiang
+            img(src='img/jiantou.png', alt='')
+          div(style='width: 100%;height: 2px;background: #eee;margin: 5px 0;padding: 0')
+          .about_me
+            button 我邀请的
+            button 申请我的
+        div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+  script.
+    var url="http://www.901vehicle.cn";
+    var userid = !{JSON.stringify(userid)};
+    var page=1;
+     var url4=url+'/WX/wx_publishCrews/'+userid+'/'+page;
+     console.log(url4)
+      $.ajax({
+        type : "get",
+        url : url4,
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+          console.log(data);
+         
+          var length=data.length;
+          var str='';
+          for(var i=0;i<length;i++){
+          var span=''
+            for(var j=0;j<data[i].tags.repertoireTpyeArray[j].length;j++){
+             span+='<span>'+data[i].tags.repertoireTpyeArray[j].repertoireTpyeName+'</span>'
+            };
+             console.log(span)
+             str+='<div><div class="photo_experience"><img src="'+data[i].production_image+'" alt=""></div><div class="detail_experience"><ul><li><span>剧名：</span>《'+data[i].production_crews[0].name+'》<span class="types">'+data[i].tags.categoryName+'</span></li><li><span>剧目类型：</span>'+span+'</li><li><span>拍摄周期：</span>'+data[i].duration+'</li><li><span>拍摄地：</span>'+data[i].location[0].fullname+'</li></ul></div><div class="zhixiang"><img src="img/jiantou.png" alt=""></div><div style="width: 100%;height: 2px;background: #eee;margin: 5px 0;padding: 0"></div><div class="about_me"><button>我邀请的</button><button>申请我的</button></div></div><div style="width: 100%;height: 5px;background: #eee;margin: 0;padding: 0"></div>'
+          };
+          console.log(span)
+          $('.display_experience').html(str)
+        },
+        error:function(){
+        alert('fail');
+        }
+      });

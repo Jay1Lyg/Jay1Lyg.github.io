@@ -1,0 +1,65 @@
+var keystone = require('keystone'),
+	Invitation = keystone.list('Invitation');
+var search = require('../../query/save_and_get_data_in_MongoDB/position/search.js');
+var urllib = require('url');
+var async = require('async');
+
+exports = module.exports = function(req, res) {
+	var careerincrewid = req.params.careerincrewid || '';
+	async.waterfall([
+		function(callback){
+            CareerInCrew.model.findOne()
+		     .where('_id',careerincrewid)
+		     .exec(function(err,ret){
+		        if(err){
+		           throw new Error(err);
+		        }else{
+		            ret.gender = res.body.select_sex;
+		            ret.age = res.body.select_age;
+		            ret.men_count = res.body.recruit_number;
+		            ret.height = res.body.height;
+		            ret.shape = res.body.shape;
+		            ret.description = res.body.describe;
+                    ret.save(function(err){
+                      if(err){
+                         throw new Error(err);
+                      }else{
+                      	 callback(null,ret);
+                      }
+                    })
+		        }
+		     })
+		},function(arg,callback){
+           Role.model.findOne()
+            .where('_id',arg.role) 
+            .exec(function(err,ret){
+               ret.name = req.body.role;
+               ret.featureTag = req.body.featureTag;
+               ret.skillTag = req.body.skillTag;
+               ret.save(function(err){
+                 if(err){
+                   throw new Error(err);
+                 }else{
+                 	callback(null);
+                 }
+               })
+            })  
+		}
+	],function(err){
+        if(err){
+           throw new Error(err);
+        }else{
+        	var data={};
+        	data.index = true;
+        	var params = urllib.parse(req.url,true);
+			if (params.query && params.query.callback) {
+		         var str =  params.query.callback + '(' + JSON.stringify(data) + ')';//jsonp
+		         res.send(str);
+		    } else {
+		       	 res.send(JSON.stringify(data));
+		    }
+        }
+	})
+    
+	
+}

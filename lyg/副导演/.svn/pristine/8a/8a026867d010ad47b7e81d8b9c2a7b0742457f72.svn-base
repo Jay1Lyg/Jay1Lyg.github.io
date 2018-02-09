@@ -1,0 +1,111 @@
+.photo_font{
+    padding: 10px;
+}
+.photo_font>div{
+    float: left;
+    width: 46%;
+
+    padding: 2%;
+    box-shadow: none;
+
+}
+.photo_font>div>img{
+    width: 100%;
+    height: 208px;
+}
+.photo_font>div p{
+    font-size:14px ;
+    display: inline-block;
+    margin-right: 10px;
+}
+.photo_font>div b{
+    color: #4da2ad;
+    border: 1px solid #4da2ad;
+    padding: 0 5px;
+    border-radius: 12px;
+    font-size: 10px;
+}
+/*-------------------------侧边栏---------------------------*/
+.sidebar{
+    position: fixed;
+    width: 70%;
+    height: auto;
+    /*border: 1px solid red;*/
+    background: white;
+    top:0;
+    bottom: 0;
+    right: -70%;
+    z-index: 100;
+    overflow:auto;
+}
+#panel{
+    text-align: center;
+    line-height: 44px;
+    font-size: 14px;
+}
+#panel img{
+    width: 12px;
+    margin-left: 10px;
+}
+#menu label{
+    font-size: 14px;
+
+}
+#menu input::placeholder{
+    font-size: 12px;
+}
+#menu select{
+    font-size: 14px;
+}
+#menu textarea{
+    font-size: 12px;
+}
+.specialty>div{
+    float: left;
+    width: 33%;
+    margin: 0.15rem 0;
+}
+
+/*复选框样式*/
+.specialty{
+    width: 100%;
+}
+.specialty>div input{
+    background: white;
+}
+.specialty>div label{
+    font-size: 12px;
+}
+
+.filter{
+    width: 100%;
+}
+.filter button{
+    width: 100%;
+    height: 30px;
+    background: #4da2ad;
+    color: white;
+    border: none;
+}
+
+
+.overlay {
+    background: #000;
+    filter: alpha(opacity=50); /* IE的透明度 */
+    opacity: 0.3;  /* 透明度 */
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 66; /* 此处的图层要大于页面 */
+    display:none;
+
+}
+
+.weui-cell__hd{
+    width: 85px;
+}
+/*禁止滚动*/
+.ovfHiden{overflow: hidden;height: 100%;}

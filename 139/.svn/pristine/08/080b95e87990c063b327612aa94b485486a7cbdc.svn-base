@@ -1,0 +1,95 @@
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    title 注册
+    script(src='/js/zepto.min.js')
+    script(src='/js/register.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/serume-experience.css')
+    link(rel='stylesheet', href='/css/common.css')
+    link(rel='stylesheet', href='/css/register.css')
+    script.
+      $(function(){
+          var status = !{JSON.stringify(status)};
+        function statu(){
+           if(status==1){
+            alert("验证码已过期");
+          }else if(status==2){
+            alert("验证码错误")
+          } else if (status == 3) {
+               alert("你已经是副导演助手的用户，赶快登陆吧")
+           } else if (status == 4) {
+               alert("用户名或密码不能为空")
+           }
+        };
+        statu()
+
+      })
+
+  body
+    header#header
+      div
+        p 注册
+    section
+      
+      form#form(action='/WX/wx_sendtelphoneandpassword', method='post')
+        .page.panel.js_show
+          .page__bd
+            .weui-cells.weui-cells_form
+              .weui-cell.pic
+                img(src='/img/手机号-拷贝.png', alt='')
+                .weui-cell__bd
+                  input#phone.weui-input.font-color(type='tel', placeholder='请输入手机号码',value=telephone,name='telephone')
+                  input.weui-input.font-color(type='hidden',value=openid,name='openid')
+                  input.weui-input.font-color(type='hidden',value=index,name='index')
+                  input.weui-input.font-color(type='hidden',value=appid,name='appid')
+              .weui-cell.pic
+                img(src='/img/密码-拷贝.png', alt='')
+                .weui-cell__bd
+                  input#pasd.weui-input.font-color(type='password', placeholder='请输入密码',value=password,name='password')
+              .weui-cell.pic
+                img(src='/img/验证码-拷贝.png', alt='')
+                .weui-cell__bd.getcode
+                  input.weui-input.font-color.code(type='number', placeholder='请输入手机验证码',value=securitycode,name='securitycode')
+                  span#J_getCode(onclick='getCode(this)') 立即获取
+                  span#J_resetCode(style='display: none')
+                    b#J_second 60
+                    | 秒后重发
+      .add-btn
+        button.register 注册
+        a(href='/WX/page_signin/'+index+'/'+openid+'/'+appid)
+          p(style='margin-top: 20px')
+            | 有账号？
+            span(style='font-size: 15px') 点击这里登录
+    script.
+      $(".register").on("click",function(){
+         var phone = $('#phone').val();
+        var pattern1 = /^1(3[0-9]|4[57]|5[0-35-9]|7[0135678]|8[0-9])\d{8}$/;
+        var pasd = $('#pasd').val();
+        var pattern = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]{6,16})$/;
+        if(phone == '') {
+            alert('请输入手机号码');
+            isPhone = false;
+            
+        }else if(!pattern1.test(phone)){
+            alert('请输入正确的手机号码');
+            isPhone = false;
+            
+        }else  if(pasd == '') {
+        alert('请输入密码');
+        isPhone = false;
+        
+        }else if(!pattern.test(pasd)){
+            alert('密码6-16位，字母数字混合');
+            isPhone = false;
+            
+        }else if(!$(".code").val()){
+          alert('验证码不能为空');
+        }else{
+
+          $("#form").submit()
+        }
+      })

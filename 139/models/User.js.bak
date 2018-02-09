@@ -1,0 +1,123 @@
+var keystone = require('keystone');
+var Types = keystone.Field.Types;
+
+/**
+ * User Model
+ * ==========
+ */
+
+var User = new keystone.List('User', {
+	map: { name: 'name' },
+	autokey: { path: 'slug', from: 'name', unique: true },
+	label: '用户',
+	singular: '用户',
+	plural: '用户',
+	track: true
+});
+
+User.add({
+	name: { type: String, required: false, index: true, label: '用户名' },
+	mediaid: { type: String,label: '头像id' },
+	password: { type: Types.Password, initial: true, required: true },
+	realname: { type: String, index: true, label: '真名' },
+	artname: { type: String, index: true, label: '艺名' },
+	birth: { type: Types.Date },
+	gender: { type: Types.Select, 
+		options: [{ value: '1', label: '男'},
+				  { value: '2', label: '女'},
+				  { value: '3', label: '不详'},
+				 ],
+		default: '3',
+		label: '性别'
+	},
+	paycheck: { type: String, label: '片酬' },
+	schedule:{ type:Types.Boolean, default: false, label: '是否有档期'},
+	allok:{ type:Types.Boolean, default: false, label: '资料是否填写完毕'},
+	if_own_agent:{ type:Types.Boolean, default: false, label: '是否拥有经纪人'},
+	schoolname: { type: String,index: true },
+	height: { type: Types.Number, label:'身高(cm)'},
+	weight: { type: Types.Number, label:'体重(kg)'},
+	bust: { type: Types.Number, label:'胸围(cm)'},
+	waist: { type: Types.Number, label:'腰围(kg)'},
+	hip: { type: Types.Number, label:'臀围(kg)'},
+	role_tag: { type: Types.Relationship, ref: 'RoleTag', refPath: 'name', many:true, label: '角色标签'},
+	skill: { type: Types.Relationship, ref: 'SkillTag', refPath: 'name',many:true,  label: '技能标签'},
+	//category: { type: Types.Relationship, ref: 'Category', refPath: 'name', many:true, label: '剧目类别'},
+	feature: { type: Types.Relationship, ref: 'FeatureTag', refPath: 'name',many:true,  label: '特征标签'},
+	hometown: { type: Types.Relationship, ref: 'Areainfo', refPath: 'name', label: '籍贯'},
+	//Status: { type: Boolean, label: '登录状态'},
+	images: { type: Types.LocalFiles,
+					dest: 'images/users/',
+					prefix: 'users',
+					filename: function(item, customized_name) {
+				    	return item._id + '/' + customized_name.originalname;
+				    }
+					, label: '个人头像'
+				},
+	IDcardFrontImage: { type: Types.LocalFiles,
+					dest: 'images/IDcardFrontImage/',
+					prefix: 'IDcardFrontImage',
+					filename: function(item, customized_name) {
+				    	return item._id + '/' + customized_name.originalname;
+				    }
+					, label: '身份证正面照片'
+				},
+	IDcardBackImage: { type: Types.LocalFiles,
+					dest: 'images/IDcardBackImage/',
+					prefix: 'IDcardBackImage',
+					filename: function(item, customized_name) {
+				    	return item._id + '/' + customized_name.originalname;
+				    }
+					, label: '身份证反面照片'
+				},
+	signature: { type: Types.Textarea },
+	telephone: { type: String },
+	agentTelphone: { type: String },
+	email: { type: Types.Email, required: false, unique: false},
+	id_number: { type: String ,label: '身份证号'},
+	user_address: { type: String ,label: '具体住址'},
+	shortintroduce: { type: String ,label: '一句话简介'},
+	currentLocation: { type: Types.Relationship, ref: 'Areainfo', refPath: 'name', label: '现居地'},
+	currentStatus:  { type: Types.Select, 
+		options: [{ value: '1', label: '正在寻找下任剧组'},
+				  { value: '2', label: '暂不考虑新的机会'}
+				 ],
+		default: '1',
+		label: '状态'
+	},
+	isRead:{ type:Types.Boolean, default: false, label: '是否阅读简历'},//author@zheng 
+	beInvitedNumber:{ type:Types.Number, default: 0, label: '被邀请的次数'},//author@cincan
+	careerInCrewsRelation:{type: Types.Relationship, ref: 'CareerInCrew', label: '现任工作'},
+	openIDArray: { type: Types.Relationship, ref: 'User_Openid', many:true, label: '微信公众号下用户的oppenID'},
+}, 'Permissions', {
+	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
+	role: { type: Types.Select, 
+		options: [{ value: '1', label: '非注册会员'},
+				  { value: '2', label: '注册求职者'},
+				  { value: '3', label: '注册求贤者'},
+				  { value: '4', label: '管理员'}],
+		default: '1',
+		label: '访问控制角色'
+	},
+
+});
+
+// Provide access to Keystone
+User.schema.virtual('canAccessKeystone').get(function() {
+	return this.isAdmin;
+});
+
+
+/**
+ * Relationships
+ */
+
+User.relationship({ ref: 'Post', path: 'posts', refPath: 'author' });
+
+
+/**
+ * Registration
+ */
+
+User.defaultColumns = 'name, email, isAdmin, openID';
+User.register();

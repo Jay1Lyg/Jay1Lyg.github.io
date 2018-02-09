@@ -1,0 +1,196 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 演员详情
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/actor_edit_echart.css')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+    script(type='text/javascript').
+      // document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 8 + "px";
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/jqWeui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js')
+    script(type='text/javascript', src='/js/echarts.min.js')
+  body
+    .newactor_banner
+      div
+        ul.tab
+          li.active 未处理
+          li 已同意
+          li 已拒绝
+    section
+      .active.info1
+      // ========================已通过====================
+      div.info2
+      // ++++++++++++++++++++++未通过--------------------
+      div.info3
+        | 文件还来不及
+  script.
+    var btns =$(".tab li"),
+    contents =$("section>div")
+    var t = new TabView(btns,contents);
+    var url="http://www.901vehicle.cn";
+    var careerincrew_id = !{JSON.stringify(careerincrew_id)};
+    function searchcandidatesinfo(page,index){
+      var url4=url+'/WX/wx_searchcandidatesinfo/'+careerincrew_id+'/'+page+'/'+index;
+     console.log(url4)
+      $.ajax({
+        type : "get",
+        url : url4,
+        dataType : "jsonp",
+        // jsonp: "jsonpCallback",
+        success : function(data){
+          console.log(data);
+         var results=data.results;
+          var length=results.length;
+          var str='';
+          var main="main";
+          for(var i=0;i<length;i++){
+          
+             str+='<div class="recommend_edit"><div><img src="'+results[i].image+'" alt="" class="chart"></div><div><div id="'+main+i+'" style="width: 100px;height:132px;float: left;margin-top: 0.1rem"></div><ul class="pipei"><li><span class="one"></span>基本信息：</li><li><span class="two"></span>特征角色：</li><li><span class="three"></span>片酬需求：</li><li><span class="four"></span>档期匹配：</li></ul></div></div><div style="background: #f2f2f2;height: 0.1rem;clear: both"></div>'
+             var myChart='myChart'+i;
+             console.log(myChart)
+               myChart+i; = echarts.init(document.getElementById('main[i]'));
+
+            var dataStyle = {
+                normal: {
+                    label: {show:false},
+                    labelLine: {show:false}
+                }
+            };
+            var placeHolderStyle = {
+                normal : {
+                    color: 'rgba(0,0,0,0)',
+                    label: {show:false},
+                    labelLine: {show:false}
+                },
+                emphasis : {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            
+             var option=option;
+             console.log(option)
+            option+i = {
+                title: {
+                    text: '：'+totalMatchingDegree+'%',
+                    //subtext: '来自紫螺科技数据',
+                    //sublink: 'https://www.baidu.com',
+                    x: 'center',
+                    y: 'center',
+                    itemGap: 10,
+                    textStyle : {
+                        color : 'rgba(30,144,255,0.8)',
+                        fontFamily : '微软雅黑',
+                        fontSize : 6,
+                        fontWeight : 'bolder',
+                    }
+                },
+                grid:{
+                    x:0,
+                    y:5,
+                    x2:50,
+                    y2:0,
+                    borderWidth:1
+                },
+                tooltip : {
+                    show: true,
+                    formatter: "{a} <br/>{b}"
+                },
+                color:[
+                    '#4da2ad','#adebf3','#cee7ea','#222222'
+                ],
+        //        legend: {
+        //            orient : 'vertical',
+        //            x : document.getElementById('main').offsetWidth/1.7,
+        //            y : 0,
+        //            itemGap:12,
+        //            data:['基本信息匹配度'+x+'%','29%的人表示生活压力很大','3%的人表示“我姓曾”']
+        //        },
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                series : [
+                    {
+                        name:'基本信息',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [36, 45],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:results[i].basicMatchingDegree,
+                                name:'基本信息匹配度'+results[i].basicMatchingDegree+'%',
+                            },
+                            {
+                                value:1-results[i].basicMatchingDegree,
+                                name:'invisible',
+                                itemStyle : placeHolderStyle
+                            }
+                        ]
+                    },
+                    {
+                        name:'特征角色',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [26, 35],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:results[i].featureMatchingDegree,
+                                name:'特征角色匹配度'+results[i].featureMatchingDegree+'%',
+                            },
+                            {
+                                value:1-results[i].featureMatchingDegree,
+                                name:'invisible',
+                                itemStyle : placeHolderStyle
+                            }
+                        ]
+                    },
+                    {
+                        name:'片酬需求',
+                        type:'pie',
+                        clockWise:false,
+                        radius : [16, 25],
+                        itemStyle : dataStyle,
+                        data:[
+                            {
+                                value:results[i].offsetMatchingDegree,
+                                name:'片酬需求匹配度'+results[i].offsetMatchingDegree+'%'
+                            },
+                            {
+                                value:1-results[i].offsetMatchingDegree,
+                                name:'invisible',
+                                itemStyle : placeHolderStyle
+                            }
+                        ]
+                    },
+                    
+                ]
+            };
+
+            myChart.setOption(option);
+          };
+          var info=".info"+index;
+          $(info).html(str)
+          console.log($(info))
+        },
+        error:function(){
+        alert('fail');
+        }
+      });
+    }
+    searchcandidatesinfo(1,1)
+     

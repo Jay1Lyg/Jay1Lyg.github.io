@@ -1,0 +1,177 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title science
+    link(rel='stylesheet', href='/css/science.css')
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    //script(src='js/echarts.min.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    .sciMesg
+      .sciBj
+        img(src='/img/kh1.png', width='750', height='528', border='0', alt='')
+      .crewTitle
+        p.crew_name 
+        .solidBorder
+          .juTitle 剧组信息
+        .sciBorder
+          img(src='/img/kh3.png', width='750', height='199', border='0', alt='')
+        .message.crew_info
+        div(style='clear:both;')
+        .solidBorder
+          .juTitle 角色信息
+          .sciBorder
+            img(src='/img/kh3.png', width='750', height='199', border='0', alt='')
+        // ---------剧目类别增多，可循环下边div-------
+        .marginTop
+          .otherMesg.ling
+          .otherMesg.zhu
+          .otherMesg.ke
+          .otherMesg.qi      
+        .sciBj2
+          img(src='/img/kh2.png',  width='749', height='299', border='0', alt='')
+  script.
+    var productionCrew_id = !{JSON.stringify(productionCrew_id)};
+     
+      var juzu_url=url+'/WX/wx_searchallpositionDetails/'+productionCrew_id+'/null';
+      console.log(juzu_url);
+      $.ajax({
+          type : "get",
+          url : juzu_url,
+          dataType : "jsonp",
+          async:false,
+          // jsonp: "jsonpCallback",
+          success : function(data){
+              console.log(data);
+              var crew=data.production;
+              var crew_info='';
+              var categorytag_info="";
+              var categorytag=data.production.categorytag;
+              for(repertoireTpye of categorytag.repertoireTpyeArray){
+                categorytag_info+=`${repertoireTpye.repertoireTpyeName}`;
+              }
+              crew_info=`<div class="messLeft">
+                            <ul>
+                                <li>剧名：${crew.production_name}</li>
+                                <li>剧目类别：${crew.categorytag.categoryName}</li>
+                                <li>报名截止日期：${crew.expired_date}</li>
+                                <li>出品公司：${crew.issuer_companies_name}</li>
+                            </ul>
+                        </div>
+                        <div class="messRight">
+                            <ul>
+                                <li>剧目类型：${categorytag_info}</li>
+                                <li>拍摄地：${crew.location[0].fullname}</li>
+                                <li>拍摄周期(天)：${crew.duration}</li>
+                                <li>承制公司：${crew.production_companys_name}</li>
+                            </ul>
+                        </div>`
+              $(".crew_info").html(crew_info);
+              //剧名
+              $(".crew_name").html(crew.production_name);
+              var obj2=data.obj2;
+              var obj3=data.obj3;
+              var obj4=data.obj4;
+              var obj5=data.obj5;
+              var str2="";
+              var str3="";
+              var str4="";
+              var str5="";
+              function(obj,html,str){
+                if(obj==undefined){
+                  $(html).html();
+                }else{
+                   for(var i=0;i<obj.length;i++){
+                            //-------------性别------------
+                            if(obj[i].gender==1){
+                                obj[i].gender="男";
+                            }else if(obj[i].gender==2){
+                                obj[i].gender="女";
+                            }else if(obj[i].gender==3){
+                                obj[i].gender="不限";
+                            };
+                            //obj[i].genger=obj[i].genger=="1"?"男":obj[i].genger=="2"?"女":obj[i].genger=="3"?"不限";
+                            //-------------年龄------------
+                            if(obj[i].age=="1"){
+                               obj[i].age="婴幼儿";
+                            }else if(obj[i].age=="2"){
+                               obj[i].age="少年";
+                            }else if(obj[i].age=="3"){
+                                obj[i].age="青年";
+                            }else if(obj[i].age=="4"){
+                                obj[i].age="中年";
+                            }else if(obj[i].age=="5"){
+                                obj[i].age="老年";
+                            }else if(obj[i].age=="6"){
+                                obj[i].age="不限";
+                            };
+                            //-------------体质------------
+                            if(obj[i].shape=="1"){
+                                obj[i].shape="极瘦";
+                            }else if(obj[i].shape=="2"){
+                                obj[i].shape = "偏瘦";
+                            }else if(obj[i].shape=="3"){
+                                obj[i].shape = "适中";
+                            }else if(obj[i].shape=="4"){
+                                obj[i].shape = "健壮";
+                            }else if(obj[i].shape=="5"){
+                                obj[i].shape = "偏胖";
+                            }else if(obj[i].shape=="0"){
+                                obj[i].shape = "不限";
+                            };
+                            //-------------身高------------
+                            var height;
+                            obj[i].height=height;
+                            if(obj[i].min_height=="" && obj[i].max_height==""){
+                               obj[i].height= "不限";
+
+                            }else if(obj[i].min_height=="" && obj[i].max_height!=""){
+                                obj[i].height= "<="+obj[i].max_height;
+
+                            }else if(obj[i].min_height!="" && obj[i].max_height==""){
+                                obj[i].height= ">="+obj[i].min_height;
+
+                            }else if(obj[i].min_height!="" && obj[i].max_height!=""){
+                                obj[i].height= obj[i].min_height+'-' +obj[i].max_height;
+                            };
+                            //-------------渲染数据------------
+                            
+                      string+=` <div class="erjiTitle">
+                                    <img src="imags/科幻（领衔主演）_04.png" width="180" height="91" border="0" alt="">
+                                    <p>领衔主演</p>
+                                </div>
+                                <div class="message">
+                                    <div class="messLeft">
+                                        <ul>
+                                            <li>剧名：古城</li>
+                                            <li>剧目类型：科幻片</li>
+                                            <li>报名截止日期：2017-05-10</li>
+                                            <li>出品公司：紫螺科技</li>
+                                            <li>人物小传：</li>
+                                        </ul>
+                                    </div>
+                                    <div class="messRight">
+                                        <ul>
+                                            <li>剧目类型：院线电影</li>
+                                            <li>拍摄地：北京</li>
+                                            <li>拍摄周期(天)：45</li>
+                                            <li>承制公司：紫螺科技</li>
+                                        </ul>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                    <div class="xiaozhuan"></div>
+                                </div>`;
+                        }
+                }
+              }
+             
+              
+          },
+          error:function(err){
+             console.log(err)
+          }
+      });

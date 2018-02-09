@@ -1,0 +1,479 @@
+doctype html
+html(lang='zh-CN')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+        title 通告列表
+        link(rel='stylesheet', href='/css/jqueryWeui.css')
+        link(rel='stylesheet', href='/css/weui.css')
+        link(rel='stylesheet', href='/css/notice_list.css')
+        //script(src='js/jquery1.1.js')
+        style.
+            * {
+                padding: 0;
+                margin: 0;
+                list-style: none
+            }
+
+            body {
+                background: white;
+            }
+
+            .htit {
+                line-height: 1rem;
+                padding: 0 .3rem;
+                color: #ff8e2e;
+                font-size: .4rem;
+                margin: 1rem 0 .4rem 0
+            }
+
+            .wrapper01 {
+                position: relative;
+                height: 50px;
+                width: 100%;
+                overflow: hidden;
+                margin: 0 auto;
+                border-bottom: 1px solid #ccc;
+                z-index: 500;
+                background: white;
+            }
+
+            .wrapper01 .scroller {
+                position: absolute
+            }
+
+            .wrapper01 .scroller li {
+                height: 1rem;
+                color: #333;
+                float: left;
+                line-height: 50px;
+                font-size: .4rem;
+                text-align: center;
+            }
+
+            .wrapper01 .scroller li a {
+                color: #333;
+                display: block;
+                margin: 0 .3rem
+            }
+
+            .wrapper .scroller li.cur a {
+                color: #4da2ad;
+            }
+
+            .director_info {
+                width: 100%;
+                height: 100px;
+                border-bottom: 1px solid #999;
+            }
+
+            .director_pic {
+                width: 30%;
+            }
+
+            .director_pic > img {
+                width: 65px;
+                border-radius: 50%;
+                margin: 18px 10% 0 10%;
+                float: left;
+            }
+
+            .director_edit {
+                width: 70%;
+                float: left;
+            }
+
+            .director_edit > div {
+                float: left;
+                margin-top: 20px;
+                margin-left: 5%;
+            }
+
+            .director_edit > div > p {
+                font-size: 14px;
+                margin-top: 22px;
+            }
+
+            .director_edit > img {
+                width: 45px;
+                float: right;
+                margin-top: 30px;
+            }
+           .wrapper01 .scroller li.cur a.active{
+                     color:#4da2ad !important;
+           }
+        <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
+        <script type="text/javascript" src="/js/jquery-weui.js"></script>
+        //script(type='text/javascript', src='/js/rootfont.js')
+        script(src='/js/jqWeui.js')
+        script(type='text/javascript', src='/js/url.js')
+        //script(type='text/javascript', src='/js/zepto.min.js')
+    body
+        .weui-pull-to-refresh__layer
+            .weui-pull-to-refresh__arrow
+            .weui-pull-to-refresh__preloader
+            .down 下拉刷新
+            .up 释放刷新
+            .refresh 正在刷新
+        div
+            .director_info
+        header.clearfix
+            #retr.wrapper.wrapper01
+                .scroller
+                    ul.clearfix.clearfix1
+            #wrapper02.wrapper01(style='display:none')
+                .scroller.cc
+                    ul.clearfix.clearfix2
+            #wrapper03.wrapper.wrapper01
+                .scroller
+                    ul.clearfix
+                        li#null
+                            a 全部
+                        li#true
+                            a 已认证
+                        li#false
+                            a 未认证
+        section(style='clear:both',ontouchstart='')
+            div(style='width: 100%;height: 5px;background: #eee;margin: 0;padding: 0')
+            .display_experience
+        .weui-loadmore(style='clear: both')
+            i.weui-loading
+            span.weui-loadmore__tips 正在加载
+    script(type='text/javascript', src='/js/flexible.js')
+    script(type='text/javascript', src='/js/iscroll.js')
+    script(type='text/javascript', src='/js/navbarscroll.js')
+    // <script src="js/notice_nav.js"></script>
+    script.
+        $(function () {
+            var director_appid = !{JSON.stringify(director_appid)};
+            var user_id = !{JSON.stringify(user_id)};
+            
+            'use strict';
+
+                var url3 = url + "/WX/wx_allproductiontypes/1/null";
+                var time = $.now();
+                //console.log(url3);
+                //------------------------------头部信息----------------------
+                var openid = null;
+                var headerUrl = url + '/WX/wx_allcrewlist/1/' + director_appid + '/' + openid + '/' + time;
+                $.ajax({
+                    type: "GET",
+                    url: headerUrl,
+                    datatype: "jsonp",
+                    success: function success(data) {
+                        var data = JSON.parse(data);
+                        //$(".notice_list").attr("id", data.results[0].productioncrews_id[0]._id);
+                        var headerhtml = "";
+                        headerhtml += '\n                            <div class="director_pic">\n                               <img src="' + data.head_img + '" alt="">\n                            </div>\n                            <div class="director_edit">\n                               <div>\n                                   <p>' + data.nick_name + '</p>\n                               </div>\n                               <img src="' + data.QRcodeUrl + '" alt="">\n                            </div>\n                        ';
+                        $(".director_info").html(headerhtml);
+                    },
+                    error: function error() {
+                        console.log(err);
+                    }
+                });
+                //------------------------------点击跳转详情页--------------------------
+                $(".display_experience").on("click", ".notice_list", function (e) {
+                    e.preventDefault();
+                    var productionCrew_id = $(this).attr("id");
+                    var naticeUrl = url + '/agent/a_page_CrewDetailsUderAgent/' + productionCrew_id + '/' + user_id;
+                    location.href = naticeUrl;
+                });
+                //------------------------------刷新--------------------------
+                //问题只要是section内的内容，下拉就会触发刷新。导致用户上翻的时候就触发刷新
+                //$(".weui-pull-to-refresh__layer").hide();
+                $(document.body).pullToRefresh().on("pull-to-refresh", function () {
+                    setTimeout(function () {
+                        $(document.body).pullToRefreshDone();
+                        var clearfix2 = $(".clearfix2").html();
+                        if (clearfix2.length == 0 || clearfix2 == null) {
+                            if (isregistered == "null") {
+                                updateFunc();
+                                j = 2;
+                            } else {
+                                leibie_url(1, categoryid, repertoiretypeid, isregistered);
+                            }
+                        } else {
+                            leibie_url(1, categoryid, repertoiretypeid, isregistered);
+                            //$(document.body).destroyInfinite()
+                        }
+                    }, 2000);
+                });
+                //------------------------------更新函数--------------------------
+                function updateFunc() {
+                    var time = null;
+                    $.ajax({
+                        type: "GET",
+                        url: headerUrl,
+                        datatype: "jsonp",
+                        success: function success(data) {
+                            var data = JSON.parse(data);
+                            console.log(data);
+                            $("section").attr("id", data.totalPages);
+                            var uphtml = "";
+                            var _iteratorNormalCompletion = true;
+                            var _didIteratorError = false;
+                            var _iteratorError = undefined;
+
+                            try {
+                                for (var _iterator = data.results[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                                    var result = _step.value;
+
+                                    var updatehtml1 = "";
+                                    var _iteratorNormalCompletion2 = true;
+                                    var _didIteratorError2 = false;
+                                    var _iteratorError2 = undefined;
+
+                                    try {
+                                        for (var _iterator2 = result.repertoireTpyeArray[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                                            var twoResult = _step2.value;
+
+                                            updatehtml1 += '\n                                             ' + twoResult.repertoireTpyeName + '\n                                                 ';
+                                        }
+                                    } catch (err) {
+                                        _didIteratorError2 = true;
+                                        _iteratorError2 = err;
+                                    } finally {
+                                        try {
+                                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                                _iterator2.return();
+                                            }
+                                        } finally {
+                                            if (_didIteratorError2) {
+                                                throw _iteratorError2;
+                                            }
+                                        }
+                                    }
+
+                                    uphtml += '\n                                     <a>\n                                          <div class="notice_list" id="' + result.productioncrews_id[0]._id + '">\n                                              <div class="photo_experience"><img src="' + result.production_image + '" alt=""></div>\n                                              <div class="detail_experience">\n                                                  <ul>\n                                                      <li><span>\u5267\u540D\uFF1A</span>' + result.name + '<span class="types">' + result.categorytag.categoryName + '</span></li>\n                                                      <li><span>\u5267\u76EE\u7C7B\u578B\uFF1A</span><span>' + updatehtml1 + '</span></li>\n                                                      <li><span>\u62CD\u6444\u5468\u671F\uFF08\u5929\uFF09\uFF1A</span>' + result.duration + '</li>\n                                                      <li><span>\u62CD\u6444\u5730\uFF1A</span>' + result.location[0].fullname + '</li>\n                                                  </ul>\n                                              </div>\n                                              <div class="zhixiang"><img src="/img/jiantou.png" alt=""></div>\n                                          </div>\n                                      </a>\n                                      <div style="width: 100%;height: 5px;background: #eee;margin: 0;padding: 0"></div>\n                                 ';
+                                    $(".display_experience").html(uphtml);
+                                }
+                            } catch (err) {
+                                _didIteratorError = true;
+                                _iteratorError = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion && _iterator.return) {
+                                        _iterator.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError) {
+                                        throw _iteratorError;
+                                    }
+                                }
+                            }
+                        },
+                        error: function error() {
+                            alert('fail');
+                        }
+                    });
+                };
+                updatePull();
+                //------------------------------加载--------------------------
+                var j = 2;
+                var loading = false; //状态标记
+                $(document.body).infinite(1000).on("infinite", function (e) {
+                    if (loading) return;
+                    loading = true;
+                    var totals = parseInt($("section").attr("id"));
+                    //判断高度，加载下一页，在判断如果是最后一页，就结束加载
+                    setTimeout(function () {
+                        var clearfix2 = $(".clearfix2").html();
+                        if (clearfix2.length == 0 || clearfix2 == null) {
+                            if (isregistered == "null") {
+                                if (totals >= j) {
+
+                                    updatePull(j);
+                                    j++;
+                                } else {
+                                    $(".weui-loadmore").css("display", "none");
+                                }
+                            }
+                        }
+                        loading = false;
+                    }, 1000);
+                });
+                //------------------------------加载函数--------------------------
+                function updatePull(page) {
+                    var openid = null,
+                        time = null;
+                    var alistUrl = url + '/WX/wx_allcrewlist/' + page + '/' + director_appid + '/' + openid + '/' + time;
+                    $.ajax({
+                        type: "GET",
+                        url: alistUrl,
+                        datatype: "jsonp",
+                        success: function success(data) {
+                            var data = JSON.parse(data);
+                            console.log(data);
+                            $("section").attr("id", data.totalPages);
+                            var html = "";
+                            var _iteratorNormalCompletion3 = true;
+                            var _didIteratorError3 = false;
+                            var _iteratorError3 = undefined;
+
+                            try {
+                                for (var _iterator3 = data.results[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                                    var result = _step3.value;
+
+                                    var html1 = "";
+                                    var _iteratorNormalCompletion4 = true;
+                                    var _didIteratorError4 = false;
+                                    var _iteratorError4 = undefined;
+
+                                    try {
+                                        for (var _iterator4 = result.repertoireTpyeArray[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                                            var twoResult = _step4.value;
+
+                                            //console.log(twoResult);
+                                            html1 += '\n                                       ' + twoResult.repertoireTpyeName + '\n                                           ';
+                                        }
+                                    } catch (err) {
+                                        _didIteratorError4 = true;
+                                        _iteratorError4 = err;
+                                    } finally {
+                                        try {
+                                            if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                                                _iterator4.return();
+                                            }
+                                        } finally {
+                                            if (_didIteratorError4) {
+                                                throw _iteratorError4;
+                                            }
+                                        }
+                                    }
+
+                                    html += '\n                                   <a>\n                                        <div class="notice_list" id="' + result.productioncrews_id[0]._id + '">\n                                            <div class="photo_experience"><img src="' + result.production_image + '" alt=""></div>\n                                            <div class="detail_experience">\n                                                <ul>\n                                                    <li><span>\u5267\u540D\uFF1A</span>' + result.name + '<span class="types">' + result.categorytag.categoryName + '</span></li>\n                                                    <li><span>\u5267\u76EE\u7C7B\u578B\uFF1A</span><span>' + html1 + '</span></li>\n                                                    <li><span>\u62CD\u6444\u5468\u671F\uFF08\u5929\uFF09\uFF1A</span>' + result.duration + '</li>\n                                                    <li><span>\u62CD\u6444\u5730\uFF1A</span>' + result.location[0].fullname + '</li>\n                                                </ul>\n                                            </div>\n                                            <div class="zhixiang"><img src="/img/jiantou.png" alt=""></div>\n                                        </div>\n                                    </a>\n                                    <div style="width: 100%;height: 5px;background: #eee;margin: 0;padding: 0"></div>\n                               ';
+                                }
+                            } catch (err) {
+                                _didIteratorError3 = true;
+                                _iteratorError3 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                        _iterator3.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError3) {
+                                        throw _iteratorError3;
+                                    }
+                                }
+                            }
+
+                            $(".display_experience").append(html);
+                        },
+                        error: function error() {
+                            alert('fail');
+                        }
+                    });
+                };
+                //-----------------------------栏目类别-------------------------------------
+                $.ajax({
+                    type: "get",
+                    url: url3,
+                    dataType: "jsonp",
+                    async: false,
+                    // jsonp: "jsonpCallback",
+                    success: function success(data) {
+                        console.log(data);
+                        $(".clearfix1").empty();
+                        var str = $(".clearfix1").html();
+                        for (var i = 0; i < data.length; i++) {
+                            str += '<li id="' + data[i].id + '"><a >' + data[i].name + '</a></li>';
+                        }
+                        $(".clearfix1").html(str);
+                        $('#retr').navbarscroll();
+                    },
+                    error: function error() {
+                        alert('fail');
+                    }
+                });
+                var categoryid = "null";
+                var repertoiretypeid = "null";
+                var isregistered = "null";
+                //------------------------wrapper栏目加载函数---------------------------------
+
+
+                function leibie_url(page, categoryid, repertoiretypeid, isregistered) {
+                    var leibie_url = url + '/WX/wx_matchproduction/' + page + '/' + director_appid + '/' + openid + '/' + time + '/' + categoryid + '/' + repertoiretypeid + '/' + isregistered;
+                    console.log(leibie_url);
+                    $.ajax({
+                        type: "get",
+                        url: leibie_url,
+                        dataType: "jsonp",
+                        // jsonp: "jsonpCallback",
+                        success: function success(data) {
+                            console.log(data);
+
+                            $(".display_experience").empty();
+                            if (data.length != 0) {
+                                var str = $(".display_experience").html();
+                                for (var i = 0; i < data.length; i++) {
+                                    var type = '';
+                                    for (var j = 0; j < data[i].repertoireTpyeArray.length; j++) {
+                                        type += '<span style="margin-right:5px;">' + data[i].repertoireTpyeArray[j].repertoireTpyeName + '</span>';
+                                    }
+                                    str += '<a ><div class="notice_list" id="' + data[i].production_crews[0]._id + '"><div class="photo_experience"><img src="' + data[i].production_image + '" alt=""></div><div class="detail_experience"><ul><li><span>剧名：</span>《' + data[i].name + '》<span class="types">' + data[i].categoryName + '</span></li><li><span>剧目类型：</span>' + type + '</li><li><span>拍摄周期（天）：</span>' + data[i].duration + '</li><li><span>拍摄地：</span>' + data[i].location[0].fullname + '</li></ul></div><div class="zhixiang"><img src="/img/jiantou.png" alt=""></div></div></a><div style="width: 100%;height: 5px;background: #eee;margin: 0;padding: 0"></div>';
+                                }
+                                $(".display_experience").html(str);
+                                if (data.length < 5) {
+                                    $(".weui-loadmore").css("display", "none");
+                                }
+                            } else {
+                                $.alert("无符合要求的选项");
+                                $(".weui-loadmore").css("display", "none");
+                            }
+                        },
+                        error: function error() {
+                            alert('fail');
+                        }
+                    });
+                };
+                $('#retr').on("click", "li", function () {
+                    categoryid = $(this).attr("id");
+                    repertoiretypeid = "null";
+                    leibie_url(1, categoryid, repertoiretypeid, isregistered);
+                    var url4 = url + '/WX/wx_allrepertoiretype/' + categoryid;
+                    j = 1;
+                    $.ajax({
+                        type: "get",
+                        url: url4,
+                        dataType: "jsonp",
+                        // jsonp: "jsonpCallback",
+                        success: function success(data) {
+                            $("#wrapper02").css("display", "block");
+                            //console.log(data);//有结果
+                            console.log("加载wrapper02的列表");
+                            $(".clearfix2").empty();
+                            var str = $(".clearfix2").html();
+                            for (var i = 0; i < data.length; i++) {
+                                str += '<li id="' + data[i].id + '" ><a>' + data[i].name + '</a></li>';
+                            }
+                            $(".clearfix2").html(str);
+                            $(".wrapper02 .scroller li.cur a").css("color", "#333");
+                            $('#wrapper02').navbarscroll();
+                        },
+                        error: function error() {
+                            alert('fail');
+                        }
+                    });
+                    //点击wrapper02时
+                    $("#wrapper02").on("click", "li", function () {
+                        var repertoiretypeid = $(this).attr("id");
+                        var aa = $(this).children();
+                        var clearfix2 = $(".clearfix2 a");
+                        console.log(clearfix2.length);
+                        for (var i = 0; i < clearfix2.length; i++) {
+                            clearfix2[i].classList.remove('active');
+                        }
+                        $(this).children().addClass('active');
+                        leibie_url(1, categoryid, repertoiretypeid, isregistered);
+                        //点击wrapper03时
+                        $("#wrapper03").on("click", "li", function () {
+                            //加载内容时主要注意渲染容器
+                            var isregistered = $(this).attr("id");
+                            leibie_url(1, categoryid, repertoiretypeid, isregistered);
+                        });
+                    });
+                });
+                $('#wrapper03').navbarscroll();
+            });

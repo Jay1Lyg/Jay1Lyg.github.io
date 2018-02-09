@@ -1,0 +1,156 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/common.css')
+    link(rel='stylesheet', href='/css/my_Delivery.css')
+    link(rel='stylesheet', href='/css/myNotice.css')
+    script(src='/js/zepto.min.js')
+    script(src='/js/my_Delivery.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    title 邀请记录
+ 
+
+  body
+    // title start
+    header.manage-header
+      div
+        //img(src='/img/矩形-1-拷贝.png', alt='')
+        p 邀请记录
+    // title end
+    // top nav start
+    .weui-tab.manage-nav
+      .weui-flex
+        .weui-flex__item.nav-tab.tab-active
+          p.tab-text 全部
+        .weui-flex__item.nav-tab
+          p.tab-text 接受
+        .weui-flex__item.nav-tab
+          p.tab-text 拒绝
+    // top nav end
+    // main start
+    .manage-main(style='display:block')
+      .main-contain.main-select
+        .notice-more.one
+      .main-interview
+        .notice-more.two
+      .main-pase
+        .notice-more.three
+    .none_div(style='display: none')
+      img.none(src='/img/暂无记录.png', alt='')
+      p 暂无记录
+    // main end
+    script.
+      $(function(){
+        $('.nav-tab').on('click', function () {
+          $(this)
+              .addClass('tab-active')
+              .siblings('div')
+              .removeClass('tab-active');
+          var $index = $(this).index();
+          console.log($index)
+          $(".manage-main>div")
+              .eq($index)
+              .addClass("main-select")
+              .siblings('.main-select')
+              .removeClass("main-select");
+      });
+          var userid= !{JSON.stringify(userid)};
+          var url = "http://www.kaishiapp.com/WX/wx_allsearchmyinvitation/";
+          
+              $.ajax({
+                  type : "get",
+                  url : url+userid+"/1",
+                  dataType : "jsonp",
+                  // jsonp: "jsonpCallback",
+                  success : function(data){
+                      var All=data;
+                      console.log(All);
+                      $(".none_div").css("display","none")
+                      if(All.length==0){
+                          $(".none_div").css("display","block")
+                      }else{
+                          if(All.length==0){
+                                $(".none_div").css("display","block")
+                                $(".notice-more").css("height","0px")
+                            }else{
+                                  console.log('step1');
+                                   $('.one').empty();
+                                   var str1 = $('.one').html();
+                                   console.log(All.length);
+                                   $('.two').empty();
+                                   var str2 = $('.two').html();
+                                   $('.three').empty();
+                                   var str3 = $('.three').html();
+                                    for(var i=0;i<All.length;i++){
+                                       console.log(All.length);
+                                       console.log('step2');
+                                        var url2='http://www.kaishiapp.com/WX/page_deliveryActor/'+All[i].invited_id;
+                                        var url1='http://www.kaishiapp.com/WX/page_RefuseactorInfo/'+All[i].invited_id;
+                                       
+                                        if(All[i].invitestate==1){
+                                            str1 += '<div class="notice-small"><a style="clear:both;display:block" href="'+url1+'"> <div class="notice-left"> <img src="'+All[i].invited_iconUrl+'" alt=""> </div> <div class="notice-right" style="margin-top:10px"><p style="font-size:12px;color:#6a6e6e">艺人姓名：'+All[i].invited_realname+'</p> <div><span class="spanMa">受邀角色： '+All[i].role_name+'</span> <br> </div><div class="notice-crew">剧组： 《'+All[i].productioncrew_name+'》 </div> <p style="float:right;margin-right:10px;color:#4da2ad">【已邀约】</p></div> </a><div class="nullWhite;margin-bottom:15px;clear:both;height:20px"></div></div> '
+                                          
+                                        }if(All[i].invitestate==2){
+                                         
+
+                                          str1 += '<div class="notice-small"><a style="clear:both;display:block" href="'+url2+'"> <div class="notice-left"> <img src="'+All[i].invited_iconUrl+'" alt=""> </div> <div class="notice-right" style="margin-top:10px"><p style="font-size:12px;color:#6a6e6e">艺人姓名：'+All[i].invited_realname+'</p> <div><span class="spanMa">受邀角色： '+All[i].role_name+'</span> <br> </div><div class="notice-crew">剧组： 《'+All[i].productioncrew_name+'》 </div><p style="float:right;margin-right:10px;color:#4da2ad">【同意邀约】</p> </div></a><div class="nullWhite;margin-bottom:15px;clear:both;height:20px"></div></div> '
+                                      
+                                          
+                                        }if(All[i].invitestate==3){
+
+                                          str1 += '<div class="notice-small"><a style="clear:both;display:block" href="'+url1+'"> <div class="notice-left"> <img src="'+All[i].invited_iconUrl+'" alt=""> </div> <div class="notice-right" style="margin-top:10px"><p style="font-size:12px;color:#6a6e6e">艺人姓名：'+All[i].invited_realname+'</p> <div><span class="spanMa">受邀角色： '+All[i].role_name+'</span> <br> </div><div class="notice-crew">剧组：《'+All[i].productioncrew_name+'》 </div><p style="float:right;margin-right:10px;color:#4da2ad">【拒绝邀约】</p></div></a><div class="nullWhite;margin-bottom:15px;clear:both;height:20px"></div></div> '
+                                        
+                                          
+                                        }
+                              
+                                    }
+                                     for(var i=0;i<All.length;i++){
+                                      
+                                        if(All[i].invitestate==2){
+                                             var url2='http://www.kaishiapp.com/WX/page_deliveryActor/'+All[i].invited_id;
+                                             str2 += '<div class="notice-small"><a style="clear:both;display:block" href="'+url2+'"> <div class="notice-left"> <img src="'+All[i].invited_iconUrl+'" alt=""> </div> <div class="notice-right" style="margin-top:10px"><p style="font-size:12px;color:#6a6e6e">艺人姓名：'+All[i].invited_realname+'</p> <div><span class="spanMa">受邀角色： '+All[i].role_name+'</span> <br> </div><div class="notice-crew">剧组： 《'+All[i].productioncrew_name+'》 </div> <p style="float:right;margin-right:10px;color:#4da2ad">【同意邀约】</p></div></a><div class="nullWhite;margin-bottom:15px;clear:both;height:20px"></div></div> '
+                                          
+                                        }
+
+                              
+                                    }
+                                    for(var i=0;i<All.length;i++){
+                                      
+                                        if(All[i].invitestate==3){
+
+                                            var url1='http://www.kaishiapp.com/WX/page_RefuseactorInfo/'+All[i].invited_id;
+                                        
+                                           
+
+                                             str3 += '<div class="notice-small"><a style="clear:both;display:block" href="'+url1+'"> <div class="notice-left"> <img src="'+All[i].invited_iconUrl+'" alt=""> </div> <div class="notice-right" style="margin-top:10px"><p style="font-size:12px;color:#6a6e6e">艺人姓名：'+All[i].invited_realname+'</p> <div><span class="spanMa">受邀角色： '+All[i].role_name+'</span> <br> </div><div class="notice-crew">剧组： 《'+All[i].productioncrew_name+'》 </div> <p style="float:right;margin-right:10px;color:#4da2ad">【拒绝邀约】</p></div></a><div class="nullWhite;margin-bottom:15px;clear:both;height:20px"></div></div> '
+                                          
+                                        }
+
+                              
+                                    }
+                                    $('.one').html(str1);
+                                    if(str2==""){
+                                      $(".main-interview").html('<div class="none_div1"><img src="/img/暂无记录.png" class="none"><p>暂无记录</p></div>')
+                                    }else{
+                                       $('.two').html(str2);
+                                    }
+                                    if(str3==""){
+                                      $(".main-pase").html('<div class="none_div1"><img src="/img/暂无记录.png" class="none"><p>暂无记录</p></div>')
+                                    }else{
+                                       $('.three').html(str2);
+                                    }
+                                   
+                            }
+                      }
+                      
+                  },
+                  error:function(){
+                      alert('fail');
+                  }
+            });
+         });

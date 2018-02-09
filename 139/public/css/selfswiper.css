@@ -1,0 +1,121 @@
+ .swiper-container {
+            width: 100%;
+            height: 100%;
+            margin-bottom:90px;
+          }
+      .swiper-pagination{  
+        height:25px;
+       }
+        .swiper-slide{
+          overflow:auto;
+           }
+      .swiper-paginati{
+        width:76px;
+        height:20px;
+        background:none;
+         }
+      .experience{
+        margin-top:192px;
+      }
+      .casting{
+        margin-top:199px;
+      }
+      .weui-cells_form{
+        top:185px;
+      }
+      .newactor_banner{
+        width:100%;
+        position:absolute;
+        /*height:4rem;*/
+        z-index:200;
+      }
+      .swiper-pagination-bullet{
+          width:83px;
+          height:20px;
+          color:#fff;
+          opacity:1;
+          background:none;
+          line-height:23px;
+      }
+      .swiper-pagination-bullet-active{
+          background:none;
+          color:#4da2ad;
+          border-bottom:2px solid #4da2ad;
+      }
+      span{font-size:0.28rem}
+      .newactor_banner>div.fixed_tel{
+            width: 35%;
+            height: 40px;
+            /*border: 1px solid red;*/
+            position: fixed;
+            right: -7%;
+            top:12%;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.3);
+
+        }
+        .newactor_banner>div.fixed_tel span{
+            color: white;
+            font-size: 14px;
+            position: fixed;
+            right: 3%;
+            line-height: 40px;
+        }
+        .newactor_banner>div.fixed_tel img{
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            right: 20%;
+            top:13.2%;
+        }
+        .button_invite{
+          position:fixed;
+          bottom:0;
+          height:60px;
+          right:0;
+          left:0;
+          text-align:center;
+          background:rgb(242,242,242);
+          z-index:201;
+
+        }
+        .button_invite button{
+          float:left;
+          width:40%;
+          height:40px;
+          background:#4da2ad;
+          color:white;
+          border:none;
+          margin-left:6.6%;
+           border-radius: 5px;
+        }
+        .newactor_banner{
+            margin:0;
+        }
+        .casting{
+          overflow:hidden;
+        }
+        .experience{
+          overflow:hidden;
+        }
+        .display_experience>div{
+          margin-bottom:4px;
+        }
+      #videoUl{
+        width:96%;
+        min-height:40px;
+        }
+        .casting .url{
+          width:100%;
+        }
+         .casting .url .h4{
+          text-align:left;
+          margin-left:0.4rem;
+         }
+         /*.casting .url p{
+          margin-left:-60%;
+         }*/
+         .newactor_banner{
+          min-height:114px;
+           overflow: hidden;
+         }

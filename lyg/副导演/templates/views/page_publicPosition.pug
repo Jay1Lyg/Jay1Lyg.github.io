@@ -1,0 +1,63 @@
+doctype html
+html(lang='zh-cmn-Hans')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+        title 通告详情
+        link(rel='stylesheet', href='/css/weui.css')
+        link(rel='stylesheet', href='/css/notice.css')
+    body
+        // banner start
+        .notice-banner
+           //img.banner-img(src='img/banner.png', alt='')
+        // banner end
+        // container start
+        .notice-container
+            .weui-tab
+                .weui-navbar
+                    .weui-flex__item.container-tab
+                        p.tab-text 职位列表
+            .contain-page
+                .page-role(style='display:block')
+                    .exp-tv
+                        i
+                        .title_h4
+                        .add_actor
+                            a(href='http://www.901vehicle.cn/WX/page_positionDetail2/'+array[0].user_id+'/'+array[0].production_crews_id+'/'+array[0].openid+'/false')
+                                button +添加角色   
+                        .exptv-position
+            // container end
+            // footer start
+            // footer end
+            script(src='/js/zepto.min.js')
+            //script(src="/js/notice.js")
+            script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+            script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+            script.
+                var data = !{JSON.stringify(array)};
+                var str=$(".exptv-position").html();
+                var str1=$(".title_h4").html();
+                var str0=$(".notice-banner").html();
+                var str2=$(".exptv_juzu").html();
+                str1='<h4 class="exptv-title">'+data[0].crews_name+'</h4>';
+                str0='<img class="banner-img" src="'+data[0].production_image+'">';
+                $(".notice-banner").html(str0);
+                $(".title_h4").html(str1);
+                for(var i=0;i<data.length;i++){
+                        var url="http://www.901vehicle.cn/WX/page_candidateinfo/"+data[i].careerincrew_id;
+                        str +='<table style="TABLE-LAYOUT: fixed;font-size: 14px;padding:-10px 10px 10px 10px" cellspacing="10" cellpadding="0" width="100%"> <tr> <td style = "width: 35%" > 职位名称</td > <td style = "word-wrap:break-word;word-break:break-all;color: #6a6e6e">'+data[i].role_name+'</td > </tr > <tr> <td> 部门 </td><td style = "word-wrap:break-word;word-break:break-all;color: #6a6e6e">'+data[i].role_category_name+'</td> </tr> <tr> <td> 年龄段 </td><td class="age'+data[i].age+'" style = "word-wrap:break-word;word-break:break-all;color: #6a6e6e" ></td > </tr> <tr> <td> 姓别 </td><td class="gender'+data[i].gender+'" style = "word-wrap:break-word;word-break:break-all;color: #6a6e6e" > a </td> </tr> <tr><td> 招募数量 </td> <td style = "word-wrap:break-word;word-break:break-all;color: #6a6e6e" > '+data[i].men_count+' </td> </tr> <tr> <td> 见组地址 </td> <td style = "word-wrap:break-word;word-break:break-all;color: #6a6e6e" > '+data[i].address_name+' </td> </tr></tr> <tr><td> 职位描述 </td> <td style = "word-wrap:break-word;word-break:break-all;color: #6a6e6e" > '+data[i].description+'</td></tr> </table> <div class="manage-man"><div class="weui-cell__bd massage" style="height:44px"><a href="'+url+'"><div class="weui-cell__bd" style="text-align:center;border:2px solid #4da2ad;margin-bottom:10px;height:44px"><img style="vertical-align: middle" src="/img/报名人员.png" alt=""><span class="bao" style="vertical-align: middle;color:#666">报名人管理</span><span class="weui-badge" style="margin-left: 5px;">'+data[i].candidates.length+'</span></div></a></div>'
+                }
+                console.log(data)
+               // $(".expty_juzu").html(str2);
+                $(".exptv-position").html(str)
+                $(".gender1").html("男");
+                $(".gender2").html("女");
+                $(".gender3").html("不限");
+                $(".age1").html("婴幼儿");
+                $(".age2").html("少年");
+                $(".age3").html("青年");
+                $(".age4").html("中年");
+                $(".age5").html("老年");
+                $(".age6").html("不限");
+                //添加角色
+               

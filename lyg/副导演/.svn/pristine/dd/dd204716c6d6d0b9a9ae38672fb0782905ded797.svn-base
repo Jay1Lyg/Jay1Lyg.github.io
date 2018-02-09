@@ -1,0 +1,126 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    title 方案管理
+    link(rel='stylesheet', href='/css/left.css')
+    <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="/js/jquery-weui.js"></script>
+  body
+    section
+      .list
+        ul
+          li.jiji
+            | 剧名：三生三世
+            b
+              img.img(src='imags/jian2.png', width='12', height='18', border='0', alt='')
+            .erjilist
+              ul
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮1
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮2
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮3
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+          li.jiji
+            | 剧名：三生三世
+            b
+              img.img(src='imags/jian2.png', width='12', height='18', border='0', alt='')
+            .erjilist
+              ul
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮1
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮2
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮3
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+          li.jiji
+            | 剧名：三生三世
+            b
+              img.img(src='imags/jian2.png', width='12', height='18', border='0', alt='')
+            .erjilist
+              ul
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮1
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮2
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮3
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+          li.jiji
+            | 剧名：三生三世
+            b
+              img.img(src='imags/jian2.png', width='12', height='18', border='0', alt='')
+            .erjilist
+              ul
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮1
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮2
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+                li
+                  a(href='#')
+                    | 侧滑显示删除按钮3
+                    i
+                      img(src='imags/delete2.png', width='40', height='40', border='0', alt='')
+      script(src='/js/left.js')
+      script.
+        var director_id=!{JSON.stringify(director_id)};
+        var appid=!{JSON.stringify(appid)};
+        function list(){
+          var juzu_url=url+'/WX/wx_searchProgrammeList/'+director_id;
+          console.log(juzu_url);
+          $.ajax({
+              type : "get",
+              url : juzu_url,
+              dataType : "jsonp",
+              async:false,
+              // jsonp: "jsonpCallback",
+              success : function(data){
+                  console.log(data);
+                  var datas=data;
+                  var str='';
+                  for(data of datas){
+                    //str+=`<li id="${data.id}">剧名：${data.production_crews[0].name}<b></b></li>`
+                  }
+                
+                 
+              },
+              error:function(err){
+                 console.log(err)
+              }
+          });
+        };
+        list();

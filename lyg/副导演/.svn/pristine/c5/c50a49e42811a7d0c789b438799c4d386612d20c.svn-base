@@ -1,0 +1,9 @@
+
+var keystone = require('keystone');
+var fs = require('fs');
+exports = module.exports = function (req, res) { 
+   var productionid=req.params.productionid;
+   res.render('page_editpositioninfo',{
+   	 productionid:productionid
+   });
+};

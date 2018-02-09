@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+  style.
+    .one{ font-size:36px}
+  body
+    .one
+      center
+        form(action='/WX/wx_resumeBasicInfoSave', method='post')
+          | 学校名称: 
+          input(type='text', name='school',value='school')
+          br
+          | 			专 业: 
+          input(type='text', name='major',value='major')
+          br
+          | 			时 间：
+          input(type='text', name='duration',value='duration')
+          br
+          | 			学校类型：
+          input(type='text', name='schooltype',value='schooltype')
+          br
+          center
+            input(type='submit', value='保存')

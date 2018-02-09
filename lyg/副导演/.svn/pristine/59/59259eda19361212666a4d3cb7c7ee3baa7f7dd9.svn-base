@@ -1,0 +1,43 @@
+doctype html
+html(lang="zh-cmn-Hans")
+  head
+    meta(charset="UTF-8")   
+    meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=0")
+    link(rel="stylesheet", href="/css/weui.css")   
+    link(rel='stylesheet', href='/css/myNotice.css')
+    link(rel='stylesheet', href='/css/common.css')
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    script(src="/js/zepto.min.js")
+    script(type="text/javascript", src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js")
+    script(src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js")   
+    title 发布管理    
+  body
+    script.
+       window.onload=function(){
+        var array=!{JSON.stringify(data)};
+         //动态显示发布的通告
+         var str = $('.one').html()             
+          for(var i=0;i<array.length;i++){
+            var url_2=url+"/WX/page_candidateinfo/"+array[i].careerincrew_id;
+            var url1=url+"/WX/wx_publicMoreposition/"+array[i].careerincrew_id+"/"+array[i].user_id;
+            var time=new Date();
+
+            str += '<div class="notice-small"><a style="clear:both;display:block" href="http://www.901vehicle.cn/WX/wx_publishPosition/'+array[i].production_crewId+'/1/'+time+'"> <div class="notice-left"> <img src="'+array[i].production_image+'" alt=""> </div> <div class="notice-right"> <p> <span>'+array[i].category+'</span>'+array[i].name+'</p> <div> <span class="spanMa">拍摄地点： '+array[i].location+'</span> <br> <span>投资规模(万元)：'+array[i].investmentAmount+'</span> </div> <div> <span>拍摄周期(天)：'+array[i].duration+'</span> </div> <div class="notice-crew"> <span>《'+array[i].name+'》</span>剧组 </div> </div> </a><div class="nullWhite;margin-bottom:15px;clear:both;height:20px"></div></div> '
+
+          }
+           if(array.length==0){
+              $(".none_data").css("display","block")
+           }else{
+              $('.one').html(str)
+           }                 
+      }
+    header#header
+      div
+    
+        p 我的剧组
+        |         
+        //img.img-right(src="/img/矩形-1.png", alt="")
+    section
+      .notice-more.one
+      .none_data(style='text-align:center;display:none')
+        p(style='color:#666;font-size:24px;line-height:80px') 暂无数据

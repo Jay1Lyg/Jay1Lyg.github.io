@@ -1,0 +1,267 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 通告管理
+    link(rel='stylesheet', href='/css/jqueryWeui.css')
+    link(rel='stylesheet', href='/css/weui.css')
+    link(rel='stylesheet', href='/css/weui2.css')
+    link(rel='stylesheet', href='/css/weui3.css')
+    // <link rel="stylesheet" href="css/weui.css" />
+    link(rel='stylesheet', href='/css/notice_list.css')
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/rootfont.js')
+    script(type='text/javascript', src='/js/tab.js') 
+    script(type='text/javascript', src='/js/zepto.min.js')
+    script(type='text/javascript', src='/js/url.js')
+    style.
+      *{padding: 0;margin: 0;list-style: none}
+      .ppp{
+      clear: both;
+      font-weight: bold;
+      text-align: center;
+      z-index: 1000;
+      background: #fff;
+      color: #000;
+      mix-blend-mode: lighten;
+      height: 90px;
+      font-size: 50px;
+      z-index: 100;
+      position: fixed;
+      top: 50px;
+      left: 150px;
+      }
+       .mask{
+                position: relative;
+            }
+        .mask>div>img.true{
+            position: absolute;
+            right: 5%;
+            top: 15%;
+            z-index: 100;
+            display: block;
+            transform:rotate(45deg);
+            -ms-transform:rotate(45deg);     
+            -moz-transform:rotate(45deg);    
+            -webkit-transform:rotate(45deg); 
+            -o-transform:rotate(45deg);
+            width:80px;
+        }
+        .mask>div>img.false{
+            position: absolute;
+            right: 5%;
+            top: 5%;
+            z-index: 100;
+            display: none;
+            width:80px;
+        }
+         .weui_cell .slideleft{
+            display: inline;
+        }
+        .weui_cell .slideleft span{
+            height: 50%;
+            font-size:12px;
+        }
+        .slidelefts .weui_cell_bd{
+        padding:0 5px;
+        }
+    
+        
+    //<script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
+    //<script type="text/javascript" src="js/jquery-weui.js"></script>
+   
+    //script(src='/js/slideleft.js')
+  body
+    .weui-pull-to-refresh__layer
+      .weui-pull-to-refresh__arrow
+      .weui-pull-to-refresh__preloader
+      .down 下拉刷新
+      .up 释放刷新
+      .refresh 正在刷新
+    header
+    section
+    .weui-loadmore(style='clear: both')
+      i.weui-loading
+      span.weui-loadmore__tips 正在加载
+  script.
+  script.
+      
+      
+      //挂起-------------------
+       $("section").on("click",".false",function () {
+        var $this=$(this);
+        var productionid=$(this).attr("id");
+          var deleteurl=url+'/WX/wx_hangupOrrecoverypposition/'+productionid+'/true';
+            $.ajax({
+            type : "get",
+            url : deleteurl,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+              console.log(data)
+              alert("挂起成功")
+               $this.parent(".slideleft").prev().children(".display_experience").removeClass("false1");
+                console.log($(this).parent(".slideleft").prev().children(".display_experience"));
+               $this.parents().prev().children(".display_experience").addClass("true1");
+               $this.removeClass("false");
+               $this.addClass("true");
+                $this.parents().parents().prev().children("img").removeClass("false");
+                $this.parents().parents().prev().children("img").addClass("true");
+               
+
+            },
+            error:function(){
+            alert('fail');
+            }
+          });
+        })
+        //恢复-------------------
+       $("section").on("click",".true",function () {
+        var $this=$(this);
+        var productionid=$(this).attr("id");
+          var deleteurl=url+'/WX/wx_hangupOrrecoverypposition/'+productionid+'/false';
+            $.ajax({
+            type : "get",
+            url : deleteurl,
+            dataType : "jsonp",
+            // jsonp: "jsonpCallback",
+            success : function(data){
+              console.log(data)
+              alert("恢复成功")
+               $this.parent(".slideleft").prev().children(".display_experience").removeClass("true1");
+                console.log($(this).parent(".slideleft").prev().children(".display_experience"));
+               $this.parents().prev().children(".display_experience").addClass("false1");
+               $this.removeClass("true");
+               $this.addClass("false");
+               $this.parents().parents().prev().children("img").removeClass("true");
+                $this.parents().parents().prev().children("img").addClass("false");
+
+            },
+            error:function(){
+            alert('fail');
+            }
+          });
+        })
+        $("section").on("click",".bianji",function () {
+          var productionid=$(this).next().attr("id");
+          var productioncrew_id=$(this).attr("id");
+
+          console.log(productioncrew_id);
+          window.location.href=url+"/WX/page_editpositioninfo/"+productionid+'/'+productioncrew_id+'/'+userid+'/'+openid;
+        });
+         var userid = !{JSON.stringify(userid)};
+         var openid = !{JSON.stringify(openid)};
+          function juzu(page){
+           var url4=url+'/WX/wx_publishCrews/'+userid+'/'+page;
+            $.ajax({
+                type : "get",
+                url : url4,
+                async: false,
+                dataType : "jsonp",
+                // jsonp: "jsonpCallback",
+                success : function(data){
+                console.log(data);
+                var data=data.results;
+                 var length=data.length;
+                  var str='';
+                  for(var i=0;i<length;i++){
+                  var span=''
+                    for(var j=0;j<data[i].tags.repertoireTpyeArray.length;j++){
+                     span+='<span>'+data[i].tags.repertoireTpyeArray[j].repertoireTpyeName+'</span>'
+                    };
+                    
+                     str+='<div class="mask"><div><img class="'+data[i].isDelete+'" src="/img/guaqi1.png"></div><div  class="weui_cell slidelefts "><div class="weui_cell_bd weui_cell_primary info_detile" id="'+data[i].production_crews[0]._id+'"><div class="display_experience '+data[i].isDelete+'1"><div><div class="photo_experience"><img src="'+data[i].compress_production_image+'" alt=""></div><div class="detail_experience"><ul><li><span>剧名：</span>《'+data[i].production_crews[0].name+'》<span class="types">'+data[i].tags.categoryName+'</span></li><li><span>剧目类型：</span>'+span+'</li><li><span>拍摄周期(天)：</span>'+data[i].duration+'</li><li><span>拍摄地：</span>'+data[i].location[0].fullname+'</li></ul></div><div  class="zhixiang"><img src="/img/jiantou.png" alt=""></div></div></div></div><div class="slideleft"><span class="bianji" style="background:#4da2ad;color:#fff" id="'+data[i].production_crews[0]._id+'">编辑</span><span class="bg-green f-white delete '+data[i].isDelete+'" id="'+data[i].id+'">挂起</br>or</br>恢复</span></div></div></div>'
+                  };
+                     
+                  console.log(span)
+                  $('section').html(str);
+                  if (data.length <5) {
+                          $(".weui-loadmore").css("display", "none")
+                      } 
+                  window.slideleft=(function($){var listItem=$(".weui_cell_bd"),listOpts=$(".slideleft");var onthel=false,isScroll=false,initX=0,initY=0,endX=0,endY=0,moveX=0,expandLi=null;var slideMaxWid=listOpts.width();var handleSlide=(function(){listItem.on("touchstart",function(e){if(expandLi){if(expandLi.parent().index()!==$(this).parent().index()){if(Math.abs(endY-initY)<Math.abs(endX-initX)){e.preventDefault()}expandLi.css("-webkit-transform","translateX("+0+"px)")}}initX=e.targetTouches[0].pageX;initY=e.targetTouches[0].pageY;moveX=$(this).offset().left;$(this).on("touchmove",function(e){var curY=e.targetTouches[0].pageY;var curX=e.targetTouches[0].pageX;var X=curX-initX;$(this).removeClass("animated");if(Math.abs(endY-initY)<Math.abs(endX-initX)){e.preventDefault();if(moveX==0){if(X>0){$(this).css("-webkit-transform","translateX("+0+"px)")}else{if(X<0){if(X<-slideMaxWid){X=-slideMaxWid}$(this).css("-webkit-transform","translateX("+X+"px)")}}}else{if(moveX<0){onthel=true;if(X>0){if(X-slideMaxWid>0){$(this).css("-webkit-transform","translateX("+0+"px)")}else{$(this).css("-webkit-transform","translateX("+(X-slideMaxWid)+"px)")}}else{$(this).addClass("animated");$(this).css("-webkit-transform","translateX("+0+"px)")}}}}else{isScroll=true}})});listItem.on("touchend",function(e){endX=e.changedTouches[0].pageX;endY=e.changedTouches[0].pageY;var X=endX-initX;$(this).addClass("animated");if(X>-20||onthel||isScroll){$(this).css("-webkit-transform","translateX("+0+"px)");onthel=false;isScroll=false}else{$(this).css("-webkit-transform","translateX("+(-slideMaxWid)+"px)");expandLi=$(this)}})})()})(Zepto);function echo(stringA,stringB){var hello="你好";alert("hello world")};
+                
+                },
+                error:function(){
+                alert('fail');
+                }
+              });
+          }
+          function juzu_jiazai(page){
+           var url4=url+'/WX/wx_publishCrews/'+userid+'/'+page;
+            $.ajax({
+                type : "get",
+                url : url4,
+                async: false,
+                dataType : "jsonp",
+                // jsonp: "jsonpCallback",
+                success : function(data){
+                console.log(data);
+                var data=data.results;
+                 var length=data.length;
+                  var str='';
+                  for(var i=0;i<length;i++){
+                  var span=''
+                    for(var j=0;j<data[i].tags.repertoireTpyeArray.length;j++){
+                     span+='<span>'+data[i].tags.repertoireTpyeArray[j].repertoireTpyeName+'</span>'
+                    };
+                    
+                     str+='<div class="mask"><div><img class="'+data[i].isDelete+'" src="/img/guaqi1.png"></div><div  class="weui_cell slidelefts "><div class="weui_cell_bd weui_cell_primary info_detile" id="'+data[i].production_crews[0]._id+'"><div class="display_experience '+data[i].isDelete+'1"><div><div class="photo_experience"><img src="'+data[i].compress_production_image+'" alt=""></div><div class="detail_experience"><ul><li><span>剧名：</span>《'+data[i].production_crews[0].name+'》<span class="types">'+data[i].tags.categoryName+'</span></li><li><span>剧目类型：</span>'+span+'</li><li><span>拍摄周期：</span>'+data[i].duration+'</li><li><span>拍摄地：</span>'+data[i].location[0].fullname+'</li></ul></div><div  class="zhixiang"><img src="/img/jiantou.png" alt=""></div></div></div></div><div class="slideleft"><span class="bianji" style="background:#4da2ad;color:#fff" id="'+data[i].production_crews[0]._id+'">编辑</span><span class="bg-green f-white delete '+data[i].isDelete+'" id="'+data[i].id+'">挂起</br>or</br>恢复</span></div></div></div>'
+                  };
+                     
+                  console.log(span)
+                  $('section').append(str);
+                  console.log(str);
+                  if (data.length <5) {
+                          $(".weui-loadmore").css("display", "none")
+                      } 
+                  window.slideleft=(function($){var listItem=$(".weui_cell_bd"),listOpts=$(".slideleft");var onthel=false,isScroll=false,initX=0,initY=0,endX=0,endY=0,moveX=0,expandLi=null;var slideMaxWid=listOpts.width();var handleSlide=(function(){listItem.on("touchstart",function(e){if(expandLi){if(expandLi.parent().index()!==$(this).parent().index()){if(Math.abs(endY-initY)<Math.abs(endX-initX)){e.preventDefault()}expandLi.css("-webkit-transform","translateX("+0+"px)")}}initX=e.targetTouches[0].pageX;initY=e.targetTouches[0].pageY;moveX=$(this).offset().left;$(this).on("touchmove",function(e){var curY=e.targetTouches[0].pageY;var curX=e.targetTouches[0].pageX;var X=curX-initX;$(this).removeClass("animated");if(Math.abs(endY-initY)<Math.abs(endX-initX)){e.preventDefault();if(moveX==0){if(X>0){$(this).css("-webkit-transform","translateX("+0+"px)")}else{if(X<0){if(X<-slideMaxWid){X=-slideMaxWid}$(this).css("-webkit-transform","translateX("+X+"px)")}}}else{if(moveX<0){onthel=true;if(X>0){if(X-slideMaxWid>0){$(this).css("-webkit-transform","translateX("+0+"px)")}else{$(this).css("-webkit-transform","translateX("+(X-slideMaxWid)+"px)")}}else{$(this).addClass("animated");$(this).css("-webkit-transform","translateX("+0+"px)")}}}}else{isScroll=true}})});listItem.on("touchend",function(e){endX=e.changedTouches[0].pageX;endY=e.changedTouches[0].pageY;var X=endX-initX;$(this).addClass("animated");if(X>-20||onthel||isScroll){$(this).css("-webkit-transform","translateX("+0+"px)");onthel=false;isScroll=false}else{$(this).css("-webkit-transform","translateX("+(-slideMaxWid)+"px)");expandLi=$(this)}})})()})(Zepto);function echo(stringA,stringB){var hello="你好";alert("hello world")};
+                
+                },
+                error:function(){
+                alert('fail');
+                }
+              });
+              a++
+          }
+          juzu(1);
+          //点击跳转到通告详情----------------------
+          $("section").on("click",".info_detile",function(){
+              var productionCrew_id=$(this).attr("id");
+              window.location.href=url+'/WX/page_searchmanagepositionDetails/'+productionCrew_id+'/'+userid;
+          });
+          //刷新--------------------------
+          $(document.body).pullToRefresh().on("pull-to-refresh",function () {
+                  setTimeout(function () {
+                      $(document.body).pullToRefreshDone();
+                      juzu(1);
+
+                  },2000)
+              });
+
+              //------------------------------加载---------------------------------
+              
+           var a=2;
+            var loading = false;  //状态标记
+           
+            $(document.body).infinite(1000).on("infinite", function(e) {
+
+                if(loading) return;
+                loading = true;
+                //var totalpages=parseInt($(".display_experience").attr("id"));
+                //console.log(totalpages)
+                setTimeout(function() {
+                          console.log(a) 
+                          juzu_jiazai(a)
+                  
+                    loading = false;
+                }, 1000);
+            });
+    
+
+  
+
+    
+     

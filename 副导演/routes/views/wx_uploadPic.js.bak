@@ -1,0 +1,137 @@
+var keystone = require('keystone');
+var Picturematerial = keystone.list('Picturematerial');
+var multiparty = require('multiparty'); 
+var fs = require('fs'); 
+var query1 = require('../../query/get_auth_info/AuthTokenRefreshInfo.js');
+var async = require('async');
+var util = require('../../query/util/util.js');
+var WechatAPI = require('open-wechat-api');
+var config = require('../../public/conf/common.js');
+/*
+*
+*  通过作者和素材名称检索素材
+*
+*
+*/
+function getPicturematerialPath(picturematerial_id, callback){
+	Picturematerial.model.findOne()
+	.where('_id', picturematerial_id)
+	.exec( function (err, ret){
+		if(err){
+			return callback(err, null);
+		}else{
+			if(ret == null){
+				//console.log('输入错误！');
+				return callback(null, null, null);
+			}else{
+				
+				return callback(null, ret);
+			}
+			
+		}
+	});
+}
+
+exports.upload = function(req, res, next){
+	console.log('上传素材方法执行中...');
+  	console.log(req.body);
+  	var name = req.body.name || '';
+  	var author = req.body.author || '';
+  	if(name == '' || author == '' ){
+  		res.status(200).send('素材名称和作者不能为空！');
+  	}else{
+
+  		console.log(req.files);
+	  	Picturematerial.model.findOne()
+	  	.where('name', name)
+	  	.where('author', author)
+	  	.exec( function (err, ret){
+	  		if(err){
+	  			throw new Error(err);
+	  		}else{
+	  			if(ret == null || ret == {}){
+	  				Picturematerial.model.create({
+	  					name: name,
+	  					author: author
+	  				},
+	  				function (err1, ret1) {
+	  					if(err1){
+	  						throw new Error(err1);
+	  					}else{
+	  						updater = ret1.getUpdateHandler(req);
+	  						updater.process(req.body, {
+	  							flashErrors: true,
+	  							fields: 'images', 
+	  							errorMessage: 'There was a problem submitting your image!'
+	  						}, function (err3){
+	  							if(err3){
+	  								ret1.validationErrors = err3.errors;
+	  							}else{
+	  								ret1.newsSubmitted = true;
+	  							}
+	  						});
+	  						res.redirect(config.homeEntry.url+"WX/wx_uploadPic/"+ret1._id);
+	  					}
+	  				});
+	  			}else{
+	  				res.status(200).send('素材名称存在！');
+	  			}
+	  		}
+	  	});
+  	}
+  	
+};
+
+exports.uploadPic = function(req, res, next){
+	var picturematerial_id = req.params.picturematerial_id || '';
+	console.log('上传素材到微信服务器...');
+	//首先获取access_token
+  	async.waterfall([
+  		function (callback){
+  			query1.JudgeAuthToken("wx7ced785ebc43ac12",function(err,ret){
+	           if(err){
+	                throw new Error(err);
+	            }else{
+	                callback(null, ret);
+	            }
+	       });
+  		},
+  		function (arg, callback){
+  			console.log('access_token:'+arg.authorizer_access_token);
+
+  			getPicturematerialPath(picturematerial_id, function (err, ret){
+  				if(err){
+  					res.send(err);
+  				}else{
+  					console.log('media:'+ret);
+  					var file_path = (ret.images)[0].path+(ret.images)[0].filename;
+  					var fs_path = process.cwd()+'/'+file_path;
+  					var file = fs_path.replace(/\//g,'\\')
+  					//var media = fs.createReadStream(file);//读取图片文件
+  					//console.log('media:');
+  			 		console.log(file);
+  			 		var api = new WechatAPI("wx7ced785ebc43ac12", { authorizer_access_token: arg.authorizer_access_token, expires_at: 7000});
+  			 		api.uploadImage(file, function (err1, body){
+  			 			if(err1){
+  			 				throw new Error(err1)
+  			 			}else{
+  			 				console.log(body);
+							
+							ret.url = body.url;
+							ret.save( function (err3){
+								if(err3){
+									throw new Error(err3);
+								}else{
+									res.send('上传图片成功！url为：'+body.url);
+								}
+							});
+						
+  			 			}
+  			 		});
+  			
+  				}
+  			});
+  			
+  		}
+  	]);
+};

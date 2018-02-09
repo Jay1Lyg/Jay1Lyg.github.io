@@ -1,0 +1,162 @@
+var keystone = require('keystone'),
+   User = keystone.list('User');
+var search = require('../position_match/search.js');
+var format_match = require('../position_match/format.js');
+var format = require('./format.js');
+var format1 = require('../position/format.js');
+var async = require('async');
+var _ = require('underscore');
+//查询平台上的演员详情
+var searchUserDetails = function(callback){
+  var userArray = [];
+    User.model.find()
+    .where('allok',true)
+    .exec(function(err,ret){
+       if(err){
+         throw new Error(err);
+       }else{
+         async.eachSeries(ret,function(item,next){
+           format_match.formatProfileBasicInfo(item,function(err,userinfo){
+               if(err){
+                  throw new Error(err);
+               }else{
+                  userArray.push(userinfo);
+                  next();
+               }
+           },function(err){
+              if(err){
+                 throw new Error(err);
+              }else{
+                 callback(null,userArray);
+              }
+           });
+         });
+       }
+    })
+}
+
+//根据滑块值匹配全平台演员
+var matchActorByActorBudgetRetio = function(budgetinfo,productionid,callback){
+     Production.model.findOne()
+     .where('_id',productionid)
+	   .where('isCreated',true)
+     .where('isDelete',false)
+     .where('isPost',true)
+	   .populate('production_crews category location')
+	   .exec(function(err,ret){
+       if(err){
+          throw new Error(err);
+       }else{
+   	      CareerInCrew.model.find()
+           .where('crews_object',ret.production_crews[0]._id)
+           .where('isDelete',false)
+           .populate('crews_object role address createdBy role.roleCategory')
+           .exec(function(err,careerinfo){
+              if(err){
+                 throw new Error(err);
+              }else{
+                  format.searchActorNumberUderRoletype(careerinfo,function(err,actornum){//查询每种角色下有几个演员
+                     if(err){
+                        throw new Error(err);
+                     }else{
+                        format.getActorPaycheckByactorBudgetRetio(ret.actorBudget,careerinfo,budgetinfo,actornum,function(err,actorpaychek){//通过滑块计算每个角色的日薪水
+                           async.eachSeries(careerinfo,function(item1,next){//遍历通告下的每一条角色
+    		                     format1.formatRoleDetail(item1,function(err,careercrewInfo){//查询角色详情
+    		                        if(err){
+    		                           throw new Error(err);
+    		                        }else{ 
+                                      async.eachSeries(actorpaychek,function(item2,next){
+                                          if(careercrewInfo.careerincrew_id==item2.careerincrew_id){
+                                             careercrewInfo.role_paycheck = item2.day_pacheck;
+                                             next();
+                                          }else{
+                                          	 next();
+                                          }
+                                       },function(err){
+                                           if(err){
+                                               throw new Error(err);
+                                           }else{
+                                               searchUserDetails(function(err,userinfo){//查询平台上的演员及演员详情
+                  							                   if(err){
+                  							                      throw new Error(err);
+                  							                   }else{
+                  							                   	  format.positionMatchActorForProgramme(careercrewInfo,userinfo,function(err,user_result){//匹配
+                  							                   	      if(err){
+                  							                             throw new Error(err);
+                  							                   	      }else{
+                                                             next();
+                  							                   	      }
+                  							                   	  })
+    							                               	 }
+    							                             })
+                                           }
+                                       });
+    		                        }
+    		                     })
+                        },function(err){
+                             if(err){
+                                throw new Error(err);
+                             }else{
+                              callback(null);
+                             }
+                        });
+                      })
+                     }
+                  });
+
+              }
+           })
+        }
+    })
+}
+//查询系统匹配出的三个演员
+// var searchThreeActorsForProgramme = function(production_id,callback){
+//     Production.model.findOne()
+//      .where('_id',productionid)
+//      .where('isCreated',true)
+//      .where('isDelete',false)
+//      .where('isPost',true)
+//      .populate('production_crews category location')
+//      .exec(function(err,ret){
+//        if(err){
+//           throw new Error(err);
+//        }else{
+//           CareerInCrew.model.find()
+//            .where('crews_object',ret.production_crews[0]._id)
+//            .where('isDelete',false)
+//            .populate('crews_object role address createdBy role.roleCategory')
+//            .exec(function(err,careerinfo){
+//               if(err){
+//                  throw new Error(err);
+//               }else{
+//                  async.eachSeries(careerinfo,function(item,next){
+//                    if(item.gender==3){//不限
+//                      ProgrammeMatchActor.model.find()
+//                      .where('careerincrew_id',item._id)
+//                      .exec(function(err,programme){
+//                         if(err){
+//                            throw new Error(err);
+//                         }else{
+//                            async.eachSeries(programme,function(item1,next){
+                              
+//                            });
+//                         }
+//                      })
+//                    }else{
+//                      ProgrammeMatchActor.model.findOne()
+//                      .where('careerincrew_id',item._id)
+//                      .where('gender',item.gender)
+//                      .exec(function(err,programme){
+                       
+//                      })
+//                    }
+//                  });
+//               }
+//           })
+//         }
+//       })
+// }
+
+module.exports = {
+  matchActorByActorBudgetRetio: matchActorByActorBudgetRetio
+}

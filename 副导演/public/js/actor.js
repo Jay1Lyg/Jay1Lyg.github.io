@@ -1,0 +1,83 @@
+// 演员页面开始
+$(function () {
+    var $fsex = $('.actor-filter>div');
+    var $ful = $('.filter-ul');
+    var $fsul = $('.fsex-ul');
+    var $faul = $('.fage-ul');
+    var $fage = $('.filter-age');
+    var $slideflag = false;
+
+    // 给选项绑定点击事件
+    $fsex.click(function () {
+        if ($slideflag == false) {
+            $(this).children('ul').show();
+            $slideflag = true;
+        } else {
+            $(this).children('ul').hide();
+            $slideflag = false;
+
+        }
+    })
+    // 给每个li绑定点击事件
+    $ful.children('li').on("click", function () {
+
+        $(this)
+            .addClass('filter-hover')
+            .siblings()
+            .removeClass('filter-hover')
+
+        $(this)
+            .parent()
+            .siblings('div')
+            .children('p')
+            .text($(this).text())
+            .css('color', '#4da2ad')
+            .siblings('img')
+            .attr('src', './img/三角-上blue.png');
+
+
+        $(this)
+            .parent()
+            .hide();
+
+
+    })
+    $fsul.children("li").on('click',function(){
+        // 性别li标签index
+        var $sexIndex = $(this).index()+1;
+        // 年龄li标签index
+        var $ageIndex = $faul.children('.filter-hover').index()+1;
+        // console.log($thisIndex + '-' + $sibIndex);
+        
+
+        $.ajax({
+            type: 'GET',
+            url: "http://www.901vehicle.cn/WX/wx_getalluserresums/3/"+ $ageIndex +"/"+$sexIndex+"",
+            dataType: "jsonp",
+            success: function (data) {
+                // console.log("result:" + data);
+            }
+
+        })
+
+    })
+    $faul.children("li").on('click',function(){
+        var $ageIndex = $(this).index()+1;
+        var $sexIndex = $fsul.children('.filter-hover').index()+1;
+        // console.log($thisIndex + '-' + $sibIndex);
+
+        $.ajax({
+            type: 'GET',
+            url: "http://www.901vehicle.cn/WX/wx_getalluserresums/3/"+ $ageIndex +"/"+$sexIndex+"",
+            dataType: "jsonp",
+            success: function (data) {
+                // console.log("result:" + data);
+            }
+
+        })
+
+    })
+
+
+
+})

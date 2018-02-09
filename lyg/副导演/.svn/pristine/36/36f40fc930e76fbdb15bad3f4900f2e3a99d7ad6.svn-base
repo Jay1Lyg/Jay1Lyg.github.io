@@ -1,0 +1,57 @@
+var keystone = require('keystone'),
+	Invitation = keystone.list('Invitation'),
+	Category = keystone.list('Category'),
+	Production = keystone.list('Production'),
+	User = keystone.list('User'),
+	CareerInCrew = keystone.list('CareerInCrew'),
+  Category = keystone.list('Category');
+  BoundProductionAndInvited = keystone.list('BoundProductionAndInvited');
+var async = require('async');
+var config = require('../../public/conf/common.js');
+var urllib = require('url');
+var search = require('../../query/save_and_get_data_in_MongoDB/resume/search.js');
+var _ = require('underscore');
+
+exports = module.exports = function(req, res) {
+	var agentid = req.params.agentid;
+	var careerincrew_id = req.careerincrew_id;
+	var result=[];
+    Invitation.model.find()
+     .where('career_in_crews',careerincrew_id)
+     .exec(function(err,ret){
+       if(err){
+          throw new Error(err);
+       }else{
+       	  async.each(ret,function(item,next){
+       	  	var detail={};
+       	  	async.waterfall([
+       	  	   function(callback){
+       	  	   	  detail.invitestate=item.invitestate;
+       	  	   	  detail.invited=item.invited;
+       	  	   	  detail.invitationid=item._id;
+       	  	   	  detail.invite_date=item.invite_date;
+       	  	   	  detail.agree_or_refuse_date=item.agree_or_refuse_date;
+                  Casting.model.findOne()
+  		             .where('user_id',item.invited)
+  		             .exec(function(err,img){
+  		             	if(err){
+  		                  throw new Error(err);
+  		             	}else{
+  		             	   if(img!=null){
+  			                   (img.artimage.length>0) ? (detail.iconUrl = config.homeEntry.url+'WX/casting/artimage/' + img.artimage[img.artimage.length-1].filename) : (detail.iconUrl="") ;
+  			               }else{
+  			                   detail.iconUrl="";
+  			               }
+  		             	}
+		             })
+       	  	   },function(callback){
+       	  	   	 //求该演员的匹配度
+       	  	   }
+       	  	]);
+            
+       	  });
+       }
+     })
+
+
+}

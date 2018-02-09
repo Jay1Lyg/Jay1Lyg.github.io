@@ -1,0 +1,45 @@
+doctype html
+html(lang='zh-cmn-Hans')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,user-scalable=0')
+    script(src='/js/zepto.min.js')
+    script(src='/js/zepto.cookie.js')
+    script(type='text/javascript', src='https://res.wx.qq.com/open/js/jweixin-1.0.0.js')
+    script(src='https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js')
+    title 我的简历
+    link(rel='stylesheet', href='/../css/weui.css')
+    link(rel='stylesheet', href='/../css/detail.css')
+    script(type='text/javascript', src='/js/url.js')
+  body
+  script.
+    var userid=!{JSON.stringify(userid)};
+    var appid = !{JSON.stringify(appid)};
+    var url_url=url+'/WX/wx_JudgeResume';
+    var data={
+        userid:userid
+    }
+    console.log(data)
+    $.ajax({
+      type : "post",
+      url : url_url,
+      data:data,
+      dataType : "jsonp",
+      // jsonp: "jsonpCallback",
+      success : function(data){
+       console.log(data);
+       var index=data.index;
+        if(data.index==0){
+            //alert("true")
+           window.location.href = '/WX/page_userInfoEdit/'+userid+'/'+appid;
+         }else{
+          window.location.href = '/WX/page_addNewActors/'+userid+'/'+appid+'/'+index;
+         }
+      },
+      error:function(err){
+        console.log(err)
+      }
+       
+       
+    })
+

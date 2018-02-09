@@ -1,0 +1,211 @@
+ul,ol{
+  list-style: none;
+}
+.detail-header {
+    height: 48px;
+    width: 100%;
+}
+
+.detail-header div {
+    position: relative;
+}
+
+.detail-header div img {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    margin: 16px 0 0 5px;
+}
+
+.detail-header div p {
+    color: #222222;
+    font-size: 16px;
+    font-family: 微软雅黑;
+    line-height: 48px;
+    text-align: center;
+}
+
+.detail-banner {
+    width: 100%;
+    position: relative;
+}
+
+.detail-banner img {
+    width: 100%;
+}
+
+.detail-banner .banner-job {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    text-align: right;
+}
+
+.detail-banner .banner-job p {
+    height: 15px;
+    line-height: 15px;
+    font-size: 12px;
+    background-color: #909498;
+    color: #fff;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+    padding: 0 7px 0 7px;
+    border-radius: 3px;
+}
+
+.detail-container {
+    position: relative;
+    width: 100%;
+}
+
+.detail-container>div:first-child {
+    top: -49px;
+}
+
+.detail-container>div:first-child>div {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    height: 44px;
+    line-height: 44px;
+}
+
+.detail-container>div:first-child>div p {
+    display: inline-block;
+}
+
+.detail-container>div:first-child>div .tab-active {
+    height: 36px;
+    border-bottom: 2px solid #fff;
+}
+
+.detail-container .contain-page {
+    position: absolute;
+    top: 16px;
+    left: 10px;
+}
+
+.detail-container .contain-page>div {
+    display: none;
+}
+
+.detail-container .contain-page .page-select {
+    display: block;
+}
+
+.detail-container .contain-page .exp-tv {
+    position: relative;
+}
+
+.detail-container .contain-page .exp-tv i {
+    display: block;
+    height: 10px;
+    background-color: #222222;
+    border: 2px solid #222;
+    border-radius: 3px;
+    position: absolute;
+    top: 3px;
+}
+
+.detail-container .contain-page .exp-tv h4 {
+    font-weight: 400;
+    padding-left: 4px;
+    font-size: 14px;
+}
+
+.detail-container .contain-page .exp-tv p {
+    line-height: 23px;
+    font-size: 14px;
+    color: #6e6e6e;
+    padding-left: 14px;
+}
+
+.detail-container .contain-page .exp-tv .exptv-name {
+    margin-top: 5px;
+}
+
+.detail-container .contain-page .page-base>div {
+    position: relative;
+}
+
+.detail-container .contain-page .page-base>div>p {
+    padding-left: 0;
+    margin: 20px 0 20px 0;
+}
+
+.detail-container .contain-page .page-base img {
+    width: 45px;
+    position: absolute;
+    top: 5px;
+    left: 80px;
+}
+
+.detail-container .contain-page .page-base .exp-skill p {
+    margin-top: 10px;
+    text-indent: 2em;
+}
+
+.detail-container .contain-page .page-img {
+    width: 100%;
+}
+
+.detail-container .contain-page .page-img ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+.detail-container .contain-page .page-img ul li{
+  width: 33%;
+  height: 160px
+}
+.detail-container .contain-page .page-img ul img{
+  width: 100%;
+  height: 130px
+}
+.detail-container .contain-page .page-img ul li p{
+    text-align: center;
+    line-height: 25px;
+    font-size: 10px;
+    color: #6e6e6e;
+}
+.flex{
+    width: 100%;
+}
+.picture{
+    height: 120px;
+    width: 30%;
+    margin: 3px;
+    text-align: center;
+    float: left;
+
+}
+.picture img{
+    width: 100%;
+}
+
+
+
+.weui-skin_android .weui-dialog__title{
+    font-size: 16px
+}
+
+.weui-skin_android .weui-dialog__bd{
+    font-size: 14px;
+    line-height: 15px;
+     color:#333;
+}
+.weui-cell{
+    padding: 5px 15px
+
+}
+.weui-cells{
+    font-size: 12px
+}
+
+#androidDialog1 .weui-skin_android .weui-dialog__bd{
+    text-align: center;
+    padding: 0 ;
+    
+}

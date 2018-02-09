@@ -1,0 +1,119 @@
+#header{
+    height: 48px;
+    width: 100%;
+    background: #f7f7f7f;
+}
+#header div{
+    position: relative;
+}
+#header div .img-left{
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    margin: 16px 0 0 5px;
+}
+#header div .img-right{
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    right: 10px;
+    top:16px;
+}
+#header div p{
+    color: #222222;
+    font-size: 16px;
+    font-family:微软雅黑;
+    line-height: 48px;
+    text-align: center;
+}
+#header div span{
+    color: #4da2ad;
+    font-size: 15px;
+    line-height: 48px;
+    font-family:微软雅黑;
+    position: absolute;
+    right:20px;
+    top:0;
+}
+/*头部结束*/
+
+.notice-more{
+    width: 100%;
+    /*border: 1px solid red;*/
+}
+.notice-more .notice-small{
+
+    margin-left: 10px;
+    margin-top: 9px;
+    /*border: 1px solid black;*/
+}
+.notice-more .notice-left{
+    float: left;
+    margin-right: 5%;
+    width: 35%;
+
+}
+.notice-more .notice-left img{
+    width: 100%;
+    height:132px;
+
+}
+
+.notice-more .notice-right{
+    float: left;
+    width: 60%;
+
+    /*border: 1px solid blue;*/
+}
+.notice-more .notice-right p{
+    font-size: 14px;
+    color: #222222;
+    /*margin-bottom: 20px;*/
+}
+.notice-more .notice-right p span{
+    font-size: 10px;
+    color: #4da2ad;
+    border: 1px solid #4da2ad;
+    padding: 1px;
+    border-radius: 2px;
+}
+.notice-more .notice-right div img{
+    height: 10px;
+}
+.notice-more .notice-right div span{
+    font-size: 12px;
+    color:#6a6e6e;
+}
+.notice-crew{
+    font-size: 12px;
+    color:#6a6e6e;
+}
+.notice-more .notice-right .notice-crew span{
+    font-size: 10px;
+    color: #4da2ad;
+    padding: 1px;
+    border-radius: 2px;
+}
+
+/*报名人管理*/
+.manage-man{
+    height: 34px;
+    width: 80%;
+   margin: 0 auto;
+    clear: both;
+
+}
+.manage-man .massage{
+    text-align: center;
+    /*border: 1px solid black;*/
+}
+.manage-man .massage img{
+    height: 30px;
+    display: inline;
+    padding-top: 5px;
+    vertical-align:middle
+}
+.manage-man .massage .bao{
+    font-size: 14px;
+    color: #4da2ad;
+}

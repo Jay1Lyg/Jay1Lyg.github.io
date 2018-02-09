@@ -1,0 +1,193 @@
+.notice-banner {
+  width: 100%;
+
+  position: relative;
+}
+.notice-banner .banner-img {
+  width: 100%;
+  height: 200px;
+}
+.notice-banner .banner-icon {
+  height: 18px;
+  position: absolute;
+  left: 5px;
+  top: 10px;
+}
+.notice-container {
+  width: 100%;
+  position: relative;
+}
+.notice-container > div:first-child {
+  top: -49px;
+}
+.notice-container > div:first-child > div {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-align: center;
+  height: 44px;
+  line-height: 44px;
+}
+.notice-container > div:first-child > div p {
+  display: inline-block;
+}
+.notice-container > div:first-child > div .tab-active {
+  height: 36px;
+  border-bottom: 2px solid #fff;
+}
+.notice-container .contain-page {
+  position: relative;
+  top: 16px;
+  padding: 0 16px 0 10px;
+}
+.notice-container .contain-page > div {
+  display: none;
+}
+.notice-container .contain-page .page-select {
+  display: block;
+}
+.notice-container .contain-page .exp-tv {
+  position: relative;
+}
+.notice-container .contain-page .exp-tv i {
+  display: block;
+  height: 10px;
+  background-color: #222222;
+  border: 2px solid #222;
+  border-radius: 3px;
+  position: absolute;
+  top: 5px;
+}
+.notice-container .contain-page .exp-tv h4 {
+  font-weight: 400;
+  padding-left: 14px;
+  font-size: 16px;
+}
+.notice-container .contain-page .exp-tv .exptv-name {
+  margin-top: 5px;
+}
+.notice-container .contain-page .page-base > div {
+  position: relative;
+}
+.notice-container .contain-page .page-base .exptv-position,
+.page-role .exptv-position {
+  margin-top: 25px;
+  position: relative;
+}
+.notice-container .contain-page .page-base .exptv-info,
+.page-role .exptv-info {
+  margin-left: 14px;
+  overflow: hidden;
+}
+.notice-container .contain-page .page-base .exptv-info .info-name,
+.page-role .exptv-info .info-name {
+  float: left;
+  width: 35%
+}
+.notice-container .contain-page .page-base .exptv-info .info-name p,
+.page-role .exptv-info .info-name p {
+  line-height: 40px;
+  font-size: 14px;
+  color: #222;
+}
+.notice-container .contain-page .page-base .exptv-info .info-content,
+.page-role .exptv-info .info-content {
+  float: left;
+  width: 64%
+}
+.notice-container .contain-page .page-base .exptv-info .info-content p,
+.page-role .exptv-info .info-content p {
+  line-height: 40px;
+  font-size: 14px;
+  color: #666;
+}
+.notice-container .contain-page .page-base .exptv-detail,
+.page-role .exptv-detail {
+  margin-left: 14px;
+}
+.notice-container .contain-page .page-base .exptv-detail p:first-child,
+.page-role .exptv-detail p:first-child {
+  line-height: 40px;
+  font-size: 14px;
+  color: #222;
+}
+.notice-container .contain-page .page-base .exptv-detail p:last-child,
+.page-role .exptv-detail p:last-child {
+  line-height: 40px;
+  font-size: 14px;
+  color: #666;
+}
+.notice-container .contain-page .page-base .exptv-danger,
+.page-role .exptv-danger {
+  position: relative;
+  padding-left: 28px;
+  margin-top: 8px;
+}
+.notice-container .contain-page .page-base .exptv-danger img,
+.page-role .exptv-danger img {
+  width: 17px;
+  position: absolute;
+  top: 15px;
+  left: 0;
+}
+.notice-container .contain-page .page-base .exptv-danger p:nth-child(2),
+.page-role .exptv-danger p:nth-child(2) {
+  font-size: 16px;
+  color: #4da2ad;
+}
+.notice-container .contain-page .page-base .exptv-danger p:last-child,
+.page-role .exptv-danger p:last-child {
+  font-size: 14px;
+  color: #666;
+}
+.notice-container .contain-page .page-base .exptv-jjj,
+.page-role .exptv-jjj {
+  padding: 0 13px;
+  position: absolute;
+  top: 5px;
+  right: 0;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.notice-container .contain-page .page-base .exptv-join,
+.page-role .exptv-join {
+  border: 1px solid #4da2ad;
+  color: #4da2ad;
+}
+.notice-container .contain-page .page-base .exptv-joined,
+.page-role .exptv-joined {
+  border: 1px solid #a0a0a0;
+  color: #a0a0a0;
+}
+.notice-container .contain-page .page-base .exp-skill p {
+  margin-top: 10px;
+}
+.notice-container {
+  width: 100%;
+}
+.notice-container .contain-page .page-role {
+  width: 100%;
+}
+.notice-footer {
+  margin-top: 7%;
+}
+.notice-footer a {
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  height: 58px;
+  background-color: #4da2ad;
+  line-height: 58px;
+}
+.add_actor{
+  width: 100%;
+  text-align:center;
+}
+.add_actor button{
+  width: 50%;
+  height: 40px;
+  background-color:#4da2ad;
+  color: white;
+  border-style: none;
+  border-radius: 5px
+}

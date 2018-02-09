@@ -1,0 +1,10 @@
+//BubbleSort
+var keystone = require('keystone');
+exports = module.exports = function (req, res) {
+   var array = [1,4,7,0,2,9,6,3,8]
+   for(var i = 0;i<array.length;i++){
+      for(var j = 0;j<array.length;j++){
+
+      }
+   }
+}

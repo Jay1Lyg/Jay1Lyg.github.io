@@ -1,0 +1,127 @@
+.program{
+    width: 100%;
+
+}
+.slider{
+    width: 80%;
+    height: 50px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+.slider>div{
+    float: left;
+}
+.one_slider{
+    /*width: 40%;*/
+    height: 50px;
+    background: #91b7ff;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+}
+.two_slider{
+    background: #b7c0fe;
+    /*width: 30%;*/
+    height: 50px;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+}
+.three_slider{
+    /*width: 20%;*/
+    height: 50px;
+    background: #97e9e7;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+}
+.four_slider{
+    /*width: 10%;*/
+    height: 50px;
+    background: #feccae;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+}
+.bai{
+    width: 100%;
+}
+.bai>ul{
+    width: 80%;
+    margin: 0 auto;
+}
+.bai>ul li{
+    color: #6b6b6b;
+    font-size: 10px;
+    float: left;
+    width: 9%;
+    -webkit-transform-origin-x: 0;
+    -webkit-transform: scale(0.90);
+}
+.slide_info{
+    width: 100%;
+    margin-top: 15px;
+}
+.slide_info>ul{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+.slide_info>ul li{
+    float: left;
+    font-size: 13px;
+    width: 25%;
+}
+.one_kuai{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #91b7ff;
+}
+.two_kuai{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #b7c0fe;
+}
+.three_kuai{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #97e9e7;
+}
+.four_kuai{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #feccae;
+
+}
+.more_actor{
+    width: 100%;
+    text-align: center;
+}
+.more_actor p{
+    width: 80%;
+    border: 1px solid #4da2ad;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    margin: 10px auto;
+
+}
+.more_actor p.button1{
+    background: white;
+    color: #4da2ad;
+    font-size: 14px;
+
+}
+.more_actor p.button2{
+    background: #4da2ad;
+    color: white;
+    font-size: 14px;
+}

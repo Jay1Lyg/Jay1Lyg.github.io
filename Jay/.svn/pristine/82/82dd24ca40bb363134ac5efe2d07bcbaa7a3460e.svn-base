@@ -1,8 +1,0 @@
-html,body{height:100%;}
-header{
- 	height:44px;
- 	line-height: 44px;
- 	background:#333;
- 	color: white;
- 	text-align: center;
-}

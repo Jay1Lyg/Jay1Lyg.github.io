@@ -1,0 +1,191 @@
+/*
+*
+*
+*     微信端发布通告的信息
+*
+*
+*
+*/
+var keystone = require('keystone'),
+	Role = keystone.list('Role'),
+	Address = keystone.list('Address'),
+	CaregoryInTarget = keystone.list('CaregoryInTarget'),
+	CareerInCrew = keystone.list('CareerInCrew');
+var async = require('async');
+var searchUser = require('../../query/util/getJssdkConfig.js');
+var search_productiion = require('../../query/save_and_get_data_in_MongoDB/production/search.js');
+var config = require('../../public/conf/common.js');
+
+exports = module.exports = function(req, res) {
+	//if (req.method === 'get') {
+		var params = req.body;
+		console.log('接收到的前端数据：'+JSON.stringify(params));
+		
+		var production_address_obj = {};//用来封装见组地址的id和name
+		//var production_company_obj = {};//用来封装出品公司的id和name的对象
+		//var issuer_obj = {};//用来封装承制公司的id和name的对象
+		var areainfo_obj = {};//用来封装拍摄地的id和name
+		var production_obj = {};//用来封装production的数据的
+		var production_obj1 = {};//用来封装production额id和name
+		var production_Crews_obj = {};//用来封装productionCrews额id和name
+		async.waterfall([
+			// function (callback){
+			// 	//判断productionCompany库中是否存在同名额出品公司，如果存在同名的出品公司，需要获取name和id,否则新创条目
+			// 	search_productiion.searchProductionCategory(params.category_id, function (err, category){
+			// 		if(err){
+			// 			throw new Error(err);
+			// 		}else{
+			// 			production_category_obj = category;
+			// 			callback(null);
+			// 		}
+			// 	});
+			// },
+			// function(callback){
+			// 	//判断Address库中是否存在同名见组地址，如果存在同名的同名见组地址，需要获取name和id,否则新创
+   //             search_productiion.searchOrCreateAddress(params.addressName, function (err, address){
+			// 		if(err){
+			// 			throw new Error(err);
+			// 		}else{
+			// 			production_address_obj = address;
+			// 			callback(null);
+			// 		}
+			// 	});
+			// },
+			// function (callback){
+			// 	//判断productionCompany库中是否存在同名额出品公司，如果存在同名的出品公司，需要获取name和id,否则新创条目
+			// 	search_productiion.searchProductionCompany(params.production_companies, function (err, production_companies_info){
+			// 		if(err){
+			// 			throw new Error(err);
+			// 		}else{
+			// 			production_company_obj = production_companies_info;
+			// 			callback(null);
+			// 		}
+			// 	});
+			// },
+			// function (callback){
+			// 	//判断Issuer库中是否存在同名的承制公司，如果存在同名的承制公司，需要获取name和id,否则新创条目
+			// 	search_productiion.searchIssuer(params.issuser_companies, function (err, issuer_info){
+			// 		if(err){
+			// 			throw new Error(err);
+			// 		}else{
+			// 			issuer_obj = issuer_info;
+			// 			callback(null);
+			// 		}
+			// 	});
+			// }, 
+			function (callback){
+				//通过前端传入的的拍摄地的区域码检索出地址的id
+				search_productiion.searchAreaInfo(params.code, params.areaCode, function (err, areaInfo){
+					if(err){
+						throw new Error(err);
+					}else{
+						areainfo_obj = areaInfo;
+						callback(null);
+					}
+				});
+			},
+			function (callback){
+				//创建项目，通过项目名进行判断，如果production库中存在规定字段都相同的，不创建新的条目，进行绑定即可，否则创建新条目
+				//对规定的字段进行封装
+				//剧目类型和剧目类别未作处理
+				production_obj.production_name = params.production_name;//剧名
+				//production_obj.production_category_obj = production_category_obj;
+				production_obj.areainfo_obj = areainfo_obj;//拍摄地
+				//production_obj.production_company_obj = production_company_obj;
+				//production_obj.issuer_obj = issuer_obj;
+				production_obj.account = params.account;//投资规模
+				production_obj.date = params.date;//拍摄周期
+				production_obj.openid = req.params.openid;
+				(req.params.production_companies=='') ? (production_obj.productionCompany = '') : (production_obj.productionCompany = params.production_companies);
+                (req.params.issuser_companies=='') ? (production_obj.issuserCompany = '') : (production_obj.issuserCompany = params.issuser_companies);
+			    production_obj.actorBudget = params.actorBudget;//演员预算
+			    production_obj.expired_date = params.expired_date;//报名截止日期
+			    production_obj.production_address_obj = params.production_address_obj;//见组地址
+				// production_obj.starring_ratio = req.params.starring_ratio;
+				// production_obj.starring_team_ratio = params.starring_team_ratio;
+				// production_obj.guestplayer_ratio = req.params.guestplayer_ratio;
+				//production_obj.otherRole_ratio = params.otherRole_ratio;
+
+				search_productiion.dealWithProduction(production_obj, req.params.user_id, function (err, ret){
+					if(err){
+						throw new Error(err);
+					}else{
+						production_obj1 = ret;
+						console.log('=======production_obj1=======');
+						console.log(production_obj1);
+						console.log('=======production_obj1=======');
+						callback(null);
+					}
+				});
+			},function(callback){//关联剧目类别和剧目类型
+                CaregoryInTarget.model.findOne()
+                 .where('production_id',production_obj1.id)
+                 .exec(function(err,ret){
+                     if(err){
+                        throw new Error(err);
+                     }else{
+                     	if(ret==null){
+                     	   CaregoryInTarget.model.create({
+                     	   	 production_id : production_obj1.id,
+                     	   	 category : params.categoryid,
+                     	   	 repertoireType : params.repertoireTpye,
+                     	   	 isCreateforProduction:true
+                     	   },function(err,ret1){
+                               if(err){
+                                  throw new Error(err);
+                               }else{
+                               	  console.log('-------ret1-------');
+                                  console.log(ret1);
+                               	  console.log('-------ret1-------');
+                               	  callback(null);
+                               }
+                     	   })
+
+                     	}else{
+                     		 ret.production_id = production_obj1.id;
+                     	   	 ret.category = params.categoryid;
+                     	   	 ret.repertoireType = params.repertoireTpye;
+                     	   	 ret.save(function(err){
+                                if(err){
+                                   throw new Error(err);
+                                }else{
+                                   callback(null);
+                                }
+                     	   	 })
+                     	}
+                     }
+                 })
+			},
+			function (callback){
+				//关联剧组
+				search_productiion.searchProductionCrews(production_obj1, function (err, ret){
+					if(err){
+						throw new Error(err);
+					}else{
+						production_Crews_obj = ret;
+						callback(null);
+					}
+				});
+			}], function (err){
+			if(err){
+				throw new Error(err);
+			}else{
+				//进行重定向，重定向到上传照片的页面
+				console.log('发布通告成功，请上传影片海报。。。'+req.params.openid);
+
+				var url = config.homeEntry.url+'/WX/page_posterInfo/'+production_obj1.id+'/'+production_Crews_obj.id+'/'+req.params.user_id+'/'+req.params.openid+'/'+req.params.appid;
+				console.log("url:"+url);
+				res.send(url);
+				/**设置响应头允许ajax跨域访问**/
+				//res.setHeader("Access-Control-Allow-Origin","*");
+				/*星号表示所有的异域请求都可以接受，*/
+				//res.setHeader("Access-Control-Allow-Methods","GET,POST");
+				//res.send(url);
+ 	
+			}
+		});
+
+	//}
+
+}
+

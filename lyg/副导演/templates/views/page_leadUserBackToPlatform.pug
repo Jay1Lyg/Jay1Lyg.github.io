@@ -1,0 +1,62 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui')
+    title 了解更多
+    style.
+      * {
+      padding: 0;
+      margin: 0;
+      list-style: none
+      }
+      html {
+      font-size: 62.5%; /* 10��16=62.5% */
+      }
+      .font{
+      width: 100%;
+      text-align: center;
+      margin-top: 5rem;
+      }
+      .font>p{
+      color: #4da2ad;
+      font-size: 2.5rem;
+      }
+      .image{
+      width: 100%;
+      text-align: center;
+      margin-top: 2rem;
+      }
+      .image>img{
+      width: 11.6rem;
+      }
+    script(type='text/javascript', src='/js/jquery-2.1.4.js')
+    //script(src='js/echarts.min.js')
+    script(type='text/javascript', src='/js/jquery-weui.js')
+    script(type='text/javascript', src='/js/url.js')
+  body
+    .font
+      p 扫码关注公众号
+      p 了解更多详情呦！！！
+    .image
+      img.img(src='', alt='')
+  script.
+    var appid=!{JSON.stringify(appid)};
+    var juzu_url=url+'/resume/wx_searchQRcode/'+appid;
+      console.log(juzu_url);
+      $.ajax({
+          type : "get",
+          url : juzu_url,
+          dataType : "jsonp",
+          async:false,
+          // jsonp: "jsonpCallback",
+          success : function(data){
+              console.log(data);
+              $(".img").attr("src",data.QRcodeUrl);
+             
+          },
+          error:function(err){
+             console.log(err)
+          }
+      });
